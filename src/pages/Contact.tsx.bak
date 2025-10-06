@@ -1,0 +1,627 @@
+import React, { useEffect, useState } from 'react';import React, { useEffect, useState } from 'react';
+
+import styled from 'styled-components';import styled from 'styled-components';
+
+import gsap from 'gsap';import gsap from 'gsap';
+
+import { ScrollTrigger } from 'gsap/ScrollTrigger';import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+import { motion, AnimatePresence } from 'framer-motion';import { motion, AnimatePresence } from 'framer-motion';
+
+
+
+gsap.registerPlugin(ScrollTrigger);gsap.registerPlugin(ScrollTrigger);
+
+
+
+const ContactContainer = styled.div`const ContactContainer = styled.div`
+
+  min-height: 100vh;  min-height: 100vh;
+
+  background: ${props => props.theme.colors.background.dark};  background: ${props => props.theme.colors.background.dark};
+
+  color: ${props => props.theme.colors.text.light};  color: ${props => props.theme.colors.text.light};
+
+  padding: ${props => props.theme.spacing.large};  padding: ${props => props.theme.spacing.large};
+
+  max-width: 1200px;  max-width: 1200px;
+
+  margin: 0 auto;  margin: 0 auto;
+
+    
+
+  @media (min-width: 768px) {  @media (min-width: 768px) {
+
+    padding: 8rem 4rem;    padding: 8rem 4rem;
+
+  }  }
+
+`;`;
+
+
+
+const ContactGrid = styled.div`const ContactGrid = styled.div`
+
+  display: grid;  display: grid;
+
+  grid-template-columns: 1fr;  grid-template-columns: 1fr;
+
+  gap: ${props => props.theme.spacing.large};  gap: ${props => props.theme.spacing.large};
+
+  max-width: 1400px;  max-width: 1400px;
+
+  margin: 0 auto;  margin: 0 auto;
+
+    
+
+  @media (min-width: 768px) {  @media (min-width: 768px) {
+
+    grid-template-columns: 1fr 1fr;    grid-template-columns: 1fr 1fr;
+
+  }  }
+
+`;`;
+
+
+
+const ContactHeader = styled.div`const ContactHeader = styled.div`
+
+  text-align: center;  text-align: center;
+
+  margin-bottom: ${props => props.theme.spacing.large};  margin-bottom: ${props => props.theme.spacing.large};
+
+  opacity: 0;  opacity: 0;
+
+`;`;
+
+
+
+const ContactTitle = styled.h1`const ContactTitle = styled.h1`
+
+  font-size: clamp(2.5rem, 5vw, 4rem);  font-size: clamp(2.5rem, 5vw, 4rem);
+
+  margin-bottom: ${props => props.theme.spacing.medium};  margin-bottom: ${props => props.theme.spacing.medium};
+
+  color: ${props => props.theme.colors.primary};  color: ${props => props.theme.colors.primary};
+
+  font-family: ${props => props.theme.fonts.title};  font-family: ${props => props.theme.fonts.title};
+
+`;`;
+
+
+
+const ContactSubtitle = styled.p`const ContactSubtitle = styled.p`
+
+  font-size: 1.2rem;  font-size: 1.2rem;
+
+  color: ${props => props.theme.colors.text.light};  color: ${props => props.theme.colors.text.light};
+
+  max-width: 600px;  max-width: 600px;
+
+  margin: 0 auto;  margin: 0 auto;
+
+  line-height: 1.6;  line-height: 1.6;
+
+`;`;
+
+
+
+const ContactInfo = styled.div`const ContactInfo = styled.div`
+
+  background: ${props => props.theme.colors.background.darker};  background: ${props => props.theme.colors.background.darker};
+
+  padding: ${props => props.theme.spacing.large};  padding: ${props => props.theme.spacing.large};
+
+  border-radius: 20px;  border-radius: 20px;
+
+  height: fit-content;  height: fit-content;
+
+
+
+  h1 {  h1 {
+
+    font-size: clamp(2rem, 4vw, 3rem);    font-size: clamp(2rem, 4vw, 3rem);
+
+    font-family: ${props => props.theme.fonts.title};    font-family: ${props => props.theme.fonts.title};
+
+    margin-bottom: ${props => props.theme.spacing.medium};    margin-bottom: ${props => props.theme.spacing.medium};
+
+    color: ${props => props.theme.colors.primary};    color: ${props => props.theme.colors.primary};
+
+  }  }
+
+
+
+  p {  p {
+
+    font-size: 1.1rem;    font-size: 1.1rem;
+
+    margin-bottom: ${props => props.theme.spacing.medium};    margin-bottom: ${props => props.theme.spacing.medium};
+
+    line-height: 1.6;    line-height: 1.6;
+
+  }  }
+
+
+
+  .contact-details {  .contact-details {
+
+    margin-top: ${props => props.theme.spacing.large};    margin-top: ${props => props.theme.spacing.large};
+
+
+
+    div {    div {
+
+      margin-bottom: ${props => props.theme.spacing.medium};      margin-bottom: ${props => props.theme.spacing.medium};
+
+
+
+      strong {      strong {
+
+        color: ${props => props.theme.colors.primary};        color: ${props => props.theme.colors.primary};
+
+        display: block;        display: block;
+
+        margin-bottom: 0.5rem;        margin-bottom: 0.5rem;
+
+      }      }
+
+    }    }
+
+  }  }
+
+`;`;
+
+
+
+const ContactForm = styled.form`const ContactForm = styled.form`
+
+  background: ${props => props.theme.colors.background.darker};  background: ${props => props.theme.colors.background.darker};
+
+  padding: ${props => props.theme.spacing.large};  padding: ${props => props.theme.spacing.large};
+
+  border-radius: 20px;  border-radius: 20px;
+
+  display: flex;  display: flex;
+
+  flex-direction: column;  flex-direction: column;
+
+  gap: ${props => props.theme.spacing.medium};  gap: ${props => props.theme.spacing.medium};
+
+`;`;
+
+
+
+const FormGroup = styled.div`const FormGroup = styled.div`
+
+  display: flex;  display: flex;
+
+  flex-direction: column;  flex-direction: column;
+
+  gap: 0.5rem;  gap: 0.5rem;
+
+
+
+  label {  label {
+
+    display: block;    display: block;
+
+    margin-bottom: 0.5rem;    margin-bottom: 0.5rem;
+
+    color: ${props => props.theme.colors.primary};    color: ${props => props.theme.colors.primary};
+
+    font-weight: 500;    font-weight: 500;
+
+  }  }
+
+
+
+  input, textarea {  input, textarea {
+
+    width: 100%;    width: 100%;
+
+    padding: 1rem;    padding: 1rem;
+
+    background: ${props => props.theme.colors.background.dark};    background: ${props => props.theme.colors.background.dark};
+
+    border: 1px solid ${props => props.theme.colors.border};    border: 1px solid ${props => props.theme.colors.border};
+
+    border-radius: 10px;    border-radius: 10px;
+
+    color: ${props => props.theme.colors.text.light};    color: ${props => props.theme.colors.text.light};
+
+    font-size: 1rem;    font-size: 1rem;
+
+    transition: border-color ${props => props.theme.transitions.fast};    transition: border-color ${props => props.theme.transitions.fast};
+
+
+
+    &:focus {    &:focus {
+
+      outline: none;      outline: none;
+
+      border-color: ${props => props.theme.colors.primary};      border-color: ${props => props.theme.colors.primary};
+
+    }    }
+
+
+
+    &::placeholder {    &::placeholder {
+
+      color: ${props => props.theme.colors.text.light}60;      color: ${props => props.theme.colors.text.light}60;
+
+    }    }
+
+  }  }
+
+
+
+  textarea {  textarea {
+
+    min-height: 150px;    min-height: 150px;
+
+    resize: vertical;    resize: vertical;
+
+  }  }
+
+`;`;
+
+
+
+const SubmitButton = styled.button`const SubmitButton = styled.button`
+
+  width: 100%;  width: 100%;
+
+  padding: 1rem;  padding: 1rem;
+
+  background: ${props => props.theme.colors.primary};  background: ${props => props.theme.colors.primary};
+
+  color: ${props => props.theme.colors.text.light};  color: ${props => props.theme.colors.text.light};
+
+  border: none;  border: none;
+
+  border-radius: 10px;  border-radius: 10px;
+
+  font-size: 1.1rem;  font-size: 1.1rem;
+
+  font-weight: 500;  font-weight: 500;
+
+  cursor: pointer;  cursor: pointer;
+
+  transition: all ${props => props.theme.transitions.fast};  transition: all ${props => props.theme.transitions.fast};
+
+
+
+  &:hover {  &:hover {
+
+    background: ${props => props.theme.colors.primaryDark};    background: ${props => props.theme.colors.primaryDark};
+
+    transform: translateY(-2px);    transform: translateY(-2px);
+
+  }  }
+
+
+
+  &:active {  &:active {
+
+    transform: translateY(0);    transform: translateY(0);
+
+  }  }
+
+`;`;
+
+
+
+const InfoSection = styled.div`const InfoSection = styled.div`
+
+  margin-bottom: ${props => props.theme.spacing.large};  margin-bottom: ${props => props.theme.spacing.large};
+
+    
+
+  &:last-child {  &:last-child {
+
+    margin-bottom: 0;    margin-bottom: 0;
+
+  }  }
+
+
+
+  h3 {  h3 {
+
+    font-size: 1.5rem;    font-size: 1.5rem;
+
+    margin-bottom: ${props => props.theme.spacing.small};    margin-bottom: ${props => props.theme.spacing.small};
+
+    color: ${props => props.theme.colors.primary};    color: ${props => props.theme.colors.primary};
+
+    font-family: ${props => props.theme.fonts.title};    font-family: ${props => props.theme.fonts.title};
+
+  }  }
+
+
+
+  p {  p {
+
+    color: ${props => props.theme.colors.text.light};    color: ${props => props.theme.colors.text.light};
+
+    line-height: 1.6;    line-height: 1.6;
+
+  }  }
+
+
+
+  a {  a {
+
+    color: ${props => props.theme.colors.primary};    color: ${props => props.theme.colors.primary};
+
+    text-decoration: none;    text-decoration: none;
+
+    transition: all ${props => props.theme.transitions.fast};    transition: all ${props => props.theme.transitions.fast};
+
+
+
+    &:hover {    &:hover {
+
+      color: ${props => props.theme.colors.primaryLight};      color: ${props => props.theme.colors.primaryLight};
+
+      text-decoration: underline;      text-decoration: underline;
+
+    }    }
+
+  }  }
+
+`;`;
+
+
+
+const SuccessMessage = styled(motion.div)`const SuccessMessage = styled(motion.div)`
+
+  position: fixed;  position: fixed;
+
+  top: 20px;  top: 20px;
+
+  right: 20px;  right: 20px;
+
+  background: ${props => props.theme.colors.success};  background: ${props => props.theme.colors.success};
+
+  color: ${props => props.theme.colors.text.light};  color: ${props => props.theme.colors.text.light};
+
+  padding: 1rem 2rem;  padding: 1rem 2rem;
+
+  border-radius: 10px;  border-radius: 10px;
+
+  z-index: 1000;  z-index: 1000;
+
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+`;`;
+
+
+
+const Contact = () => {const Contact = () => {
+
+  const [showSuccess, setShowSuccess] = useState(false);  const [showSuccess, setShowSuccess] = useState(false);
+
+
+
+  useEffect(() => {  useEffect(() => {
+
+    const tl = gsap.timeline({    const tl = gsap.timeline({
+
+      scrollTrigger: {      scrollTrigger: {
+
+        trigger: '#contact-section',        trigger: '#contact-section',
+
+        start: 'top center+=100',        start: 'top center+=100',
+
+        toggleActions: 'play none none none'        toggleActions: 'play none none none'
+
+      }      }
+
+    });    });
+
+
+
+    tl.fromTo('#contact-header',    tl.fromTo('#contact-header',
+
+      { y: 30, opacity: 0 },      { y: 30, opacity: 0 },
+
+      { y: 0, opacity: 1, duration: 0.8 }      { y: 0, opacity: 1, duration: 0.8 }
+
+    ).fromTo('.contact-section-content',    ).fromTo('.contact-section-content',
+
+      { y: 30, opacity: 0 },      { y: 30, opacity: 0 },
+
+      { y: 0, opacity: 1, duration: 0.8, stagger: 0.2 },      { y: 0, opacity: 1, duration: 0.8, stagger: 0.2 },
+
+      '-=0.4'      '-=0.4'
+
+    );    );
+
+
+
+    return () => {    return () => {
+
+      if (tl) tl.kill();      if (tl) tl.kill();
+
+    };    };
+
+  }, []);  }, []);
+
+
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+
+    e.preventDefault();    e.preventDefault();
+
+    // Add form submission logic here    // Add form submission logic here
+
+        
+
+    // Show success message    // Show success message
+
+    setShowSuccess(true);    setShowSuccess(true);
+
+    setTimeout(() => setShowSuccess(false), 3000);    setTimeout(() => setShowSuccess(false), 3000);
+
+  };  };
+
+
+
+  return (  return (
+
+    <ContactContainer id="contact-section">    <ContactContainer id="contact-section">
+
+      <ContactHeader id="contact-header">      <ContactHeader id="contact-header">
+
+        <ContactTitle>Get in Touch</ContactTitle>        <ContactTitle>Get in Touch</ContactTitle>
+
+        <ContactSubtitle>        <ContactSubtitle>
+
+          Have questions about Art4Hearts? We'd love to hear from you. Send us a message and we'll respond as soon as possible.          Have questions about Art4Hearts? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
+
+        </ContactSubtitle>        </ContactSubtitle>
+
+      </ContactHeader>      </ContactHeader>
+
+
+
+      <ContactGrid>      <ContactGrid>
+
+        <ContactForm onSubmit={handleSubmit} className="contact-section-content">        <ContactForm onSubmit={handleSubmit} className="contact-section-content">
+
+          <FormGroup>          <FormGroup>
+
+            <label htmlFor="name">Name</label>            <label htmlFor="name">Name</label>
+
+            <input type="text" id="name" required placeholder="Your name" />            <input type="text" id="name" required placeholder="Your name" />
+
+          </FormGroup>          </FormGroup>
+
+
+
+          <FormGroup>          <FormGroup>
+
+            <label htmlFor="email">Email</label>            <label htmlFor="email">Email</label>
+
+            <input type="email" id="email" required placeholder="your.email@example.com" />            <input type="email" id="email" required placeholder="your.email@example.com" />
+
+          </FormGroup>          </FormGroup>
+
+
+
+          <FormGroup>          <FormGroup>
+
+            <label htmlFor="subject">Subject</label>            <label htmlFor="subject">Subject</label>
+
+            <input type="text" id="subject" required placeholder="What's this about?" />            <input type="text" id="subject" required placeholder="What's this about?" />
+
+          </FormGroup>          </FormGroup>
+
+
+
+          <FormGroup>          <FormGroup>
+
+            <label htmlFor="message">Message</label>            <label htmlFor="message">Message</label>
+
+            <textarea            <textarea
+
+              id="message"              id="message"
+
+              required              required
+
+              placeholder="Tell us more about your inquiry..."              placeholder="Tell us more about your inquiry..."
+
+            />            />
+
+          </FormGroup>          </FormGroup>
+
+
+
+          <SubmitButton type="submit">Send Message</SubmitButton>          <SubmitButton type="submit">Send Message</SubmitButton>
+
+        </ContactForm>        </ContactForm>
+
+
+
+        <ContactInfo className="contact-section-content">        <ContactInfo className="contact-section-content">
+
+          <InfoSection>          <InfoSection>
+
+            <h3>Visit Us</h3>            <h3>Visit Us</h3>
+
+            <p>123 Art Street<br />New York, NY 10001</p>            <p>123 Art Street<br />New York, NY 10001</p>
+
+          </InfoSection>          </InfoSection>
+
+
+
+          <InfoSection>          <InfoSection>
+
+            <h3>Contact Information</h3>            <h3>Contact Information</h3>
+
+            <p>            <p>
+
+              Email: <a href="mailto:info@art4hearts.org">info@art4hearts.org</a><br />              Email: <a href="mailto:info@art4hearts.org">info@art4hearts.org</a><br />
+
+              Phone: <a href="tel:+11234567890">(123) 456-7890</a>              Phone: <a href="tel:+11234567890">(123) 456-7890</a>
+
+            </p>            </p>
+
+          </InfoSection>          </InfoSection>
+
+
+
+          <InfoSection>          <InfoSection>
+
+            <h3>Working Hours</h3>            <h3>Working Hours</h3>
+
+            <p>            <p>
+
+              Monday - Friday: 9:00 AM - 6:00 PM<br />              Monday - Friday: 9:00 AM - 6:00 PM<br />
+
+              Saturday: 10:00 AM - 4:00 PM<br />              Saturday: 10:00 AM - 4:00 PM<br />
+
+              Sunday: Closed              Sunday: Closed
+
+            </p>            </p>
+
+          </InfoSection>          </InfoSection>
+
+        </ContactInfo>        </ContactInfo>
+
+      </ContactGrid>      </ContactGrid>
+
+
+
+      <AnimatePresence>      <AnimatePresence>
+
+        {showSuccess && (        {showSuccess && (
+
+          <SuccessMessage          <SuccessMessage
+
+            initial={{ opacity: 0, y: -20 }}            initial={{ opacity: 0, y: -20 }}
+
+            animate={{ opacity: 1, y: 0 }}            animate={{ opacity: 1, y: 0 }}
+
+            exit={{ opacity: 0, y: -20 }}            exit={{ opacity: 0, y: -20 }}
+
+          >          >
+
+            Message sent successfully!            Message sent successfully!
+
+          </SuccessMessage>          </SuccessMessage>
+
+        )}        )}
+
+      </AnimatePresence>      </AnimatePresence>
+
+    </ContactContainer>    </ContactContainer>
+
+  );  );
+
+};};
+
+
+
+export default Contact;export default Contact;

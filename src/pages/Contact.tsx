@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
+import Layout from '../components/Layout';
 
 const ContactContainer = styled.div`
-  min-height: 100vh;
+  min-height: calc(100vh - ${props => props.theme.spacing.header});
   background: ${props => props.theme.colors.background.dark};
   color: ${props => props.theme.colors.text.light};
   padding: ${props => props.theme.spacing.large};
+  margin-top: ${props => props.theme.spacing.header};
 `;
 
 const ContactGrid = styled.div`
@@ -123,6 +125,7 @@ const Contact: React.FC = () => {
   };
 
   return (
+    <Layout>
     <ContactContainer>
       <ContactGrid>
         <ContactInfo>
@@ -187,6 +190,7 @@ const Contact: React.FC = () => {
         )}
       </AnimatePresence>
     </ContactContainer>
+    </Layout>
   );
 };
 

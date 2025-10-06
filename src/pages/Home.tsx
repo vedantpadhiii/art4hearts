@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import gsap from 'gsap';
+import Layout from '../components/Layout';
 
 const HomeContainer = styled.div`
   min-height: 100vh;
@@ -108,15 +109,16 @@ const Home: React.FC = () => {
   }, []);
 
   return (
-    <HomeContainer>
-      <HeroSection>
-        <HeroTitle ref={titleRef}>
-          Art4Hearts
-        </HeroTitle>
-        <HeroSubtitle ref={subtitleRef}>
-          Creating smiles through art, one heart at a time
-        </HeroSubtitle>
-      </HeroSection>
+    <Layout>
+      <HomeContainer>
+        <HeroSection>
+          <HeroTitle ref={titleRef}>
+            Art4Hearts
+          </HeroTitle>
+          <HeroSubtitle ref={subtitleRef}>
+            Creating smiles through art, one heart at a time
+          </HeroSubtitle>
+        </HeroSection>
 
       <StatSection>
         <StatCard>
@@ -142,7 +144,8 @@ const Home: React.FC = () => {
           creativity to their healing journey.
         </p>
       </MissionSection>
-    </HomeContainer>
+      </HomeContainer>
+    </Layout>
   );
 };
 
