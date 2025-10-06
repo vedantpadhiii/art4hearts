@@ -10,16 +10,17 @@ const NavContainer = styled.nav<{ isScrolled: boolean; isVisible: boolean }>`
   left: 0;
   right: 0;
   z-index: 1000;
-  background: ${props => props.isScrolled 
-    ? props.theme.colors.background.darker + 'f0'
-    : 'transparent'};
-  padding: ${props => props.isScrolled ? '1rem 2rem' : '2rem'};
-  transition: all 0.3s ease-in-out;
+  padding: ${props => props.isScrolled ? '0.5rem 2rem' : '1.5rem 2rem'};
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   transform: translateY(${props => props.isVisible ? '0' : '-100%'});
+  background: ${props => props.isScrolled 
+    ? 'rgba(0, 0, 0, 0.95)'
+    : 'linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%)'};
   backdrop-filter: ${props => props.isScrolled ? 'blur(10px)' : 'none'};
 
   @media (max-width: 768px) {
-    padding: 1rem;
+    padding: 0.5rem 1rem;
+    background: rgba(0, 0, 0, 0.95);
   }
 `;
 
@@ -64,65 +65,55 @@ const NavLinks = styled.div<{ isOpen: boolean }>`
 
 const NavItem = styled.div`
   position: relative;
-  
-  &:hover > .dropdown {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
-`;
-
-const Dropdown = styled.div`
-  position: absolute;
-  top: 100%;
-  left: -1rem;
-  background: ${props => props.theme.colors.background.glass};
-  backdrop-filter: blur(10px);
-  border: 1px solid ${props => props.theme.colors.border};
-  border-radius: 8px;
-  padding: 0.5rem;
-  min-width: 200px;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-10px);
-  transition: all 0.3s ease;
-  z-index: 1000;
-
-  @media (max-width: 768px) {
-    position: static;
-    background: transparent;
-    border: none;
-    padding: 0 0 0 1rem;
-    opacity: 1;
-    visibility: visible;
-    transform: none;
-    min-width: auto;
-    backdrop-filter: none;
-  }
 `;
 
 const NavLink = styled(Link)<{ $isActive?: boolean }>`
   color: ${props => props.theme.colors.text.light};
   text-decoration: none;
-  font-weight: 500;
-  position: relative;
-  padding: 0.5rem;
+  font-weight: ${props => props.$isActive ? '600' : '400'};
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+  display: block;
+  white-space: nowrap;
+  border-radius: 8px;
+  
+  ${props => props.$isActive && `
+    color: ${props.theme.colors.primary};
+    background: rgba(255, 93, 115, 0.1);
+  `}
 
-  &:after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 2px;
-    background: ${props => props.theme.colors.primary};
-    transform: scaleX(${props => props.$isActive ? 1 : 0});
-    transform-origin: left;
-    transition: transform 0.3s ease;
+  &:hover {
+    color: ${props => props.theme.colors.primary};
+    background: rgba(255, 93, 115, 0.1);
   }
+`;
 
-  &:hover:after {
-    transform: scaleX(1);
+const Dropdown = styled.div<{ isOpen: boolean }>`
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: ${props => props.theme.colors.background.darker};
+  border: 1px solid ${props => props.theme.colors.background.light}20;
+  border-radius: 8px;
+  padding: 0.5rem;
+  min-width: 200px;
+  opacity: ${props => props.isOpen ? 1 : 0};
+  visibility: ${props => props.isOpen ? 'visible' : 'hidden'};
+  transition: all 0.2s ease-in-out;
+  z-index: 1000;
+
+  @media (max-width: 768px) {
+    position: static;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    background: transparent;
+    border: none;
+    padding: 0 0 0 1rem;
+    min-width: unset;
   }
 `;
 
@@ -168,7 +159,8 @@ const MenuButton = styled.button<{ isOpen: boolean }>`
 
 export const Navigation: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { scrollY, direction } = useScroll();
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const { scrollY } = useScroll();
   const location = useLocation();
   const [isVisible, setIsVisible] = useState(true);
   const lastScrollY = React.useRef(0);
@@ -180,10 +172,11 @@ export const Navigation: React.FC = () => {
       if (!isVisible) setIsVisible(true);
     }
     lastScrollY.current = scrollY;
-  }, [scrollY, direction]);
+  }, [scrollY, isVisible]);
 
   useEffect(() => {
     setIsOpen(false);
+    setDropdownOpen(false);
   }, [location.pathname]);
 
   return (
@@ -210,15 +203,17 @@ export const Navigation: React.FC = () => {
             </NavLink>
           </NavItem>
 
-          <NavItem>
+          <NavItem
+            onMouseEnter={() => setDropdownOpen(true)}
+            onMouseLeave={() => setDropdownOpen(false)}
+          >
             <NavLink 
               to="/about" 
               $isActive={location.pathname.startsWith('/about')}
-              style={{ paddingRight: '1.5rem' }}
             >
               ABOUT
             </NavLink>
-            <Dropdown className="dropdown">
+            <Dropdown isOpen={dropdownOpen}>
               <NavLink to="/about" $isActive={location.pathname === '/about'}>
                 About Us
               </NavLink>

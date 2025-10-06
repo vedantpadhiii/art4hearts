@@ -4,13 +4,16 @@ import { ThemeProvider } from 'styled-components';
 import theme from './styles/theme';
 import GlobalStyles from './styles/GlobalStyles';
 import AppRoutes from './AppRoutes';
+import { ScrollProvider } from './context/ScrollContext';
 
 const App: React.FC = () => {
   return (
     <BrowserRouter>
       <ThemeProvider theme={theme}>
         <GlobalStyles />
-        <AppRoutes />
+        <ScrollProvider>
+          <AppRoutes />
+        </ScrollProvider>
       </ThemeProvider>
     </BrowserRouter>
   );

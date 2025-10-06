@@ -1,6 +1,7 @@
 import React from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
+import Layout from './components/Layout';
 import PageTransition from './components/PageTransition';
 
 // Page imports
@@ -17,18 +18,20 @@ const AppRoutes: React.FC = () => {
   const location = useLocation();
 
   return (
-    <AnimatePresence mode="wait">
-      <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/about/team" element={<Team />} />
-        <Route path="/about/chapters" element={<Chapters />} />
-        <Route path="/get-involved" element={<GetInvolved />} />
-        <Route path="/faqs" element={<FAQs />} />
-        <Route path="/spotlight" element={<Spotlight />} />
-        <Route path="/contact" element={<Contact />} />
-      </Routes>
-    </AnimatePresence>
+    <Layout>
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/about/team" element={<Team />} />
+          <Route path="/about/chapters" element={<Chapters />} />
+          <Route path="/get-involved" element={<GetInvolved />} />
+          <Route path="/faqs" element={<FAQs />} />
+          <Route path="/spotlight" element={<Spotlight />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      </AnimatePresence>
+    </Layout>
   );
 };
 

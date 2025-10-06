@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
-import Layout from '../components/Layout';
 
 const ContactContainer = styled.div`
   min-height: calc(100vh - ${props => props.theme.spacing.header});
@@ -125,7 +124,6 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <Layout>
     <ContactContainer>
       <ContactGrid>
         <ContactInfo>
@@ -190,7 +188,6 @@ const Contact: React.FC = () => {
         )}
       </AnimatePresence>
     </ContactContainer>
-    </Layout>
   );
 };
 

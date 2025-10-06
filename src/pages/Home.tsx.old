@@ -11,6 +11,15 @@ const HomeContainer = styled.div`
   overflow: hidden;
   background: ${props => props.theme.colors.background.dark};
 `;
+import * as Animations from '../styles/animations';
+
+gsap.registerPlugin(ScrollTrigger);
+
+const HomeContainer = styled.div`
+  min-height: 100vh;
+  overflow: hidden;
+  background: ${props => props.theme.colors.background.dark};
+`;
 
 const HeroSection = styled.section`
   height: 100vh;
@@ -148,18 +157,22 @@ const StatCard = styled.div`
   }
 `;
 
-const RegistrationSection = styled.section`
+const MissionSection = styled.section`
   padding: ${props => props.theme.spacing.large} max(${props => props.theme.spacing.large}, 5vw);
-  background: ${props => props.theme.colors.background.darker};
-  margin-top: 4rem;
-  padding-bottom: 6rem;
-  text-align: center;
-  
+  background: ${props => props.theme.colors.background.dark};
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 4rem auto;
+  max-width: 1400px;
+
   h2 {
     font-size: 4.5rem;
     font-family: "Playfair Display", serif;
     color: ${props => props.theme.colors.text.light};
     margin-bottom: 2rem;
+    text-align: center;
     font-weight: 700;
     position: relative;
 
@@ -181,7 +194,58 @@ const RegistrationSection = styled.section`
     max-width: 900px;
     margin: 0 auto;
     line-height: 1.8;
+    text-align: center;
     opacity: 0.9;
+  }
+`;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, 
+      ${props => props.theme.colors.primary}00,
+      ${props => props.theme.colors.primary},
+      ${props => props.theme.colors.primary}00
+    );
+  }
+  
+  h2 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-family: "Playfair Display", serif;
+    color: ${props => props.theme.colors.text.light};
+    margin-bottom: ${props => props.theme.spacing.medium};
+    text-align: center;
+    font-weight: 700;
+    position: relative;
+  }
+  
+  p {
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    color: ${props => props.theme.colors.text.light}dd;
+    max-width: 900px;
+    margin: 0 auto;
+    line-height: 1.8;
+    font-family: "Montserrat", sans-serif;
+    text-align: center;
+  }
+`;
+
+const RegistrationSection = styled(MissionSection)`
+  background: ${props => props.theme.colors.background.darker};
+  margin-top: 4rem;
+  padding-bottom: 6rem;
+  
+  h2 {
+    margin-bottom: 2rem;
+  }
+  
+  p {
+    margin-bottom: 2rem;
   }
 `;
 
@@ -283,10 +347,11 @@ const Home: React.FC = () => {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const statSectionRef = useRef<HTMLElement>(null);
-  const missionRef = useRef<HTMLDivElement>(null);
+  const missionSectionRef = useRef<HTMLElement>(null);
+  const briefMissionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    if (!titleRef.current || !subtitleRef.current || !statSectionRef.current) {
+    if (!titleRef.current || !subtitleRef.current || !statSectionRef.current || !missionSectionRef.current) {
       return;
     }
 
@@ -357,26 +422,24 @@ const Home: React.FC = () => {
       once: true // Only trigger once
     });
 
-    // Mission section animation
-    if (missionRef.current) {
-      gsap.fromTo(missionRef.current, 
-        { 
-          opacity: 0, 
-          y: 50 
-        },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          scrollTrigger: {
-            trigger: missionRef.current,
-            start: "top center+=100",
-            end: "bottom center",
-            toggleActions: "play none none reverse"
-          }
+    // Mission section animations
+    gsap.fromTo(missionSectionRef.current, 
+      { 
+        opacity: 0, 
+        y: 50 
+      },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        scrollTrigger: {
+          trigger: missionSectionRef.current,
+          start: "top center+=100",
+          end: "bottom center",
+          toggleActions: "play none none reverse"
         }
-      );
-    }
+      }
+    );
 
     // Parallax effect for hero section
     gsap.to(titleRef.current, {
@@ -397,69 +460,73 @@ const Home: React.FC = () => {
   }, []);
 
   return (
-    <HomeContainer>
-      <HeroSection>
-        <HeroContent>
-          <HeroTitle ref={titleRef}>
-            Art4Hearts
-          </HeroTitle>
-          <HeroSubtitle ref={subtitleRef}>
-            Creating smiles through art, one heart at a time
-          </HeroSubtitle>
-        </HeroContent>
-      </HeroSection>
+      <HomeContainer>
+        <HeroSection>
+          <HeroContent>
+            <HeroTitle ref={titleRef}>
+              Art4Hearts
+            </HeroTitle>
+            <HeroSubtitle ref={subtitleRef}>
+              Creating smiles through art, one heart at a time
+            </HeroSubtitle>
+          </HeroContent>
+        </HeroSection>
 
-      <div ref={missionRef}>
-        <MissionStatement />
-      </div>
+        <MissionSection ref={missionSectionRef}>
+          <h2>OUR MISSION</h2>
+          <p>
+            Art4Hearts is a youth-led nonprofit spreading creativity and comfort through crafting personalized art therapy kits, 
+            leading art workshops, and handmaking bracelets with uplifting messages to brighten the lives of communities we serve.
+          </p>
+        </MissionSection>
 
-      <StatSection ref={statSectionRef}>
-        <StatCard className="stat-card">
-          <div className="number" data-value="4500">0</div>
-          <div className="label">VOLUNTEERS WORLDWIDE</div>
-        </StatCard>
-        <StatCard className="stat-card">
-          <div className="number" data-value="150">0</div>
-          <div className="label">ACTIVE CHAPTERS</div>
-        </StatCard>
-        <StatCard className="stat-card">
-          <div className="number" data-value="50">0</div>
-          <div className="label">COUNTRIES REACHED</div>
-        </StatCard>
-        <StatCard className="stat-card">
-          <div className="number" data-value="1000">0</div>
-          <div className="label">ART KITS & BRACELETS</div>
-        </StatCard>
-      </StatSection>
+        <StatSection ref={statSectionRef}>
+          <StatCard className="stat-card">
+            <div className="number" data-value="4500">0</div>
+            <div className="label">VOLUNTEERS WORLDWIDE</div>
+          </StatCard>
+          <StatCard className="stat-card">
+            <div className="number" data-value="150">0</div>
+            <div className="label">ACTIVE CHAPTERS</div>
+          </StatCard>
+          <StatCard className="stat-card">
+            <div className="number" data-value="50">0</div>
+            <div className="label">COUNTRIES REACHED</div>
+          </StatCard>
+          <StatCard className="stat-card">
+            <div className="number" data-value="1000">0</div>
+            <div className="label">ART KITS & BRACELETS</div>
+          </StatCard>
+        </StatSection>
 
-      <RegistrationSection>
-        <h2>Join Our Mission!</h2>
-        <p>
-          Be part of a global movement that brings joy and creativity to those who need it most. 
-          Whether you're an artist, student, or someone who wants to make a difference, 
-          there's a place for you in the Art4Hearts family.
-        </p>
-        <ButtonContainer>
-          <RegistrationButton 
-            href="https://docs.google.com/forms/d/e/1FAIpQLSd98E0LsNhBywLdUhlIBmp6e88bjt81Fh1tV6Lz6FklT1LtEg/viewform?usp=send_form" 
-            target="_blank" 
-            rel="noopener noreferrer"
-          >
-            Join Our Mission
-          </RegistrationButton>
-        </ButtonContainer>
-        <FormEmbed>
-          <iframe
-            src="https://docs.google.com/forms/d/e/1FAIpQLSd98E0LsNhBywLdUhlIBmp6e88bjt81Fh1tV6Lz6FklT1LtEg/viewform?embedded=true"
-            title="Volunteer Registration Form"
-            style={{ width: "100%", height: "800px", border: "none", background: "#fff" }}
-            loading="lazy"
-          >
-            Loading...
-          </iframe>
-        </FormEmbed>
-      </RegistrationSection>
-    </HomeContainer>
+        <RegistrationSection>
+          <h2>Join Our Mission!</h2>
+          <p>
+            Be part of a global movement that brings joy and creativity to those who need it most. 
+            Whether you're an artist, student, or someone who wants to make a difference, 
+            there's a place for you in the Art4Hearts family.
+          </p>
+          <ButtonContainer>
+            <RegistrationButton 
+              href="https://docs.google.com/forms/d/e/1FAIpQLSd98E0LsNhBywLdUhlIBmp6e88bjt81Fh1tV6Lz6FklT1LtEg/viewform?usp=send_form" 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              Join Our Mission
+            </RegistrationButton>
+          </ButtonContainer>
+          <FormEmbed>
+            <iframe
+              src="https://docs.google.com/forms/d/e/1FAIpQLSd98E0LsNhBywLdUhlIBmp6e88bjt81Fh1tV6Lz6FklT1LtEg/viewform?embedded=true"
+              title="Volunteer Registration Form"
+              style={{ width: "100%", height: "800px", border: "none", background: "#fff" }}
+              loading="lazy"
+            >
+              Loading...
+            </iframe>
+          </FormEmbed>
+        </RegistrationSection>
+      </HomeContainer>
   );
 };
 

@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
 const GetInvolvedContainer = styled.div`
-  min-height: 100vh;
+  min-height: calc(100vh - ${props => props.theme.spacing.header});
+  margin-top: ${props => props.theme.spacing.header};
   background: ${props => props.theme.colors.background.dark};
   color: ${props => props.theme.colors.text.light};
 `;
