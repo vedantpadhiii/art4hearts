@@ -1,8 +1,6 @@
-import React, { useState, ReactElement } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence, PanInfo } from 'framer-motion';
-import { IconType } from 'react-icons';
-import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 interface FAQ {
   question: string;
@@ -83,12 +81,24 @@ const FAQCarousel: React.FC<FAQCarouselProps> = ({ faqs, title }) => {
           </Card>
         </AnimatePresence>
 
-        <NavigationButton onClick={() => paginate(-1)} position="left">
-          <span className="icon"><FiChevronLeft size={24} /></span>
-        </NavigationButton>
-        <NavigationButton onClick={() => paginate(1)} position="right">
-          <span className="icon"><FiChevronRight size={24} /></span>
-        </NavigationButton>
+        <NavButton 
+          as={motion.button}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          left 
+          onClick={() => paginate(-1)}
+        >
+          <Arrow direction="left" />
+        </NavButton>
+        <NavButton 
+          as={motion.button}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          right
+          onClick={() => paginate(1)}
+        >
+          <Arrow direction="right" />
+        </NavButton>
       </CarouselContainer>
 
       <DotsContainer>
@@ -188,39 +198,41 @@ const Progress = styled.div`
   margin-top: 1.5rem;
 `;
 
-interface NavigationButtonProps {
-  position: 'left' | 'right';
-}
-
-const NavigationButton = styled.button<NavigationButtonProps>`
-  background: none;
-  border: none;
+const NavButton = styled(motion.button)<{ left?: boolean; right?: boolean }>`
   position: absolute;
   top: 50%;
-  ${props => props.position}: -50px;
+  ${props => props.left ? 'left: -50px;' : ''}
+  ${props => props.right ? 'right: -50px;' : ''}
   transform: translateY(-50%);
-  font-size: 2.5rem;
-  color: ${props => props.theme.colors.text.light};
+  background: none;
+  border: none;
+  width: 40px;
+  height: 40px;
   cursor: pointer;
-  opacity: 0.7;
-  transition: opacity 0.3s ease;
-  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 8px;
+  transition: opacity 0.3s;
+  opacity: 0.7;
+  z-index: 2;
 
   &:hover {
     opacity: 1;
   }
-
-  & > svg {
-    width: 24px;
-    height: 24px;
-    color: ${props => props.theme.colors.text.light};
-    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.3));
-  }
 `;
+
+const Arrow = styled.div<{ direction: 'left' | 'right' }>`
+  width: 20px;
+  height: 20px;
+  border: solid ${props => props.theme.colors.text.light};
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 3px;
+  transform: rotate(${props => props.direction === 'left' ? '135deg' : '-45deg'});
+  filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.3));
+`;
+
+
 
 const DotsContainer = styled.div`
   display: flex;
