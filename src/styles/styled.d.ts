@@ -50,7 +50,24 @@ declare module 'styled-components' {
       small: string;
       medium: string;
       large: string;
+      xlarge: string;
+      xxlarge: string;
+      xxxlarge: string;
       header: string;
+    };
+    fontSizes: {
+      small: string;
+      medium: string;
+      large: string;
+      xlarge: string;
+      xxlarge: string;
+      xxxlarge: string;
+    };
+    borderRadii: {
+      small: string;
+      medium: string;
+      large: string;
+      full: string;
     };
   }
 }

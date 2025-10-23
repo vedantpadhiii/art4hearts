@@ -1,93 +1,71 @@
 import React, { useEffect, useRef } from 'react';
-import styled from 'styled-components';
+import styled, { css, DefaultTheme } from 'styled-components';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import MissionStatement from '../components/MissionStatement';
+import { float, gradientFlow, gradientMove, pulse, rotate, shimmer } from '../styles/animations';
+
+interface ThemeProps {
+  theme: DefaultTheme;
+}
+
+interface StyledComponent {
+  theme: DefaultTheme;
+}
+
+const gradientBackground = ({ theme }: ThemeProps) => css`
+  background: linear-gradient(135deg,
+    ${theme.colors.secondaryLight} 0%,
+    ${theme.colors.secondary} 100%
+  );
+`;
+
+const radialGradient = ({ theme }: ThemeProps) => css`
+  background: radial-gradient(
+    circle at center,
+    ${theme.colors.primaryLight}20 0%,
+    transparent 50%,
+    ${theme.colors.secondaryLight}20 100%
+  );
+`;
+
+// Shared styles
+const glassEffect = css<StyledComponent>`
+  background: ${({ theme }) => theme.colors.background.glass};
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+`;
 
 gsap.registerPlugin(ScrollTrigger);
 
-const HomeContainer = styled.div`
+const HomeContainer = styled.div<StyledComponent>`
   min-height: 100vh;
   overflow: hidden;
-  background: ${props => props.theme.colors.background.dark};
+  background: ${({ theme }) => theme.colors.background.dark};
 `;
 
-const HeroSection = styled.section`
-  height: 100vh;
+const HeroSection = styled.section<StyledComponent>`
+  min-height: 100vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
+  position: relative;
+  background-color: ${({ theme }) => theme.colors.background.dark};
+  padding: 0;
+  margin: 0;
+`;
+
+const BannerContainer = styled.div<StyledComponent>`
+  width: 100%;
+  min-height: 100vh;
+  padding-top: ${({ theme }) => theme.spacing.header};
+  background-color: ${({ theme }) => theme.colors.secondary};
+  display: flex;
+  flex-direction: column;
   align-items: center;
   position: relative;
   overflow: hidden;
-  padding-top: ${props => props.theme.spacing.header};
-  background: url('/Art4Hearts Banner.png') center/cover no-repeat;
-
-  &:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.7) 0%,
-      rgba(0, 0, 0, 0.5) 50%,
-      rgba(0, 0, 0, 0.7) 100%
-    );
-    pointer-events: none;
-  }
-`;
-
-const HeroContent = styled.div`
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 1200px;
-  padding: 0 2rem;
-`;
-
-const HeroTitle = styled.h1`
-  font-size: clamp(3rem, 15vw, 12rem);
-  font-family: ${props => props.theme.fonts.title};
-  color: ${props => props.theme.colors.text.light};
-  text-align: center;
-  line-height: 0.9;
-  margin: 0;
-  text-transform: uppercase;
-  letter-spacing: -0.02em;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(255, 255, 255, 0.8) 100%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 20px rgba(255, 93, 115, 0.3));
-`;
-
-const HeroSubtitle = styled.p`
-  font-size: clamp(1rem, 3vw, 2rem);
-  color: ${props => props.theme.colors.primary};
-  text-align: center;
-  margin-top: ${props => props.theme.spacing.medium};
-  font-weight: 300;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-`;
-
-const StatSection = styled.section`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: ${props => props.theme.spacing.large};
-  padding: ${props => props.theme.spacing.large} max(${props => props.theme.spacing.large}, 5vw);
-  background: ${props => props.theme.colors.background.darker};
-  position: relative;
-  margin: 4rem auto;
-  max-width: 1400px;
   
   &::before {
     content: '';
@@ -96,72 +74,280 @@ const StatSection = styled.section`
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(
-      circle at center,
-      rgba(255, 93, 115, 0.1) 0%,
-      rgba(0, 0, 0, 0) 70%
-    );
-    pointer-events: none;
+    background: ${({ theme }) => css`
+      linear-gradient(
+        135deg,
+        ${theme.colors.secondaryLight} 0%,
+        ${theme.colors.secondary} 100%
+      )
+    `};
+    opacity: 0.5;
   }
-  
-  @media (min-width: 1200px) {
-    grid-template-columns: repeat(4, 1fr);
-    gap: ${props => props.theme.spacing.large};
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    right: -50%;
+    bottom: -50%;
+    background: ${({ theme }) => css`
+      radial-gradient(
+        circle at center,
+        ${theme.colors.primaryLight}20 0%,
+        transparent 50%,
+        ${theme.colors.info}10 100%
+      )
+    `};
+    animation: ${rotate} 30s linear infinite;
   }
 `;
 
-const StatCard = styled.div`
+const Banner = styled.img`
+  width: 90%;
+  max-width: 1200px;
+  height: auto;
+  margin: 2rem auto;
+  object-fit: contain;
+`;
+
+const HeroContent = styled.div`
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 800px;
   text-align: center;
-  padding: ${props => props.theme.spacing.medium};
-  background: rgba(255, 255, 255, 0.05);
+  padding: 1.5rem;
+  background: ${props => props.theme.colors.background.glass};
   border-radius: 16px;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  backdrop-filter: blur(12px);
+  box-shadow: 
+    0 8px 32px ${props => props.theme.colors.shadow},
+    0 0 0 1px ${props => props.theme.colors.primaryLight}20 inset,
+    0 0 0 2px ${props => props.theme.colors.secondaryLight}10 inset;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  transition: all 0.4s ease;
+  animation: float 6s ease-in-out infinite;
   
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transform: translateX(-50%) translateY(-5px);
+    box-shadow: 
+      0 15px 40px ${props => props.theme.colors.shadow},
+      0 0 0 2px ${props => props.theme.colors.primaryLight}30 inset,
+      0 0 0 4px ${props => props.theme.colors.secondaryLight}20 inset;
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateX(-50%) translateY(0px); }
+    50% { transform: translateX(-50%) translateY(-10px); }
+  }
+  
+  @media (max-width: 768px) {
+    bottom: 2rem;
+    padding: 1rem;
+  }
+`;
+
+const HeroSubtitle = styled.p`
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: ${props => props.theme.colors.text.dark};
+  text-align: center;
+  margin: 0;
+  line-height: 1.6;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+`;
+
+const StatSection = styled.section`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(1rem, 3vw, 2rem);
+  padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 3vw, 2rem);
+  background: ${props => `linear-gradient(
+    135deg,
+    ${props.theme.colors.background.dark} 0%,
+    ${props.theme.colors.background.light} 50%,
+    ${props.theme.colors.background.dark} 100%
+  )`};
+  position: relative;
+  margin: 0 auto;
+  max-width: 1400px;
+  width: 100%;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: ${props => `radial-gradient(
+      circle at center,
+      ${props.theme.colors.secondary}20 0%,
+      transparent 70%
+    )`};
+    pointer-events: none;
+    animation: ${pulse} 8s ease-in-out infinite;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    right: -100%;
+    bottom: -100%;
+    background: ${props => `
+      radial-gradient(circle at 30% 30%, ${props.theme.colors.primaryLight}10 0%, transparent 50%),
+      radial-gradient(circle at 70% 70%, ${props.theme.colors.info}10 0%, transparent 50%),
+      radial-gradient(circle at 30% 70%, ${props.theme.colors.warning}10 0%, transparent 50%),
+      radial-gradient(circle at 70% 30%, ${props.theme.colors.success}10 0%, transparent 50%)
+    `};
+    animation: ${gradientMove} 20s ease-in-out infinite;
+    z-index: 0;
+  }
+  
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+`;
+
+const StatCard = styled.div<StyledComponent>`
+  padding: ${({ theme }) => theme.spacing.large};
+  background: ${({ theme }) => theme.colors.background.light};
+  border-radius: 16px;
+  box-shadow: ${({ theme }) => `
+    0 4px 20px ${theme.colors.shadow}20,
+    0 0 0 1px ${theme.colors.border} inset
+  `};
+  text-align: center;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 1;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      ${props => props.theme.colors.primaryLight}20,
+      ${props => props.theme.colors.secondaryLight}20
+    );
+    border-radius: 16px;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+  
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 
+      0 20px 40px ${props => props.theme.colors.shadow}30,
+      0 0 0 2px ${props => props.theme.colors.primary}20 inset;
+
+    &::before {
+      opacity: 1;
+    }
+
+    .number {
+      transform: scale(1.1);
+      background: linear-gradient(135deg,
+        ${props => props.theme.colors.primary},
+        ${props => props.theme.colors.info},
+        ${props => props.theme.colors.success}
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    .label {
+      transform: scale(1.05);
+      color: ${props => props.theme.colors.primary};
+    }
   }
   
   .number {
-    font-size: 4.5rem;
-    font-family: "Playfair Display", serif;
-    color: ${props => props.theme.colors.primary};
-    margin-bottom: ${props => props.theme.spacing.small};
-    font-weight: 700;
-    background: linear-gradient(135deg, ${props => props.theme.colors.primary}, ${props => props.theme.colors.primaryLight});
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin: 0 0 0.5rem;
+    font-weight: bold;
+    background: linear-gradient(135deg, 
+      ${props => props.theme.colors.primary}, 
+      ${props => props.theme.colors.secondary}
+    );
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
-    line-height: 1;
-    letter-spacing: -0.02em;
+    transition: all 0.5s ease;
+    display: inline-block;
   }
   
   .label {
-    color: ${props => props.theme.colors.text.light};
-    font-size: 1.1rem;
-    font-family: "Montserrat", sans-serif;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+    font-size: clamp(0.875rem, 2vw, 1rem);
+    color: ${props => props.theme.colors.text.dark};
+    margin: 0;
     opacity: 0.9;
+    font-weight: 500;
+    transition: all 0.5s ease;
+    letter-spacing: 0.5px;
   }
 `;
 
 const RegistrationSection = styled.section`
-  padding: ${props => props.theme.spacing.large} max(${props => props.theme.spacing.large}, 5vw);
-  background: ${props => props.theme.colors.background.darker};
-  margin-top: 4rem;
-  padding-bottom: 6rem;
+  padding: ${props => props.theme.spacing.xxlarge} ${props => props.theme.spacing.large};
+  background: ${props => props.theme.colors.background.light};
+  margin-top: ${props => props.theme.spacing.xxlarge};
+  padding-bottom: ${props => props.theme.spacing.xxxlarge};
   text-align: center;
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    ${radialGradient}
+    animation: ${gradientMove} 15s ease infinite;
+  }
   
   h2 {
-    font-size: 4.5rem;
-    font-family: "Playfair Display", serif;
-    color: ${props => props.theme.colors.text.light};
-    margin-bottom: 2rem;
+    font-size: ${props => props.theme.fontSizes.xxxlarge};
+    font-family: ${props => props.theme.fonts.title};
+    color: ${props => props.theme.colors.text.dark};
+    margin-bottom: ${props => props.theme.spacing.large};
     font-weight: 700;
     position: relative;
+    z-index: 1;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: ${props => `radial-gradient(circle at center, ${props.theme.colors.primaryLight}20 0%, transparent 50%, ${props.theme.colors.secondaryLight}20 100%)`};
+    animation: ${gradientMove} 15s ease infinite;
+  }
+  
+  h2 {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-family: ${props => props.theme.fonts.title};
+    color: ${props => props.theme.colors.text.dark};
+    margin-bottom: ${props => props.theme.spacing.large};
+    font-weight: 700;
+    position: relative;
+    z-index: 1;
 
     &:after {
       content: '';
@@ -171,17 +357,21 @@ const RegistrationSection = styled.section`
       transform: translateX(-50%);
       width: 100px;
       height: 3px;
-      background: ${props => props.theme.colors.primary};
+      background: ${props => `linear-gradient(90deg, ${props.theme.colors.primary}, ${props.theme.colors.info}, ${props.theme.colors.success})`};
+      animation: ${gradientFlow} 3s linear infinite;
+      background-size: 200% auto;
     }
   }
 
   p {
-    font-size: 1.2rem;
-    color: ${props => props.theme.colors.text.light};
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: ${props => props.theme.colors.text.dark};
     max-width: 900px;
     margin: 0 auto;
     line-height: 1.8;
     opacity: 0.9;
+    position: relative;
+    z-index: 1;
   }
 `;
 
@@ -200,9 +390,10 @@ const FormEmbed = styled.div`
   margin-right: auto;
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 20px 40px ${props => props.theme.colors.shadow};
   position: relative;
   background: ${props => props.theme.colors.background.light};
+  border: 1px solid ${props => props.theme.colors.border};
   
   &::before {
     content: '';
@@ -212,9 +403,24 @@ const FormEmbed = styled.div`
     right: 0;
     height: 4px;
     background: linear-gradient(90deg, 
-      ${props => props.theme.colors.primary}, 
-      ${props => props.theme.colors.primaryLight}
+      ${props => props.theme.colors.secondaryLight}, 
+      ${props => props.theme.colors.secondary}
     );
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg,
+      ${props => props.theme.colors.background.glass},
+      ${props => props.theme.colors.background.light}
+    );
+    opacity: 0.5;
+    pointer-events: none;
   }
   
   iframe {
@@ -223,6 +429,8 @@ const FormEmbed = styled.div`
     border: none;
     background: ${props => props.theme.colors.background.light};
     transition: opacity 0.3s ease;
+    position: relative;
+    z-index: 1;
     
     &:not([loaded]) {
       opacity: 0;
@@ -240,11 +448,11 @@ const FormEmbed = styled.div`
 const RegistrationButton = styled.a`
   display: inline-block;
   padding: 1.2rem 3rem;
-  background: linear-gradient(135deg, ${props => props.theme.colors.primary}, #FF9F9F);
-  color: white;
+  background: ${props => props.theme.colors.background.light};
+  color: ${props => props.theme.colors.primary};
   text-decoration: none;
   border-radius: 50px;
-  font-family: "Montserrat", sans-serif;
+  font-family: ${props => props.theme.fonts.body};
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -252,24 +460,31 @@ const RegistrationButton = styled.a`
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   position: relative;
   overflow: hidden;
+  border: 2px solid ${props => props.theme.colors.primary};
   
-  &::after {
+  &::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, ${props => props.theme.colors.primaryLight}, ${props => props.theme.colors.primary});
+    background: linear-gradient(135deg, 
+      ${props => props.theme.colors.primary}, 
+      ${props => props.theme.colors.primaryLight}
+    );
     opacity: 0;
-    transition: opacity 0.4s ease;
+    transition: opacity 0.3s ease;
+    z-index: -1;
   }
   
   &:hover {
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 15px 30px rgba(255, 93, 115, 0.3);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px ${props => props.theme.colors.shadow};
+    color: ${props => props.theme.colors.background.light};
+    border-color: transparent;
     
-    &::after {
+    &::before {
       opacity: 1;
     }
   }
@@ -286,35 +501,28 @@ const Home: React.FC = () => {
   const missionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!titleRef.current || !subtitleRef.current || !statSectionRef.current) {
+    if (!subtitleRef.current || !statSectionRef.current) {
       return;
     }
 
     // Initial hero animations
-    gsap.set([titleRef.current, subtitleRef.current], { opacity: 0 });
+    gsap.set(subtitleRef.current, { opacity: 0, y: 30 });
     
-    const heroTl = gsap.timeline();
-    heroTl
-      .to(titleRef.current, {
-        opacity: 1,
-        scale: 1,
-        duration: 1,
-        ease: "power3.out"
-      })
-      .to(subtitleRef.current, {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: "power3.out"
-      }, "-=0.5");
+    const heroTl = gsap.timeline({ delay: 0.5 });
+    heroTl.to(subtitleRef.current, {
+      opacity: 1,
+      y: 0,
+      duration: 1,
+      ease: "power2.out"
+    });
 
     // Stats section animations
     const statCards = statSectionRef.current.querySelectorAll('.stat-card');
     const numbers = statSectionRef.current.querySelectorAll('.number');
     const labels = statSectionRef.current.querySelectorAll('.label');
     
-    gsap.set(statCards, { opacity: 0, y: 50 });
-    gsap.set(labels, { opacity: 0 });
+    gsap.set([statCards, numbers, labels], { opacity: 0 });
+    gsap.set(statCards, { y: 50 });
     
     ScrollTrigger.create({
       trigger: statSectionRef.current,
@@ -330,19 +538,26 @@ const Home: React.FC = () => {
         });
         
         // Animate numbers with a smooth countup
-        numbers.forEach((number, index) => {
-          const target = parseInt(number.getAttribute('data-value') || '0', 10);
-          let obj = { value: 0 };
-          
-          gsap.to(obj, {
-            value: target,
-            duration: 2.5,
-            ease: "power3.out",
-            delay: 0.2 + index * 0.1,
-            onUpdate: () => {
-              number.textContent = Math.round(obj.value) + '+';
+        numbers.forEach((number: Element, index: number) => {
+          const htmlElement = number as HTMLElement;
+          const target = parseInt(htmlElement.getAttribute('data-value') || '0', 10);
+          gsap.fromTo(htmlElement, 
+            { 
+              opacity: 0,
+              textContent: '0' 
+            },
+            {
+              opacity: 1,
+              duration: 0.6,
+              delay: 0.2 + index * 0.1,
+              snap: { textContent: 1 },
+              textContent: target,
+              ease: "power1.inOut",
+              onComplete: () => {
+                htmlElement.textContent = target + '+';
+              }
             }
-          });
+          );
         });
         
         // Fade in labels after numbers
@@ -350,7 +565,7 @@ const Home: React.FC = () => {
           opacity: 1,
           duration: 0.8,
           stagger: 0.15,
-          delay: 0.5,
+          delay: 1,
           ease: "power2.out"
         });
       },
@@ -399,14 +614,14 @@ const Home: React.FC = () => {
   return (
     <HomeContainer>
       <HeroSection>
-        <HeroContent>
-          <HeroTitle ref={titleRef}>
-            Art4Hearts
-          </HeroTitle>
-          <HeroSubtitle ref={subtitleRef}>
-            Creating smiles through art, one heart at a time
-          </HeroSubtitle>
-        </HeroContent>
+        <BannerContainer>
+          <Banner src="/Art4Hearts Banner.png" alt="Art4Hearts Logo" />
+          <HeroContent>
+            <HeroSubtitle ref={subtitleRef}>
+              Art4Hearts is a 501(3)c non-profit based in the Bay Area aiming to spread love through art. Join our creative journey!
+            </HeroSubtitle>
+          </HeroContent>
+        </BannerContainer>
       </HeroSection>
 
       <div ref={missionRef}>
@@ -415,19 +630,19 @@ const Home: React.FC = () => {
 
       <StatSection ref={statSectionRef}>
         <StatCard className="stat-card">
-          <div className="number" data-value="4500">0</div>
+          <div className="number" data-value="4500"></div>
           <div className="label">VOLUNTEERS WORLDWIDE</div>
         </StatCard>
         <StatCard className="stat-card">
-          <div className="number" data-value="150">0</div>
+          <div className="number" data-value="150"></div>
           <div className="label">ACTIVE CHAPTERS</div>
         </StatCard>
         <StatCard className="stat-card">
-          <div className="number" data-value="50">0</div>
+          <div className="number" data-value="50"></div>
           <div className="label">COUNTRIES REACHED</div>
         </StatCard>
         <StatCard className="stat-card">
-          <div className="number" data-value="1000">0</div>
+          <div className="number" data-value="1000"></div>
           <div className="label">ART KITS & BRACELETS</div>
         </StatCard>
       </StatSection>
@@ -441,19 +656,26 @@ const Home: React.FC = () => {
         </p>
         <ButtonContainer>
           <RegistrationButton 
-            href="https://docs.google.com/forms/d/e/1FAIpQLSd98E0LsNhBywLdUhlIBmp6e88bjt81Fh1tV6Lz6FklT1LtEg/viewform?usp=send_form" 
+            href="https://docs.google.com/forms/d/e/1FAIpQLSd98E0LsNhBywLdUhlIBmp6e88bjt81Fh1tV6Lz6FklT1LtEg/viewform" 
             target="_blank" 
             rel="noopener noreferrer"
           >
-            Join Our Mission
+            Register as a Volunteer
           </RegistrationButton>
         </ButtonContainer>
         <FormEmbed>
           <iframe
-            src="https://docs.google.com/forms/d/e/1FAIpQLSd98E0LsNhBywLdUhlIBmp6e88bjt81Fh1tV6Lz6FklT1LtEg/viewform?embedded=true"
+            src="https://docs.google.com/forms/d/e/1FAIpQLSd98E0LsNhBywLdUhlIBmp6e88bjt81Fh1tV6Lz6FklT1LtEg/viewform?embedded=true&usp=pp_url"
             title="Volunteer Registration Form"
             style={{ width: "100%", height: "800px", border: "none", background: "#fff" }}
             loading="lazy"
+            onLoad={(e) => {
+              const iframe = e.target as HTMLIFrameElement;
+              if (iframe) {
+                iframe.setAttribute('loaded', 'true');
+              }
+            }}
+            allowFullScreen
           >
             Loading...
           </iframe>

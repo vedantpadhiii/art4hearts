@@ -1,5 +1,7 @@
 import gsap from 'gsap';
+import { keyframes } from 'styled-components';
 
+// GSAP Animations
 export const fadeInUp = (element: HTMLElement, delay: number = 0) => {
   return gsap.from(element, {
     y: 50,
@@ -72,3 +74,35 @@ export const numberCounter = (element: HTMLElement, endValue: number, duration: 
     ease: "power1.inOut"
   });
 };
+
+// Styled Components Animations
+export const gradientMove = keyframes`
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-2%, -2%) scale(1.05); }
+  100% { transform: translate(0, 0) scale(1); }
+`;
+
+export const gradientFlow = keyframes`
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+`;
+
+export const float = keyframes`
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+`;
+
+export const rotate = keyframes`
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+`;
+
+export const pulse = keyframes`
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.05); opacity: 0.8; }
+`;
+
+export const shimmer = keyframes`
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+`;

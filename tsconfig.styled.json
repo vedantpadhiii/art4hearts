@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "plugins": [
+      {
+        "name": "typescript-plugin-styled-components",
+        "tags": [
+          "styled",
+          "css",
+          "sty"
+        ]
+      }
+    ]
+  }
+}

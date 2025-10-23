@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 const MissionWrapper = styled.section`
-  padding: 6rem 2rem;
-  background: #000;
+  padding: clamp(4rem, 10vh, 6rem) 2rem;
+  background: ${props => props.theme.colors.background.light};
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -13,34 +13,78 @@ const MissionWrapper = styled.section`
   position: relative;
   min-height: 50vh;
 
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+      circle at center,
+      ${props => props.theme.colors.secondaryLight}40 0%,
+      transparent 70%
+    );
+    pointer-events: none;
+  }
+
   &::after {
     content: '';
     position: absolute;
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 100px;
-    height: 4px;
-    background: linear-gradient(90deg, transparent, #FF1493, transparent);
+    width: 200px;
+    height: 2px;
+    background: linear-gradient(
+      90deg, 
+      transparent,
+      ${props => props.theme.colors.primary}40,
+      ${props => props.theme.colors.secondary}40,
+      transparent
+    );
   }
 `;
 
 const Title = styled.h2`
-  font-size: 4rem;
-  color: #fff;
-  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  color: ${props => props.theme.colors.text.dark};
+  font-family: ${props => props.theme.fonts.title};
   font-weight: 700;
   margin-bottom: 2rem;
   position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(
+      90deg,
+      ${props => props.theme.colors.primary},
+      ${props => props.theme.colors.secondary}
+    );
+  }
 `;
 
 const Description = styled.p`
-  font-size: 1.2rem;
-  color: #fff;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: ${props => props.theme.colors.text.dark};
   max-width: 900px;
   line-height: 1.8;
   margin: 0 auto;
-  opacity: 0.9;
+  opacity: 0.85;
+  position: relative;
+  z-index: 1;
+  font-family: ${props => props.theme.fonts.body};
+  font-weight: 400;
+  
+  @media (max-width: 768px) {
+    padding: 0 1rem;
+  }
 `;
 
 const MissionStatement: React.FC = () => {

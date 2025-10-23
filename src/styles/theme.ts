@@ -2,39 +2,39 @@ import { DefaultTheme } from 'styled-components';
 
 const theme: DefaultTheme = {
   colors: {
-    primary: '#FF69B4',    // Hot Pink
-    primaryLight: '#FF8DC7', // Lighter Pink
-    primaryDark: '#D4578F', // Darker Pink
-    secondary: '#51ABA7',  // Teal
-    secondaryLight: '#6FC2BE',
-    secondaryDark: '#3D817E',
-    success: '#4CAF50',
-    successLight: '#66BB6A',
-    successDark: '#388E3C',
-    error: '#F44336',
-    errorLight: '#EF5350',
-    errorDark: '#D32F2F',
-    warning: '#FFA726',
-    info: '#29B6F6',
+    primary: '#FF9FB6',    // Soft Pink
+    primaryLight: '#FFCCD5', // Lighter Pink
+    primaryDark: '#FF8BA7', // Slightly Darker Pink
+    secondary: '#C6DBDA',  // Mint Green (from logo)
+    secondaryLight: '#E3EEEE', // Lighter Mint
+    secondaryDark: '#A8C7C5', // Darker Mint
+    success: '#98D8B4',    // Soft Green
+    successLight: '#BFE5D0',
+    successDark: '#75C49B',
+    error: '#FFB5B5',      // Soft Red
+    errorLight: '#FFD1D1',
+    errorDark: '#FF9B9B',
+    warning: '#FFE1B5',    // Soft Orange
+    info: '#B5E2FF',       // Soft Blue
     background: {
-      dark: '#1A1A1A',      // Slightly softer black
-      darker: '#121212',    // Dark background
+      dark: '#F7F9F9',     // Very Light Mint
+      darker: '#E8EFEF',   // Slightly Darker Light Mint
       light: '#FFFFFF',
-      glass: 'rgba(26, 26, 26, 0.8)', // For glass effect
-      overlay: 'rgba(0, 0, 0, 0.7)',
-      card: '#242424'       // Slightly lighter than dark
+      glass: 'rgba(255, 255, 255, 0.9)', // Light glass effect
+      overlay: 'rgba(198, 219, 218, 0.7)', // Mint overlay
+      card: '#FFFFFF'      // White cards
     },
     text: {
       light: '#FFFFFF',
-      dark: '#1A1A1A',
-      muted: '#9E9E9E',     // Muted text
-      accent: '#FF69B4',    // Same as primary
-      lightMuted: 'rgba(255, 255, 255, 0.7)'
+      dark: '#4A5D5C',     // Deep Mint
+      muted: '#8AA6A5',    // Muted Mint
+      accent: '#FF9FB6',   // Soft Pink
+      lightMuted: 'rgba(74, 93, 92, 0.7)' // Transparent Deep Mint
     },
-    border: '#2A2A2A',      // Subtle border color
-    divider: 'rgba(255, 255, 255, 0.1)',
-    shadow: 'rgba(0, 0, 0, 0.2)',
-    highlight: 'rgba(255, 105, 180, 0.1)' // Primary color with low opacity
+    border: '#E3EEEE',     // Light Mint Border
+    divider: 'rgba(198, 219, 218, 0.3)', // Transparent Mint
+    shadow: 'rgba(166, 189, 188, 0.15)', // Soft Mint Shadow
+    highlight: 'rgba(255, 159, 182, 0.1)' // Soft Pink Highlight
   },
   fonts: {
     title: 'TAN Nimbus, serif',
@@ -49,7 +49,24 @@ const theme: DefaultTheme = {
     small: '1rem',
     medium: '2rem',
     large: '4rem',
-    header: '64px'  // Added header spacing
+    xlarge: '6rem',
+    xxlarge: '8rem',
+    xxxlarge: '10rem',
+    header: '64px'
+  },
+  fontSizes: {
+    small: '0.875rem',
+    medium: '1rem',
+    large: '1.25rem',
+    xlarge: '1.5rem',
+    xxlarge: '2rem',
+    xxxlarge: '3rem'
+  },
+  borderRadii: {
+    small: '4px',
+    medium: '8px',
+    large: '16px',
+    full: '9999px'
   }
 };
 

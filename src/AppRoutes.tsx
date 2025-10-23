@@ -11,7 +11,7 @@ import Team from './pages/about/Team';
 import Chapters from './pages/about/Chapters';
 import GetInvolved from './pages/GetInvolved';
 import FAQs from './pages/FAQs';
-import Spotlight from './pages/Spotlight';
+import Spotlights from './pages/Spotlights';
 import Contact from './pages/Contact';
 
 const AppRoutes: React.FC = () => {
@@ -27,7 +27,7 @@ const AppRoutes: React.FC = () => {
           <Route path="/about/chapters" element={<Chapters />} />
           <Route path="/get-involved" element={<GetInvolved />} />
           <Route path="/faqs" element={<FAQs />} />
-          <Route path="/spotlight" element={<Spotlight />} />
+          <Route path="/spotlights" element={<Spotlights />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </AnimatePresence>
