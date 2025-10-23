@@ -15,14 +15,15 @@ const NavContainer = styled.nav<{ isScrolled: boolean; isVisible: boolean }>`
   transform: translateY(${props => props.isVisible ? '0' : '-100%'});
   opacity: ${props => props.isVisible ? '1' : '0'};
   background: ${props => props.isScrolled 
-    ? 'rgba(0, 0, 0, 0.95)'
-    : 'linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%)'};
-  backdrop-filter: ${props => props.isScrolled ? 'blur(10px)' : 'none'};
-  box-shadow: ${props => props.isScrolled ? '0 4px 30px rgba(0, 0, 0, 0.1)' : 'none'};
+    ? 'rgba(255, 255, 255, 1)'
+    : 'linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.95) 100%)'};
+  backdrop-filter: ${props => props.isScrolled ? 'blur(12px)' : 'none'};
+  box-shadow: ${props => props.isScrolled ? '0 4px 16px rgba(0, 0, 0, 0.1)' : 'none'};
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
   @media (max-width: 768px) {
     padding: 0.5rem 1rem;
-    background: rgba(0, 0, 0, 0.95);
+    background: rgba(240, 247, 255, 0.95);
   }
 `;
 
@@ -37,11 +38,17 @@ const NavContent = styled.div`
 const LogoWrapper = styled(Link)`
   display: flex;
   align-items: center;
-  color: ${props => props.theme.colors.text.light};
+  color: #111827;
   transition: all 0.3s ease;
+  font-weight: 800;
+  font-size: 1.35rem;
+  letter-spacing: 0.02em;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1);
   
   &:hover {
-    color: ${props => props.theme.colors.primary};
+    color: #1e3a8a;
+    transform: translateY(-1px);
+    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
   }
 `;
 
@@ -55,7 +62,7 @@ const NavLinks = styled.div<{ isOpen: boolean }>`
     top: 0;
     right: 0;
     height: 100vh;
-    background: ${props => props.theme.colors.background.darker};
+    background: rgba(240, 247, 255, 0.95);
     padding: 6rem 2rem;
     flex-direction: column;
     transform: translateX(${props => props.isOpen ? '0' : '100%'});
@@ -70,25 +77,29 @@ const NavItem = styled.div`
 `;
 
 const NavLink = styled(Link)<{ $isActive?: boolean }>`
-  color: ${props => props.theme.colors.text.light};
+  color: #111827;
   text-decoration: none;
-  font-weight: ${props => props.$isActive ? '600' : '400'};
+  font-weight: ${props => props.$isActive ? '700' : '600'};
   padding: 0.75rem 1rem;
-  font-size: 0.95rem;
-  letter-spacing: 0.05em;
+  font-size: 1rem;
+  letter-spacing: 0.03em;
   transition: all 0.3s ease;
   display: block;
   white-space: nowrap;
   border-radius: 8px;
+  position: relative;
   
   ${props => props.$isActive && `
-    color: ${props.theme.colors.primary};
-    background: rgba(255, 93, 115, 0.1);
+    color: #1e3a8a;
+    background: rgba(30, 58, 138, 0.08);
+    box-shadow: 0 2px 8px rgba(30, 58, 138, 0.12);
   `}
 
   &:hover {
-    color: ${props => props.theme.colors.primary};
-    background: rgba(255, 93, 115, 0.1);
+    color: #1e3a8a;
+    background: rgba(30, 58, 138, 0.05);
+    box-shadow: 0 2px 8px rgba(30, 58, 138, 0.08);
+    transform: translateY(-1px);
   }
 `;
 
@@ -97,15 +108,16 @@ const Dropdown = styled.div<{ isOpen: boolean }>`
   top: 100%;
   left: 50%;
   transform: translateX(-50%);
-  background: ${props => props.theme.colors.background.darker};
-  border: 1px solid ${props => props.theme.colors.background.light}20;
-  border-radius: 8px;
-  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid rgba(37, 99, 235, 0.15);
+  border-radius: 12px;
+  padding: 0.75rem;
   min-width: 200px;
   opacity: ${props => props.isOpen ? 1 : 0};
   visibility: ${props => props.isOpen ? 'visible' : 'hidden'};
   transition: all 0.2s ease-in-out;
   z-index: 1000;
+  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.15);
 
   @media (max-width: 768px) {
     position: static;
@@ -133,7 +145,7 @@ const MenuButton = styled.button<{ isOpen: boolean }>`
     display: block;
     width: 100%;
     height: 2px;
-    background: ${props => props.theme.colors.text.light};
+    background: #111827;
     position: absolute;
     transition: all 0.3s ease;
 
@@ -187,6 +199,10 @@ export const Navigation: React.FC = () => {
     setIsOpen(false);
     setDropdownOpen(false);
     setIsVisible(true); // Show navigation when route changes
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   }, [location.pathname]);
 
   return (

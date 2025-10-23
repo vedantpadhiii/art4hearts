@@ -5,6 +5,7 @@ import theme from './styles/theme';
 import GlobalStyles from './styles/GlobalStyles';
 import AppRoutes from './AppRoutes';
 import { ScrollProvider } from './context/ScrollContext';
+import ScrollToTop from './components/ScrollToTop';
 
 const App: React.FC = () => {
   return (
@@ -12,6 +13,7 @@ const App: React.FC = () => {
       <ThemeProvider theme={theme}>
         <GlobalStyles />
         <ScrollProvider>
+          <ScrollToTop />
           <AppRoutes />
         </ScrollProvider>
       </ThemeProvider>
