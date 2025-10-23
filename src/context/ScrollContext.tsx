@@ -1,20 +1,27 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useCallback, useRef, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
+import { useScrollSnap } from '../hooks/useScrollSnap';
 
 interface ScrollContextType {
-  scrollY: number;
+  currentSection: number;
+  totalSections: number;
   isScrolling: boolean;
   direction: 'up' | 'down';
+  scrollY: number;
+  containerRef: React.RefObject<HTMLDivElement>;
+  setTotalSections: (total: number) => void;
+  scrollToSection: (index: number) => void;
 }
 
 const ScrollContext = createContext<ScrollContextType>({
-  scrollY: 0,
+  currentSection: 0,
+  totalSections: 0,
   isScrolling: false,
   direction: 'down',
+  scrollY: 0,
+  containerRef: { current: null },
+  setTotalSections: () => {},
+  scrollToSection: () => {},
 });
 
 export const useScroll = () => useContext(ScrollContext);
@@ -24,44 +31,74 @@ interface ScrollProviderProps {
 }
 
 export const ScrollProvider: React.FC<ScrollProviderProps> = ({ children }) => {
-  const [scrollY, setScrollY] = useState(0);
+  const [currentSection, setCurrentSection] = useState(0);
+  const [totalSections, setTotalSections] = useState(0);
   const [isScrolling, setIsScrolling] = useState(false);
   const [direction, setDirection] = useState<'up' | 'down'>('down');
-  const [lastScrollY, setLastScrollY] = useState(0);
+  const [scrollY, setScrollY] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
 
-  useEffect(() => {
-    let scrollTimeout: NodeJS.Timeout;
+  useScrollSnap(containerRef, (index) => {
+    setCurrentSection(index);
+    setDirection(index > currentSection ? 'down' : 'up');
+  });
 
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      setScrollY(currentScrollY);
-      setDirection(currentScrollY > lastScrollY ? 'down' : 'up');
-      setLastScrollY(currentScrollY);
+  const scrollToSection = useCallback((index: number) => {
+    if (index < 0 || index >= totalSections) return;
+    
+    const container = containerRef.current;
+    if (!container) return;
+
+    const sections = container.querySelectorAll('section');
+    if (index >= 0 && index < sections.length) {
       setIsScrolling(true);
-
-      clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(() => {
+      setDirection(index > currentSection ? 'down' : 'up');
+      
+      sections[index].scrollIntoView({ behavior: 'smooth' });
+      setCurrentSection(index);
+      
+      setTimeout(() => {
         setIsScrolling(false);
-      }, 150);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      clearTimeout(scrollTimeout);
-    };
-  }, [lastScrollY]);
+      }, 1000);
+    }
+  }, [currentSection, totalSections]);
 
   useEffect(() => {
-    // Scroll to top on route change
-    window.scrollTo(0, 0);
-    ScrollTrigger.refresh();
+    const handleScroll = () => {
+      if (containerRef.current) {
+        setScrollY(containerRef.current.scrollTop);
+      }
+    };
+
+    const container = containerRef.current;
+    if (container) {
+      container.addEventListener('scroll', handleScroll, { passive: true });
+      return () => container.removeEventListener('scroll', handleScroll);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (containerRef.current) {
+      containerRef.current.scrollTop = 0;
+      setScrollY(0);
+    }
+    setCurrentSection(0);
   }, [location.pathname]);
 
   return (
-    <ScrollContext.Provider value={{ scrollY, isScrolling, direction }}>
+    <ScrollContext.Provider 
+      value={{ 
+        currentSection, 
+        totalSections, 
+        isScrolling, 
+        direction,
+        scrollY,
+        containerRef,
+        setTotalSections,
+        scrollToSection
+      }}
+    >
       {children}
     </ScrollContext.Provider>
   );

@@ -1,71 +1,81 @@
-import React, { useEffect, useRef } from 'react';
-import styled, { css, DefaultTheme } from 'styled-components';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import React from 'react';
+import styled from 'styled-components';
 import MissionStatement from '../components/MissionStatement';
-import { float, gradientFlow, gradientMove, pulse, rotate, shimmer } from '../styles/animations';
+import { useScroll } from '../context/ScrollContext';
+import { float, gradientFlow, gradientMove, pulse, rotate } from '../styles/animations';
+import useCountUp from '../hooks/useCountUp';
+import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 
-interface ThemeProps {
-  theme: DefaultTheme;
+interface StyledSectionProps {
+  $isActive: boolean;
 }
 
-interface StyledComponent {
-  theme: DefaultTheme;
-}
-
-const gradientBackground = ({ theme }: ThemeProps) => css`
-  background: linear-gradient(135deg,
-    ${theme.colors.secondaryLight} 0%,
-    ${theme.colors.secondary} 100%
-  );
-`;
-
-const radialGradient = ({ theme }: ThemeProps) => css`
-  background: radial-gradient(
-    circle at center,
-    ${theme.colors.primaryLight}20 0%,
-    transparent 50%,
-    ${theme.colors.secondaryLight}20 100%
-  );
-`;
-
-// Shared styles
-const glassEffect = css<StyledComponent>`
-  background: ${({ theme }) => theme.colors.background.glass};
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-`;
-
-gsap.registerPlugin(ScrollTrigger);
-
-const HomeContainer = styled.div<StyledComponent>`
-  min-height: 100vh;
-  overflow: hidden;
-  background: ${({ theme }) => theme.colors.background.dark};
-`;
-
-const HeroSection = styled.section<StyledComponent>`
-  min-height: 100vh;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+const HomeContainer = styled.div`
   position: relative;
+  width: 100%;
   background-color: ${({ theme }) => theme.colors.background.dark};
-  padding: 0;
-  margin: 0;
+  overflow-x: hidden;
+  scroll-snap-type: y mandatory;
+  height: 100vh;
+  overflow-y: auto;
+
+  .sections-container {
+    position: relative;
+    width: 100%;
+  }
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: ${({ theme }) => theme.colors.background.dark};
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: ${({ theme }) => `${theme.colors.primary}40`};
+    border-radius: 20px;
+    border: 2px solid ${({ theme }) => theme.colors.background.dark};
+    transition: background-color 0.3s ease;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: ${({ theme }) => `${theme.colors.primary}80`};
+  }
 `;
 
-const BannerContainer = styled.div<StyledComponent>`
-  width: 100%;
+const Section = styled.section<StyledSectionProps>`
   min-height: 100vh;
-  padding-top: ${({ theme }) => theme.spacing.header};
-  background-color: ${({ theme }) => theme.colors.secondary};
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: ${({ theme }) => `${theme.spacing.xxlarge} ${theme.spacing.large}`};
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  background-color: ${props => props.$isActive ? '#fff8e1' : 'white'};
+`;
+
+const HeroSection = styled(Section)`
+  height: 100vh;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  z-index: 1;
+`;
+
+const BannerContainer = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;
-  overflow: hidden;
+  justify-content: center;
   
   &::before {
     content: '';
@@ -74,613 +84,333 @@ const BannerContainer = styled.div<StyledComponent>`
     left: 0;
     right: 0;
     bottom: 0;
-    background: ${({ theme }) => css`
-      linear-gradient(
-        135deg,
-        ${theme.colors.secondaryLight} 0%,
-        ${theme.colors.secondary} 100%
-      )
-    `};
-    opacity: 0.5;
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    right: -50%;
-    bottom: -50%;
-    background: ${({ theme }) => css`
-      radial-gradient(
-        circle at center,
-        ${theme.colors.primaryLight}20 0%,
-        transparent 50%,
-        ${theme.colors.info}10 100%
-      )
-    `};
-    animation: ${rotate} 30s linear infinite;
+    background: ${({ theme }) => `linear-gradient(
+      135deg,
+      ${theme.colors.primaryLight} 0%,
+      ${theme.colors.secondaryLight} 50%,
+      ${theme.colors.primaryLight} 100%
+    )`};
+    opacity: 0.3;
+    animation: ${gradientMove} 15s ease infinite;
   }
 `;
 
-const Banner = styled.img`
-  width: 90%;
-  max-width: 1200px;
-  height: auto;
-  margin: 2rem auto;
-  object-fit: contain;
+const Banner = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/Art4Hearts Banner.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 `;
 
 const HeroContent = styled.div`
   position: absolute;
-  bottom: 3rem;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   width: 90%;
   max-width: 800px;
   text-align: center;
-  padding: 1.5rem;
-  background: ${props => props.theme.colors.background.glass};
-  border-radius: 16px;
+  padding: 2rem;
+  background: rgba(255, 250, 250, 0.9);
   backdrop-filter: blur(12px);
-  box-shadow: 
-    0 8px 32px ${props => props.theme.colors.shadow},
-    0 0 0 1px ${props => props.theme.colors.primaryLight}20 inset,
-    0 0 0 2px ${props => props.theme.colors.secondaryLight}10 inset;
   border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: ${({ theme }) => theme.borderRadii.large};
   transition: all 0.4s ease;
-  animation: float 6s ease-in-out infinite;
+  animation: ${float} 6s ease-in-out infinite;
   
   &:hover {
-    transform: translateX(-50%) translateY(-5px);
-    box-shadow: 
-      0 15px 40px ${props => props.theme.colors.shadow},
-      0 0 0 2px ${props => props.theme.colors.primaryLight}30 inset,
-      0 0 0 4px ${props => props.theme.colors.secondaryLight}20 inset;
-  }
-  
-  @keyframes float {
-    0%, 100% { transform: translateX(-50%) translateY(0px); }
-    50% { transform: translateX(-50%) translateY(-10px); }
-  }
-  
-  @media (max-width: 768px) {
-    bottom: 2rem;
-    padding: 1rem;
+    transform: translate(-50%, -55%);
   }
 `;
 
 const HeroSubtitle = styled.p`
-  font-size: clamp(1rem, 2vw, 1.2rem);
-  color: ${props => props.theme.colors.text.dark};
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  color: ${({ theme }) => theme.colors.text.dark};
   text-align: center;
   margin: 0;
   line-height: 1.6;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.02em;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 `;
 
-const StatSection = styled.section`
+const StatSectionWrapper: React.FC<{
+  children: (props: {
+    targetRef: React.RefObject<HTMLDivElement>;
+    isVisible: boolean;
+    hasAnimated: boolean;
+  }) => React.ReactNode;
+}> = ({ children }) => {
+  const { targetRef, isVisible, hasAnimated } = useIntersectionObserver({
+    threshold: 0.3
+  });
+  return <>{children({ targetRef, isVisible, hasAnimated })}</>;
+};
+
+const StatSection = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: clamp(1rem, 3vw, 2rem);
-  padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 3vw, 2rem);
-  background: ${props => `linear-gradient(
-    135deg,
-    ${props.theme.colors.background.dark} 0%,
-    ${props.theme.colors.background.light} 50%,
-    ${props.theme.colors.background.dark} 100%
-  )`};
-  position: relative;
-  margin: 0 auto;
-  max-width: 1400px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: clamp(1.5rem, 4vw, 2.5rem);
+  padding: clamp(3rem, 6vw, 5rem);
   width: 100%;
-  overflow: hidden;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: ${props => `radial-gradient(
-      circle at center,
-      ${props.theme.colors.secondary}20 0%,
-      transparent 70%
-    )`};
-    pointer-events: none;
-    animation: ${pulse} 8s ease-in-out infinite;
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: -100%;
-    left: -100%;
-    right: -100%;
-    bottom: -100%;
-    background: ${props => `
-      radial-gradient(circle at 30% 30%, ${props.theme.colors.primaryLight}10 0%, transparent 50%),
-      radial-gradient(circle at 70% 70%, ${props.theme.colors.info}10 0%, transparent 50%),
-      radial-gradient(circle at 30% 70%, ${props.theme.colors.warning}10 0%, transparent 50%),
-      radial-gradient(circle at 70% 30%, ${props.theme.colors.success}10 0%, transparent 50%)
-    `};
-    animation: ${gradientMove} 20s ease-in-out infinite;
-    z-index: 0;
-  }
-  
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  @media (min-width: 1024px) {
-    grid-template-columns: repeat(4, 1fr);
-  }
+  max-width: 1400px;
+  margin: 0 auto;
 `;
 
-const StatCard = styled.div<StyledComponent>`
-  padding: ${({ theme }) => theme.spacing.large};
-  background: ${({ theme }) => theme.colors.background.light};
-  border-radius: 16px;
-  box-shadow: ${({ theme }) => `
-    0 4px 20px ${theme.colors.shadow}20,
-    0 0 0 1px ${theme.colors.border} inset
-  `};
+const StatCard = styled.div`
+  padding: ${({ theme }) => theme.spacing.xlarge};
+  background: rgba(255, 255, 255, 0.9);
   text-align: center;
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  z-index: 1;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      135deg,
-      ${props => props.theme.colors.primaryLight}20,
-      ${props => props.theme.colors.secondaryLight}20
-    );
-    border-radius: 16px;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-  }
+  border-radius: ${({ theme }) => theme.borderRadii.large};
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 16px rgba(100, 150, 255, 0.12);
+  backdrop-filter: blur(8px);
   
   &:hover {
-    transform: translateY(-8px);
-    box-shadow: 
-      0 20px 40px ${props => props.theme.colors.shadow}30,
-      0 0 0 2px ${props => props.theme.colors.primary}20 inset;
-
-    &::before {
-      opacity: 1;
-    }
-
-    .number {
-      transform: scale(1.1);
-      background: linear-gradient(135deg,
-        ${props => props.theme.colors.primary},
-        ${props => props.theme.colors.info},
-        ${props => props.theme.colors.success}
-      );
-      -webkit-background-clip: text;
-      background-clip: text;
-    }
-
-    .label {
-      transform: scale(1.05);
-      color: ${props => props.theme.colors.primary};
-    }
+    transform: translateY(-6px);
+    box-shadow: 0 8px 24px rgba(100, 150, 255, 0.2);
+    background: rgba(255, 255, 255, 0.95);
   }
-  
+
   .number {
-    font-size: clamp(2rem, 4vw, 3rem);
-    margin: 0 0 0.5rem;
-    font-weight: bold;
-    background: linear-gradient(135deg, 
-      ${props => props.theme.colors.primary}, 
-      ${props => props.theme.colors.secondary}
-    );
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    transition: all 0.5s ease;
-    display: inline-block;
+    font-size: clamp(3.5rem, 6vw, 4.5rem);
+    font-weight: 800;
+    color: #1e40af; /* Darker blue for better contrast */
+    margin-bottom: 1.25rem;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    letter-spacing: -0.02em;
   }
   
   .label {
     font-size: clamp(0.875rem, 2vw, 1rem);
-    color: ${props => props.theme.colors.text.dark};
-    margin: 0;
-    opacity: 0.9;
-    font-weight: 500;
-    transition: all 0.5s ease;
+    color: #1e293b; /* Darker slate for better contrast */
+    font-weight: 600;
     letter-spacing: 0.5px;
+    text-transform: uppercase;
+    line-height: 1.4;
   }
 `;
 
-const RegistrationSection = styled.section`
-  padding: ${props => props.theme.spacing.xxlarge} ${props => props.theme.spacing.large};
-  background: ${props => props.theme.colors.background.light};
-  margin-top: ${props => props.theme.spacing.xxlarge};
-  padding-bottom: ${props => props.theme.spacing.xxxlarge};
+const MissionSectionContent = styled.div`
+  padding: clamp(4rem, 10vh, 6rem) 2rem;
+  background: #fff8e1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
   position: relative;
-  overflow: hidden;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    ${radialGradient}
-    animation: ${gradientMove} 15s ease infinite;
-  }
+  min-height: 100vh;
   
   h2 {
-    font-size: ${props => props.theme.fontSizes.xxxlarge};
-    font-family: ${props => props.theme.fonts.title};
-    color: ${props => props.theme.colors.text.dark};
-    margin-bottom: ${props => props.theme.spacing.large};
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    color: #333;
     font-weight: 700;
+    margin-bottom: 2rem;
     position: relative;
-    z-index: 1;
-  }
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: ${props => `radial-gradient(circle at center, ${props.theme.colors.primaryLight}20 0%, transparent 50%, ${props.theme.colors.secondaryLight}20 100%)`};
-    animation: ${gradientMove} 15s ease infinite;
   }
   
-  h2 {
-    font-size: clamp(2.5rem, 5vw, 4.5rem);
-    font-family: ${props => props.theme.fonts.title};
-    color: ${props => props.theme.colors.text.dark};
-    margin-bottom: ${props => props.theme.spacing.large};
-    font-weight: 700;
-    position: relative;
-    z-index: 1;
-
-    &:after {
-      content: '';
-      position: absolute;
-      bottom: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100px;
-      height: 3px;
-      background: ${props => `linear-gradient(90deg, ${props.theme.colors.primary}, ${props.theme.colors.info}, ${props.theme.colors.success})`};
-      animation: ${gradientFlow} 3s linear infinite;
-      background-size: 200% auto;
-    }
-  }
-
   p {
     font-size: clamp(1rem, 2vw, 1.2rem);
-    color: ${props => props.theme.colors.text.dark};
+    color: #333;
     max-width: 900px;
-    margin: 0 auto;
     line-height: 1.8;
-    opacity: 0.9;
-    position: relative;
-    z-index: 1;
+    margin: 0 auto;
+    opacity: 0.85;
+  }
+`;
+
+const RegisterSection = styled(Section)`
+  text-align: center;
+  
+  h2 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    color: ${({ theme }) => theme.colors.text.dark};
+    margin-bottom: 2rem;
+    
+    &::after {
+      content: '';
+      display: block;
+      width: 100px;
+      height: 3px;
+      margin: 1rem auto;
+      background: ${({ theme }) => `linear-gradient(90deg, 
+        ${theme.colors.primary}, 
+        ${theme.colors.secondary}
+      )`};
+      animation: ${gradientFlow} 3s linear infinite;
+    }
   }
 `;
 
 const ButtonContainer = styled.div`
+  margin-top: 3rem;
   display: flex;
   justify-content: center;
-  margin-top: 3rem;
-  padding: 0 ${props => props.theme.spacing.medium};
+  gap: 1rem;
+  flex-wrap: wrap;
+`;
+
+const RegisterButton = styled.a`
+  display: inline-block;
+  padding: 1.2rem 3rem;
+  background: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.background.light};
+  text-decoration: none;
+  border-radius: ${({ theme }) => theme.borderRadii.full};
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px ${({ theme }) => `${theme.colors.shadow}40`};
+  }
 `;
 
 const FormEmbed = styled.div`
   margin-top: 4rem;
   width: 100%;
   max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
-  border-radius: 20px;
+  border-radius: ${({ theme }) => theme.borderRadii.large};
   overflow: hidden;
-  box-shadow: 0 20px 40px ${props => props.theme.colors.shadow};
-  position: relative;
-  background: ${props => props.theme.colors.background.light};
-  border: 1px solid ${props => props.theme.colors.border};
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, 
-      ${props => props.theme.colors.secondaryLight}, 
-      ${props => props.theme.colors.secondary}
-    );
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: 4px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(180deg,
-      ${props => props.theme.colors.background.glass},
-      ${props => props.theme.colors.background.light}
-    );
-    opacity: 0.5;
-    pointer-events: none;
-  }
+  background: ${({ theme }) => theme.colors.background.light};
+  box-shadow: 0 10px 30px ${({ theme }) => `${theme.colors.shadow}20`};
   
   iframe {
     width: 100%;
     height: 800px;
     border: none;
-    background: ${props => props.theme.colors.background.light};
-    transition: opacity 0.3s ease;
-    position: relative;
-    z-index: 1;
-    
-    &:not([loaded]) {
-      opacity: 0;
-    }
-  }
-
-  @media (max-width: 768px) {
-    margin-top: 3rem;
-    iframe {
-      height: 600px;
-    }
-  }
-`;
-
-const RegistrationButton = styled.a`
-  display: inline-block;
-  padding: 1.2rem 3rem;
-  background: ${props => props.theme.colors.background.light};
-  color: ${props => props.theme.colors.primary};
-  text-decoration: none;
-  border-radius: 50px;
-  font-family: ${props => props.theme.fonts.body};
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-size: 1.1rem;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  position: relative;
-  overflow: hidden;
-  border: 2px solid ${props => props.theme.colors.primary};
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, 
-      ${props => props.theme.colors.primary}, 
-      ${props => props.theme.colors.primaryLight}
-    );
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: -1;
-  }
-  
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 30px ${props => props.theme.colors.shadow};
-    color: ${props => props.theme.colors.background.light};
-    border-color: transparent;
-    
-    &::before {
-      opacity: 1;
-    }
-  }
-  
-  &:active {
-    transform: translateY(-2px) scale(0.98);
   }
 `;
 
 const Home: React.FC = () => {
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const subtitleRef = useRef<HTMLParagraphElement>(null);
-  const statSectionRef = useRef<HTMLElement>(null);
-  const missionRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!subtitleRef.current || !statSectionRef.current) {
-      return;
-    }
-
-    // Initial hero animations
-    gsap.set(subtitleRef.current, { opacity: 0, y: 30 });
-    
-    const heroTl = gsap.timeline({ delay: 0.5 });
-    heroTl.to(subtitleRef.current, {
-      opacity: 1,
-      y: 0,
-      duration: 1,
-      ease: "power2.out"
-    });
-
-    // Stats section animations
-    const statCards = statSectionRef.current.querySelectorAll('.stat-card');
-    const numbers = statSectionRef.current.querySelectorAll('.number');
-    const labels = statSectionRef.current.querySelectorAll('.label');
-    
-    gsap.set([statCards, numbers, labels], { opacity: 0 });
-    gsap.set(statCards, { y: 50 });
-    
-    ScrollTrigger.create({
-      trigger: statSectionRef.current,
-      start: "top center+=100",
-      onEnter: () => {
-        // Animate cards with a bounce effect
-        gsap.to(statCards, {
-          opacity: 1,
-          y: 0,
-          duration: 1.2,
-          stagger: 0.15,
-          ease: "back.out(1.2)"
-        });
-        
-        // Animate numbers with a smooth countup
-        numbers.forEach((number: Element, index: number) => {
-          const htmlElement = number as HTMLElement;
-          const target = parseInt(htmlElement.getAttribute('data-value') || '0', 10);
-          gsap.fromTo(htmlElement, 
-            { 
-              opacity: 0,
-              textContent: '0' 
-            },
-            {
-              opacity: 1,
-              duration: 0.6,
-              delay: 0.2 + index * 0.1,
-              snap: { textContent: 1 },
-              textContent: target,
-              ease: "power1.inOut",
-              onComplete: () => {
-                htmlElement.textContent = target + '+';
-              }
-            }
-          );
-        });
-        
-        // Fade in labels after numbers
-        gsap.to(labels, {
-          opacity: 1,
-          duration: 0.8,
-          stagger: 0.15,
-          delay: 1,
-          ease: "power2.out"
-        });
-      },
-      once: true // Only trigger once
-    });
-
-    // Mission section animation
-    if (missionRef.current) {
-      gsap.fromTo(missionRef.current, 
-        { 
-          opacity: 0, 
-          y: 50 
-        },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          scrollTrigger: {
-            trigger: missionRef.current,
-            start: "top center+=100",
-            end: "bottom center",
-            toggleActions: "play none none reverse"
-          }
-        }
-      );
-    }
-
-    // Parallax effect for hero section
-    gsap.to(titleRef.current, {
-      scrollTrigger: {
-        trigger: titleRef.current,
-        start: "top top",
-        end: "bottom top",
-        scrub: 1
-      },
-      y: (index, target) => -target.offsetHeight * 0.2,
-      ease: "none"
-    });
-
-    return () => {
-      // Cleanup ScrollTrigger instances
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    };
-  }, []);
+  const { currentSection, containerRef } = useScroll();
 
   return (
-    <HomeContainer>
-      <HeroSection>
-        <BannerContainer>
-          <Banner src="/Art4Hearts Banner.png" alt="Art4Hearts Logo" />
-          <HeroContent>
-            <HeroSubtitle ref={subtitleRef}>
-              Art4Hearts is a 501(3)c non-profit based in the Bay Area aiming to spread love through art. Join our creative journey!
-            </HeroSubtitle>
-          </HeroContent>
-        </BannerContainer>
-      </HeroSection>
+    <HomeContainer ref={containerRef}>
+      <div className="sections-container">
+        <HeroSection $isActive={currentSection === 0}>
+          <BannerContainer>
+            <Banner role="img" aria-label="Art4Hearts Banner" />
+            <HeroContent>
+              <HeroSubtitle>
+                Art4Hearts is a 501(3)c non-profit based in the Bay Area aiming to spread love through art. 
+                Join our creative journey!
+              </HeroSubtitle>
+            </HeroContent>
+          </BannerContainer>
+        </HeroSection>
 
-      <div ref={missionRef}>
-        <MissionStatement />
+        <Section $isActive={currentSection === 1} style={{backgroundColor: '#fff8e1'}}>
+          <h2 style={{
+            fontSize: '4.5rem',
+            marginBottom: '2.5rem',
+            color: '#333',
+            fontWeight: '700',
+            letterSpacing: '0.02em'
+          }}>
+            OUR MISSION
+          </h2>
+          <p style={{
+            fontSize: '1.2rem',
+            maxWidth: '900px',
+            lineHeight: '1.8',
+            color: '#333',
+            padding: '0 2rem'
+          }}>
+            Art4Hearts is a youth-led nonprofit spreading creativity and comfort through crafting personalized art therapy kits, 
+            leading art workshops, and handmaking bracelets with uplifting messages to brighten the lives of communities we serve.
+          </p>
+        </Section>
+
+        <Section $isActive={currentSection === 2} style={{ backgroundColor: '#f0f7ff' }}>
+          <StatSectionWrapper>
+            {({ targetRef, isVisible, hasAnimated }) => (
+              <StatSection ref={targetRef} style={{ backgroundColor: 'transparent' }}>
+                <StatCard>
+                  <div className="number">
+                    {useCountUp({ 
+                      end: 4500, 
+                      isVisible: isVisible || hasAnimated,
+                      duration: 2500
+                    }).toLocaleString()}+
+                  </div>
+                  <div className="label">VOLUNTEERS WORLDWIDE</div>
+                </StatCard>
+                <StatCard>
+                  <div className="number">
+                    {useCountUp({ 
+                      end: 150, 
+                      isVisible: isVisible || hasAnimated,
+                      duration: 2000,
+                      delay: 200
+                    }).toLocaleString()}+
+                  </div>
+                  <div className="label">ACTIVE CHAPTERS</div>
+                </StatCard>
+                <StatCard>
+                  <div className="number">
+                    {useCountUp({ 
+                      end: 50, 
+                      isVisible: isVisible || hasAnimated,
+                      duration: 1500,
+                      delay: 400
+                    }).toLocaleString()}+
+                  </div>
+                  <div className="label">COUNTRIES REACHED</div>
+                </StatCard>
+                <StatCard>
+                  <div className="number">
+                    {useCountUp({ 
+                      end: 1000, 
+                      isVisible: isVisible || hasAnimated,
+                      duration: 2000,
+                      delay: 600
+                    }).toLocaleString()}+
+                  </div>
+                  <div className="label">ART KITS & BRACELETS</div>
+                </StatCard>
+              </StatSection>
+            )}
+          </StatSectionWrapper>
+        </Section>
+
+        <RegisterSection $isActive={currentSection === 3}>
+          <h2>Join Our Mission!</h2>
+          <p>
+            Be part of a global movement that brings joy and creativity to those who need it most. 
+            Whether you're an artist, student, or someone who wants to make a difference, 
+            there's a place for you in the Art4Hearts family.
+          </p>
+          <ButtonContainer>
+            <RegisterButton 
+              href="https://docs.google.com/forms/d/e/1FAIpQLSd98E0LsNhBywLdUhlIBmp6e88bjt81Fh1tV6Lz6FklT1LtEg/viewform" 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              Register as a Volunteer
+            </RegisterButton>
+          </ButtonContainer>
+          <FormEmbed>
+            <iframe
+              src="https://docs.google.com/forms/d/e/1FAIpQLSd98E0LsNhBywLdUhlIBmp6e88bjt81Fh1tV6Lz6FklT1LtEg/viewform?embedded=true"
+              title="Volunteer Registration Form"
+              loading="lazy"
+            />
+          </FormEmbed>
+        </RegisterSection>
       </div>
-
-      <StatSection ref={statSectionRef}>
-        <StatCard className="stat-card">
-          <div className="number" data-value="4500"></div>
-          <div className="label">VOLUNTEERS WORLDWIDE</div>
-        </StatCard>
-        <StatCard className="stat-card">
-          <div className="number" data-value="150"></div>
-          <div className="label">ACTIVE CHAPTERS</div>
-        </StatCard>
-        <StatCard className="stat-card">
-          <div className="number" data-value="50"></div>
-          <div className="label">COUNTRIES REACHED</div>
-        </StatCard>
-        <StatCard className="stat-card">
-          <div className="number" data-value="1000"></div>
-          <div className="label">ART KITS & BRACELETS</div>
-        </StatCard>
-      </StatSection>
-
-      <RegistrationSection>
-        <h2>Join Our Mission!</h2>
-        <p>
-          Be part of a global movement that brings joy and creativity to those who need it most. 
-          Whether you're an artist, student, or someone who wants to make a difference, 
-          there's a place for you in the Art4Hearts family.
-        </p>
-        <ButtonContainer>
-          <RegistrationButton 
-            href="https://docs.google.com/forms/d/e/1FAIpQLSd98E0LsNhBywLdUhlIBmp6e88bjt81Fh1tV6Lz6FklT1LtEg/viewform" 
-            target="_blank" 
-            rel="noopener noreferrer"
-          >
-            Register as a Volunteer
-          </RegistrationButton>
-        </ButtonContainer>
-        <FormEmbed>
-          <iframe
-            src="https://docs.google.com/forms/d/e/1FAIpQLSd98E0LsNhBywLdUhlIBmp6e88bjt81Fh1tV6Lz6FklT1LtEg/viewform?embedded=true&usp=pp_url"
-            title="Volunteer Registration Form"
-            style={{ width: "100%", height: "800px", border: "none", background: "#fff" }}
-            loading="lazy"
-            onLoad={(e) => {
-              const iframe = e.target as HTMLIFrameElement;
-              if (iframe) {
-                iframe.setAttribute('loaded', 'true');
-              }
-            }}
-            allowFullScreen
-          >
-            Loading...
-          </iframe>
-        </FormEmbed>
-      </RegistrationSection>
     </HomeContainer>
   );
 };

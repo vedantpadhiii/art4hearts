@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useScroll } from '../context/ScrollContext';
 
 const MissionWrapper = styled.section`
   padding: clamp(4rem, 10vh, 6rem) 2rem;
@@ -11,7 +12,9 @@ const MissionWrapper = styled.section`
   justify-content: center;
   text-align: center;
   position: relative;
-  min-height: 50vh;
+  min-height: 100vh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 
   &::before {
     content: '';
@@ -87,9 +90,20 @@ const Description = styled.p`
   }
 `;
 
-const MissionStatement: React.FC = () => {
+interface MissionStatementProps {
+  isActive?: boolean;
+}
+
+const MissionStatement: React.FC<MissionStatementProps> = () => {
+  const { currentSection } = useScroll();
+  const isActive = currentSection === 1;
+  
   return (
-    <MissionWrapper>
+    <MissionWrapper style={{
+      opacity: isActive ? 1 : 0,
+      transform: `translateY(${isActive ? 0 : '30px'})`,
+      transition: 'opacity 0.6s ease, transform 0.6s ease'
+    }}>
       <Title>OUR MISSION</Title>
       <Description>
         Art4Hearts is a youth-led nonprofit spreading creativity and comfort through crafting personalized art therapy kits, 

@@ -2,26 +2,26 @@ import { DefaultTheme } from 'styled-components';
 
 const theme: DefaultTheme = {
   colors: {
-    primary: '#FF9FB6',    // Soft Pink
-    primaryLight: '#FFCCD5', // Lighter Pink
-    primaryDark: '#FF8BA7', // Slightly Darker Pink
-    secondary: '#C6DBDA',  // Mint Green (from logo)
-    secondaryLight: '#E3EEEE', // Lighter Mint
-    secondaryDark: '#A8C7C5', // Darker Mint
-    success: '#98D8B4',    // Soft Green
-    successLight: '#BFE5D0',
-    successDark: '#75C49B',
+    primary: '#FFB5D3',    // Pastel Pink
+    primaryLight: '#FFE2EE', // Light Pastel Pink
+    primaryDark: '#FF9FC4', // Slightly Darker Pastel Pink
+    secondary: '#FFE5B9',  // Pastel Yellow
+    secondaryLight: '#FFF2D9', // Light Pastel Yellow
+    secondaryDark: '#FFD89F', // Darker Pastel Yellow
+    success: '#B5E6D8',    // Pastel Mint
+    successLight: '#D9F2EB',
+    successDark: '#95D6C4',
     error: '#FFB5B5',      // Soft Red
     errorLight: '#FFD1D1',
     errorDark: '#FF9B9B',
     warning: '#FFE1B5',    // Soft Orange
-    info: '#B5E2FF',       // Soft Blue
+    info: '#B5DCFF',       // Pastel Blue
     background: {
-      dark: '#F7F9F9',     // Very Light Mint
-      darker: '#E8EFEF',   // Slightly Darker Light Mint
-      light: '#FFFFFF',
-      glass: 'rgba(255, 255, 255, 0.9)', // Light glass effect
-      overlay: 'rgba(198, 219, 218, 0.7)', // Mint overlay
+      dark: '#FFF9F9',     // Very Light Pink
+      darker: '#FFF2F2',   // Slightly Darker Light Pink
+      light: '#FFFAFA',    // Snow White
+      glass: 'rgba(255, 250, 250, 0.9)', // Light glass effect
+      overlay: 'rgba(255, 229, 185, 0.7)', // Pastel Yellow overlay
       card: '#FFFFFF'      // White cards
     },
     text: {

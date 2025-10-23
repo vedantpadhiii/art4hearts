@@ -13,10 +13,12 @@ const NavContainer = styled.nav<{ isScrolled: boolean; isVisible: boolean }>`
   padding: ${props => props.isScrolled ? '0.5rem 2rem' : '1.5rem 2rem'};
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   transform: translateY(${props => props.isVisible ? '0' : '-100%'});
+  opacity: ${props => props.isVisible ? '1' : '0'};
   background: ${props => props.isScrolled 
     ? 'rgba(0, 0, 0, 0.95)'
     : 'linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%)'};
   backdrop-filter: ${props => props.isScrolled ? 'blur(10px)' : 'none'};
+  box-shadow: ${props => props.isScrolled ? '0 4px 30px rgba(0, 0, 0, 0.1)' : 'none'};
 
   @media (max-width: 768px) {
     padding: 0.5rem 1rem;
@@ -166,17 +168,25 @@ export const Navigation: React.FC = () => {
   const lastScrollY = React.useRef(0);
 
   useEffect(() => {
-    if (scrollY > lastScrollY.current && scrollY > 100) {
-      if (isVisible) setIsVisible(false);
-    } else {
-      if (!isVisible) setIsVisible(true);
+    const currentScrollY = scrollY;
+    const scrollThreshold = 100;
+    const scrollDelta = 50;
+
+    if (currentScrollY < scrollThreshold) {
+      setIsVisible(true);
+    } else if (currentScrollY > lastScrollY.current + scrollDelta) {
+      setIsVisible(false);
+    } else if (currentScrollY < lastScrollY.current - scrollDelta / 2) {
+      setIsVisible(true);
     }
-    lastScrollY.current = scrollY;
-  }, [scrollY, isVisible]);
+
+    lastScrollY.current = currentScrollY;
+  }, [scrollY]);
 
   useEffect(() => {
     setIsOpen(false);
     setDropdownOpen(false);
+    setIsVisible(true); // Show navigation when route changes
   }, [location.pathname]);
 
   return (
