@@ -10,16 +10,15 @@ const NavContainer = styled.nav<{ isScrolled: boolean; isVisible: boolean }>`
   left: 0;
   right: 0;
   z-index: 1000;
-  padding: ${props => props.isScrolled ? '0.5rem 2rem' : '1.5rem 2rem'};
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: ${props => props.isScrolled ? '0.5rem 2rem' : '1rem 2rem'};
+  transition: all 0.3s ease;
   transform: translateY(${props => props.isVisible ? '0' : '-100%'});
-  opacity: ${props => props.isVisible ? '1' : '0'};
   background: ${props => props.isScrolled 
-    ? 'rgba(255, 255, 255, 1)'
-    : 'linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.95) 100%)'};
-  backdrop-filter: ${props => props.isScrolled ? 'blur(12px)' : 'none'};
-  box-shadow: ${props => props.isScrolled ? '0 4px 16px rgba(0, 0, 0, 0.1)' : 'none'};
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    ? 'rgba(255, 255, 255, 0.95)'
+    : 'rgba(255, 255, 255, 0.98)'};
+  backdrop-filter: blur(8px);
+  box-shadow: ${props => props.isScrolled ? '0 4px 16px rgba(0, 0, 0, 0.08)' : 'none'};
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 
   @media (max-width: 768px) {
     padding: 0.5rem 1rem;
@@ -177,23 +176,30 @@ export const Navigation: React.FC = () => {
   const { scrollY } = useScroll();
   const location = useLocation();
   const [isVisible, setIsVisible] = useState(true);
-  const lastScrollY = React.useRef(0);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
-    const currentScrollY = scrollY;
-    const scrollThreshold = 100;
-    const scrollDelta = 50;
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      // Always show navbar at the top of the page
+      if (currentScrollY < 100) {
+        setIsVisible(true);
+      }
+      // Hide when scrolling down, show when scrolling up
+      else {
+        setIsVisible(currentScrollY < lastScrollY);
+      }
+      
+      setLastScrollY(currentScrollY);
+    };
 
-    if (currentScrollY < scrollThreshold) {
-      setIsVisible(true);
-    } else if (currentScrollY > lastScrollY.current + scrollDelta) {
-      setIsVisible(false);
-    } else if (currentScrollY < lastScrollY.current - scrollDelta / 2) {
-      setIsVisible(true);
-    }
-
-    lastScrollY.current = currentScrollY;
-  }, [scrollY]);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [lastScrollY]);
 
   useEffect(() => {
     setIsOpen(false);
