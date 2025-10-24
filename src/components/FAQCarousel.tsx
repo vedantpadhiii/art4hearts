@@ -132,42 +132,22 @@ const Answer = styled.p`
 `;
 
 const FAQCarousel: React.FC<FAQCarouselProps> = ({ faqs, title }) => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.1
-      }
-    }
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: 'easeOut'
-      }
-    }
-  };
-
   return (
     <FAQSection>
       <SectionTitle>{title}</SectionTitle>
       <CardsGrid
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
         viewport={{ once: true, margin: "-100px" }}
       >
         {faqs.map((faq, index) => (
           <Card
             key={index}
-            variants={cardVariants}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            viewport={{ once: true, margin: "-100px" }}
           >
             <Question>{faq.question}</Question>
             <Answer>{faq.answer}</Answer>
