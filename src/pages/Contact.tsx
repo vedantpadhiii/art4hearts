@@ -4,57 +4,78 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const ContactContainer = styled.div`
   min-height: calc(100vh - ${props => props.theme.spacing.header});
-  background: ${props => props.theme.colors.background.dark};
-  color: ${props => props.theme.colors.text.light};
-  padding: ${props => props.theme.spacing.large};
+  background: #fff8e1;
   margin-top: ${props => props.theme.spacing.header};
 `;
 
-const ContactGrid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: ${props => props.theme.spacing.large};
-  max-width: 1400px;
-  margin: 0 auto;
-  
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-  }
-`;
-
 const ContactInfo = styled.div`
+  text-align: center;
+  padding: 4rem 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+
   h1 {
-    font-size: clamp(3rem, 6vw, 6rem);
-    font-family: ${props => props.theme.fonts.title};
-    margin-bottom: ${props => props.theme.spacing.medium};
-    color: ${props => props.theme.colors.primary};
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #1a365d;
   }
-  
+
   p {
-    font-size: 1.2rem;
-    margin-bottom: ${props => props.theme.spacing.large};
+    color: #1e293b;
+    font-size: 1.1rem;
     line-height: 1.6;
+    margin-bottom: 3rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   .contact-details {
-    margin-top: ${props => props.theme.spacing.large};
+    background: #fff;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    max-width: 400px;
+    margin: 0 auto;
     
     div {
-      margin-bottom: ${props => props.theme.spacing.medium};
+      margin-bottom: 2rem;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
       
       strong {
-        color: ${props => props.theme.colors.primary};
+        color: #2563eb;
         display: block;
         margin-bottom: 0.5rem;
+        font-size: 1.1rem;
+        font-weight: 600;
+      }
+
+      a, span {
+        color: #1a365d;
+        text-decoration: none;
+        font-size: 1rem;
+        line-height: 1.5;
+        display: block;
+
+        &:hover {
+          color: #2563eb;
+        }
       }
     }
   }
 `;
 
 const ContactForm = styled.form`
-  background: ${props => props.theme.colors.background.darker};
+  background: rgba(255, 255, 255, 0.95);
   padding: ${props => props.theme.spacing.large};
   border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
   
   .form-group {
     margin-bottom: ${props => props.theme.spacing.medium};
@@ -62,21 +83,30 @@ const ContactForm = styled.form`
     label {
       display: block;
       margin-bottom: 0.5rem;
-      color: ${props => props.theme.colors.primary};
+      color: #1a365d;
+      font-weight: 600;
+      font-size: 0.95rem;
     }
     
     input, textarea {
       width: 100%;
       padding: 1rem;
-      background: ${props => props.theme.colors.background.dark};
-      border: 1px solid ${props => props.theme.colors.background.light}40;
-      border-radius: 10px;
-      color: ${props => props.theme.colors.text.light};
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(37, 99, 235, 0.2);
+      border-radius: 12px;
+      color: #1a365d;
       font-size: 1rem;
+      transition: all 0.3s ease;
       
       &:focus {
         outline: none;
-        border-color: ${props => props.theme.colors.primary};
+        border-color: #2563eb;
+        background: rgba(255, 255, 255, 0.95);
+        box-shadow: 0 2px 8px rgba(37, 99, 235, 0.1);
+      }
+      
+      &::placeholder {
+        color: #64748b;
       }
     }
     
@@ -89,16 +119,19 @@ const ContactForm = styled.form`
   button {
     width: 100%;
     padding: 1rem;
-    background: ${props => props.theme.colors.primary};
-    color: ${props => props.theme.colors.text.light};
+    background: #2563eb;
+    color: white;
     border: none;
-    border-radius: 10px;
+    border-radius: 12px;
     font-size: 1.1rem;
+    font-weight: 600;
     cursor: pointer;
-    transition: transform ${props => props.theme.transitions.medium};
+    transition: all 0.3s ease;
     
     &:hover {
       transform: translateY(-2px);
+      background: #1e40af;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
     }
   }
 `;
@@ -107,86 +140,42 @@ const SuccessMessage = styled(motion.div)`
   position: fixed;
   top: 20px;
   right: 20px;
-  background: ${props => props.theme.colors.success};
-  color: ${props => props.theme.colors.text.light};
+  background: rgba(34, 197, 94, 0.95);
+  color: white;
   padding: 1rem 2rem;
-  border-radius: 10px;
+  border-radius: 12px;
   z-index: 1000;
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.2);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-weight: 500;
 `;
 
 const Contact: React.FC = () => {
-  const [showSuccess, setShowSuccess] = useState(false);
-  
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setShowSuccess(true);
-    setTimeout(() => setShowSuccess(false), 3000);
-  };
-
   return (
     <ContactContainer>
-      <ContactGrid>
-        <ContactInfo>
-          <h1>Contact Us</h1>
-          <p>
-            Have questions about our programs? Want to get involved? 
-            We'd love to hear from you. Reach out using the form or 
-            contact us directly.
-          </p>
-          
-          <div className="contact-details">
-            <div>
-              <strong>Email</strong>
-              info@art4hearts.org
-            </div>
-            <div>
-              <strong>Phone</strong>
-              +1 (555) 123-4567
-            </div>
-            <div>
-              <strong>Address</strong>
-              123 Art Street, Creative District<br />
-              San Francisco, CA 94105
-            </div>
-          </div>
-        </ContactInfo>
+      <ContactInfo>
+        <h1>Contact Us</h1>
+        <p>
+          Have questions about our programs? Want to get involved? 
+          We'd love to hear from you! Please reach out to us via email,
+          and we'll get back to you as soon as possible.
+        </p>
         
-        <ContactForm onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label>Name</label>
-            <input type="text" required />
+        <div className="contact-details">
+          <div>
+            <strong>Email</strong>
+            <a href="mailto:art4heartsorg@gmail.com">art4heartsorg@gmail.com</a>
           </div>
-          
-          <div className="form-group">
-            <label>Email</label>
-            <input type="email" required />
+          <div>
+            <strong>Mailing Address</strong>
+            <span>14435 Big Basin Way</span>
+            <span>Suite C</span>
+            <span>PMB 175</span>
+            <span>Saratoga, CA 95070</span>
           </div>
-          
-          <div className="form-group">
-            <label>Subject</label>
-            <input type="text" required />
-          </div>
-          
-          <div className="form-group">
-            <label>Message</label>
-            <textarea required></textarea>
-          </div>
-          
-          <button type="submit">Send Message</button>
-        </ContactForm>
-      </ContactGrid>
-      
-      <AnimatePresence>
-        {showSuccess && (
-          <SuccessMessage
-            initial={{ opacity: 0, y: -50 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0 }}
-          >
-            Message sent successfully!
-          </SuccessMessage>
-        )}
-      </AnimatePresence>
+        </div>
+      </ContactInfo>
     </ContactContainer>
   );
 };

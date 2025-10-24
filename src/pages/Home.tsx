@@ -109,22 +109,23 @@ const Banner = styled.div`
 
 const HeroContent = styled.div`
   position: absolute;
-  top: 50%;
+  bottom: 5%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
   width: 90%;
   max-width: 800px;
   text-align: center;
   padding: 2rem;
-  background: rgba(255, 250, 250, 0.9);
+  background: rgba(255, 250, 250, 0.95);
   backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.4);
   border-radius: ${({ theme }) => theme.borderRadii.large};
   transition: all 0.4s ease;
-  animation: ${float} 6s ease-in-out infinite;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   
   &:hover {
-    transform: translate(-50%, -55%);
+    transform: translateX(-50%) translateY(-10px);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15);
   }
 `;
 
