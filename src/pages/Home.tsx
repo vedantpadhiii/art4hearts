@@ -231,6 +231,42 @@ const MissionSectionContent = styled.div`
   }
 `;
 
+const InitiativesGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin: 0 auto 3rem;
+  padding: 0 1rem;
+`;
+
+const InitiativeCard = styled.div`
+  background: rgba(255, 255, 255, 0.9);
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+  text-align: left;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  }
+
+  h4 {
+    font-size: 1.5rem;
+    color: #2563eb;
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+
+  p {
+    font-size: 1.1rem;
+    color: #1e293b;
+    line-height: 1.6;
+    margin: 0;
+  }
+`;
+
 const RegisterSection = styled(Section)`
   text-align: center;
   
@@ -394,6 +430,28 @@ const Home: React.FC = () => {
             Whether you're an artist, student, or someone who wants to make a difference, 
             there's a place for you in the Art4Hearts family.
           </p>
+
+          <div style={{ marginTop: '3rem', maxWidth: '800px' }}>
+            <h3 style={{ 
+              fontSize: '2rem', 
+              marginBottom: '2rem', 
+              color: '#1a365d',
+              fontWeight: '600' 
+            }}>
+              Current Initiatives
+            </h3>
+            <InitiativesGrid>
+              <InitiativeCard>
+                <h4>Art Therapy Kits</h4>
+                <p>Through art therapy, we hope to spread warmth and bring comfort to the recipients of the kit. Recipients can engage with a creative outlet.</p>
+              </InitiativeCard>
+              <InitiativeCard>
+                <h4>Bracelets</h4>
+                <p>Make handmade bracelets for someone in need of care. These bracelets can provide comfort and encouragement to those who are socially invisible.</p>
+              </InitiativeCard>
+            </InitiativesGrid>
+          </div>
+
           <ButtonContainer>
             <RegisterButton 
               href="https://docs.google.com/forms/d/e/1FAIpQLSd98E0LsNhBywLdUhlIBmp6e88bjt81Fh1tV6Lz6FklT1LtEg/viewform" 
