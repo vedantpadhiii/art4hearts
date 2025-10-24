@@ -53,10 +53,10 @@ const SpotlightsPage: React.FC = () => {
   return (
     <PageContainer>
       <HeroSection>
-        <HeroTitle>Spotlight Stories</HeroTitle>
-        <HeroSubtitle>
+        <h1>Spotlight Stories</h1>
+        <p>
           Highlighting inspiring stories from our community members, volunteers, and the impact of art in healthcare settings.
-        </HeroSubtitle>
+        </p>
       </HeroSection>
       
       <ContentSection>
@@ -114,56 +114,65 @@ const SpotlightsPage: React.FC = () => {
 };
 
 const PageContainer = styled.div`
-  min-height: 100vh;
-  background: ${props => props.theme.colors.background.dark};
-`;
-
-const HeroSection = styled.div`
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
-  padding: 6rem 2rem;
-  text-align: center;
+  min-height: calc(100vh - ${props => props.theme.spacing.header});
+  margin-top: ${props => props.theme.spacing.header};
+  background: #ecfdf5;
   position: relative;
+`;
+
+const HeroSection = styled.section`
+  position: relative;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 4rem 2rem;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0) 100%);
   
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(to right, ${props => props.theme.colors.primary}, ${props => props.theme.colors.secondary});
+  h1 {
+    font-size: clamp(3rem, 6vw, 4.5rem);
+    font-weight: 700;
+    color: #065f46;
+    margin-bottom: 2rem;
+    position: relative;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 3px;
+      background: linear-gradient(90deg, #059669, #10b981);
+    }
   }
-`;
-
-const HeroTitle = styled.h1`
-  font-size: 4rem;
-  color: ${props => props.theme.colors.text.light};
-  margin-bottom: 1.5rem;
-  font-family: "Playfair Display", serif;
-`;
-
-const HeroSubtitle = styled.p`
-  font-size: 1.6rem;
-  color: ${props => props.theme.colors.text.light};
-  max-width: 800px;
-  margin: 0 auto;
-  opacity: 0.9;
+  
+  p {
+    font-size: clamp(1.2rem, 2vw, 1.4rem);
+    max-width: 800px;
+    line-height: 1.8;
+    color: #065f46;
+    margin: 0 auto;
+  }
 `;
 
 const ContentSection = styled.section`
   max-width: 1200px;
   margin: 0 auto;
   padding: 4rem 2rem;
+  position: relative;
 `;
 
 const Description = styled.p`
-  font-size: 1.4rem;
+  font-size: 1.1rem;
   line-height: 1.8;
-  color: ${props => props.theme.colors.text.light};
+  color: #047857;
   text-align: center;
   max-width: 800px;
   margin: 0 auto 4rem;
-  font-family: "Playfair Display", serif;
   position: relative;
   
   &:after {
@@ -174,48 +183,53 @@ const Description = styled.p`
     transform: translateX(-50%);
     width: 100px;
     height: 2px;
-    background: ${props => props.theme.colors.primary};
-    opacity: 0.6;
+    background: #10b981;
+    opacity: 0.3;
+    border-radius: 1px;
   }
 `;
 
 const ImageGrid = styled(motion.div)`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  padding: 2rem 0;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 3rem;
+  padding: 2rem;
   margin: 0 auto;
   max-width: 1400px;
 
   @media (min-width: 1200px) {
     grid-template-columns: repeat(3, 1fr);
-    & > *:nth-child(4),
-    & > *:nth-child(5) {
-      grid-column: span 1.5;
+    & > *:nth-child(3n+2) {
+      transform: translateY(4rem);
+    }
+    & > *:nth-child(3n+3) {
+      transform: translateY(2rem);
     }
   }
 `;
 
 const ImageContainer = styled(motion.div)`
   position: relative;
-  border-radius: 12px;
+  border-radius: 20px;
   overflow: hidden;
   aspect-ratio: 3/4;
   cursor: pointer;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  background: ${props => props.theme.colors.background.light};
+  box-shadow: 0 4px 20px rgba(6, 95, 70, 0.06);
+  background: white;
   transform-origin: center;
+  transition: all 0.3s ease;
   
   &:hover {
     transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 12px 30px rgba(5, 150, 105, 0.1);
     
     img {
-      transform: scale(1.1);
+      transform: scale(1.05);
     }
     
     div {
       opacity: 1;
+      backdrop-filter: blur(2px);
     }
   }
 `;
@@ -232,28 +246,36 @@ const Overlay = styled.div`
   inset: 0;
   background: linear-gradient(
     to top,
-    rgba(0, 0, 0, 0.9) 0%,
-    rgba(0, 0, 0, 0.5) 50%,
-    rgba(0, 0, 0, 0.3) 100%
+    rgba(6, 95, 70, 0.95) 0%,
+    rgba(16, 185, 129, 0.7) 50%,
+    rgba(16, 185, 129, 0.4) 100%
   );
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  padding: 1.5rem;
+  padding: 2rem;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: all 0.3s ease;
 `;
 
 const OverlayText = styled.span`
   color: white;
   font-size: 1.2rem;
   text-align: center;
-  font-family: "Playfair Display", serif;
-  padding: 0.5rem;
-  background: rgba(0, 0, 0, 0.6);
-  border-radius: 4px;
+  font-weight: 600;
+  max-width: 90%;
+  position: relative;
+  padding: 0.75rem 1.5rem;
+  background: rgba(6, 95, 70, 0.8);
+  border-radius: 8px;
   backdrop-filter: blur(4px);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  transform: translateY(10px);
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 12px rgba(6, 95, 70, 0.2);
+  
+  ${ImageContainer}:hover & {
+    transform: translateY(0);
+  }
 `;
 
 export default SpotlightsPage;
