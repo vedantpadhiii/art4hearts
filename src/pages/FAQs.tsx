@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import FAQCarousel from '../components/FAQCarousel';
+import FAQAccordion from '../components/FAQAccordion';
 
 const volunteerFAQs = [
   {
@@ -54,18 +55,30 @@ const chaptersFAQs = [
 
 const PageContainer = styled(motion.div)`
   min-height: 100vh;
-  background: ${props => props.theme.colors.background.dark};
+  background: #f5f3ff;
 `;
 
 const HeroSection = styled.section`
   height: 50vh;
   min-height: 400px;
-  background: url('/Art4Hearts Banner.png') center/cover no-repeat;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 4rem;
+  background: #ede9fe;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #c4b5fd33 0%, #a78bfa33 50%, #8b5cf633 100%);
+    z-index: 0;
+  }
 `;
 
 const HeroOverlay = styled.div`
@@ -76,9 +89,9 @@ const HeroOverlay = styled.div`
   bottom: 0;
   background: linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 0.7) 0%,
-    rgba(0, 0, 0, 0.5) 50%,
-    rgba(0, 0, 0, 0.7) 100%
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(255, 255, 255, 0.7) 50%,
+    rgba(255, 255, 255, 0.9) 100%
   );
 `;
 
@@ -91,31 +104,35 @@ const HeroContent = styled.div`
 
 const HeroTitle = styled.h1`
   font-size: clamp(3rem, 8vw, 5rem);
-  font-family: "Playfair Display", serif;
-  color: ${props => props.theme.colors.text.light};
-  margin-bottom: 1rem;
-  text-transform: uppercase;
+  color: #5b21b6;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
   letter-spacing: -0.02em;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(255, 255, 255, 0.8) 100%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 20px rgba(255, 93, 115, 0.3));
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 3px;
+    background: linear-gradient(90deg, #8b5cf6, #7c3aed);
+  }
 `;
 
 const HeroSubtitle = styled.p`
-  font-size: clamp(1rem, 2vw, 1.5rem);
-  color: ${props => props.theme.colors.primary};
-  font-weight: 300;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  font-size: clamp(1.1rem, 2vw, 1.3rem);
+  color: #6d28d9;
+  font-weight: 500;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto;
 `;
 
 const ContentContainer = styled.div`
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 2rem 4rem;
   display: flex;
@@ -127,31 +144,48 @@ const ContactSection = styled.section`
   text-align: center;
   margin-top: 4rem;
   padding: 4rem 2rem;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 20px;
-  backdrop-filter: blur(10px);
+  background: white;
+  border-radius: 24px;
+  box-shadow: 0 4px 20px rgba(139, 92, 246, 0.1);
 `;
 
 const ContactTitle = styled.h2`
   font-size: 2.5rem;
-  color: ${props => props.theme.colors.text.light};
-  margin-bottom: 1rem;
-  font-family: "Playfair Display", serif;
+  color: #5b21b6;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -0.75rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 2px;
+    background: #8b5cf6;
+    opacity: 0.3;
+  }
 `;
 
 const ContactText = styled.p`
   font-size: 1.2rem;
-  color: ${props => props.theme.colors.text.light};
+  color: #6d28d9;
   line-height: 1.6;
 `;
 
 const ContactLink = styled.a`
-  color: ${props => props.theme.colors.primary};
+  color: #7c3aed;
   text-decoration: none;
-  transition: color 0.3s ease;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  padding-bottom: 2px;
+  border-bottom: 2px solid transparent;
 
   &:hover {
-    color: ${props => props.theme.colors.primaryLight};
+    color: #6d28d9;
+    border-bottom-color: #8b5cf6;
   }
 `;
 
@@ -172,7 +206,7 @@ const FAQs: React.FC = () => {
       </HeroSection>
 
       <ContentContainer>
-        <FAQCarousel
+        <FAQAccordion
           title="Volunteer FAQs"
           faqs={volunteerFAQs}
         />

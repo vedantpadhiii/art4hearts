@@ -1,259 +1,351 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import SpotlightCarousel from '../components/SpotlightCarousel';
 
-const SpotlightsPage: React.FC = () => {
-  // Animation variants for smooth image loading
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        delayChildren: 0.3,
-        staggerChildren: 0.2
-      }
-    }
-  };
+const spotlightPhotos = [
+  {
+    id: 1,
+    url: 'https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=800&h=600&fit=crop',
+  },
+  {
+    id: 2,
+    url: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop',
+  },
+  {
+    id: 3,
+    url: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&h=600&fit=crop',
+  },
+  {
+    id: 4,
+    url: 'https://images.unsplash.com/photo-1543269865-cbdf26ce6c5f?w=800&h=600&fit=crop',
+  },
+  {
+    id: 5,
+    url: 'https://images.unsplash.com/photo-1516321318423-f06f70d504f0?w=800&h=600&fit=crop',
+  },
+];
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5
-      }
-    }
-  };
-  
-  // Spotlight gallery images
-  const spotlightImages = [
-    {
-      src: "/images/spotlight/image1.jpg",
-      caption: "Crafting meaningful connections through art"
-    },
-    {
-      src: "/images/spotlight/image2.jpg",
-      caption: "Sharing creative moments that inspire"
-    },
-    {
-      src: "/images/spotlight/image3.jpg",
-      caption: "Building community through artistic expression"
-    },
-    {
-      src: "/images/spotlight/image4.jpg",
-      caption: "Empowering voices through creativity"
-    },
-    {
-      src: "/images/spotlight/image5.jpg",
-      caption: "Art that brings hearts together"
-    }
-  ];
-
-  return (
-    <PageContainer>
-      <HeroSection>
-        <HeroTitle>Spotlight Stories</HeroTitle>
-        <HeroSubtitle>
-          Highlighting inspiring stories from our community members, volunteers, and the impact of art in healthcare settings.
-        </HeroSubtitle>
-      </HeroSection>
-      
-      <ContentSection>
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <Description>
-            Through art, we create lasting connections and bring hope to healthcare environments.
-            These moments capture the heart of our mission — where creativity meets compassion,
-            and every artistic expression becomes a bridge to healing and joy.
-          </Description>
-        </motion.div>
-
-        <ImageGrid
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          <ImageContainer variants={itemVariants}>
-            <StyledImage src="/images/spotlight/image1.jpg" alt="Art4Hearts Impact" />
-            <Overlay>
-              <OverlayText>Bringing art to healing spaces</OverlayText>
-            </Overlay>
-          </ImageContainer>
-          <ImageContainer variants={itemVariants}>
-            <StyledImage src="/images/spotlight/image2.jpg" alt="Art4Hearts Community" />
-            <Overlay>
-              <OverlayText>Creating moments of joy</OverlayText>
-            </Overlay>
-          </ImageContainer>
-          <ImageContainer variants={itemVariants}>
-            <StyledImage src="/images/spotlight/image3.jpg" alt="Art4Hearts Volunteers" />
-            <Overlay>
-              <OverlayText>Volunteers making a difference</OverlayText>
-            </Overlay>
-          </ImageContainer>
-          <ImageContainer variants={itemVariants}>
-            <StyledImage src="/images/spotlight/image4.jpg" alt="Art4Hearts Activities" />
-            <Overlay>
-              <OverlayText>Fostering creative expression</OverlayText>
-            </Overlay>
-          </ImageContainer>
-          <ImageContainer variants={itemVariants}>
-            <StyledImage src="/images/spotlight/image5.jpg" alt="Art4Hearts Impact" />
-            <Overlay>
-              <OverlayText>Building community through art</OverlayText>
-            </Overlay>
-          </ImageContainer>
-        </ImageGrid>
-      </ContentSection>
-    </PageContainer>
-  );
-};
-
-const PageContainer = styled.div`
+const PageContainer = styled(motion.div)`
   min-height: 100vh;
-  background: ${props => props.theme.colors.background.dark};
+  background: #f5f3ff;
 `;
 
-const HeroSection = styled.div`
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
-  padding: 6rem 2rem;
-  text-align: center;
+const HeroSection = styled.section`
+  height: 50vh;
+  min-height: 400px;
   position: relative;
-  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4rem;
+  background: #ede9fe;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #c4b5fd33 0%, #a78bfa33 50%, #8b5cf633 100%);
+    z-index: 0;
+  }
+`;
+
+const HeroOverlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(255, 255, 255, 0.7) 50%,
+    rgba(255, 255, 255, 0.9) 100%
+  );
+`;
+
+const HeroContent = styled.div`
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 2rem;
+`;
+
+const HeroTitle = styled.h1`
+  font-size: clamp(3rem, 8vw, 5rem);
+  color: #5b21b6;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 3px;
+    background: linear-gradient(90deg, #8b5cf6, #7c3aed);
+  }
+`;
+
+const HeroSubtitle = styled.p`
+  font-size: clamp(1.1rem, 2vw, 1.3rem);
+  color: #6d28d9;
+  font-weight: 500;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto;
+`;
+
+const ContentContainer = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 6rem;
+`;
+
+const InstagramSection = styled.section`
+  width: 100%;
+  position: relative;
+  padding: 2rem 0;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(139, 92, 246, 0.2) 50%,
+      transparent 100%
+    );
+  }
+
   &::after {
     content: '';
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    height: 4px;
-    background: linear-gradient(to right, ${props => props.theme.colors.primary}, ${props => props.theme.colors.secondary});
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(139, 92, 246, 0.2) 50%,
+      transparent 100%
+    );
   }
 `;
 
-const HeroTitle = styled.h1`
-  font-size: 4rem;
-  color: ${props => props.theme.colors.text.light};
-  margin-bottom: 1.5rem;
-  font-family: "Playfair Display", serif;
-`;
-
-const HeroSubtitle = styled.p`
-  font-size: 1.6rem;
-  color: ${props => props.theme.colors.text.light};
-  max-width: 800px;
-  margin: 0 auto;
-  opacity: 0.9;
-`;
-
-const ContentSection = styled.section`
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 4rem 2rem;
-`;
-
-const Description = styled.p`
-  font-size: 1.4rem;
-  line-height: 1.8;
-  color: ${props => props.theme.colors.text.light};
+const SectionTitle = styled.h2`
+  font-size: 2.5rem;
+  color: #5b21b6;
   text-align: center;
-  max-width: 800px;
-  margin: 0 auto 4rem;
-  font-family: "Playfair Display", serif;
+  margin-bottom: 3rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
   position: relative;
-  
-  &:after {
+
+  &::after {
     content: '';
     position: absolute;
-    bottom: -2rem;
+    bottom: -18px;
     left: 50%;
     transform: translateX(-50%);
-    width: 100px;
-    height: 2px;
-    background: ${props => props.theme.colors.primary};
-    opacity: 0.6;
+    width: 120px;
+    height: 4px;
+    background: linear-gradient(90deg, #a78bfa 0%, #8b5cf6 50%, #7c3aed 100%);
+    border-radius: 2px;
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2);
+  }
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+    margin-bottom: 2.5rem;
   }
 `;
 
-const ImageGrid = styled(motion.div)`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  padding: 2rem 0;
-  margin: 0 auto;
-  max-width: 1400px;
-
-  @media (min-width: 1200px) {
-    grid-template-columns: repeat(3, 1fr);
-    & > *:nth-child(4),
-    & > *:nth-child(5) {
-      grid-column: span 1.5;
-    }
-  }
-`;
-
-const ImageContainer = styled(motion.div)`
+const SubsectionTitle = styled.h3`
+  text-align: center;
+  color: #6d28d9;
+  margin-bottom: 3rem;
+  margin-top: 3rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.005em;
   position: relative;
+  padding-bottom: 1.5rem;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #8b5cf6, transparent);
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.25rem;
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+  }
+`;
+
+const InstagramGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+  margin-bottom: 4rem;
+  perspective: 1000px;
+  width: 100%;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 2rem;
+  box-sizing: border-box;
+
+  @media (max-width: 1000px) {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding: 0 1.5rem;
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    padding: 0 1rem;
+  }
+`;
+
+const InstagramEmbed = styled(motion.div)`
   border-radius: 12px;
   overflow: hidden;
-  aspect-ratio: 3/4;
-  cursor: pointer;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  background: ${props => props.theme.colors.background.light};
-  transform-origin: center;
-  
+  box-shadow: 0 8px 32px rgba(139, 92, 246, 0.12);
+  background: white;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+  transform: translateY(0);
+  width: 100%;
+
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-    
-    img {
-      transform: scale(1.1);
-    }
-    
-    div {
-      opacity: 1;
-    }
+    box-shadow: 0 16px 48px rgba(139, 92, 246, 0.18);
+    transform: translateY(-6px);
+  }
+
+  blockquote.instagram-media {
+    border-radius: 12px !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  iframe {
+    border: none !important;
+    border-radius: 12px !important;
+    max-width: 100% !important;
+    width: 100% !important;
   }
 `;
 
-const StyledImage = styled.img`
+const CarouselSection = styled.section`
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 `;
 
-const Overlay = styled.div`
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.9) 0%,
-    rgba(0, 0, 0, 0.5) 50%,
-    rgba(0, 0, 0, 0.3) 100%
+const SpotlightsPage: React.FC = () => {
+  useEffect(() => {
+    // Load Instagram embed script
+    const script = document.createElement('script');
+    script.src = 'https://www.instagram.com/embed.js';
+    script.async = true;
+    script.defer = true;
+    document.body.appendChild(script);
+
+    // Process embeds if Instagram script is already loaded
+    if ((window as any).instgrm) {
+      (window as any).instgrm.Embeds.process();
+    }
+
+    return () => {
+      if (document.body.contains(script)) {
+        document.body.removeChild(script);
+      }
+    };
+  }, []);
+
+  return (
+    <PageContainer
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <HeroSection>
+        <HeroOverlay />
+        <HeroContent>
+          <HeroTitle>Spotlight</HeroTitle>
+          <HeroSubtitle>Celebrating our community and volunteers</HeroSubtitle>
+        </HeroContent>
+      </HeroSection>
+
+      <ContentContainer>
+        <InstagramSection>
+          <SectionTitle>Community Spotlight</SectionTitle>
+          <SubsectionTitle>Featured Posts</SubsectionTitle>
+          
+          <InstagramGrid>
+            <InstagramEmbed>
+              <blockquote
+                className="instagram-media"
+                data-instgrm-permalink="https://www.instagram.com/p/DNzbD3K3Izy/?utm_source=ig_embed&amp;utm_campaign=loading"
+                data-instgrm-version="14"
+              ></blockquote>
+            </InstagramEmbed>
+            <InstagramEmbed>
+              <blockquote
+                className="instagram-media"
+                data-instgrm-permalink="https://www.instagram.com/p/DN68DoNiVmm/?utm_source=ig_embed&amp;utm_campaign=loading"
+                data-instgrm-version="14"
+              ></blockquote>
+            </InstagramEmbed>
+            <InstagramEmbed>
+              <blockquote
+                className="instagram-media"
+                data-instgrm-permalink="https://www.instagram.com/p/DO2ukhaDq-t/?utm_source=ig_embed&amp;utm_campaign=loading"
+                data-instgrm-version="14"
+              ></blockquote>
+            </InstagramEmbed>
+            <InstagramEmbed>
+              <blockquote
+                className="instagram-media"
+                data-instgrm-permalink="https://www.instagram.com/p/DO7Im5AAZtk/?utm_source=ig_embed&amp;utm_campaign=loading"
+                data-instgrm-version="14"
+              ></blockquote>
+            </InstagramEmbed>
+          </InstagramGrid>
+        </InstagramSection>
+
+        <CarouselSection>
+          <SpotlightCarousel photos={spotlightPhotos} />
+        </CarouselSection>
+      </ContentContainer>
+    </PageContainer>
   );
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding: 1.5rem;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-`;
-
-const OverlayText = styled.span`
-  color: white;
-  font-size: 1.2rem;
-  text-align: center;
-  font-family: "Playfair Display", serif;
-  padding: 0.5rem;
-  background: rgba(0, 0, 0, 0.6);
-  border-radius: 4px;
-  backdrop-filter: blur(4px);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-`;
+};
 
 export default SpotlightsPage;
