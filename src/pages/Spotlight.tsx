@@ -22,7 +22,7 @@ const spotlightPhotos = [
   },
   {
     id: 5,
-    url: 'https://images.unsplash.com/photo-1516321318423-f06f70d504f0?w=800&h=600&fit=crop',
+    url: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop',
   },
 ];
 
@@ -115,38 +115,6 @@ const ContentContainer = styled.div`
 
 const InstagramSection = styled.section`
   width: 100%;
-  position: relative;
-  padding: 2rem 0;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      rgba(139, 92, 246, 0.2) 50%,
-      transparent 100%
-    );
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      rgba(139, 92, 246, 0.2) 50%,
-      transparent 100%
-    );
-  }
 `;
 
 const SectionTitle = styled.h2`
@@ -154,112 +122,45 @@ const SectionTitle = styled.h2`
   color: #5b21b6;
   text-align: center;
   margin-bottom: 3rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  position: relative;
-
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -18px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 120px;
-    height: 4px;
-    background: linear-gradient(90deg, #a78bfa 0%, #8b5cf6 50%, #7c3aed 100%);
-    border-radius: 2px;
-    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2);
-  }
-
-  @media (max-width: 768px) {
-    font-size: 2rem;
-    margin-bottom: 2.5rem;
-  }
-`;
-
-const SubsectionTitle = styled.h3`
-  text-align: center;
-  color: #6d28d9;
-  margin-bottom: 3rem;
-  margin-top: 3rem;
-  font-size: 1.5rem;
   font-weight: 600;
-  letter-spacing: -0.005em;
   position: relative;
-  padding-bottom: 1.5rem;
 
   &::after {
     content: '';
     position: absolute;
-    bottom: 0;
+    bottom: -12px;
     left: 50%;
     transform: translateX(-50%);
-    width: 60px;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, #8b5cf6, transparent);
-  }
-
-  @media (max-width: 768px) {
-    font-size: 1.25rem;
-    margin-top: 2.5rem;
-    margin-bottom: 2.5rem;
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(90deg, #8b5cf6, #7c3aed);
+    opacity: 0.5;
   }
 `;
 
 const InstagramGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 3rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2.5rem;
   margin-bottom: 4rem;
-  perspective: 1000px;
-  width: 100%;
-  max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0 2rem;
-  box-sizing: border-box;
-
-  @media (max-width: 1000px) {
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
-    padding: 0 1.5rem;
-  }
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
     gap: 2rem;
-    margin-bottom: 3rem;
-    padding: 0 1rem;
   }
 `;
 
-const InstagramEmbed = styled(motion.div)`
+const InstagramEmbed = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 8px 32px rgba(139, 92, 246, 0.12);
-  background: white;
-  transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
-  transform: translateY(0);
-  width: 100%;
-
-  &:hover {
-    box-shadow: 0 16px 48px rgba(139, 92, 246, 0.18);
-    transform: translateY(-6px);
-  }
-
-  blockquote.instagram-media {
-    border-radius: 12px !important;
-    margin: 0 !important;
-    max-width: 100% !important;
-    width: 100% !important;
-    height: auto !important;
-  }
+  box-shadow: 0 4px 20px rgba(139, 92, 246, 0.15);
 
   iframe {
-    border: none !important;
-    border-radius: 12px !important;
-    max-width: 100% !important;
-    width: 100% !important;
+    border: none;
+    border-radius: 12px;
   }
 `;
 
@@ -267,19 +168,13 @@ const CarouselSection = styled.section`
   width: 100%;
 `;
 
-const SpotlightsPage: React.FC = () => {
+const Spotlight: React.FC = () => {
   useEffect(() => {
     // Load Instagram embed script
     const script = document.createElement('script');
     script.src = 'https://www.instagram.com/embed.js';
     script.async = true;
-    script.defer = true;
     document.body.appendChild(script);
-
-    // Process embeds if Instagram script is already loaded
-    if ((window as any).instgrm) {
-      (window as any).instgrm.Embeds.process();
-    }
 
     return () => {
       if (document.body.contains(script)) {
@@ -305,37 +200,68 @@ const SpotlightsPage: React.FC = () => {
 
       <ContentContainer>
         <InstagramSection>
-          <SectionTitle>Community Spotlight</SectionTitle>
-          <SubsectionTitle>Featured Posts</SubsectionTitle>
-          
+          <SectionTitle>Chapter Spotlight</SectionTitle>
+          <h3 style={{ textAlign: 'center', color: '#6d28d9', marginBottom: '2rem', fontSize: '1.3rem' }}>
+            Volunteer of the Month (August)
+          </h3>
           <InstagramGrid>
             <InstagramEmbed>
-              <blockquote
-                className="instagram-media"
-                data-instgrm-permalink="https://www.instagram.com/p/DNzbD3K3Izy/?utm_source=ig_embed&amp;utm_campaign=loading"
-                data-instgrm-version="14"
-              ></blockquote>
+              <iframe
+                src="https://www.instagram.com/p/DNzbD3K3Izy/?embed&utm_campaign=loading"
+                width="320"
+                height="400"
+                frameBorder="0"
+                scrolling="no"
+                allowTransparency
+              ></iframe>
             </InstagramEmbed>
+          </InstagramGrid>
+
+          <h3 style={{ textAlign: 'center', color: '#6d28d9', marginBottom: '2rem', fontSize: '1.3rem' }}>
+            Chapter Spotlight: Medina, Tennessee
+          </h3>
+          <InstagramGrid>
             <InstagramEmbed>
-              <blockquote
-                className="instagram-media"
-                data-instgrm-permalink="https://www.instagram.com/p/DN68DoNiVmm/?utm_source=ig_embed&amp;utm_campaign=loading"
-                data-instgrm-version="14"
-              ></blockquote>
+              <iframe
+                src="https://www.instagram.com/p/DN68DoNiVmm/?embed&utm_campaign=loading"
+                width="320"
+                height="400"
+                frameBorder="0"
+                scrolling="no"
+                allowTransparency
+              ></iframe>
             </InstagramEmbed>
+          </InstagramGrid>
+
+          <h3 style={{ textAlign: 'center', color: '#6d28d9', marginBottom: '2rem', fontSize: '1.3rem' }}>
+            Chapter Spotlight: Yangon, Myanmar
+          </h3>
+          <InstagramGrid>
             <InstagramEmbed>
-              <blockquote
-                className="instagram-media"
-                data-instgrm-permalink="https://www.instagram.com/p/DO2ukhaDq-t/?utm_source=ig_embed&amp;utm_campaign=loading"
-                data-instgrm-version="14"
-              ></blockquote>
+              <iframe
+                src="https://www.instagram.com/p/DO2ukhaDq-t/?embed&utm_campaign=loading"
+                width="320"
+                height="400"
+                frameBorder="0"
+                scrolling="no"
+                allowTransparency
+              ></iframe>
             </InstagramEmbed>
+          </InstagramGrid>
+
+          <h3 style={{ textAlign: 'center', color: '#6d28d9', marginBottom: '2rem', fontSize: '1.3rem' }}>
+            Chapter Spotlight: Yangon, Myanmar (Reel)
+          </h3>
+          <InstagramGrid>
             <InstagramEmbed>
-              <blockquote
-                className="instagram-media"
-                data-instgrm-permalink="https://www.instagram.com/p/DO7Im5AAZtk/?utm_source=ig_embed&amp;utm_campaign=loading"
-                data-instgrm-version="14"
-              ></blockquote>
+              <iframe
+                src="https://www.instagram.com/p/DO7Im5AAZtk/?embed&utm_campaign=loading"
+                width="320"
+                height="500"
+                frameBorder="0"
+                scrolling="no"
+                allowTransparency
+              ></iframe>
             </InstagramEmbed>
           </InstagramGrid>
         </InstagramSection>
@@ -348,4 +274,4 @@ const SpotlightsPage: React.FC = () => {
   );
 };
 
-export default SpotlightsPage;
+export default Spotlight;
