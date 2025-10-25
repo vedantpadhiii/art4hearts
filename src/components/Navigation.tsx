@@ -350,7 +350,7 @@ export const Navigation: React.FC = () => {
               CONTACT US
             </ContactLink>
             <InstagramLink 
-              href="https://www.instagram.com/art4hearts/" 
+              href="https://www.instagram.com/art4heartsorg/?hl=en" 
               target="_blank" 
               rel="noopener noreferrer"
               title="Follow us on Instagram"
