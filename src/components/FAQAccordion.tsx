@@ -26,16 +26,16 @@ const Section = styled.section`
     left: -20%;
     right: -20%;
     height: calc(100% + 4rem);
-    background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+    background: linear-gradient(135deg, #c6dddc 0%, #b3d4d2 100%);
     z-index: -1;
     border-radius: 30px;
-    box-shadow: inset 0 0 20px rgba(139, 92, 246, 0.1);
+    box-shadow: inset 0 0 20px rgba(198, 221, 220, 0.3);
   }
 `;
 
 const SectionTitle = styled.h2`
   font-size: clamp(2.5rem, 5vw, 3.5rem);
-  color: #5b21b6;
+  color: #1a365d;
   text-align: center;
   margin-bottom: 4rem;
   font-weight: 700;
@@ -50,7 +50,7 @@ const SectionTitle = styled.h2`
     transform: translateX(-50%);
     width: 140px;
     height: 4px;
-    background: linear-gradient(90deg, #8b5cf6, #7c3aed);
+    background: linear-gradient(90deg, #5ba3a0, #4a9894);
     border-radius: 2px;
     opacity: 0.7;
   }
@@ -72,7 +72,7 @@ const AccordionContainer = styled.div`
     left: -3rem;
     width: 6px;
     height: 100px;
-    background: linear-gradient(to bottom, #8b5cf6, #7c3aed);
+    background: linear-gradient(to bottom, #5ba3a0, #4a9894);
     transform: translateY(-50%);
     border-radius: 3px;
     opacity: 0.5;
@@ -83,13 +83,13 @@ const AccordionItem = styled.div`
   border-radius: 16px;
   overflow: hidden;
   background: white;
-  box-shadow: 0 4px 20px rgba(139, 92, 246, 0.1);
+  box-shadow: 0 4px 20px rgba(198, 221, 220, 0.2);
   transform: translateY(0);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 
   &:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 30px rgba(139, 92, 246, 0.2);
+    box-shadow: 0 8px 30px rgba(198, 221, 220, 0.3);
   }
 `;
 
@@ -97,13 +97,13 @@ const QuestionButton = styled.button<{ isOpen: boolean }>`
   width: 100%;
   text-align: left;
   padding: 1.75rem 2rem;
-  background: ${props => props.isOpen ? '#f5f3ff' : 'white'};
+  background: ${props => props.isOpen ? '#e8f2f1' : 'white'};
   border: none;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: ${props => props.isOpen ? '#4c1d95' : '#5b21b6'};
+  color: ${props => props.isOpen ? '#0f4c47' : '#1a365d'};
   font-size: 1.25rem;
   font-weight: 600;
   letter-spacing: -0.01em;
@@ -111,14 +111,14 @@ const QuestionButton = styled.button<{ isOpen: boolean }>`
   border-bottom: 2px solid transparent;
 
   &:hover {
-    background: #f5f3ff;
-    color: #4c1d95;
+    background: #e8f2f1;
+    color: #0f4c47;
   }
 
   &:focus {
     outline: none;
-    background: #f5f3ff;
-    border-bottom-color: #8b5cf6;
+    background: #e8f2f1;
+    border-bottom-color: #5ba3a0;
   }
 
   span {
@@ -129,7 +129,7 @@ const QuestionButton = styled.button<{ isOpen: boolean }>`
       content: '•';
       position: absolute;
       left: -1.5rem;
-      color: #8b5cf6;
+      color: #5ba3a0;
       opacity: ${props => props.isOpen ? '1' : '0'};
       transform: scale(${props => props.isOpen ? '1.2' : '1'});
       transition: all 0.3s ease;
@@ -141,15 +141,15 @@ const QuestionButton = styled.button<{ isOpen: boolean }>`
     transform: rotate(${props => props.isOpen ? '180deg' : '0deg'}) 
                scale(${props => props.isOpen ? '1.1' : '1'});
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    filter: drop-shadow(0 2px 4px rgba(139, 92, 246, 0.2));
+    filter: drop-shadow(0 2px 4px rgba(198, 221, 220, 0.3));
   }
 `;
 
 const AnswerContent = styled(motion.div)`
-  background: linear-gradient(to right, #f5f3ff, white);
+  background: linear-gradient(to right, #e8f2f1, white);
   padding: 0.5rem 2rem;
   font-size: 1.15rem;
-  color: #6d28d9;
+  color: #4a9894;
   line-height: 1.8;
   opacity: 0.9;
   position: relative;
@@ -165,7 +165,7 @@ const AnswerContent = styled(motion.div)`
       top: 1.5rem;
       bottom: 1.5rem;
       width: 2px;
-      background: linear-gradient(to bottom, #8b5cf6, #7c3aed);
+      background: linear-gradient(to bottom, #5ba3a0, #4a9894);
       opacity: 0.3;
       border-radius: 1px;
     }
@@ -182,7 +182,7 @@ const ChevronIcon = () => (
   >
     <path 
       d="M5 8.5L12 15.5L19 8.5" 
-      stroke="#7C3AED" 
+      stroke="#5ba3a0" 
       strokeWidth="2.5" 
       strokeLinecap="round" 
       strokeLinejoin="round"

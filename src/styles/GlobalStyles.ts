@@ -8,6 +8,8 @@ const GlobalStyles = createGlobalStyle`
     font-style: normal;
   }
 
+  @import url('https://fonts.googleapis.com/css2?family=Kollektif&display=swap');
+
   * {
     margin: 0;
     padding: 0;
@@ -24,6 +26,10 @@ const GlobalStyles = createGlobalStyle`
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  p, span, li, td, th, label, input, textarea, button {
+    font-family: ${props => props.theme.fonts.body};
   }
 
   h1, h2, h3, h4, h5, h6 {

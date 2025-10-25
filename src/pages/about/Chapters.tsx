@@ -76,34 +76,47 @@ const chapters: Chapter[] = [
 // Styled Components
 const PageContainer = styled(motion.div)`
   min-height: 100vh;
-  background: #f5f3ff;
-  padding-top: 80px;
+  margin-top: ${props => props.theme.spacing.header};
+  background: #ffffff;
+  padding-top: 0;
+  font-family: 'Kollektif', sans-serif;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
 
   @media (max-width: 768px) {
-    padding-top: 60px;
+    padding-top: 0;
   }
 `;
 
 const HeroSection = styled.section`
-  height: 50vh;
-  min-height: 400px;
+  width: 100%;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
   position: relative;
+  min-height: 60vh;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
-  margin-bottom: 4rem;
-  background: #ede9fe;
-  overflow: hidden;
+  align-items: center;
+  text-align: center;
+  padding: 4rem 2rem;
+  margin-bottom: 0;
+  margin-top: 0;
+  flex-shrink: 0;
+  background: #c6dddc;
 
   &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, #c4b5fd33 0%, #a78bfa33 50%, #8b5cf633 100%);
-    z-index: 0;
+    display: none;
+  }
+
+  &::after {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    padding: 2.5rem 1.5rem;
+    min-height: auto;
   }
 `;
 
@@ -125,16 +138,17 @@ const HeroContent = styled(motion.div)`
   position: relative;
   z-index: 1;
   text-align: center;
-  padding: 2rem;
+  padding: 0;
+  max-width: 800px;
 `;
 
 const HeroTitle = styled.h1`
-  font-size: clamp(3rem, 8vw, 5rem);
-  color: #5b21b6;
-  margin-bottom: 1.5rem;
+  font-size: clamp(3rem, 6vw, 4.5rem);
   font-weight: 700;
-  letter-spacing: -0.02em;
+  color: #1a365d;
+  margin-bottom: 2rem;
   position: relative;
+  z-index: 1;
 
   &::after {
     content: '';
@@ -142,63 +156,69 @@ const HeroTitle = styled.h1`
     bottom: -1rem;
     left: 50%;
     transform: translateX(-50%);
-    width: 120px;
+    width: 100px;
     height: 3px;
-    background: linear-gradient(90deg, #8b5cf6, #7c3aed);
+    background: linear-gradient(90deg, #2563eb, #1d4ed8);
   }
 `;
 
 const HeroSubtitle = styled.p`
-  font-size: clamp(1.1rem, 2vw, 1.3rem);
-  color: #6d28d9;
-  font-weight: 500;
-  margin-top: 3rem;
-
-  @media (max-width: 768px) {
-    font-size: 1rem;
-  }
+  font-size: clamp(1.2rem, 2vw, 1.4rem);
+  max-width: 800px;
+  line-height: 1.8;
+  color: #1e293b;
+  margin: 0 auto;
 `;
 
 const ContentSection = styled(motion.section)`
   width: 100%;
-  padding: 4rem 2rem;
-  max-width: 1400px;
-  margin: 0 auto;
+  padding: 0;
+  max-width: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: auto;
 
   @media (max-width: 768px) {
-    padding: 3rem 1.5rem;
+    padding: 0;
   }
 `;
 
 const MapContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 3rem;
-  margin-bottom: 4rem;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 700px;
+  gap: 0;
+  margin-bottom: 2rem;
 
   @media (max-width: 1024px) {
-    grid-template-columns: 1fr;
+    flex-direction: column;
+    height: 600px;
+  }
+
+  @media (max-width: 768px) {
+    height: 500px;
   }
 `;
 
 const MapWrapper = styled.div`
   width: 100%;
-  height: 600px;
-  border-radius: 16px;
+  height: 100%;
+  border-radius: 0;
   overflow: hidden;
-  box-shadow: 0 20px 60px rgba(139, 92, 246, 0.15);
-  margin-bottom: 3rem;
+  box-shadow: none;
+  margin-bottom: 0;
   position: relative;
   z-index: 1;
-
-  @media (max-width: 768px) {
-    height: 400px;
-  }
+  background: white;
+  flex: 1;
 
   .leaflet-container {
     height: 100%;
     width: 100%;
-    font-family: inherit;
+    font-family: 'Kollektif', sans-serif;
+    background: white;
   }
 
   .leaflet-marker-icon {
@@ -207,7 +227,7 @@ const MapWrapper = styled.div`
 
   .leaflet-popup-content-wrapper {
     border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(139, 92, 246, 0.15);
+    box-shadow: 0 8px 24px rgba(198, 221, 220, 0.25);
   }
 
   .leaflet-popup-tip {
@@ -216,6 +236,7 @@ const MapWrapper = styled.div`
 `;
 
 const MapHeaderContainer = styled.div`
+  display: none;
   grid-column: 1 / -1;
   margin-bottom: 2rem;
 `;
@@ -228,7 +249,7 @@ const MapSectionTitle = styled.h2`
 `;
 
 const StateCardContainer = styled.div`
-  display: grid;
+  display: none;
   grid-template-columns: repeat(2, 1fr);
   gap: 3rem;
   margin-bottom: 4rem;
@@ -241,18 +262,29 @@ const StateCardContainer = styled.div`
 const MapSection = styled(motion.div)`
   display: flex;
   flex-direction: column;
+  flex: 1;
+  width: 100%;
+
+  &:nth-child(2),
+  &:nth-child(3) {
+    display: none;
+  }
 `;
 
 const MapTitle = styled.h2`
-  font-size: 1.8rem;
-  color: #5b21b6;
+  font-size: 2.5rem;
+  color: #1a365d;
   margin-bottom: 1.5rem;
-  font-weight: 700;
-  padding-bottom: 1rem;
-  border-bottom: 3px solid #8b5cf6;
+  font-weight: 600;
+  padding: 1.5rem 2rem 0;
+  border-bottom: none;
+  background: transparent;
+  letter-spacing: normal;
+  flex-shrink: 0;
 
   @media (max-width: 768px) {
-    font-size: 1.4rem;
+    font-size: 1.8rem;
+    padding: 1rem 1.5rem 0;
   }
 `;
 
@@ -458,49 +490,7 @@ const Chapters: React.FC = () => {
       maxZoom: 19,
     }).addTo(map);
 
-    // Add country/region labels
-    const countryLabels: { [key: string]: [number, number] } = {
-      'USA': [39.8283, -98.5795],
-      'Canada': [56.1304, -106.3468],
-      'Egypt': [26.8206, 30.8025],
-      'Spain': [40.4637, -3.7492],
-      'Myanmar': [21.9162, 95.9560],
-      'United Arab Emirates': [23.4241, 53.8478],
-      'Greece': [39.0742, 21.8243],
-      'Malaysia': [4.2105, 101.6964]
-    };
-
-    Object.entries(countryLabels).forEach(([country, [lat, lng]]) => {
-      const countryInfo = countryNames[country] || { english: country, native: country };
-      const label = countryInfo.native !== countryInfo.english 
-        ? `${countryInfo.english}\n${countryInfo.native}`
-        : countryInfo.english;
-      
-      L.marker([lat, lng], {
-        icon: L.divIcon({
-          html: `
-            <div style="
-              background-color: rgba(139, 92, 246, 0.1);
-              border: 2px solid #8b5cf6;
-              border-radius: 8px;
-              padding: 6px 10px;
-              font-weight: 600;
-              color: #5b21b6;
-              font-size: 13px;
-              text-align: center;
-              white-space: nowrap;
-              pointer-events: none;
-              box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-              line-height: 1.3;
-            ">
-              ${label.replace('\n', '<br/>')}
-            </div>
-          `,
-          iconSize: [150, 60],
-          className: 'country-label'
-        })
-      }).addTo(map);
-    });
+    // Country/region labels removed to prevent overlap when zooming
 
     // Add markers
     const markersGroup = L.featureGroup();
@@ -618,7 +608,9 @@ const Chapters: React.FC = () => {
         >
           <HeroTitle>Our Chapters</HeroTitle>
           <HeroSubtitle>
-            Art4Hearts chapters spanning across the United States and around the world.
+            Art4Hearts has grown to include 150+ chapters across the United States and around the world. 
+            Explore our interactive map to discover chapters in your region and learn about the passionate leaders 
+            bringing creativity and compassion to their communities.
           </HeroSubtitle>
         </HeroContent>
       </HeroSection>

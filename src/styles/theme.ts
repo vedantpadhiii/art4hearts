@@ -38,7 +38,7 @@ const theme: DefaultTheme = {
   },
   fonts: {
     title: 'TAN Nimbus, serif',
-    body: 'Helvetica Neue, sans-serif'
+    body: 'Kollektif, sans-serif'
   },
   transitions: {
     slow: '0.6s ease-in-out',

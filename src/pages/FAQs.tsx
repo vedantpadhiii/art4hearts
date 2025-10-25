@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import FAQCarousel from '../components/FAQCarousel';
 import FAQAccordion from '../components/FAQAccordion';
 
 const volunteerFAQs = [
@@ -55,7 +54,7 @@ const chaptersFAQs = [
 
 const PageContainer = styled(motion.div)`
   min-height: 100vh;
-  background: #f5f3ff;
+  background: #ffffff;
 `;
 
 const HeroSection = styled.section`
@@ -66,7 +65,7 @@ const HeroSection = styled.section`
   align-items: center;
   justify-content: center;
   margin-bottom: 4rem;
-  background: #ede9fe;
+  background: #c6dddc;
   overflow: hidden;
   
   &::before {
@@ -76,7 +75,7 @@ const HeroSection = styled.section`
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, #c4b5fd33 0%, #a78bfa33 50%, #8b5cf633 100%);
+    background: linear-gradient(135deg, #b3d4d233 0%, #9cccc833 50%, #5ba3a033 100%);
     z-index: 0;
   }
 `;
@@ -104,7 +103,7 @@ const HeroContent = styled.div`
 
 const HeroTitle = styled.h1`
   font-size: clamp(3rem, 8vw, 5rem);
-  color: #5b21b6;
+  color: #1a365d;
   margin-bottom: 1.5rem;
   font-weight: 700;
   letter-spacing: -0.02em;
@@ -118,13 +117,13 @@ const HeroTitle = styled.h1`
     transform: translateX(-50%);
     width: 120px;
     height: 3px;
-    background: linear-gradient(90deg, #8b5cf6, #7c3aed);
+    background: linear-gradient(90deg, #5ba3a0, #4a9894);
   }
 `;
 
 const HeroSubtitle = styled.p`
   font-size: clamp(1.1rem, 2vw, 1.3rem);
-  color: #6d28d9;
+  color: #4a9894;
   font-weight: 500;
   line-height: 1.6;
   max-width: 800px;
@@ -146,12 +145,12 @@ const ContactSection = styled.section`
   padding: 4rem 2rem;
   background: white;
   border-radius: 24px;
-  box-shadow: 0 4px 20px rgba(139, 92, 246, 0.1);
+  box-shadow: 0 4px 20px rgba(198, 221, 220, 0.2);
 `;
 
 const ContactTitle = styled.h2`
   font-size: 2.5rem;
-  color: #5b21b6;
+  color: #1a365d;
   margin-bottom: 1.5rem;
   font-weight: 600;
   position: relative;
@@ -164,19 +163,19 @@ const ContactTitle = styled.h2`
     transform: translateX(-50%);
     width: 80px;
     height: 2px;
-    background: #8b5cf6;
+    background: #5ba3a0;
     opacity: 0.3;
   }
 `;
 
 const ContactText = styled.p`
   font-size: 1.2rem;
-  color: #6d28d9;
+  color: #4a9894;
   line-height: 1.6;
 `;
 
 const ContactLink = styled.a`
-  color: #7c3aed;
+  color: #5ba3a0;
   text-decoration: none;
   font-weight: 500;
   transition: all 0.3s ease;
@@ -184,8 +183,8 @@ const ContactLink = styled.a`
   border-bottom: 2px solid transparent;
 
   &:hover {
-    color: #6d28d9;
-    border-bottom-color: #8b5cf6;
+    color: #4a9894;
+    border-bottom-color: #5ba3a0;
   }
 `;
 
@@ -211,12 +210,12 @@ const FAQs: React.FC = () => {
           faqs={volunteerFAQs}
         />
 
-        <FAQCarousel
+        <FAQAccordion
           title="Bracelets & Kits FAQs"
           faqs={braceletsAndKitsFAQs}
         />
 
-        <FAQCarousel
+        <FAQAccordion
           title="Chapters FAQs"
           faqs={chaptersFAQs}
         />
