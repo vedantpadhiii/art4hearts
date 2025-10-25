@@ -4,6 +4,13 @@ import styled from 'styled-components';
 import { useScroll } from '../context/ScrollContext';
 import Logo from '../assets/Logo';
 
+// Instagram Icon
+const InstagramIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1 1 12.324 0 6.162 6.162 0 0 1-12.324 0zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm4.965-10.322a1.44 1.44 0 1 1 2.881.001 1.44 1.44 0 0 1-2.881-.001z"/>
+  </svg>
+);
+
 const NavContainer = styled.nav<{ isScrolled: boolean; isVisible: boolean }>`
   position: fixed;
   top: 0;
@@ -32,6 +39,7 @@ const NavContent = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 3rem;
 `;
 
 const LogoWrapper = styled(Link)`
@@ -53,8 +61,10 @@ const LogoWrapper = styled(Link)`
 
 const NavLinks = styled.div<{ isOpen: boolean }>`
   display: flex;
-  gap: 2rem;
+  gap: 1rem;
   align-items: center;
+  flex: 1;
+  justify-content: center;
 
   @media (max-width: 768px) {
     position: fixed;
@@ -68,6 +78,67 @@ const NavLinks = styled.div<{ isOpen: boolean }>`
     transition: transform 0.3s ease-in-out;
     gap: 1rem;
     align-items: flex-start;
+    flex: none;
+    justify-content: flex-start;
+  }
+`;
+
+const RightSection = styled.div`
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-left: auto;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
+const ContactLink = styled(Link)<{ $isActive?: boolean }>`
+  color: #1e3a8a;
+  text-decoration: none;
+  font-weight: 700;
+  padding: 0.6rem 1.5rem;
+  font-size: 0.95rem;
+  letter-spacing: 0.03em;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+  border: 2px solid #1e3a8a;
+  white-space: nowrap;
+  background: transparent;
+  
+  &:hover {
+    background: #1e3a8a;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(30, 58, 138, 0.25);
+  }
+`;
+
+const InstagramLink = styled.a`
+  color: #1e3a8a;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  letter-spacing: 0.03em;
+  transition: all 0.3s ease;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 2px solid #1e3a8a;
+  background: transparent;
+  white-space: nowrap;
+  
+  &:hover {
+    background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    border-color: #cc2366;
+    color: white;
+    transform: translateY(-2px) rotate(10deg);
+    box-shadow: 0 4px 12px rgba(204, 35, 102, 0.3);
   }
 `;
 
@@ -79,25 +150,23 @@ const NavLink = styled(Link)<{ $isActive?: boolean }>`
   color: #111827;
   text-decoration: none;
   font-weight: ${props => props.$isActive ? '700' : '600'};
-  padding: 0.75rem 1rem;
-  font-size: 1rem;
+  padding: 0.5rem 0.8rem;
+  font-size: 0.95rem;
   letter-spacing: 0.03em;
   transition: all 0.3s ease;
   display: block;
   white-space: nowrap;
-  border-radius: 8px;
+  border-radius: 6px;
   position: relative;
   
   ${props => props.$isActive && `
     color: #1e3a8a;
-    background: rgba(30, 58, 138, 0.08);
-    box-shadow: 0 2px 8px rgba(30, 58, 138, 0.12);
+    background: transparent;
   `}
 
   &:hover {
     color: #1e3a8a;
-    background: rgba(30, 58, 138, 0.05);
-    box-shadow: 0 2px 8px rgba(30, 58, 138, 0.08);
+    background: transparent;
     transform: translateY(-1px);
   }
 `;
@@ -276,11 +345,19 @@ export const Navigation: React.FC = () => {
             </NavLink>
           </NavItem>
 
-          <NavItem>
-            <NavLink to="/contact" $isActive={location.pathname === '/contact'}>
-              CONTACT
-            </NavLink>
-          </NavItem>
+          <RightSection>
+            <ContactLink to="/contact" $isActive={location.pathname === '/contact'}>
+              CONTACT US
+            </ContactLink>
+            <InstagramLink 
+              href="https://www.instagram.com/art4hearts/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              title="Follow us on Instagram"
+            >
+              <InstagramIcon />
+            </InstagramLink>
+          </RightSection>
         </NavLinks>
       </NavContent>
     </NavContainer>
