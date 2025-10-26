@@ -240,7 +240,60 @@ const InstagramEmbed = styled(motion.div)`
   }
 `;
 
+const PhotoGallerySection = styled.section`
+  width: 100%;
+  position: relative;
+  padding: 4rem 0;
+  background: white;
+`;
+
+const PhotoGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+  width: 100%;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+`;
+
+const PhotoCard = styled(motion.div)`
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(198, 221, 220, 0.2);
+  background: #f5f5f5;
+  aspect-ratio: 4 / 3;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+
+  &:hover {
+    box-shadow: 0 12px 32px rgba(198, 221, 220, 0.3);
+    transform: translateY(-4px);
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+`;
+
 const SpotlightsPage: React.FC = () => {
+  // Gallery images - excluding HEIC files as they're not web-compatible
+  const galleryImages = [
+    { src: '/gallery/DSCF5420.JPG', alt: 'Community event photo' },
+    { src: '/gallery/DSCF5430.JPG', alt: 'Community event photo' },
+    { src: '/gallery/DSCF5447.JPG', alt: 'Community event photo' },
+    { src: '/gallery/DSCF5452.JPG', alt: 'Community event photo' },
+    { src: '/gallery/Screenshot 2025-07-05 at 2.47.41 PM.png', alt: 'Community event photo' },
+    { src: '/gallery/processed-D10D25C8-6C7A-4597-B16B-1B28EC67801A.jpeg', alt: 'Community event photo' },
+  ];
+
   useEffect(() => {
     // Load Instagram embed script
     const script = document.createElement('script');
@@ -312,6 +365,23 @@ const SpotlightsPage: React.FC = () => {
             </InstagramEmbed>
           </InstagramGrid>
         </InstagramSection>
+
+        <PhotoGallerySection>
+          <SubsectionTitle>Photo Gallery</SubsectionTitle>
+          <PhotoGrid>
+            {galleryImages.map((image, index) => (
+              <PhotoCard
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <img src={image.src} alt={image.alt} loading="lazy" />
+              </PhotoCard>
+            ))}
+          </PhotoGrid>
+        </PhotoGallerySection>
       </ContentContainer>
     </PageContainer>
   );
