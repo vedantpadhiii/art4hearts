@@ -375,382 +375,68 @@ const SpotlightsPage: React.FC = () => {
           <SectionTitle>Photos</SectionTitle>
           <PhotosGrid>
             <PhotoItem
-              src="/Photos/Cary, North Carolina/572171669_17855370453555521_6099618948601915028_n.jpeg"
-              alt="Cary North Carolina"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
+              src="/photos/jpegmini_optimized/FullSizeRender_5.jpg"
+              alt="Art4Hearts Photo 1"
             />
             <PhotoItem
-              src="/Photos/Cary, North Carolina/Screenshot 2025-10-24 at 5.54.23 PM.png"
-              alt="Cary North Carolina 2"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.05 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
+              src="/photos/jpegmini_optimized/IMG_2650.jpg"
+              alt="Art4Hearts Photo 2"
             />
             <PhotoItem
-              src="/Photos/Cary, North Carolina/Screenshot 2025-10-24 at 5.54.37 PM.png"
-              alt="Cary North Carolina 3"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
+              src="/photos/jpegmini_optimized/IMG_3335.jpg"
+              alt="Art4Hearts Photo 3"
             />
             <PhotoItem
-              src="/Photos/DH Conley High School/Screenshot 2025-10-14 at 2.53.15 PM.png"
-              alt="DH Conley High School"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.15 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
+              src="/photos/jpegmini_optimized/IMG_3336.jpg"
+              alt="Art4Hearts Photo 4"
             />
             <PhotoItem
-              src="/Photos/Elite Scholars Academy/Screenshot 2025-10-14 at 2.24.06 PM.png"
-              alt="Elite Scholars Academy 1"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
+              src="/photos/jpegmini_optimized/IMG_7093_2.jpg"
+              alt="Art4Hearts Photo 5"
             />
             <PhotoItem
-              src="/Photos/Elite Scholars Academy/Screenshot 2025-10-14 at 2.24.14 PM.png"
-              alt="Elite Scholars Academy 2"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.25 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
+              src="/photos/jpegmini_optimized/IMG_8900.jpg"
+              alt="Art4Hearts Photo 6"
             />
             <PhotoItem
-              src="/Photos/Elite Scholars Academy/Screenshot 2025-10-14 at 2.24.22 PM.png"
-              alt="Elite Scholars Academy 3"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
+              src="/photos/jpegmini_optimized/IMG_8904.jpg"
+              alt="Art4Hearts Photo 7"
             />
             <PhotoItem
-              src="/Photos/Elite Scholars Academy/Screenshot 2025-10-14 at 2.49.45 PM.png"
-              alt="Elite Scholars Academy 4"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.35 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
+              src="/photos/jpegmini_optimized/IMG_8906.jpg"
+              alt="Art4Hearts Photo 8"
             />
             <PhotoItem
-              src="/Photos/Elite Scholars Academy/Screenshot 2025-10-14 at 2.49.57 PM.png"
-              alt="Elite Scholars Academy 5"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
+              src="/photos/jpegmini_optimized/IMG_9354.jpg"
+              alt="Art4Hearts Photo 9"
             />
             <PhotoItem
-              src="/Photos/Elite Scholars Academy/Screenshot 2025-10-14 at 2.50.04 PM.png"
-              alt="Elite Scholars Academy 6"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.45 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
+              src="/photos/jpegmini_optimized/IMG_9363.jpg"
+              alt="Art4Hearts Photo 10"
             />
             <PhotoItem
-              src="/Photos/Etiwanda High School/Screenshot 2025-10-14 at 2.57.10 PM.png"
-              alt="Etiwanda High School 1"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
+              src="/photos/jpegmini_optimized/Resized_20250321_165909.jpg"
+              alt="Art4Hearts Photo 11"
             />
             <PhotoItem
-              src="/Photos/Etiwanda High School/Screenshot 2025-10-14 at 2.57.21 PM.png"
-              alt="Etiwanda High School 2"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.55 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
+              src="/photos/jpegmini_optimized/image0_(1).jpg"
+              alt="Art4Hearts Photo 12"
             />
             <PhotoItem
-              src="/Photos/Etiwanda High School/Screenshot 2025-10-14 at 3.00.46 PM.png"
-              alt="Etiwanda High School 3"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.6 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
+              src="/photos/jpegmini_optimized/image2.jpg"
+              alt="Art4Hearts Photo 13"
             />
             <PhotoItem
-              src="/Photos/Etiwanda High School/Screenshot 2025-10-14 at 3.00.58 PM.png"
-              alt="Etiwanda High School 4"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.65 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
+              src="/photos/jpegmini_optimized/processed-C469C3CA-C7B6-441E-9CEC-E3B4080A92C3.jpg"
+              alt="Art4Hearts Photo 14"
             />
             <PhotoItem
-              src="/Photos/Etiwanda High School/Screenshot 2025-10-14 at 3.01.25 PM.png"
-              alt="Etiwanda High School 5"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.7 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
+              src="/photos/jpegmini_optimized/processed-D10D25C8-6C7A-4597-B16B-1B28EC67801A.jpg"
+              alt="Art4Hearts Photo 15"
             />
             <PhotoItem
-              src="/Photos/Isaac Bear Early College High School/Screenshot 2025-10-14 at 2.51.26 PM.png"
-              alt="Isaac Bear Early College 1"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.75 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
-            />
-            <PhotoItem
-              src="/Photos/Isaac Bear Early College High School/Screenshot 2025-10-14 at 2.51.34 PM.png"
-              alt="Isaac Bear Early College 2"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.8 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
-            />
-            <PhotoItem
-              src="/Photos/Isaac Bear Early College High School/Screenshot 2025-10-14 at 2.51.44 PM.png"
-              alt="Isaac Bear Early College 3"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.85 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
-            />
-            <PhotoItem
-              src="/Photos/Maeve, August Volunteer of the Month/image0 (1).jpeg"
-              alt="Maeve Volunteer 1"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.9 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
-            />
-            <PhotoItem
-              src="/Photos/Maeve, August Volunteer of the Month/image2.jpeg"
-              alt="Maeve Volunteer 2"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.95 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
-            />
-            <PhotoItem
-              src="/Photos/McKeel Academy of Technology/Screenshot 2025-10-14 at 3.03.34 PM.png"
-              alt="McKeel Academy 1"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 1 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
-            />
-            <PhotoItem
-              src="/Photos/McKeel Academy of Technology/Screenshot 2025-10-14 at 3.03.52 PM.png"
-              alt="McKeel Academy 2"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 1.05 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
-            />
-            <PhotoItem
-              src="/Photos/McKeel Academy of Technology/Screenshot 2025-10-14 at 3.03.58 PM.png"
-              alt="McKeel Academy 3"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 1.1 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
-            />
-            <PhotoItem
-              src="/Photos/McKeel Academy of Technology/Screenshot 2025-10-14 at 3.04.05 PM.png"
-              alt="McKeel Academy 4"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 1.15 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
-            />
-            <PhotoItem
-              src="/Photos/McKeel Academy of Technology/Screenshot 2025-10-14 at 3.04.13 PM.png"
-              alt="McKeel Academy 5"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 1.2 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
-            />
-            <PhotoItem
-              src="/Photos/McKeel Academy of Technology/Screenshot 2025-10-14 at 3.04.18 PM.png"
-              alt="McKeel Academy 6"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 1.25 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
-            />
-            <PhotoItem
-              src="/Photos/Medina, Tennessee/processed-C469C3CA-C7B6-441E-9CEC-E3B4080A92C3.jpeg"
-              alt="Medina Tennessee 1"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 1.3 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
-            />
-            <PhotoItem
-              src="/Photos/Medina, Tennessee/processed-D10D25C8-6C7A-4597-B16B-1B28EC67801A.jpeg"
-              alt="Medina Tennessee 2"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 1.35 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
-            />
-            <PhotoItem
-              src="/Photos/Medina, Tennessee/processed-E2F05DC8-3F5E-4ED4-848F-0AF469A57C65.jpeg"
-              alt="Medina Tennessee 3"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 1.4 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
-            />
-            <PhotoItem
-              src="/Photos/Parkway North High School/Screenshot 2025-10-14 at 2.54.32 PM.png"
-              alt="Parkway North High School"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 1.45 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
-            />
-            <PhotoItem
-              src="/Photos/Saratoga High School/Resized_20250321_165909.JPEG"
-              alt="Saratoga High School 1"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 1.5 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
-            />
-            <PhotoItem
-              src="/Photos/Saratoga High School/Screenshot 2025-07-05 at 2.47.41 PM.png"
-              alt="Saratoga High School 2"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 1.55 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
-            />
-            <PhotoItem
-              src="/Photos/Saratoga High School/club rush sept 5.jpg"
-              alt="Saratoga High School 3"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 1.6 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
-            />
-            <PhotoItem
-              src="/Photos/Yangon, Myanmar/DSCF5409.JPG"
-              alt="Yangon Myanmar 1"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 1.65 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
-            />
-            <PhotoItem
-              src="/Photos/Yangon, Myanmar/DSCF5420.JPG"
-              alt="Yangon Myanmar 2"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 1.7 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
-            />
-            <PhotoItem
-              src="/Photos/Yangon, Myanmar/DSCF5430.JPG"
-              alt="Yangon Myanmar 3"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 1.75 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
-            />
-            <PhotoItem
-              src="/Photos/Yangon, Myanmar/DSCF5447.JPG"
-              alt="Yangon Myanmar 4"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 1.8 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
-            />
-            <PhotoItem
-              src="/Photos/Yangon, Myanmar/DSCF5451.JPG"
-              alt="Yangon Myanmar 5"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 1.85 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
-            />
-            <PhotoItem
-              src="/Photos/Yangon, Myanmar/DSCF5452.JPG"
-              alt="Yangon Myanmar 6"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 1.9 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
-            />
-            <PhotoItem
-              src="/Photos/Yangon, Myanmar/DSCF5455.JPG"
-              alt="Yangon Myanmar 7"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 1.95 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
-            />
-            <PhotoItem
-              src="/Photos/Yangon, Myanmar/DSCF5465.JPG"
-              alt="Yangon Myanmar 8"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 2 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
-            />
-            <PhotoItem
-              src="/Photos/Yangon, Myanmar/DSCF5468.JPG"
-              alt="Yangon Myanmar 9"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 2.05 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
+              src="/photos/jpegmini_optimized/processed-E2F05DC8-3F5E-4ED4-848F-0AF469A57C65.jpg"
+              alt="Art4Hearts Photo 16"
             />
           </PhotosGrid>
         </PhotosSection>
