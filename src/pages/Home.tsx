@@ -389,10 +389,10 @@ const CTAButton = styled(motion.a)`
 const PartnersSection = styled(motion.div)`
   display: flex;
   flex-wrap: wrap;
-  gap: 2rem;
+  gap: 3rem;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem 1rem;
+  padding: 3rem 1rem;
   align-items: center;
   justify-content: center;
   background: white;
@@ -403,7 +403,7 @@ const PartnersSection = styled(motion.div)`
   img {
     max-width: 100%;
     height: auto;
-    max-height: 60px;
+    max-height: 80px;
     object-fit: contain;
     filter: grayscale(0%);
     transition: all 0.3s ease;
@@ -414,11 +414,11 @@ const PartnersSection = styled(motion.div)`
   }
 
   @media (max-width: 768px) {
-    gap: 1rem;
-    padding: 1.5rem 1rem;
+    gap: 1.5rem;
+    padding: 2rem 1rem;
     
     img {
-      max-height: 50px;
+      max-height: 65px;
     }
   }
 `;
