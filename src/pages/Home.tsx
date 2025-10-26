@@ -113,7 +113,7 @@ const HeroContent = styled(motion.div)`
   max-width: 550px;
 
   h1 {
-    font-size: clamp(2.5rem, 4.5vw, 3.8rem);
+    font-size: clamp(2.8rem, 5.5vw, 4.2rem);
     color: #000000;
     font-weight: 800;
     margin-bottom: 1.2rem;
@@ -122,7 +122,7 @@ const HeroContent = styled(motion.div)`
   }
 
   p {
-    font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+    font-size: clamp(1.05rem, 2vw, 1.25rem);
     color: #000000;
     font-weight: 500;
     line-height: 1.8;
@@ -150,7 +150,7 @@ const HeroButton = styled.a<{ primary?: boolean }>`
   padding: 0.9rem 2rem;
   border-radius: 8px;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 1.1rem;
   text-decoration: none;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -459,7 +459,7 @@ const Home: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.9 }}
-            style={{ marginTop: '1.5rem', fontSize: 'clamp(0.9rem, 1.6vw, 1rem)', fontWeight: 400 }}
+            style={{ marginTop: '1.5rem', fontSize: 'clamp(1rem, 1.8vw, 1.15rem)', fontWeight: 400 }}
           >
             Join our community dedicated to curiosity and creativity through hands-on STEM projects today!
           </motion.p>
