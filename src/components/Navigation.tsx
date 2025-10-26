@@ -169,11 +169,9 @@ const NavLink = styled(Link)<{ $isActive?: boolean }>`
   `}
 
   &:hover {
-    color: #111827;
+    color: white;
     background: transparent;
     transform: translateY(-1px);
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
-    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.6));
   }
 `;
 
