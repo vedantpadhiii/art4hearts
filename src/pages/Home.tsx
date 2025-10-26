@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -426,35 +426,117 @@ const PartnersSection = styled(motion.div)`
 
 // Subsection Grid
 const SubsectionGrid = styled(motion.div)`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  max-width: 1200px;
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
   margin: 3rem auto 0;
-  padding: 0 1rem;
+  max-width: 1000px;
+`;
+
+const SubsectionButton = styled.button<{ isActive?: boolean }>`
+  padding: 0.8rem 2.2rem;
+  border: 2px solid #000000;
+  border-radius: 50px;
+  background: ${props => props.isActive ? '#000000' : 'transparent'};
+  color: ${props => props.isActive ? 'white' : '#000000'};
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+
+  &:hover {
+    background: #000000;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
+`;
+
+const ContentCard = styled(motion.div)`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  padding: 3rem 2rem;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  margin: 2.5rem 0;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+
+  div {
+    h3 {
+      font-size: clamp(1.5rem, 5vw, 2rem);
+      color: #000000;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    p {
+      font-size: clamp(0.95rem, 3vw, 1.1rem);
+      color: #333333;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  .content-image {
+    width: 100%;
+    height: 300px;
+    object-fit: contain;
+    border-radius: 8px;
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 2rem;
+
+    .content-image {
+      height: 250px;
+    }
+  }
+`;
+
+const StyledLink = styled(Link)`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 2rem;
+  background: #000000;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+
+  span {
+    display: inline-block;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover {
+    background: #333333;
+    transform: translateX(4px);
+
+    span {
+      transform: translateX(4px);
+    }
+  }
 `;
 
 const Subsection = styled(motion.div)`
   text-align: center;
   padding: 2rem;
-
-  h3 {
-    font-size: clamp(1.2rem, 2vw, 1.5rem);
-    color: #000000;
-    margin-bottom: 1rem;
-    font-weight: 700;
-  }
-
-  p {
-    font-size: clamp(0.9rem, 1.5vw, 1rem);
-    color: #000000;
-    line-height: 1.7;
-    margin: 0;
-    font-weight: 500;
-  }
 `;
 
 const Home: React.FC = () => {
+  const [activeTab, setActiveTab] = useState<'initiatives' | 'chapters' | 'volunteering'>('initiatives');
   const { targetRef: statsRef, isVisible: statsVisible, hasAnimated: statsAnimated } = useIntersectionObserver({
     threshold: 0.2
   });
@@ -565,36 +647,103 @@ const Home: React.FC = () => {
           variants={containerVariants}
           viewport={{ once: true }}
         >
-          <Subsection
+          <SubsectionButton
+            as={motion.button}
+            isActive={activeTab === 'initiatives'}
+            onClick={() => setActiveTab('initiatives')}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h3>🎨 Initiatives</h3>
-            <p>Discover our creative programs bringing art and comfort to communities, hospitals, and care facilities worldwide.</p>
-          </Subsection>
+            Initiatives
+          </SubsectionButton>
 
-          <Subsection
+          <SubsectionButton
+            as={motion.button}
+            isActive={activeTab === 'chapters'}
+            onClick={() => setActiveTab('chapters')}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
             viewport={{ once: true }}
           >
-            <h3>🏘️ Our Chapters</h3>
-            <p>Join a local Art4Hearts chapter and connect with passionate volunteers dedicated to spreading creativity in your community.</p>
-          </Subsection>
+            Our Chapters
+          </SubsectionButton>
 
-          <Subsection
+          <SubsectionButton
+            as={motion.button}
+            isActive={activeTab === 'volunteering'}
+            onClick={() => setActiveTab('volunteering')}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <h3>🤝 Volunteering</h3>
-            <p>Make a difference by volunteering with Art4Hearts. Help create art that brings joy and healing to those who need it most.</p>
-          </Subsection>
+            Volunteering
+          </SubsectionButton>
         </SubsectionGrid>
+
+        {/* Content Cards */}
+        {activeTab === 'initiatives' && (
+          <ContentCard
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <div>
+              <h3>🎨 Initiatives</h3>
+              <p>
+                Discover our creative programs bringing art and comfort to communities, hospitals, and care facilities worldwide. 
+                Our art therapy kits, workshops, and personalized bracelets are designed to spread joy and healing to those who need it most.
+              </p>
+              <StyledLink to="/spotlights">
+                Explore More <span>→</span>
+              </StyledLink>
+            </div>
+            <img className="content-image" src="/Art4Hearts logo.png" alt="Initiatives" />
+          </ContentCard>
+        )}
+
+        {activeTab === 'chapters' && (
+          <ContentCard
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <div>
+              <h3>🏘️ Our Chapters</h3>
+              <p>
+                Join a local Art4Hearts chapter and connect with passionate volunteers dedicated to spreading creativity in your community. 
+                Our chapters provide leadership opportunities, volunteer hours, and the chance to make a real difference.
+              </p>
+              <StyledLink to="/about/chapters">
+                Explore More <span>→</span>
+              </StyledLink>
+            </div>
+            <img className="content-image" src="/Art4Hearts logo.png" alt="Our Chapters" />
+          </ContentCard>
+        )}
+
+        {activeTab === 'volunteering' && (
+          <ContentCard
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <div>
+              <h3>🤝 Volunteering</h3>
+              <p>
+                Make a difference by volunteering with Art4Hearts. Help create art that brings joy and healing to those who need it most. 
+                Earn certified volunteer hours, gain leadership experience, and be part of a global movement for good.
+              </p>
+              <StyledLink to="/get-involved">
+                Explore More <span>→</span>
+              </StyledLink>
+            </div>
+            <img className="content-image" src="/Art4Hearts logo.png" alt="Volunteering" />
+          </ContentCard>
+        )}
       </WhiteSection>
 
       {/* Get Involved */}
@@ -620,9 +769,9 @@ const Home: React.FC = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h3>🎨 Volunteer</h3>
-            <p>Earn volunteer hours and make a meaningful impact in your community by creating art with us.</p>
-            <Link to="/get-involved">Learn More</Link>
+            <h3>🎨 Become a Volunteer</h3>
+            <p>Start volunteering remotely by making bracelets or art therapy kits!</p>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSd98E0LsNhBywLdUhlIBmp6e88bjt81Fh1tV6Lz6FklT1LtEg/viewform?usp=send_form" target="_blank" rel="noopener noreferrer">Apply Now</a>
           </Card>
 
           <Card
@@ -632,9 +781,9 @@ const Home: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
             viewport={{ once: true }}
           >
-            <h3>🏘️ Start a Chapter</h3>
-            <p>Lead a local Art4Hearts chapter and build a community of passionate artists and creators in your area.</p>
-            <Link to="/about/chapters">Learn More</Link>
+            <h3>🏘️ Apply to Become a Chapter</h3>
+            <p>Anyone, anywhere can start a chapter for their local community.</p>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSd0kg3Ymu1uoCwUqhjgHNZyOHoVvaci8IRKYK5XyjUp6GQbnA/viewform" target="_blank" rel="noopener noreferrer">Apply Now</a>
           </Card>
 
           <Card
@@ -644,9 +793,9 @@ const Home: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <h3>📚 Learn & Support</h3>
-            <p>Discover our projects, read stories from recipients, and stay updated on our latest initiatives.</p>
-            <Link to="/spotlights">Learn More</Link>
+            <h3>� Looking for a Kit or Bracelet?</h3>
+            <p>If you're a hospital, senior center, or any charitable organization interested in our products.</p>
+            <Link to="/contact">Contact Us</Link>
           </Card>
         </CardGrid>
       </LightSection>
