@@ -298,7 +298,7 @@ const SpotlightsPage: React.FC = () => {
       <HeroSection>
         <HeroOverlay />
         <HeroContent>
-          <HeroTitle>Spotlight</HeroTitle>
+          <HeroTitle>Gallery</HeroTitle>
           <HeroSubtitle>Celebrating our community and volunteers</HeroSubtitle>
         </HeroContent>
       </HeroSection>

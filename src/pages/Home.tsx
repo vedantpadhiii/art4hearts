@@ -671,7 +671,7 @@ const Home: React.FC = () => {
           transition={{ duration: 0.6, delay: 0.1 }}
           viewport={{ once: true }}
         >
-          Learn more about our initiatives to bring kindness and love to hospitals, senior centers, etc.
+          Learn more about our initiatives to bring kindness and love to hospitals, senior centers, and other charitable organizations.
         </SectionDescription>
         
         <SubsectionGrid
@@ -734,7 +734,7 @@ const Home: React.FC = () => {
                 Explore More <span>→</span>
               </StyledLink>
             </div>
-            <img className="content-image" src="/Art4Hearts logo.png" alt="Initiatives" />
+            <img className="content-image" src="/Art4Hearts-Logo-NoBackground.png" alt="Initiatives" />
           </ContentCard>
         )}
 
@@ -754,7 +754,7 @@ const Home: React.FC = () => {
                 Explore More <span>→</span>
               </StyledLink>
             </div>
-            <img className="content-image" src="/Art4Hearts logo.png" alt="Our Chapters" />
+            <img className="content-image" src="/Art4Hearts-Logo-NoBackground.png" alt="Our Chapters" />
           </ContentCard>
         )}
 
@@ -774,7 +774,7 @@ const Home: React.FC = () => {
                 Explore More <span>→</span>
               </StyledLink>
             </div>
-            <img className="content-image" src="/Art4Hearts logo.png" alt="Volunteering" />
+            <img className="content-image" src="/Art4Hearts-Logo-NoBackground.png" alt="Volunteering" />
           </ContentCard>
         )}
       </WhiteSection>
@@ -843,14 +843,6 @@ const Home: React.FC = () => {
         >
           Gallery
         </SectionTitle>
-        <SectionDescription
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          viewport={{ once: true }}
-        >
-          Explore moments from our community and the impact we're creating together.
-        </SectionDescription>
         <GalleryContentWrapper>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
