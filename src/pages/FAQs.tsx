@@ -65,7 +65,7 @@ const HeroSection = styled.section`
   align-items: center;
   justify-content: center;
   margin-bottom: 4rem;
-  background: #c6dddc;
+  background: linear-gradient(135deg, #c6dddc 0%, #b3d4d2 100%);
   overflow: hidden;
   
   &::before {
@@ -75,7 +75,7 @@ const HeroSection = styled.section`
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, #b3d4d233 0%, #9cccc833 50%, #5ba3a033 100%);
+    background: transparent;
     z-index: 0;
   }
 `;
@@ -98,7 +98,7 @@ const HeroContent = styled.div`
 
 const HeroTitle = styled.h1`
   font-size: clamp(3rem, 8vw, 5rem);
-  color: #1a365d;
+  color: #000000;
   margin-bottom: 1.5rem;
   font-weight: 700;
   letter-spacing: -0.02em;
@@ -112,17 +112,12 @@ const HeroTitle = styled.h1`
     transform: translateX(-50%);
     width: 120px;
     height: 3px;
-    background: linear-gradient(90deg, #5ba3a0, #4a9894);
+    background: linear-gradient(90deg, #c6dddc, #b3d4d2);
   }
 `;
 
 const HeroSubtitle = styled.p`
-  font-size: clamp(1.1rem, 2vw, 1.3rem);
-  color: #4a9894;
-  font-weight: 500;
-  line-height: 1.6;
-  max-width: 800px;
-  margin: 0 auto;
+  display: none;
 `;
 
 const ContentContainer = styled.div`
@@ -145,7 +140,7 @@ const ContactSection = styled.section`
 
 const ContactTitle = styled.h2`
   font-size: 2.5rem;
-  color: #1a365d;
+  color: #000000;
   margin-bottom: 1.5rem;
   font-weight: 600;
   position: relative;
@@ -165,12 +160,12 @@ const ContactTitle = styled.h2`
 
 const ContactText = styled.p`
   font-size: 1.2rem;
-  color: #4a9894;
+  color: #000000;
   line-height: 1.6;
 `;
 
 const ContactLink = styled.a`
-  color: #5ba3a0;
+  color: #000000;
   text-decoration: none;
   font-weight: 500;
   transition: all 0.3s ease;
@@ -178,8 +173,8 @@ const ContactLink = styled.a`
   border-bottom: 2px solid transparent;
 
   &:hover {
-    color: #4a9894;
-    border-bottom-color: #5ba3a0;
+    color: #333333;
+    border-bottom-color: #000000;
   }
 `;
 

@@ -26,16 +26,16 @@ const Section = styled.section`
     left: -20%;
     right: -20%;
     height: calc(100% + 4rem);
-    background: linear-gradient(135deg, #c6dddc 0%, #b3d4d2 100%);
+    background: transparent;
     z-index: -1;
     border-radius: 30px;
-    box-shadow: inset 0 0 20px rgba(198, 221, 220, 0.3);
+    box-shadow: none;
   }
 `;
 
 const SectionTitle = styled.h2`
   font-size: clamp(2.5rem, 5vw, 3.5rem);
-  color: #1a365d;
+  color: #000000;
   text-align: center;
   margin-bottom: 4rem;
   font-weight: 700;
@@ -50,7 +50,7 @@ const SectionTitle = styled.h2`
     transform: translateX(-50%);
     width: 140px;
     height: 4px;
-    background: linear-gradient(90deg, #5ba3a0, #4a9894);
+    background: linear-gradient(90deg, #c6dddc, #b3d4d2);
     border-radius: 2px;
     opacity: 0.7;
   }
@@ -72,7 +72,7 @@ const AccordionContainer = styled.div`
     left: -3rem;
     width: 6px;
     height: 100px;
-    background: linear-gradient(to bottom, #5ba3a0, #4a9894);
+    background: transparent;
     transform: translateY(-50%);
     border-radius: 3px;
     opacity: 0.5;
@@ -97,13 +97,13 @@ const QuestionButton = styled.button<{ isOpen: boolean }>`
   width: 100%;
   text-align: left;
   padding: 1.75rem 2rem;
-  background: ${props => props.isOpen ? '#e8f2f1' : 'white'};
+  background: ${props => props.isOpen ? '#f0f0f0' : 'white'};
   border: none;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: ${props => props.isOpen ? '#0f4c47' : '#1a365d'};
+  color: #000000;
   font-size: 1.25rem;
   font-weight: 600;
   letter-spacing: -0.01em;
@@ -111,14 +111,14 @@ const QuestionButton = styled.button<{ isOpen: boolean }>`
   border-bottom: 2px solid transparent;
 
   &:hover {
-    background: #e8f2f1;
-    color: #0f4c47;
+    background: #f0f0f0;
+    color: #000000;
   }
 
   &:focus {
     outline: none;
-    background: #e8f2f1;
-    border-bottom-color: #5ba3a0;
+    background: #f0f0f0;
+    border-bottom-color: #000000;
   }
 
   span {
@@ -129,7 +129,7 @@ const QuestionButton = styled.button<{ isOpen: boolean }>`
       content: '•';
       position: absolute;
       left: -1.5rem;
-      color: #5ba3a0;
+      color: #000000;
       opacity: ${props => props.isOpen ? '1' : '0'};
       transform: scale(${props => props.isOpen ? '1.2' : '1'});
       transition: all 0.3s ease;
@@ -146,17 +146,18 @@ const QuestionButton = styled.button<{ isOpen: boolean }>`
 `;
 
 const AnswerContent = styled(motion.div)`
-  background: linear-gradient(to right, #e8f2f1, white);
+  background: white;
   padding: 0.5rem 2rem;
   font-size: 1.15rem;
-  color: #4a9894;
+  color: #000000;
   line-height: 1.8;
-  opacity: 0.9;
+  opacity: 1;
   position: relative;
   
   p {
     padding: 1.5rem 0;
     position: relative;
+    color: #000000;
     
     &::before {
       content: '';
@@ -165,8 +166,8 @@ const AnswerContent = styled(motion.div)`
       top: 1.5rem;
       bottom: 1.5rem;
       width: 2px;
-      background: linear-gradient(to bottom, #5ba3a0, #4a9894);
-      opacity: 0.3;
+      background: transparent;
+      opacity: 0;
       border-radius: 1px;
     }
   }
@@ -182,7 +183,7 @@ const ChevronIcon = () => (
   >
     <path 
       d="M5 8.5L12 15.5L19 8.5" 
-      stroke="#5ba3a0" 
+      stroke="#000000" 
       strokeWidth="2.5" 
       strokeLinecap="round" 
       strokeLinejoin="round"
