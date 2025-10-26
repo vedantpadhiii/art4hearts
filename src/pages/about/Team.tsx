@@ -20,7 +20,7 @@ const HeroSection = styled.section`
   align-items: center;
   justify-content: center;
   margin-bottom: 4rem;
-  background: #fce7f3;
+  background: linear-gradient(135deg, #c6dddc 0%, #b3d4d2 100%);
   overflow: hidden;
 
   &::before {
@@ -30,7 +30,7 @@ const HeroSection = styled.section`
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, #fbcfe833 0%, #f472b633 50%, #ec4899 33 100%);
+    background: transparent;
     z-index: 0;
   }
 `;
@@ -58,7 +58,7 @@ const HeroContent = styled(motion.div)`
 
 const HeroTitle = styled.h1`
   font-size: clamp(3rem, 8vw, 5rem);
-  color: #be185d;
+  color: #000000;
   margin-bottom: 1.5rem;
   font-weight: 700;
   letter-spacing: -0.02em;
@@ -72,13 +72,13 @@ const HeroTitle = styled.h1`
     transform: translateX(-50%);
     width: 120px;
     height: 3px;
-    background: linear-gradient(90deg, #f472b6, #ec4899);
+    background: linear-gradient(90deg, #c6dddc, #b3d4d2);
   }
 `;
 
 const HeroSubtitle = styled.p`
   font-size: clamp(1.1rem, 2vw, 1.3rem);
-  color: #be185d;
+  color: #000000;
   font-weight: 500;
   margin-top: 3rem;
 
@@ -94,11 +94,11 @@ const TeamSection = styled.div`
 const TeamSectionTitle = styled.h2`
   font-size: 1.6rem;
   font-weight: 600;
-  color: #be185d;
+  color: #000000;
   margin-bottom: 2rem;
   text-align: center;
   padding-bottom: 1rem;
-  border-bottom: 2px solid rgba(244, 114, 182, 0.2);
+  border-bottom: 2px solid rgba(198, 221, 220, 0.2);
 
   @media (max-width: 768px) {
     font-size: 1.4rem;
@@ -181,7 +181,7 @@ const PlaceholderText = styled.span`
 const MemberName = styled.h3`
   font-size: 1.2rem;
   font-weight: 600;
-  color: #be185d;
+  color: #000000;
   margin-bottom: 0.5rem;
 
   @media (max-width: 768px) {
@@ -226,7 +226,7 @@ const NameItemText = styled.div`
 const Name = styled.span`
   font-size: 1.1rem;
   font-weight: 600;
-  color: #be185d;
+  color: #000000;
   margin-bottom: 0.3rem;
 
   @media (max-width: 768px) {
@@ -279,7 +279,7 @@ const AltColorSection = styled(ContentSection)`
 const AltSectionTitle = styled.h1`
   font-size: 2.8rem;
   font-weight: 700;
-  color: #059669;
+  color: #000000;
   margin-bottom: 1rem;
   letter-spacing: -0.01em;
   text-align: center;
@@ -291,7 +291,7 @@ const AltSectionTitle = styled.h1`
 
 const AltSectionDescription = styled.p`
   font-size: 1.1rem;
-  color: #10b981;
+  color: #000000;
   max-width: 600px;
   margin: 0 auto 0;
   line-height: 1.6;
@@ -305,20 +305,20 @@ const AltSectionDescription = styled.p`
 const AltHeadingUnderline = styled.div`
   width: 120px;
   height: 4px;
-  background: linear-gradient(90deg, #6ee7b7 0%, #10b981 50%, #059669 100%);
+  background: linear-gradient(90deg, #c6dddc 0%, #b3d4d2 50%, #5ba3a0 100%);
   border-radius: 2px;
   margin: 1.5rem auto 0;
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+  box-shadow: 0 4px 12px rgba(198, 221, 220, 0.2);
 `;
 
 const AltTeamSectionTitle = styled.h2`
   font-size: 1.6rem;
   font-weight: 600;
-  color: #059669;
+  color: #000000;
   margin-bottom: 2rem;
   text-align: center;
   padding-bottom: 1rem;
-  border-bottom: 2px solid rgba(16, 185, 129, 0.2);
+  border-bottom: 2px solid rgba(198, 221, 220, 0.2);
 
   @media (max-width: 768px) {
     font-size: 1.4rem;
@@ -335,11 +335,11 @@ const AltNameItem = styled(NameItem)`
 `;
 
 const AltName = styled(Name)`
-  color: #059669;
+  color: #000000;
 `;
 
 const AltRole = styled(MemberRole)`
-  color: #10b981;
+  color: #000000;
 `;
 
 const Team: React.FC = () => {

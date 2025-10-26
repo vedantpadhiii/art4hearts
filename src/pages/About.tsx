@@ -7,25 +7,25 @@ const ChapterButton = styled(motion(Link))`
   display: inline-flex;
   align-items: center;
   padding: 0.75rem 1.5rem;
-  background: #2563eb;
+  background: #000000;
   color: white;
   text-decoration: none;
   border-radius: 12px;
   font-weight: 600;
   font-size: 1rem;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 
   &:hover {
-    background: #1d4ed8;
-    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
+    background: #333333;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
   }
 `;
 
 const AboutContainer = styled.div`
   min-height: calc(100vh - ${props => props.theme.spacing.header});
   margin-top: ${props => props.theme.spacing.header};
-  background: #e2eeff;  /* Deeper blue background */
+  background: white;
 `;
 
 const HeroSection = styled.section`
@@ -37,12 +37,12 @@ const HeroSection = styled.section`
   align-items: center;
   text-align: center;
   padding: 4rem 2rem;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(135deg, #c6dddc 0%, #b3d4d2 100%);
   
   h1 {
     font-size: clamp(3rem, 6vw, 4.5rem);
     font-weight: 700;
-    color: #1a365d;
+    color: #000000;
     margin-bottom: 2rem;
     position: relative;
     
@@ -54,7 +54,7 @@ const HeroSection = styled.section`
       transform: translateX(-50%);
       width: 100px;
       height: 3px;
-      background: linear-gradient(90deg, #2563eb, #1d4ed8);
+      background: linear-gradient(90deg, #5ba3a0, #4a9894);
     }
   }
   
@@ -62,7 +62,7 @@ const HeroSection = styled.section`
     font-size: clamp(1.2rem, 2vw, 1.4rem);
     max-width: 800px;
     line-height: 1.8;
-    color: #1e293b;
+    color: #000000;
     margin: 0 auto;
   }
 `;
@@ -82,7 +82,7 @@ const MissionCard = styled(motion.div)`
   
   h2 {
     font-size: 2.5rem;
-    color: #2563eb;
+    color: #000000;
     margin-bottom: 1.5rem;
     font-weight: 600;
   }
@@ -90,7 +90,7 @@ const MissionCard = styled(motion.div)`
   p {
     font-size: 1.1rem;
     line-height: 1.8;
-    color: #1e293b;
+    color: #000000;
     margin-bottom: 2rem;
   }
 `;
@@ -115,26 +115,26 @@ const ValueCard = styled(motion.div)`
   
   h3 {
     font-size: 1.5rem;
-    color: #2563eb;
+    color: #000000;
     margin-bottom: 1rem;
     font-weight: 600;
   }
   
   p {
     font-size: 1.1rem;
-    color: #1e293b;
+    color: #000000;
     line-height: 1.6;
   }
 `;
 
 const ImpactSection = styled.section`
-  background: rgba(255, 255, 255, 0.8);
+  background: white;
   padding: 4rem 2rem;
   text-align: center;
   
   h2 {
     font-size: 2.5rem;
-    color: #1a365d;
+    color: #000000;
     margin-bottom: 3rem;
     font-weight: 600;
   }
@@ -157,13 +157,13 @@ const ImpactCard = styled.div`
   .number {
     font-size: 3rem;
     font-weight: 700;
-    color: #2563eb;
+    color: #000000;
     margin-bottom: 1rem;
   }
   
   .label {
     font-size: 1.1rem;
-    color: #1e293b;
+    color: #000000;
     line-height: 1.4;
   }
 `;
@@ -203,7 +203,7 @@ const About: React.FC = () => {
           }}>
             <p style={{ 
               fontSize: '1.2rem', 
-              color: '#2563eb', 
+              color: '#000000', 
               fontWeight: '600',
               margin: '0' 
             }}>
@@ -229,7 +229,7 @@ const About: React.FC = () => {
 
         <h2 style={{ 
           fontSize: '2.5rem', 
-          color: '#1a365d', 
+          color: '#000000', 
           marginBottom: '2rem', 
           textAlign: 'center' 
         }}>

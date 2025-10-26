@@ -104,7 +104,7 @@ const HeroSection = styled.section`
   margin-bottom: 0;
   margin-top: 0;
   flex-shrink: 0;
-  background: #c6dddc;
+  background: linear-gradient(135deg, #c6dddc 0%, #b3d4d2 100%);
 
   &::before {
     display: none;
@@ -145,7 +145,7 @@ const HeroContent = styled(motion.div)`
 const HeroTitle = styled.h1`
   font-size: clamp(3rem, 6vw, 4.5rem);
   font-weight: 700;
-  color: #1a365d;
+  color: #000000;
   margin-bottom: 2rem;
   position: relative;
   z-index: 1;
@@ -158,7 +158,7 @@ const HeroTitle = styled.h1`
     transform: translateX(-50%);
     width: 100px;
     height: 3px;
-    background: linear-gradient(90deg, #2563eb, #1d4ed8);
+    background: linear-gradient(90deg, #c6dddc, #b3d4d2);
   }
 `;
 
@@ -166,7 +166,7 @@ const HeroSubtitle = styled.p`
   font-size: clamp(1.2rem, 2vw, 1.4rem);
   max-width: 800px;
   line-height: 1.8;
-  color: #1e293b;
+  color: #000000;
   margin: 0 auto;
 `;
 
@@ -273,7 +273,7 @@ const MapSection = styled(motion.div)`
 
 const MapTitle = styled.h2`
   font-size: 2.5rem;
-  color: #1a365d;
+  color: #000000;
   margin-bottom: 1.5rem;
   font-weight: 600;
   padding: 1.5rem 2rem 0;
