@@ -28,7 +28,7 @@ const spotlightPhotos = [
 
 const PageContainer = styled(motion.div)`
   min-height: 100vh;
-  background: #f5f3ff;
+  background: white;
 `;
 
 const HeroSection = styled.section`
@@ -39,8 +39,13 @@ const HeroSection = styled.section`
   align-items: center;
   justify-content: center;
   margin-bottom: 4rem;
-  background: #ede9fe;
-  overflow: hidden;
+  background: linear-gradient(135deg, #c6dddc 0%, #b3d4d2 100%);
+  overflow: visible;
+  width: 100%;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  padding-left: 2rem;
+  padding-right: 2rem;
 
   &::before {
     content: '';
@@ -49,7 +54,7 @@ const HeroSection = styled.section`
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, #c4b5fd33 0%, #a78bfa33 50%, #8b5cf633 100%);
+    background: transparent;
     z-index: 0;
   }
 `;
@@ -60,12 +65,7 @@ const HeroOverlay = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0.9) 0%,
-    rgba(255, 255, 255, 0.7) 50%,
-    rgba(255, 255, 255, 0.9) 100%
-  );
+  background: transparent;
 `;
 
 const HeroContent = styled.div`
@@ -77,9 +77,9 @@ const HeroContent = styled.div`
 
 const HeroTitle = styled.h1`
   font-size: clamp(3rem, 8vw, 5rem);
-  color: #5b21b6;
+  color: #000000;
   margin-bottom: 1.5rem;
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: -0.02em;
   position: relative;
 
@@ -91,13 +91,13 @@ const HeroTitle = styled.h1`
     transform: translateX(-50%);
     width: 120px;
     height: 3px;
-    background: linear-gradient(90deg, #8b5cf6, #7c3aed);
+    background: linear-gradient(90deg, #c6dddc, #b3d4d2);
   }
 `;
 
 const HeroSubtitle = styled.p`
   font-size: clamp(1.1rem, 2vw, 1.3rem);
-  color: #6d28d9;
+  color: #000000;
   font-weight: 500;
   line-height: 1.6;
   max-width: 800px;
@@ -117,6 +117,7 @@ const InstagramSection = styled.section`
   width: 100%;
   position: relative;
   padding: 2rem 0;
+  background: white;
 
   &::before {
     content: '';
@@ -128,7 +129,7 @@ const InstagramSection = styled.section`
     background: linear-gradient(
       90deg,
       transparent 0%,
-      rgba(139, 92, 246, 0.2) 50%,
+      rgba(198, 221, 220, 0.3) 50%,
       transparent 100%
     );
   }
@@ -143,19 +144,19 @@ const InstagramSection = styled.section`
     background: linear-gradient(
       90deg,
       transparent 0%,
-      rgba(139, 92, 246, 0.2) 50%,
+      rgba(198, 221, 220, 0.3) 50%,
       transparent 100%
     );
   }
 `;
 
 const SectionTitle = styled.h2`
-  font-size: 2.5rem;
-  color: #5b21b6;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  color: #000000;
   text-align: center;
   margin-bottom: 3rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
+  font-weight: 800;
+  letter-spacing: -0.02em;
   position: relative;
 
   &::after {
@@ -164,11 +165,11 @@ const SectionTitle = styled.h2`
     bottom: -18px;
     left: 50%;
     transform: translateX(-50%);
-    width: 120px;
-    height: 4px;
-    background: linear-gradient(90deg, #a78bfa 0%, #8b5cf6 50%, #7c3aed 100%);
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(90deg, #c6dddc, #b3d4d2);
     border-radius: 2px;
-    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2);
+    box-shadow: 0 4px 12px rgba(198, 221, 220, 0.2);
   }
 
   @media (max-width: 768px) {
@@ -179,12 +180,12 @@ const SectionTitle = styled.h2`
 
 const SubsectionTitle = styled.h3`
   text-align: center;
-  color: #6d28d9;
+  color: #000000;
   margin-bottom: 3rem;
   margin-top: 3rem;
   font-size: 1.5rem;
-  font-weight: 600;
-  letter-spacing: -0.005em;
+  font-weight: 700;
+  letter-spacing: -0.01em;
   position: relative;
   padding-bottom: 1.5rem;
 
@@ -196,7 +197,7 @@ const SubsectionTitle = styled.h3`
     transform: translateX(-50%);
     width: 60px;
     height: 2px;
-    background: linear-gradient(90deg, transparent, #8b5cf6, transparent);
+    background: linear-gradient(90deg, transparent, #c6dddc, transparent);
   }
 
   @media (max-width: 768px) {
@@ -236,14 +237,14 @@ const InstagramGrid = styled.div`
 const InstagramEmbed = styled(motion.div)`
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 8px 32px rgba(139, 92, 246, 0.12);
+  box-shadow: 0 8px 32px rgba(198, 221, 220, 0.2);
   background: white;
   transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
   transform: translateY(0);
   width: 100%;
 
   &:hover {
-    box-shadow: 0 16px 48px rgba(139, 92, 246, 0.18);
+    box-shadow: 0 16px 48px rgba(198, 221, 220, 0.3);
     transform: translateY(-6px);
   }
 
