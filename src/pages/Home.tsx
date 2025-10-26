@@ -385,6 +385,36 @@ const CTAButton = styled(motion.a)`
   }
 `;
 
+// Partners Section
+const PartnersSection = styled(motion.div)`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 3rem auto 0;
+  padding: 0 1rem;
+  align-items: center;
+  justify-items: center;
+
+  img {
+    max-width: 100%;
+    height: auto;
+    max-height: 80px;
+    object-fit: contain;
+    filter: grayscale(0%);
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 1.5rem;
+  }
+`;
+
 const Home: React.FC = () => {
   const { targetRef: statsRef, isVisible: statsVisible, hasAnimated: statsAnimated } = useIntersectionObserver({
     threshold: 0.2
@@ -404,7 +434,7 @@ const Home: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            Spreading love through art
+            Spreading warmth through art therapy & bracelets
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -418,13 +448,21 @@ const Home: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.7 }}
           >
-            <HeroButton as={Link} to="/get-involved" primary>
-              Get Involved
-            </HeroButton>
-            <HeroButton as={Link} to="/about">
+            <HeroButton as={Link} to="/about" primary>
               Learn More
             </HeroButton>
+            <HeroButton as={Link} to="/contact">
+              Connect
+            </HeroButton>
           </HeroButtonGroup>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.9 }}
+            style={{ marginTop: '1.5rem', fontSize: 'clamp(0.9rem, 1.6vw, 1rem)', fontWeight: 400 }}
+          >
+            Join our community dedicated to curiosity and creativity through hands-on STEM projects today!
+          </motion.p>
         </HeroContent>
         <LogoContainer
           initial={{ scale: 0.5, opacity: 0, x: 40 }}
@@ -722,6 +760,38 @@ const Home: React.FC = () => {
         >
           Register as a Volunteer
         </CTAButton>
+      </WhiteSection>
+
+      {/* Partners Section */}
+      <WhiteSection
+        initial="hidden"
+        whileInView="visible"
+        variants={containerVariants}
+        viewport={{ once: true }}
+      >
+        <SectionTitle
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          Our Partners
+        </SectionTitle>
+        <PartnersSection
+          initial="hidden"
+          whileInView="visible"
+          variants={containerVariants}
+          viewport={{ once: true }}
+        >
+          <motion.img src="/partners/0.png" alt="Partner 1" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} />
+          <motion.img src="/partners/1.png" alt="Partner 2" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }} viewport={{ once: true }} />
+          <motion.img src="/partners/2.png" alt="Partner 3" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }} viewport={{ once: true }} />
+          <motion.img src="/partners/3.png" alt="Partner 4" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }} viewport={{ once: true }} />
+          <motion.img src="/partners/4.png" alt="Partner 5" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.4 }} viewport={{ once: true }} />
+          <motion.img src="/partners/5.png" alt="Partner 6" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.5 }} viewport={{ once: true }} />
+          <motion.img src="/partners/6.png" alt="Partner 7" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.6 }} viewport={{ once: true }} />
+          <motion.img src="/partners/7.png" alt="Partner 8" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.7 }} viewport={{ once: true }} />
+        </PartnersSection>
       </WhiteSection>
     </>
   );
