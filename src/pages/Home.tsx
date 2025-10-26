@@ -36,9 +36,9 @@ const HeroSection = styled.section`
   min-height: 85vh;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  gap: 3rem;
+  gap: 1.5rem;
   margin-top: ${({ theme }) => theme.spacing.header};
   width: 100%;
   margin-left: calc(-50vw + 50%);
