@@ -40,9 +40,11 @@ const HeroSection = styled.section`
   align-items: center;
   gap: 3rem;
   margin-top: ${({ theme }) => theme.spacing.header};
-  max-width: 1400px;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  padding-left: 2rem;
+  padding-right: 2rem;
 
   @media (max-width: 768px) {
     flex-direction: column;
