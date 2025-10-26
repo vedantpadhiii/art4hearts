@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import useCountUp from '../hooks/useCountUp';
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
+import GalleryCarousel from '../components/GalleryCarousel';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -380,6 +381,40 @@ const CTAButton = styled(motion.a)`
     color: white;
     transform: translateY(-3px);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+`;
+
+// Gallery Section
+const GallerySection = styled(SectionContainer)`
+  background: white;
+`;
+
+const GalleryContentWrapper = styled.div`
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const GalleryButton = styled(motion.a)`
+  display: inline-block;
+  padding: 0.9rem 2rem;
+  background: #000000;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  margin-top: 2.5rem;
+  border: 2px solid transparent;
+
+  &:hover {
+    background: #333333;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
   }
 `;
 
@@ -797,6 +832,60 @@ const Home: React.FC = () => {
           </Card>
         </CardGrid>
       </LightSection>
+
+      {/* Gallery Section */}
+      <GallerySection>
+        <SectionTitle
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          Gallery
+        </SectionTitle>
+        <SectionDescription
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          viewport={{ once: true }}
+        >
+          Explore moments from our community and the impact we're creating together.
+        </SectionDescription>
+        <GalleryContentWrapper>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+            style={{ width: '100%' }}
+          >
+            <GalleryCarousel 
+              images={[
+                '/gallery/DSCF5420.JPG',
+                '/gallery/DSCF5430.JPG',
+                '/gallery/DSCF5447.JPG',
+                '/gallery/DSCF5452.JPG',
+                '/gallery/IMG_3335.HEIC',
+                '/gallery/IMG_8906.heic',
+                '/gallery/processed-D10D25C8-6C7A-4597-B16B-1B28EC67801A.jpeg',
+                '/gallery/Screenshot 2025-07-05 at 2.47.41 PM.png',
+              ]}
+            />
+          </motion.div>
+          <GalleryButton
+            as={Link}
+            to="/gallery"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            viewport={{ once: true }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            View More →
+          </GalleryButton>
+        </GalleryContentWrapper>
+      </GallerySection>
 
       {/* Stats Section */}
       <WhiteSection>
