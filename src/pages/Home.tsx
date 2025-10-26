@@ -424,6 +424,36 @@ const PartnersSection = styled(motion.div)`
   }
 `;
 
+// Subsection Grid
+const SubsectionGrid = styled(motion.div)`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 3rem auto 0;
+  padding: 0 1rem;
+`;
+
+const Subsection = styled(motion.div)`
+  text-align: center;
+  padding: 2rem;
+
+  h3 {
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
+    color: #000000;
+    margin-bottom: 1rem;
+    font-weight: 700;
+  }
+
+  p {
+    font-size: clamp(0.9rem, 1.5vw, 1rem);
+    color: #000000;
+    line-height: 1.7;
+    margin: 0;
+    font-weight: 500;
+  }
+`;
+
 const Home: React.FC = () => {
   const { targetRef: statsRef, isVisible: statsVisible, hasAnimated: statsAnimated } = useIntersectionObserver({
     threshold: 0.2
@@ -526,9 +556,45 @@ const Home: React.FC = () => {
           transition={{ duration: 0.6, delay: 0.1 }}
           viewport={{ once: true }}
         >
-          Art4Hearts is a 501(c)(3) nonprofit based in the Bay Area dedicated to spreading creativity and comfort through handcrafted art therapy kits, 
-          engaging art workshops, and personalized bracelets with uplifting messages. We believe everyone deserves to experience the healing power of art.
+          Learn more about our initiatives to bring kindness and love to hospitals, senior centers, etc.
         </SectionDescription>
+        
+        <SubsectionGrid
+          initial="hidden"
+          whileInView="visible"
+          variants={containerVariants}
+          viewport={{ once: true }}
+        >
+          <Subsection
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <h3>🎨 Initiatives</h3>
+            <p>Discover our creative programs bringing art and comfort to communities, hospitals, and care facilities worldwide.</p>
+          </Subsection>
+
+          <Subsection
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            viewport={{ once: true }}
+          >
+            <h3>🏘️ Our Chapters</h3>
+            <p>Join a local Art4Hearts chapter and connect with passionate volunteers dedicated to spreading creativity in your community.</p>
+          </Subsection>
+
+          <Subsection
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <h3>🤝 Volunteering</h3>
+            <p>Make a difference by volunteering with Art4Hearts. Help create art that brings joy and healing to those who need it most.</p>
+          </Subsection>
+        </SubsectionGrid>
       </WhiteSection>
 
       {/* Get Involved */}
