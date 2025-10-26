@@ -6,6 +6,30 @@ import useCountUp from '../hooks/useCountUp';
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 import GalleryCarousel from '../components/GalleryCarousel';
 
+// FAQ Data
+const homepageFAQs = [
+  {
+    question: "Can I volunteer if I'm not in the U.S.?",
+    answer: "Yes, Art4Hearts is a global organization 🌍"
+  },
+  {
+    question: "Can I volunteer if I'm not in high school?",
+    answer: "Yes, anyone regardless of age can volunteer!"
+  },
+  {
+    question: "What's the process for making bracelets?",
+    answer: "1. Fill out the Volunteer Registration Form.\n2. Look over the Bracelets Service Hours Request Form so you know how to track time.\n3. Start making bracelets!\n4. Fill out the Bracelets Service Hours Request Form to log your hours."
+  },
+  {
+    question: "How can I donate the bracelets and art therapy kits?",
+    answer: "You can:\n1. Ship it to our P.O. Box Address found in the service request forms\n2. Donate it to your local charitable organization."
+  },
+  {
+    question: "What is a chapter?",
+    answer: "A chapter is a local branch of Art4Hearts led by a volunteer who wants to create a larger impact within their school or community.\n\nChapters organize initiatives such as bracelet-making and art therapy kit donations.\n\nBy starting a chapter, you'll recruit other volunteers, host events, and can serve local hospitals, senior centers, etc. You'll also keep your group organized and connected to our global Art4Hearts community."
+  }
+];
+
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -628,11 +652,26 @@ const FAQQuestion = styled.span`
   flex: 1;
 `;
 
-const FAQToggle = styled.span`
+const FAQToggle = styled.span<{ isOpen?: boolean }>`
   font-size: 1.2rem;
   color: #c6dddc;
   font-weight: bold;
   margin-left: 1rem;
+  transition: transform 0.3s ease;
+  transform: ${props => props.isOpen ? 'rotate(180deg)' : 'rotate(0deg)'};
+`;
+
+const FAQAnswerContainer = styled(motion.div)`
+  overflow: hidden;
+`;
+
+const FAQAnswer = styled.p`
+  padding: 1rem 1.5rem 0 1.5rem;
+  color: #666666;
+  font-size: 0.95rem;
+  line-height: 1.8;
+  white-space: pre-wrap;
+  margin: 0;
 `;
 
 const FAQRight = styled(motion.div)`
@@ -675,6 +714,7 @@ const FAQLink = styled(motion.a)`
 
 const Home: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'initiatives' | 'chapters' | 'volunteering'>('initiatives');
+  const [expandedFAQ, setExpandedFAQ] = useState<number | null>(null);
   const { targetRef: statsRef, isVisible: statsVisible, hasAnimated: statsAnimated } = useIntersectionObserver({
     threshold: 0.2
   });
@@ -1095,33 +1135,32 @@ const Home: React.FC = () => {
           <FAQLeft>
             <FAQIcon>🎨</FAQIcon>
             <FAQList>
-              <FAQItem
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6 }}
-                viewport={{ once: true }}
-              >
-                <FAQQuestion>What age groups do you teach?</FAQQuestion>
-                <FAQToggle>●</FAQToggle>
-              </FAQItem>
-              <FAQItem
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                viewport={{ once: true }}
-              >
-                <FAQQuestion>What is project based learning?</FAQQuestion>
-                <FAQToggle>●</FAQToggle>
-              </FAQItem>
-              <FAQItem
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                viewport={{ once: true }}
-              >
-                <FAQQuestion>How long is a lesson?</FAQQuestion>
-                <FAQToggle>●</FAQToggle>
-              </FAQItem>
+              {homepageFAQs.map((faq, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  style={{ cursor: 'pointer' }}
+                  onClick={() => setExpandedFAQ(expandedFAQ === index ? null : index)}
+                >
+                  <FAQItem>
+                    <FAQQuestion>{faq.question}</FAQQuestion>
+                    <FAQToggle isOpen={expandedFAQ === index}>●</FAQToggle>
+                  </FAQItem>
+                  {expandedFAQ === index && (
+                    <FAQAnswerContainer
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <FAQAnswer>{faq.answer}</FAQAnswer>
+                    </FAQAnswerContainer>
+                  )}
+                </motion.div>
+              ))}
             </FAQList>
           </FAQLeft>
 
