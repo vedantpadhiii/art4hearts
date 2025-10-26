@@ -169,9 +169,11 @@ const NavLink = styled(Link)<{ $isActive?: boolean }>`
   `}
 
   &:hover {
-    color: #1e3a8a;
+    color: #111827;
     background: transparent;
     transform: translateY(-1px);
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.6));
   }
 `;
 
@@ -344,7 +346,7 @@ export const Navigation: React.FC = () => {
           </NavItem>
 
           <NavItem>
-            <NavLink to="/spotlights" $isActive={location.pathname === '/spotlights'}>
+            <NavLink to="/gallery" $isActive={location.pathname === '/gallery'}>
               GALLERY
             </NavLink>
           </NavItem>
