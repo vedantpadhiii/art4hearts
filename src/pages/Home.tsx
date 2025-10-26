@@ -402,8 +402,9 @@ const PartnersSection = styled(motion.div)`
 
   img {
     max-width: 100%;
+    width: auto;
     height: auto;
-    max-height: 80px;
+    max-height: 140px;
     object-fit: contain;
     filter: grayscale(0%);
     transition: all 0.3s ease;
@@ -414,11 +415,11 @@ const PartnersSection = styled(motion.div)`
   }
 
   @media (max-width: 768px) {
-    gap: 1.5rem;
-    padding: 2rem 1rem;
+    gap: 2rem;
+    padding: 2.5rem 1rem;
     
     img {
-      max-height: 65px;
+      max-height: 110px;
     }
   }
 `;
