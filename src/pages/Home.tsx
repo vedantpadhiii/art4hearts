@@ -185,6 +185,16 @@ const SectionContainer = styled(motion.section)`
   text-align: center;
   position: relative;
   z-index: 1;
+  width: 100%;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  padding-left: 2rem;
+  padding-right: 2rem;
+
+  @media (max-width: 768px) {
+    margin-left: 0;
+    margin-right: 0;
+  }
 `;
 
 const WhiteSection = styled(SectionContainer)`
@@ -604,7 +614,6 @@ const Home: React.FC = () => {
         viewport={{ once: true }}
       >
         <SectionTitle
-          style={{ color: '#1a365d' }}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -613,7 +622,6 @@ const Home: React.FC = () => {
           Start a Chapter
         </SectionTitle>
         <SectionDescription
-          style={{ color: '#1a365d' }}
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
