@@ -240,6 +240,55 @@ const InstagramEmbed = styled(motion.div)`
   }
 `;
 
+const PhotosSection = styled.section`
+  width: 100%;
+  position: relative;
+  padding: 4rem 2rem;
+  background: white;
+`;
+
+const PhotosGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 3rem auto 0;
+  padding: 0 1rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+`;
+
+const PhotoItem = styled(motion.img)`
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(198, 221, 220, 0.2);
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 0 12px 32px rgba(198, 221, 220, 0.3);
+    transform: translateY(-4px) scale(1.02);
+  }
+
+  @media (max-width: 768px) {
+    height: 200px;
+  }
+
+  @media (max-width: 480px) {
+    height: 150px;
+  }
+`;
+
 const SpotlightsPage: React.FC = () => {
   useEffect(() => {
     // Load Instagram embed script
@@ -312,6 +361,84 @@ const SpotlightsPage: React.FC = () => {
             </InstagramEmbed>
           </InstagramGrid>
         </InstagramSection>
+
+        <PhotosSection>
+          <SectionTitle>Photos</SectionTitle>
+          <PhotosGrid>
+            <PhotoItem
+              src="/gallery/DSCF5420.JPG"
+              alt="Gallery photo 1"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+              whileHover={{ scale: 1.05 }}
+            />
+            <PhotoItem
+              src="/gallery/DSCF5430.JPG"
+              alt="Gallery photo 2"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              viewport={{ once: true }}
+              whileHover={{ scale: 1.05 }}
+            />
+            <PhotoItem
+              src="/gallery/DSCF5447.JPG"
+              alt="Gallery photo 3"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              viewport={{ once: true }}
+              whileHover={{ scale: 1.05 }}
+            />
+            <PhotoItem
+              src="/gallery/DSCF5452.JPG"
+              alt="Gallery photo 4"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              viewport={{ once: true }}
+              whileHover={{ scale: 1.05 }}
+            />
+            <PhotoItem
+              src="/gallery/IMG_3335.HEIC"
+              alt="Gallery photo 5"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              viewport={{ once: true }}
+              whileHover={{ scale: 1.05 }}
+            />
+            <PhotoItem
+              src="/gallery/IMG_8906.heic"
+              alt="Gallery photo 6"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+              viewport={{ once: true }}
+              whileHover={{ scale: 1.05 }}
+            />
+            <PhotoItem
+              src="/gallery/Screenshot 2025-07-05 at 2.47.41 PM.png"
+              alt="Gallery photo 7"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+              viewport={{ once: true }}
+              whileHover={{ scale: 1.05 }}
+            />
+            <PhotoItem
+              src="/gallery/processed-D10D25C8-6C7A-4597-B16B-1B28EC67801A.jpeg"
+              alt="Gallery photo 8"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.7 }}
+              viewport={{ once: true }}
+              whileHover={{ scale: 1.05 }}
+            />
+          </PhotosGrid>
+        </PhotosSection>
       </ContentContainer>
     </PageContainer>
   );
