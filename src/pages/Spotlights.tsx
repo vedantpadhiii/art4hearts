@@ -292,23 +292,10 @@ const PhotoItemImg = styled.img`
 interface PhotoItemProps {
   src: string;
   alt: string;
-  initial?: any;
-  whileInView?: any;
-  transition?: any;
-  viewport?: any;
-  whileHover?: any;
 }
 
-const PhotoItem: React.FC<PhotoItemProps> = ({ src, alt, initial, whileInView, transition, viewport, whileHover }) => (
-  <motion.div
-    initial={initial}
-    whileInView={whileInView}
-    transition={transition}
-    viewport={viewport}
-    whileHover={whileHover}
-  >
-    <PhotoItemImg src={src} alt={alt} />
-  </motion.div>
+const PhotoItem: React.FC<PhotoItemProps> = ({ src, alt }) => (
+  <PhotoItemImg src={src} alt={alt} loading="lazy" />
 );
 
 const SpotlightsPage: React.FC = () => {

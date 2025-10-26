@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
 const FooterContainer = styled.footer`
-  background: #f0f7ff;
-  border-top: 1px solid rgba(37, 99, 235, 0.1);
+  background: linear-gradient(135deg, #c6dddc 0%, #b3d4d2 100%);
+  border-top: 1px solid rgba(107, 180, 177, 0.2);
   padding: 2.5rem 2rem 2rem;
-  color: #1e293b;
+  color: #000000;
 `;
 
 const FooterContent = styled.div`
@@ -25,18 +25,18 @@ const SocialLinks = styled.div`
 `;
 
 const SocialLink = styled(motion.a)`
-  color: #1e40af;
+  color: #000000;
   text-decoration: none;
   display: flex;
   align-items: center;
   padding: 0.5rem;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.3);
   transition: all 0.3s ease;
 
   &:hover {
-    background: #2563eb;
-    color: white;
+    background: rgba(0, 0, 0, 0.15);
+    color: #000000;
     transform: translateY(-2px);
   }
 
@@ -49,7 +49,7 @@ const SocialLink = styled(motion.a)`
 const Description = styled.p`
   font-size: 1rem;
   line-height: 1.6;
-  color: #475569;
+  color: #000000;
   max-width: 600px;
   margin: 0 auto;
 `;
@@ -58,9 +58,9 @@ const Copyright = styled.div`
   text-align: center;
   margin-top: 1.5rem;
   padding-top: 1.5rem;
-  border-top: 1px solid rgba(37, 99, 235, 0.1);
+  border-top: 1px solid rgba(107, 180, 177, 0.2);
   font-size: 0.9rem;
-  color: #64748b;
+  color: #000000;
   display: flex;
   align-items: center;
   justify-content: center;

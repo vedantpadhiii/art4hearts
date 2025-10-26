@@ -8,12 +8,12 @@ interface GalleryCarouselProps {
 
 const CarouselContainer = styled.div`
   position: relative;
-  width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
   aspect-ratio: 16 / 10;
   overflow: hidden;
-  border-radius: 20px;
+  border-radius: 0;
   box-shadow: 0 12px 40px rgba(198, 221, 220, 0.3);
   background: #f5f5f5;
 `;

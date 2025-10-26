@@ -973,7 +973,7 @@ const Home: React.FC = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h3>🎨 Become a Volunteer</h3>
+            <h3>Become a Volunteer</h3>
             <p>Start volunteering remotely by making bracelets or art therapy kits!</p>
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSd98E0LsNhBywLdUhlIBmp6e88bjt81Fh1tV6Lz6FklT1LtEg/viewform?usp=send_form" target="_blank" rel="noopener noreferrer">Apply Now</a>
           </Card>
@@ -985,7 +985,7 @@ const Home: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
             viewport={{ once: true }}
           >
-            <h3>🏘️ Apply to Become a Chapter</h3>
+            <h3>Apply to Become a Chapter</h3>
             <p>Anyone, anywhere can start a chapter for their local community.</p>
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSd0kg3Ymu1uoCwUqhjgHNZyOHoVvaci8IRKYK5XyjUp6GQbnA/viewform" target="_blank" rel="noopener noreferrer">Apply Now</a>
           </Card>
@@ -997,7 +997,7 @@ const Home: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <h3>📦 Looking for a Kit or Bracelet?</h3>
+            <h3>Looking for a Kit or Bracelet?</h3>
             <p>If you're a hospital, senior center, or any charitable organization, we'd love to help!</p>
             <a href="https://art4hearts.onrender.com/contact" target="_blank" rel="noopener noreferrer">Contact Us</a>
           </Card>
@@ -1159,7 +1159,6 @@ const Home: React.FC = () => {
           viewport={{ once: true }}
         >
           <FAQLeft>
-            <FAQIcon>🎨</FAQIcon>
             <FAQList>
               {homepageFAQs.map((faq, index) => (
                 <motion.div
