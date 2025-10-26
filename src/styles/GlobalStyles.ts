@@ -8,7 +8,7 @@ const GlobalStyles = createGlobalStyle`
     font-style: normal;
   }
 
-  @import url('https://fonts.googleapis.com/css2?family=Kollektif&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Kollektif:ital,wght@0,400;1,400&display=swap');
 
   * {
     margin: 0;
@@ -20,6 +20,8 @@ const GlobalStyles = createGlobalStyle`
     background: ${props => props.theme.colors.background.dark};
     color: ${props => props.theme.colors.text.light};
     font-family: ${props => props.theme.fonts.body};
+    font-weight: bold;
+    font-style: italic;
     font-size: 16px;
     line-height: 1.5;
     overflow-x: hidden;
@@ -30,6 +32,8 @@ const GlobalStyles = createGlobalStyle`
 
   p, span, li, td, th, label, input, textarea, button, a, div, article, section, nav {
     font-family: ${props => props.theme.fonts.body};
+    font-weight: bold;
+    font-style: italic;
   }
 
   h1, h2, h3, h4, h5, h6 {
