@@ -30,16 +30,19 @@ const itemVariants = {
 // Hero Section
 const HeroSection = styled.section`
   background: linear-gradient(135deg, #c6dddc 0%, #b3d4d2 100%);
-  padding: clamp(4rem, 8vh, 6rem) 2rem;
+  padding: clamp(4rem, 8vh, 5rem) 2rem;
   position: relative;
   overflow: hidden;
-  min-height: 100vh;
+  min-height: 85vh;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  gap: 4rem;
+  gap: 3rem;
   margin-top: ${({ theme }) => theme.spacing.header};
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -84,7 +87,8 @@ const LogoContainer = styled(motion.div)`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  min-width: 300px;
+  min-width: 250px;
+  max-width: 450px;
   
   img {
     max-width: 100%;
@@ -95,7 +99,7 @@ const LogoContainer = styled(motion.div)`
 
   @media (max-width: 768px) {
     justify-content: center;
-    max-width: 400px;
+    max-width: 350px;
   }
 `;
 
@@ -104,29 +108,75 @@ const HeroContent = styled(motion.div)`
   z-index: 1;
   flex: 1;
   text-align: left;
-  max-width: 600px;
+  max-width: 550px;
 
   h1 {
-    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-size: clamp(2.5rem, 4.5vw, 3.8rem);
     color: #000000;
     font-weight: 800;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.2rem;
     line-height: 1.15;
     letter-spacing: -0.02em;
   }
 
   p {
-    font-size: clamp(1rem, 2vw, 1.2rem);
+    font-size: clamp(0.95rem, 1.8vw, 1.1rem);
     color: #000000;
     font-weight: 500;
     line-height: 1.8;
-    margin: 0;
+    margin-bottom: 2rem;
   }
 
   @media (max-width: 768px) {
     text-align: center;
     max-width: 100%;
   }
+`;
+
+const HeroButtonGroup = styled(motion.div)`
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
+`;
+
+const HeroButton = styled.a<{ primary?: boolean }>`
+  display: inline-block;
+  padding: 0.9rem 2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid;
+
+  ${props => props.primary ? `
+    background: #1a365d;
+    color: white;
+    border-color: #1a365d;
+
+    &:hover {
+      background: #0f1f38;
+      border-color: #0f1f38;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(26, 54, 93, 0.25);
+    }
+  ` : `
+    background: transparent;
+    color: #1a365d;
+    border-color: #1a365d;
+
+    &:hover {
+      background: #1a365d;
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(26, 54, 93, 0.15);
+    }
+  `}
 `;
 
 // Section Container
@@ -351,6 +401,18 @@ const Home: React.FC = () => {
           >
             Art4Hearts is a youth-led nonprofit creating beauty and comfort through personalized art, workshops, and handmade creations
           </motion.p>
+          <HeroButtonGroup
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.7 }}
+          >
+            <HeroButton as={Link} to="/get-involved" primary>
+              Get Involved
+            </HeroButton>
+            <HeroButton as={Link} to="/about">
+              Learn More
+            </HeroButton>
+          </HeroButtonGroup>
         </HeroContent>
         <LogoContainer
           initial={{ scale: 0.5, opacity: 0, x: 40 }}
