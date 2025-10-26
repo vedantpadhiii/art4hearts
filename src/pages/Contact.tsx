@@ -20,7 +20,7 @@ const LinktreeIcon = () => (
 const ContactContainer = styled.div`
   background: linear-gradient(135deg, #c6dddc 0%, #b3d4d2 100%);
   margin-top: ${props => props.theme.spacing.header};
-  padding-bottom: 8rem;
+  padding: 4rem 2rem 15rem 2rem;
   min-height: auto;
 `;
 
