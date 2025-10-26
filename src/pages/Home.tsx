@@ -5,14 +5,36 @@ import { motion } from 'framer-motion';
 import useCountUp from '../hooks/useCountUp';
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+    },
+  },
+};
+
 // Hero Section
 const HeroSection = styled.section`
-  background: #c6dddc;
-  padding: clamp(6rem, 10vh, 8rem) 2rem;
+  background: linear-gradient(135deg, #c6dddc 0%, #b3d4d2 100%);
+  padding: clamp(8rem, 15vh, 12rem) 2rem;
   text-align: center;
   position: relative;
   overflow: hidden;
-  min-height: 70vh;
+  min-height: 80vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -22,108 +44,113 @@ const HeroSection = styled.section`
   &::before {
     content: '';
     position: absolute;
-    top: -50%;
-    right: -20%;
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+    top: -40%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
     border-radius: 50%;
     z-index: 0;
+    animation: float 6s ease-in-out infinite;
   }
 
   &::after {
     content: '';
     position: absolute;
-    bottom: -30%;
-    left: -10%;
-    width: 400px;
-    height: 400px;
+    bottom: -20%;
+    left: -15%;
+    width: 500px;
+    height: 500px;
     background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
     border-radius: 50%;
     z-index: 0;
+    animation: float 8s ease-in-out infinite reverse;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(20px); }
   }
 `;
 
-const HeroContent = styled.div`
+const HeroContent = styled(motion.div)`
   position: relative;
   z-index: 1;
-  max-width: 900px;
+  max-width: 1000px;
   margin: 0 auto;
 
   h1 {
-    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-size: clamp(2.5rem, 7vw, 4.5rem);
     color: #1a365d;
-    font-weight: 700;
+    font-weight: 800;
     margin-bottom: 1.5rem;
-    line-height: 1.2;
+    line-height: 1.1;
     letter-spacing: -0.02em;
   }
 
   p {
-    font-size: clamp(1.1rem, 2vw, 1.3rem);
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
     color: #4a9894;
     font-weight: 500;
-    line-height: 1.6;
+    line-height: 1.7;
     margin: 0;
   }
 `;
 
-// About Section
-const AboutSection = styled.section`
-  padding: clamp(4rem, 8vh, 6rem) 2rem;
-  background: white;
+// Section Container
+const SectionContainer = styled(motion.section)`
+  padding: clamp(5rem, 10vh, 8rem) 2rem;
   text-align: center;
-
-  h2 {
-    font-size: clamp(2.5rem, 5vw, 3.5rem);
-    color: #1a365d;
-    font-weight: 700;
-    margin-bottom: 2rem;
-    position: relative;
-    display: inline-block;
-
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: -1rem;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 120px;
-      height: 4px;
-      background: linear-gradient(90deg, #5ba3a0, #4a9894);
-      border-radius: 2px;
-    }
-  }
-
-  p {
-    font-size: clamp(1rem, 2vw, 1.2rem);
-    color: #1e293b;
-    max-width: 900px;
-    margin: 3rem auto 0;
-    line-height: 1.8;
-  }
+  position: relative;
+  z-index: 1;
 `;
 
-// Get Involved Section
-const GetInvolvedSection = styled.section`
-  padding: clamp(4rem, 8vh, 6rem) 2rem;
+const WhiteSection = styled(SectionContainer)`
+  background: white;
+`;
+
+const LightSection = styled(SectionContainer)`
   background: #f9fafb;
+`;
 
-  h2 {
-    font-size: clamp(2.5rem, 5vw, 3.5rem);
-    color: #1a365d;
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: 4rem;
+const TealSection = styled(SectionContainer)`
+  background: #c6dddc;
+`;
+
+const SectionTitle = styled(motion.h2)`
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  color: #1a365d;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+
+  &::after {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(90deg, #5ba3a0, #4a9894);
+    margin: 1.5rem auto 0;
+    border-radius: 2px;
   }
 `;
 
-const CardGrid = styled.div`
+const SectionDescription = styled(motion.p)`
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  color: #4a9894;
+  max-width: 900px;
+  margin: 2rem auto 0;
+  line-height: 1.8;
+`;
+
+// Cards Grid
+const CardGrid = styled(motion.div)`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2.5rem;
+  gap: 2rem;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 4rem auto 0;
   padding: 0 1rem;
 `;
 
@@ -132,27 +159,28 @@ const Card = styled(motion.div)`
   padding: 2.5rem 2rem;
   border-radius: 16px;
   text-align: center;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   transition: all 0.3s ease;
   border: 2px solid transparent;
+  cursor: pointer;
 
   &:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 32px rgba(198, 221, 220, 0.2);
+    transform: translateY(-12px);
+    box-shadow: 0 16px 40px rgba(198, 221, 220, 0.25);
     border-color: #c6dddc;
   }
 
   h3 {
-    font-size: 1.5rem;
+    font-size: clamp(1.3rem, 2.5vw, 1.5rem);
     color: #1a365d;
     margin-bottom: 1rem;
-    font-weight: 600;
+    font-weight: 700;
   }
 
   p {
     font-size: 1rem;
     color: #4a9894;
-    line-height: 1.6;
+    line-height: 1.7;
     margin-bottom: 1.5rem;
   }
 
@@ -169,172 +197,178 @@ const Card = styled(motion.div)`
     &:hover {
       background: #5ba3a0;
       color: white;
+      transform: scale(1.05);
     }
   }
 `;
 
 // Stats Section
-const StatsSection = styled.section`
-  padding: clamp(4rem, 8vh, 6rem) 2rem;
-  background: white;
-
-  h2 {
-    font-size: clamp(2.5rem, 5vw, 3.5rem);
-    color: #1a365d;
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: 4rem;
-  }
-`;
-
-const StatGrid = styled.div`
+const StatGrid = styled(motion.div)`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 2rem;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 4rem auto 0;
   padding: 0 1rem;
 `;
 
-const StatCard = styled.div`
-  background: #c6dddc;
-  padding: 2rem;
+const StatCard = styled(motion.div)`
+  background: white;
+  padding: 2.5rem 1.5rem;
   border-radius: 12px;
   text-align: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 32px rgba(198, 221, 220, 0.2);
+  }
 
   .number {
-    font-size: clamp(3rem, 5vw, 4rem);
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
     font-weight: 800;
     color: #1a365d;
     line-height: 1;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.8rem;
   }
 
   .label {
-    font-size: 1rem;
-    color: #1a365d;
-    font-weight: 600;
+    font-size: clamp(0.9rem, 1.5vw, 1rem);
+    color: #4a9894;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
 `;
 
-// Start a Chapter Section
-const ChapterSection = styled.section`
-  padding: clamp(4rem, 8vh, 6rem) 2rem;
-  background: #c6dddc;
+// List styles
+const BenefitsList = styled(motion.ul)`
+  list-style: none;
+  padding: 0;
+  max-width: 600px;
+  margin: 2rem auto;
+  text-align: left;
 
-  h2 {
-    font-size: clamp(2.5rem, 5vw, 3.5rem);
+  li {
+    font-size: 1.1rem;
     color: #1a365d;
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: 2rem;
-  }
-
-  .benefits {
-    max-width: 800px;
-    margin: 2rem auto;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-
-    li {
-      font-size: 1.1rem;
-      color: #1a365d;
-      font-weight: 500;
-      text-align: left;
-    }
-  }
-
-  a {
-    display: inline-block;
-    margin-top: 2rem;
-    padding: 1rem 2.5rem;
-    background: white;
-    color: #1a365d;
-    text-decoration: none;
-    border-radius: 8px;
     font-weight: 600;
-    transition: all 0.3s ease;
+    padding: 0.8rem 0;
+    padding-left: 2rem;
+    position: relative;
 
-    &:hover {
-      background: #1a365d;
-      color: white;
+    &::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: #5ba3a0;
+      font-weight: bold;
+      font-size: 1.3rem;
     }
   }
 `;
 
-// CTA Section
-const CTASection = styled.section`
-  padding: clamp(4rem, 8vh, 6rem) 2rem;
-  background: white;
-  text-align: center;
+// CTA Button
+const CTAButton = styled(motion.a)`
+  display: inline-block;
+  padding: 1rem 2.5rem;
+  background: #c6dddc;
+  color: #1a365d;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  margin-top: 2rem;
+  border: 2px solid transparent;
 
-  h2 {
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    color: #1a365d;
-    font-weight: 700;
-    margin-bottom: 1.5rem;
-  }
-
-  p {
-    font-size: clamp(1rem, 2vw, 1.2rem);
-    color: #4a9894;
-    max-width: 800px;
-    margin: 0 auto 2rem;
-    line-height: 1.8;
-  }
-
-  a {
-    display: inline-block;
-    padding: 1rem 2.5rem;
-    background: #c6dddc;
-    color: #1a365d;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-
-    &:hover {
-      background: #5ba3a0;
-      color: white;
-    }
+  &:hover {
+    background: #5ba3a0;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(198, 221, 220, 0.3);
   }
 `;
 
 const Home: React.FC = () => {
   const { targetRef: statsRef, isVisible: statsVisible, hasAnimated: statsAnimated } = useIntersectionObserver({
-    threshold: 0.3
+    threshold: 0.2
   });
 
   return (
     <>
       {/* Hero Section */}
       <HeroSection>
-        <HeroContent>
-          <h1>Spreading love through art</h1>
-          <p>Art4Hearts is a youth-led nonprofit creating beauty and comfort through personalized art, workshops, and handmade creations</p>
+        <HeroContent
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            Spreading love through art
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+          >
+            Art4Hearts is a youth-led nonprofit creating beauty and comfort through personalized art, workshops, and handmade creations
+          </motion.p>
         </HeroContent>
       </HeroSection>
 
       {/* What is Art4Hearts */}
-      <AboutSection>
-        <h2>What is Art4Hearts?</h2>
-        <p>
+      <WhiteSection
+        initial="hidden"
+        whileInView="visible"
+        variants={containerVariants}
+        viewport={{ once: true }}
+      >
+        <SectionTitle
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          What is Art4Hearts?
+        </SectionTitle>
+        <SectionDescription
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          viewport={{ once: true }}
+        >
           Art4Hearts is a 501(c)(3) nonprofit based in the Bay Area dedicated to spreading creativity and comfort through handcrafted art therapy kits, 
           engaging art workshops, and personalized bracelets with uplifting messages. We believe everyone deserves to experience the healing power of art.
-        </p>
-      </AboutSection>
+        </SectionDescription>
+      </WhiteSection>
 
       {/* Get Involved */}
-      <GetInvolvedSection>
-        <h2>Get Involved</h2>
-        <CardGrid>
+      <LightSection>
+        <SectionTitle
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          Get Involved
+        </SectionTitle>
+        <CardGrid
+          initial="hidden"
+          whileInView="visible"
+          variants={containerVariants}
+          viewport={{ once: true }}
+        >
           <Card
+            whileHover={{ scale: 1.02 }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
             <h3>🎨 Volunteer</h3>
@@ -343,9 +377,10 @@ const Home: React.FC = () => {
           </Card>
 
           <Card
+            whileHover={{ scale: 1.02 }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
             viewport={{ once: true }}
           >
             <h3>🏘️ Start a Chapter</h3>
@@ -354,9 +389,10 @@ const Home: React.FC = () => {
           </Card>
 
           <Card
+            whileHover={{ scale: 1.02 }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
             <h3>📚 Learn & Support</h3>
@@ -364,13 +400,32 @@ const Home: React.FC = () => {
             <Link to="/spotlights">Learn More</Link>
           </Card>
         </CardGrid>
-      </GetInvolvedSection>
+      </LightSection>
 
       {/* Stats Section */}
-      <StatsSection>
-        <h2>Our Impact</h2>
-        <StatGrid ref={statsRef}>
-          <StatCard>
+      <WhiteSection>
+        <SectionTitle
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          Our Impact
+        </SectionTitle>
+        <StatGrid
+          ref={statsRef}
+          initial="hidden"
+          whileInView="visible"
+          variants={containerVariants}
+          viewport={{ once: true }}
+        >
+          <StatCard
+            whileHover={{ scale: 1.05, y: -10 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
             <div className="number">
               {useCountUp({
                 end: 4500,
@@ -380,7 +435,13 @@ const Home: React.FC = () => {
             </div>
             <div className="label">Volunteers Worldwide</div>
           </StatCard>
-          <StatCard>
+          <StatCard
+            whileHover={{ scale: 1.05, y: -10 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            viewport={{ once: true }}
+          >
             <div className="number">
               {useCountUp({
                 end: 150,
@@ -391,7 +452,13 @@ const Home: React.FC = () => {
             </div>
             <div className="label">Active Chapters</div>
           </StatCard>
-          <StatCard>
+          <StatCard
+            whileHover={{ scale: 1.05, y: -10 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
             <div className="number">
               {useCountUp({
                 end: 50,
@@ -402,7 +469,13 @@ const Home: React.FC = () => {
             </div>
             <div className="label">Countries Reached</div>
           </StatCard>
-          <StatCard>
+          <StatCard
+            whileHover={{ scale: 1.05, y: -10 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            viewport={{ once: true }}
+          >
             <div className="number">
               {useCountUp({
                 end: 1000,
@@ -414,36 +487,125 @@ const Home: React.FC = () => {
             <div className="label">Kits & Bracelets</div>
           </StatCard>
         </StatGrid>
-      </StatsSection>
+      </WhiteSection>
 
       {/* Start a Chapter */}
-      <ChapterSection>
-        <h2>Start a Chapter</h2>
-        <p style={{ fontSize: '1.1rem', color: '#1a365d', maxWidth: '800px', margin: '0 auto 1rem' }}>
+      <TealSection
+        initial="hidden"
+        whileInView="visible"
+        variants={containerVariants}
+        viewport={{ once: true }}
+      >
+        <SectionTitle
+          style={{ color: '#1a365d' }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          Start a Chapter
+        </SectionTitle>
+        <SectionDescription
+          style={{ color: '#1a365d' }}
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          viewport={{ once: true }}
+        >
           Join our mission to bring art and creativity to communities worldwide. Here's what you get:
-        </p>
-        <ul className="benefits">
-          <li>💰 Leadership Opportunities</li>
-          <li>📜 Certified Volunteer Hours</li>
-          <li>🤝 Community Engagement</li>
-          <li>🎓 Strengthen Your Resume</li>
-          <li>🎉 Lots of Fun & Support</li>
-        </ul>
-        <div style={{ textAlign: 'center' }}>
-          <Link to="/about/chapters">Get Started</Link>
-        </div>
-      </ChapterSection>
+        </SectionDescription>
+        <BenefitsList initial="hidden" whileInView="visible" viewport={{ once: true }}>
+          <motion.li
+            initial={{ opacity: 0, x: -10 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            Leadership Opportunities
+          </motion.li>
+          <motion.li
+            initial={{ opacity: 0, x: -10 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            viewport={{ once: true }}
+          >
+            Certified Volunteer Hours
+          </motion.li>
+          <motion.li
+            initial={{ opacity: 0, x: -10 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            Community Engagement
+          </motion.li>
+          <motion.li
+            initial={{ opacity: 0, x: -10 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            viewport={{ once: true }}
+          >
+            Strengthen Your Resume
+          </motion.li>
+          <motion.li
+            initial={{ opacity: 0, x: -10 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            viewport={{ once: true }}
+          >
+            Lots of Fun & Support
+          </motion.li>
+        </BenefitsList>
+        <CTAButton
+          as={Link}
+          to="/about/chapters"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          viewport={{ once: true }}
+        >
+          Get Started
+        </CTAButton>
+      </TealSection>
 
       {/* Final CTA */}
-      <CTASection>
-        <h2>Ready to Make a Difference?</h2>
-        <p>
+      <WhiteSection
+        initial="hidden"
+        whileInView="visible"
+        variants={containerVariants}
+        viewport={{ once: true }}
+      >
+        <SectionTitle
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          Ready to Make a Difference?
+        </SectionTitle>
+        <SectionDescription
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          viewport={{ once: true }}
+        >
           Join Art4Hearts today and be part of a global movement spreading creativity, comfort, and joy to those who need it most.
-        </p>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSd98E0LsNhBywLdUhlIBmp6e88bjt81Fh1tV6Lz6FklT1LtEg/viewform" target="_blank" rel="noopener noreferrer">
+        </SectionDescription>
+        <CTAButton
+          as="a"
+          href="https://docs.google.com/forms/d/e/1FAIpQLSd98E0LsNhBywLdUhlIBmp6e88bjt81Fh1tV6Lz6FklT1LtEg/viewform"
+          target="_blank"
+          rel="noopener noreferrer"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          viewport={{ once: true }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
           Register as a Volunteer
-        </a>
-      </CTASection>
+        </CTAButton>
+      </WhiteSection>
     </>
   );
 };
