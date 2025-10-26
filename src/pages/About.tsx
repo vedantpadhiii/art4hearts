@@ -73,6 +73,18 @@ const ContentSection = styled.section`
   margin: 0 auto;
 `;
 
+const SectionTitle = styled.h2`
+  font-size: 2.5rem;
+  color: #000000;
+  margin-bottom: 2rem;
+  text-align: center;
+  font-weight: 600;
+  
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
+`;
+
 const MissionCard = styled(motion.div)`
   background: white;
   border-radius: 20px;
@@ -85,6 +97,11 @@ const MissionCard = styled(motion.div)`
     color: #000000;
     margin-bottom: 1.5rem;
     font-weight: 600;
+    text-align: center;
+    
+    @media (max-width: 768px) {
+      font-size: 2rem;
+    }
   }
   
   p {
@@ -137,6 +154,10 @@ const ImpactSection = styled.section`
     color: #000000;
     margin-bottom: 3rem;
     font-weight: 600;
+    
+    @media (max-width: 768px) {
+      font-size: 2rem;
+    }
   }
 `;
 
@@ -227,14 +248,7 @@ const About: React.FC = () => {
           </div>
         </MissionCard>
 
-        <h2 style={{ 
-          fontSize: '2.5rem', 
-          color: '#000000', 
-          marginBottom: '2rem', 
-          textAlign: 'center' 
-        }}>
-          Our Values
-        </h2>
+        <SectionTitle>Our Values</SectionTitle>
         
         <ValuesGrid>
           <ValueCard
