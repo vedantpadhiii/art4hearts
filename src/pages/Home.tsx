@@ -30,16 +30,22 @@ const itemVariants = {
 // Hero Section
 const HeroSection = styled.section`
   background: linear-gradient(135deg, #c6dddc 0%, #b3d4d2 100%);
-  padding: clamp(8rem, 15vh, 12rem) 2rem;
-  text-align: center;
+  padding: clamp(4rem, 8vh, 6rem) 2rem;
   position: relative;
   overflow: hidden;
-  min-height: 80vh;
+  min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
+  gap: 4rem;
   margin-top: ${({ theme }) => theme.spacing.header};
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    min-height: auto;
+    gap: 2rem;
+  }
 
   &::before {
     content: '';
@@ -74,36 +80,52 @@ const HeroSection = styled.section`
 `;
 
 const LogoContainer = styled(motion.div)`
-  margin-bottom: 2rem;
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  min-width: 300px;
   
   img {
-    max-width: 180px;
+    max-width: 100%;
+    width: 100%;
     height: auto;
-    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1));
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.15));
+  }
+
+  @media (max-width: 768px) {
+    justify-content: center;
+    max-width: 400px;
   }
 `;
 
 const HeroContent = styled(motion.div)`
   position: relative;
   z-index: 1;
-  max-width: 1000px;
-  margin: 0 auto;
+  flex: 1;
+  text-align: left;
+  max-width: 600px;
 
   h1 {
-    font-size: clamp(2.5rem, 7vw, 4.5rem);
+    font-size: clamp(2.5rem, 5vw, 4rem);
     color: #000000;
     font-weight: 800;
     margin-bottom: 1.5rem;
-    line-height: 1.1;
+    line-height: 1.15;
     letter-spacing: -0.02em;
   }
 
   p {
-    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    font-size: clamp(1rem, 2vw, 1.2rem);
     color: #000000;
     font-weight: 500;
-    line-height: 1.7;
+    line-height: 1.8;
     margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    text-align: center;
+    max-width: 100%;
   }
 `;
 
@@ -311,23 +333,10 @@ const Home: React.FC = () => {
       {/* Hero Section */}
       <HeroSection>
         <HeroContent
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, x: -40 }}
+          animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <LogoContainer
-            initial={{ scale: 0.5, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ 
-              duration: 0.8, 
-              delay: 0.1,
-              type: "spring",
-              stiffness: 120,
-              damping: 8
-            }}
-          >
-            <img src="/Art4Hearts logo.png" alt="Art4Hearts Logo" />
-          </LogoContainer>
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -343,6 +352,19 @@ const Home: React.FC = () => {
             Art4Hearts is a youth-led nonprofit creating beauty and comfort through personalized art, workshops, and handmade creations
           </motion.p>
         </HeroContent>
+        <LogoContainer
+          initial={{ scale: 0.5, opacity: 0, x: 40 }}
+          animate={{ scale: 1, opacity: 1, x: 0 }}
+          transition={{ 
+            duration: 0.8, 
+            delay: 0.1,
+            type: "spring",
+            stiffness: 120,
+            damping: 8
+          }}
+        >
+          <img src="/Art4Hearts logo.png" alt="Art4Hearts Logo" />
+        </LogoContainer>
       </HeroSection>
 
       {/* What is Art4Hearts */}
