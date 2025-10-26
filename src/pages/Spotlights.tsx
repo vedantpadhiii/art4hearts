@@ -1,30 +1,6 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import SpotlightCarousel from '../components/SpotlightCarousel';
-
-const spotlightPhotos = [
-  {
-    id: 1,
-    url: 'https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=800&h=600&fit=crop',
-  },
-  {
-    id: 2,
-    url: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop',
-  },
-  {
-    id: 3,
-    url: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&h=600&fit=crop',
-  },
-  {
-    id: 4,
-    url: 'https://images.unsplash.com/photo-1543269865-cbdf26ce6c5f?w=800&h=600&fit=crop',
-  },
-  {
-    id: 5,
-    url: 'https://images.unsplash.com/photo-1516321318423-f06f70d504f0?w=800&h=600&fit=crop',
-  },
-];
 
 const PageContainer = styled(motion.div)`
   min-height: 100vh;
@@ -264,10 +240,6 @@ const InstagramEmbed = styled(motion.div)`
   }
 `;
 
-const CarouselSection = styled.section`
-  width: 100%;
-`;
-
 const SpotlightsPage: React.FC = () => {
   useEffect(() => {
     // Load Instagram embed script
@@ -340,10 +312,6 @@ const SpotlightsPage: React.FC = () => {
             </InstagramEmbed>
           </InstagramGrid>
         </InstagramSection>
-
-        <CarouselSection>
-          <SpotlightCarousel photos={spotlightPhotos} />
-        </CarouselSection>
       </ContentContainer>
     </PageContainer>
   );

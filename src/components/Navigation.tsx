@@ -345,7 +345,7 @@ export const Navigation: React.FC = () => {
 
           <NavItem>
             <NavLink to="/spotlights" $isActive={location.pathname === '/spotlights'}>
-              SPOTLIGHT
+              GALLERY
             </NavLink>
           </NavItem>
 
