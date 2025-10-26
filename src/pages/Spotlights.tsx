@@ -366,8 +366,8 @@ const SpotlightsPage: React.FC = () => {
           <SectionTitle>Photos</SectionTitle>
           <PhotosGrid>
             <PhotoItem
-              src="/gallery/DSCF5420.JPG"
-              alt="Gallery photo 1"
+              src="/Photos/Cary, North Carolina/572171669_17855370453555521_6099618948601915028_n.jpeg"
+              alt="Cary North Carolina"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
@@ -375,8 +375,8 @@ const SpotlightsPage: React.FC = () => {
               whileHover={{ scale: 1.05 }}
             />
             <PhotoItem
-              src="/gallery/DSCF5430.JPG"
-              alt="Gallery photo 2"
+              src="/Photos/Elite Scholars Academy/Screenshot 2025-10-14 at 2.24.06 PM.png"
+              alt="Elite Scholars Academy 1"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
@@ -384,8 +384,8 @@ const SpotlightsPage: React.FC = () => {
               whileHover={{ scale: 1.05 }}
             />
             <PhotoItem
-              src="/gallery/DSCF5447.JPG"
-              alt="Gallery photo 3"
+              src="/Photos/Elite Scholars Academy/Screenshot 2025-10-14 at 2.24.14 PM.png"
+              alt="Elite Scholars Academy 2"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
@@ -393,8 +393,8 @@ const SpotlightsPage: React.FC = () => {
               whileHover={{ scale: 1.05 }}
             />
             <PhotoItem
-              src="/gallery/DSCF5452.JPG"
-              alt="Gallery photo 4"
+              src="/Photos/DH Conley High School/Screenshot 2025-10-24 at 5.54.23 PM.png"
+              alt="DH Conley High School 1"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
@@ -402,8 +402,8 @@ const SpotlightsPage: React.FC = () => {
               whileHover={{ scale: 1.05 }}
             />
             <PhotoItem
-              src="/gallery/IMG_3335.HEIC"
-              alt="Gallery photo 5"
+              src="/Photos/Etiwanda High School/Screenshot 2025-10-24 at 5.54.37 PM.png"
+              alt="Etiwanda High School"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
@@ -411,8 +411,8 @@ const SpotlightsPage: React.FC = () => {
               whileHover={{ scale: 1.05 }}
             />
             <PhotoItem
-              src="/gallery/IMG_8906.heic"
-              alt="Gallery photo 6"
+              src="/Photos/Isaac Bear Early College High School/Screenshot 2025-10-14 at 2.24.22 PM.png"
+              alt="Isaac Bear Early College High School"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.5 }}
@@ -420,8 +420,8 @@ const SpotlightsPage: React.FC = () => {
               whileHover={{ scale: 1.05 }}
             />
             <PhotoItem
-              src="/gallery/Screenshot 2025-07-05 at 2.47.41 PM.png"
-              alt="Gallery photo 7"
+              src="/Photos/McKeel Academy of Technology/Screenshot 2025-10-14 at 2.49.45 PM.png"
+              alt="McKeel Academy of Technology"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.6 }}
@@ -429,8 +429,8 @@ const SpotlightsPage: React.FC = () => {
               whileHover={{ scale: 1.05 }}
             />
             <PhotoItem
-              src="/gallery/processed-D10D25C8-6C7A-4597-B16B-1B28EC67801A.jpeg"
-              alt="Gallery photo 8"
+              src="/Photos/Saratoga High School/Screenshot 2025-10-14 at 2.49.57 PM.png"
+              alt="Saratoga High School"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.7 }}
