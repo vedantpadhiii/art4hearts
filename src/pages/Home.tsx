@@ -628,50 +628,37 @@ const FAQList = styled.ul`
   gap: 1.2rem;
 `;
 
-const FAQItem = styled(motion.li)`
+const FAQItem = styled(motion.li)<{ isActive?: boolean }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1.2rem 1.5rem;
-  background: #f9fafb;
+  background: ${props => props.isActive ? '#c6dddc' : '#f9fafb'};
   border-radius: 8px;
-  border-left: 4px solid #c6dddc;
+  border-left: 4px solid ${props => props.isActive ? '#5ba3a0' : '#c6dddc'};
   cursor: pointer;
   transition: all 0.3s ease;
 
   &:hover {
-    background: #eeeff0;
+    background: ${props => props.isActive ? '#c6dddc' : '#eeeff0'};
     transform: translateX(4px);
   }
 `;
 
-const FAQQuestion = styled.span`
+const FAQQuestion = styled.span<{ isActive?: boolean }>`
   font-size: 1rem;
-  color: #000000;
-  font-weight: 600;
+  color: ${props => props.isActive ? '#000000' : '#000000'};
+  font-weight: ${props => props.isActive ? '700' : '600'};
   flex: 1;
 `;
 
 const FAQToggle = styled.span<{ isOpen?: boolean }>`
   font-size: 1.2rem;
-  color: #c6dddc;
+  color: ${props => props.isOpen ? '#5ba3a0' : '#c6dddc'};
   font-weight: bold;
   margin-left: 1rem;
   transition: transform 0.3s ease;
   transform: ${props => props.isOpen ? 'rotate(180deg)' : 'rotate(0deg)'};
-`;
-
-const FAQAnswerContainer = styled(motion.div)`
-  overflow: hidden;
-`;
-
-const FAQAnswer = styled.p`
-  padding: 1rem 1.5rem 0 1.5rem;
-  color: #666666;
-  font-size: 0.95rem;
-  line-height: 1.8;
-  white-space: pre-wrap;
-  margin: 0;
 `;
 
 const FAQRight = styled(motion.div)`
@@ -682,13 +669,52 @@ const FAQRight = styled(motion.div)`
   background: linear-gradient(135deg, rgba(198, 221, 220, 0.1) 0%, rgba(179, 212, 210, 0.05) 100%);
   border-radius: 12px;
   border: 2px solid rgba(198, 221, 220, 0.2);
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 `;
 
-const FAQDescription = styled.p`
-  font-size: 1.05rem;
+const FAQAnswerDisplay = styled(motion.div)`
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+`;
+
+const FAQAnswerTitle = styled(motion.h3)`
+  font-size: 1.2rem;
   color: #000000;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.6;
+`;
+
+const FAQAnswerText = styled(motion.p)`
+  font-size: 1rem;
+  color: #333333;
   line-height: 1.8;
   margin: 0;
+  white-space: pre-wrap;
+`;
+
+const FAQPlaceholder = styled(motion.div)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #999999;
+  text-align: center;
+  gap: 1rem;
+
+  span {
+    font-size: 3rem;
+  }
+
+  p {
+    font-size: 1rem;
+    margin: 0;
+  }
 `;
 
 const FAQLink = styled(motion.a)`
@@ -1142,23 +1168,14 @@ const Home: React.FC = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  style={{ cursor: 'pointer' }}
-                  onClick={() => setExpandedFAQ(expandedFAQ === index ? null : index)}
                 >
-                  <FAQItem>
-                    <FAQQuestion>{faq.question}</FAQQuestion>
+                  <FAQItem
+                    isActive={expandedFAQ === index}
+                    onClick={() => setExpandedFAQ(expandedFAQ === index ? null : index)}
+                  >
+                    <FAQQuestion isActive={expandedFAQ === index}>{faq.question}</FAQQuestion>
                     <FAQToggle isOpen={expandedFAQ === index}>●</FAQToggle>
                   </FAQItem>
-                  {expandedFAQ === index && (
-                    <FAQAnswerContainer
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <FAQAnswer>{faq.answer}</FAQAnswer>
-                    </FAQAnswerContainer>
-                  )}
                 </motion.div>
               ))}
             </FAQList>
@@ -1170,17 +1187,56 @@ const Home: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
             viewport={{ once: true }}
           >
-            <FAQDescription>
-              Have more questions? Check out our comprehensive FAQ section to learn more about Art4Hearts programs, volunteering opportunities, and how we can help your community.
-            </FAQDescription>
-            <FAQLink
-              as={Link}
-              to="/faqs"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+            {expandedFAQ !== null ? (
+              <FAQAnswerDisplay
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.3 }}
+              >
+                <FAQAnswerTitle
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.4 }}
+                >
+                  {homepageFAQs[expandedFAQ].question}
+                </FAQAnswerTitle>
+                <FAQAnswerText
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5, delay: 0.1 }}
+                >
+                  {homepageFAQs[expandedFAQ].answer}
+                </FAQAnswerText>
+              </FAQAnswerDisplay>
+            ) : (
+              <FAQPlaceholder
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <span>❓</span>
+                <p>Click a question to see the answer</p>
+              </FAQPlaceholder>
+            )}
+            
+            <motion.div
+              style={{ marginTop: 'auto', paddingTop: '1.5rem' }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              viewport={{ once: true }}
             >
-              View All FAQs →
-            </FAQLink>
+              <FAQLink
+                as={Link}
+                to="/faqs"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                View All FAQs →
+              </FAQLink>
+            </motion.div>
           </FAQRight>
         </FAQContainer>
       </WhiteSection>
