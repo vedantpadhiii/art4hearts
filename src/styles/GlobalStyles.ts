@@ -28,7 +28,7 @@ const GlobalStyles = createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
   }
 
-  p, span, li, td, th, label, input, textarea, button {
+  p, span, li, td, th, label, input, textarea, button, a, div, article, section, nav {
     font-family: ${props => props.theme.fonts.body};
   }
 
