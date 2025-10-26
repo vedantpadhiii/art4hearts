@@ -266,7 +266,7 @@ const PhotosGrid = styled.div`
   }
 `;
 
-const PhotoItem = styled(motion.img)`
+const PhotoItemImg = styled.img`
   width: 100%;
   height: 250px;
   object-fit: cover;
@@ -288,6 +288,28 @@ const PhotoItem = styled(motion.img)`
     height: 150px;
   }
 `;
+
+interface PhotoItemProps {
+  src: string;
+  alt: string;
+  initial?: any;
+  whileInView?: any;
+  transition?: any;
+  viewport?: any;
+  whileHover?: any;
+}
+
+const PhotoItem: React.FC<PhotoItemProps> = ({ src, alt, initial, whileInView, transition, viewport, whileHover }) => (
+  <motion.div
+    initial={initial}
+    whileInView={whileInView}
+    transition={transition}
+    viewport={viewport}
+    whileHover={whileHover}
+  >
+    <PhotoItemImg src={src} alt={alt} />
+  </motion.div>
+);
 
 const SpotlightsPage: React.FC = () => {
   useEffect(() => {
