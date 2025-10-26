@@ -41,12 +41,7 @@ const HeroOverlay = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0.9) 0%,
-    rgba(255, 255, 255, 0.7) 50%,
-    rgba(255, 255, 255, 0.9) 100%
-  );
+  background: transparent;
 `;
 
 const HeroContent = styled(motion.div)`
@@ -298,10 +293,7 @@ const Team: React.FC = () => {
     { name: 'Sophie Qi', image: '0151.jpg', role: 'Social Media Team', bio: 'Sophie creates engaging content that connects us with our community.' },
     { name: 'Sophie Qin', image: '0724.jpg', role: 'Secretary', bio: 'Sophie ensures our operations run smoothly and communications are clear.' },
     { name: 'Kathlyn Zhang', image: '0541.jpg', role: 'Social Media Team', bio: 'Kathlyn shares our impact and stories across social platforms.' },
-    { name: 'Soumya Katkere', image: '', role: 'Treasurer', bio: 'Soumya manages our finances and ensures resources support our mission.' },
-    { name: 'Vedant Padhi', image: '0709.jpg', role: 'Website Manager', bio: 'Vedant builds our digital presence and keeps our community connected online.', linkedin: 'https://www.linkedin.com/in/vedant-padhi-51621a320' },
-    { name: 'Arian Loftizadeh', image: '', role: 'Outreach Team', bio: 'Arian connects with communities and brings Art4Hearts to new audiences.' },
-    { name: 'Carter Wilson', image: '', role: 'Outreach Team', bio: 'Carter spreads our message and builds lasting relationships with partners.' }
+    { name: 'Vedant Padhi', role: 'Website Manager', bio: 'Vedant builds our digital presence and keeps our community connected online.', linkedin: 'https://www.linkedin.com/in/vedant-padhi-51621a320' }
   ];
 
   const containerVariants = {
@@ -362,13 +354,11 @@ const Team: React.FC = () => {
               key={index}
               variants={itemVariants}
             >
-              <ImagePlaceholder>
-                {member.image ? (
+              {member.image && (
+                <ImagePlaceholder>
                   <img src={`/team/${member.image}`} alt={member.name} />
-                ) : (
-                  <PlaceholderText>Image</PlaceholderText>
-                )}
-              </ImagePlaceholder>
+                </ImagePlaceholder>
+              )}
               <MemberName>{member.name}</MemberName>
               <MemberRole>{member.role}</MemberRole>
               <MemberBio>{member.bio}</MemberBio>
