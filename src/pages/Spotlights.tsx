@@ -393,11 +393,20 @@ const SpotlightsPage: React.FC = () => {
               whileHover={{ scale: 1.05 }}
             />
             <PhotoItem
+              src="/Photos/DH Conley High School/Screenshot 2025-10-14 at 2.53.15 PM.png"
+              alt="DH Conley High School"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.15 }}
+              viewport={{ once: true }}
+              whileHover={{ scale: 1.05 }}
+            />
+            <PhotoItem
               src="/Photos/Elite Scholars Academy/Screenshot 2025-10-14 at 2.24.06 PM.png"
               alt="Elite Scholars Academy 1"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.15 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
               viewport={{ once: true }}
               whileHover={{ scale: 1.05 }}
             />
@@ -406,7 +415,7 @@ const SpotlightsPage: React.FC = () => {
               alt="Elite Scholars Academy 2"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
+              transition={{ duration: 0.5, delay: 0.25 }}
               viewport={{ once: true }}
               whileHover={{ scale: 1.05 }}
             />
@@ -415,7 +424,7 @@ const SpotlightsPage: React.FC = () => {
               alt="Elite Scholars Academy 3"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.25 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
               viewport={{ once: true }}
               whileHover={{ scale: 1.05 }}
             />
@@ -424,7 +433,7 @@ const SpotlightsPage: React.FC = () => {
               alt="Elite Scholars Academy 4"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
+              transition={{ duration: 0.5, delay: 0.35 }}
               viewport={{ once: true }}
               whileHover={{ scale: 1.05 }}
             />
@@ -433,22 +442,13 @@ const SpotlightsPage: React.FC = () => {
               alt="Elite Scholars Academy 5"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.35 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
               viewport={{ once: true }}
               whileHover={{ scale: 1.05 }}
             />
             <PhotoItem
               src="/Photos/Elite Scholars Academy/Screenshot 2025-10-14 at 2.50.04 PM.png"
               alt="Elite Scholars Academy 6"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
-            />
-            <PhotoItem
-              src="/Photos/DH Conley High School/Screenshot 2025-10-14 at 2.53.15 PM.png"
-              alt="DH Conley High School"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.45 }}
@@ -636,7 +636,7 @@ const SpotlightsPage: React.FC = () => {
               whileHover={{ scale: 1.05 }}
             />
             <PhotoItem
-              src="/Photos/Saratoga High School/IMG_8906.heic"
+              src="/Photos/Saratoga High School/Resized_20250321_165909.JPEG"
               alt="Saratoga High School 1"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -663,11 +663,83 @@ const SpotlightsPage: React.FC = () => {
               whileHover={{ scale: 1.05 }}
             />
             <PhotoItem
-              src="/Photos/Yangon, Myanmar/Screenshot 2025-07-05 at 2.47.41 PM.png"
-              alt="Yangon Myanmar"
+              src="/Photos/Yangon, Myanmar/DSCF5409.JPG"
+              alt="Yangon Myanmar 1"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 1.65 }}
+              viewport={{ once: true }}
+              whileHover={{ scale: 1.05 }}
+            />
+            <PhotoItem
+              src="/Photos/Yangon, Myanmar/DSCF5420.JPG"
+              alt="Yangon Myanmar 2"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 1.7 }}
+              viewport={{ once: true }}
+              whileHover={{ scale: 1.05 }}
+            />
+            <PhotoItem
+              src="/Photos/Yangon, Myanmar/DSCF5430.JPG"
+              alt="Yangon Myanmar 3"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 1.75 }}
+              viewport={{ once: true }}
+              whileHover={{ scale: 1.05 }}
+            />
+            <PhotoItem
+              src="/Photos/Yangon, Myanmar/DSCF5447.JPG"
+              alt="Yangon Myanmar 4"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 1.8 }}
+              viewport={{ once: true }}
+              whileHover={{ scale: 1.05 }}
+            />
+            <PhotoItem
+              src="/Photos/Yangon, Myanmar/DSCF5451.JPG"
+              alt="Yangon Myanmar 5"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 1.85 }}
+              viewport={{ once: true }}
+              whileHover={{ scale: 1.05 }}
+            />
+            <PhotoItem
+              src="/Photos/Yangon, Myanmar/DSCF5452.JPG"
+              alt="Yangon Myanmar 6"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 1.9 }}
+              viewport={{ once: true }}
+              whileHover={{ scale: 1.05 }}
+            />
+            <PhotoItem
+              src="/Photos/Yangon, Myanmar/DSCF5455.JPG"
+              alt="Yangon Myanmar 7"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 1.95 }}
+              viewport={{ once: true }}
+              whileHover={{ scale: 1.05 }}
+            />
+            <PhotoItem
+              src="/Photos/Yangon, Myanmar/DSCF5465.JPG"
+              alt="Yangon Myanmar 8"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 2 }}
+              viewport={{ once: true }}
+              whileHover={{ scale: 1.05 }}
+            />
+            <PhotoItem
+              src="/Photos/Yangon, Myanmar/DSCF5468.JPG"
+              alt="Yangon Myanmar 9"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 2.05 }}
               viewport={{ once: true }}
               whileHover={{ scale: 1.05 }}
             />
