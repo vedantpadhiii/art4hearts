@@ -32,7 +32,7 @@ const HeroSection = styled.section`
   background: linear-gradient(135deg, #c6dddc 0%, #b3d4d2 100%);
   padding: clamp(4rem, 8vh, 5rem) 2rem;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   min-height: 85vh;
   display: flex;
   flex-direction: row;
@@ -89,7 +89,7 @@ const LogoContainer = styled(motion.div)`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  min-width: 250px;
+  min-width: 0;
   max-width: 450px;
   
   img {
@@ -110,7 +110,10 @@ const HeroContent = styled(motion.div)`
   z-index: 1;
   flex: 1;
   text-align: left;
-  max-width: 550px;
+  max-width: 600px;
+  min-width: 0;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 
   h1 {
     font-size: clamp(2.8rem, 5.5vw, 4.2rem);
@@ -119,6 +122,8 @@ const HeroContent = styled(motion.div)`
     margin-bottom: 1.2rem;
     line-height: 1.15;
     letter-spacing: -0.02em;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
 
   p {
@@ -127,6 +132,8 @@ const HeroContent = styled(motion.div)`
     font-weight: 500;
     line-height: 1.8;
     margin-bottom: 2rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
 
   @media (max-width: 768px) {
@@ -139,6 +146,7 @@ const HeroButtonGroup = styled(motion.div)`
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
+  align-items: center;
 
   @media (max-width: 768px) {
     justify-content: center;
@@ -146,11 +154,13 @@ const HeroButtonGroup = styled(motion.div)`
 `;
 
 const HeroButton = styled.a<{ primary?: boolean }>`
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 0.9rem 2rem;
   border-radius: 8px;
   font-weight: 600;
-  font-size: 1.1rem;
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
   text-decoration: none;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -158,6 +168,8 @@ const HeroButton = styled.a<{ primary?: boolean }>`
   background: #000000;
   color: white;
   border-color: #000000;
+  white-space: nowrap;
+  flex-shrink: 0;
 
   &:hover {
     background: #333333;
