@@ -568,6 +568,111 @@ const Subsection = styled(motion.div)`
   padding: 2rem;
 `;
 
+// FAQ Section
+const FAQContainer = styled(motion.div)`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  max-width: 1100px;
+  margin: 4rem auto 0;
+  padding: 3rem 2rem;
+  align-items: center;
+
+  @media (max-width: 968px) {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+`;
+
+const FAQLeft = styled(motion.div)`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+`;
+
+const FAQIcon = styled.div`
+  font-size: 3rem;
+  margin-bottom: 1rem;
+`;
+
+const FAQList = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+`;
+
+const FAQItem = styled(motion.li)`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 1.5rem;
+  background: #f9fafb;
+  border-radius: 8px;
+  border-left: 4px solid #c6dddc;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: #eeeff0;
+    transform: translateX(4px);
+  }
+`;
+
+const FAQQuestion = styled.span`
+  font-size: 1rem;
+  color: #000000;
+  font-weight: 600;
+  flex: 1;
+`;
+
+const FAQToggle = styled.span`
+  font-size: 1.2rem;
+  color: #c6dddc;
+  font-weight: bold;
+  margin-left: 1rem;
+`;
+
+const FAQRight = styled(motion.div)`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
+  background: linear-gradient(135deg, rgba(198, 221, 220, 0.1) 0%, rgba(179, 212, 210, 0.05) 100%);
+  border-radius: 12px;
+  border: 2px solid rgba(198, 221, 220, 0.2);
+`;
+
+const FAQDescription = styled.p`
+  font-size: 1.05rem;
+  color: #000000;
+  line-height: 1.8;
+  margin: 0;
+`;
+
+const FAQLink = styled(motion.a)`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.9rem 2rem;
+  background: #000000;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  width: fit-content;
+
+  &:hover {
+    background: #333333;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  }
+`;
+
 const Home: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'initiatives' | 'chapters' | 'volunteering'>('initiatives');
   const { targetRef: statsRef, isVisible: statsVisible, hasAnimated: statsAnimated } = useIntersectionObserver({
@@ -964,6 +1069,81 @@ const Home: React.FC = () => {
             <div className="label">Kits & Bracelets</div>
           </StatCard>
         </StatGrid>
+      </WhiteSection>
+
+      {/* FAQ Section */}
+      <WhiteSection
+        initial="hidden"
+        whileInView="visible"
+        variants={containerVariants}
+        viewport={{ once: true }}
+      >
+        <SectionTitle
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          Frequently Asked Questions
+        </SectionTitle>
+        <FAQContainer
+          initial="hidden"
+          whileInView="visible"
+          variants={containerVariants}
+          viewport={{ once: true }}
+        >
+          <FAQLeft>
+            <FAQIcon>🎨</FAQIcon>
+            <FAQList>
+              <FAQItem
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+              >
+                <FAQQuestion>What age groups do you teach?</FAQQuestion>
+                <FAQToggle>●</FAQToggle>
+              </FAQItem>
+              <FAQItem
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                viewport={{ once: true }}
+              >
+                <FAQQuestion>What is project based learning?</FAQQuestion>
+                <FAQToggle>●</FAQToggle>
+              </FAQItem>
+              <FAQItem
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+              >
+                <FAQQuestion>How long is a lesson?</FAQQuestion>
+                <FAQToggle>●</FAQToggle>
+              </FAQItem>
+            </FAQList>
+          </FAQLeft>
+
+          <FAQRight
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            viewport={{ once: true }}
+          >
+            <FAQDescription>
+              Have more questions? Check out our comprehensive FAQ section to learn more about Art4Hearts programs, volunteering opportunities, and how we can help your community.
+            </FAQDescription>
+            <FAQLink
+              as={Link}
+              to="/faqs"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              View All FAQs →
+            </FAQLink>
+          </FAQRight>
+        </FAQContainer>
       </WhiteSection>
 
       {/* Final CTA */}
