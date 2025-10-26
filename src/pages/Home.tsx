@@ -1,476 +1,450 @@
 import React from 'react';
 import styled from 'styled-components';
-import MissionStatement from '../components/MissionStatement';
-import { useScroll } from '../context/ScrollContext';
-import { float, gradientFlow, gradientMove, pulse, rotate } from '../styles/animations';
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import useCountUp from '../hooks/useCountUp';
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 
-interface StyledSectionProps {
-  $isActive: boolean;
-}
-
-const HomeContainer = styled.div`
+// Hero Section
+const HeroSection = styled.section`
+  background: #c6dddc;
+  padding: clamp(6rem, 10vh, 8rem) 2rem;
+  text-align: center;
   position: relative;
-  width: 100%;
-  background-color: ${({ theme }) => theme.colors.background.dark};
-  overflow-x: hidden;
-  scroll-snap-type: y mandatory;
-  height: 100vh;
-  overflow-y: auto;
-
-  .sections-container {
-    position: relative;
-    width: 100%;
-  }
-
-  &::-webkit-scrollbar {
-    width: 8px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: ${({ theme }) => theme.colors.background.dark};
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: ${({ theme }) => `${theme.colors.primary}40`};
-    border-radius: 20px;
-    border: 2px solid ${({ theme }) => theme.colors.background.dark};
-    transition: background-color 0.3s ease;
-  }
-
-  &::-webkit-scrollbar-thumb:hover {
-    background-color: ${({ theme }) => `${theme.colors.primary}80`};
-  }
-`;
-
-const Section = styled.section<StyledSectionProps>`
-  min-height: 100vh;
-  width: 100%;
+  overflow: hidden;
+  min-height: 70vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: relative;
-  padding: ${({ theme }) => `${theme.spacing.xxlarge} ${theme.spacing.large}`};
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-  background-color: ${props => props.$isActive ? '#fff8e1' : 'white'};
-`;
+  margin-top: ${({ theme }) => theme.spacing.header};
 
-const HeroSection = styled(Section)`
-  height: 100vh;
-  position: relative;
-  margin: 0;
-  padding: 0;
-  z-index: 1;
-`;
-
-const BannerContainer = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  
   &::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: ${({ theme }) => `linear-gradient(
-      135deg,
-      ${theme.colors.primaryLight} 0%,
-      ${theme.colors.secondaryLight} 50%,
-      ${theme.colors.primaryLight} 100%
-    )`};
-    opacity: 0.3;
-    animation: ${gradientMove} 15s ease infinite;
+    top: -50%;
+    right: -20%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: 0;
   }
-`;
 
-const Banner = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('/Art4Hearts Banner.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -10%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: 0;
+  }
 `;
 
 const HeroContent = styled.div`
-  position: absolute;
-  bottom: 5%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 90%;
-  max-width: 800px;
-  text-align: center;
-  padding: 2rem;
-  background: rgba(255, 250, 250, 0.95);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  border-radius: ${({ theme }) => theme.borderRadii.large};
-  transition: all 0.4s ease;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  
-  &:hover {
-    transform: translateX(-50%) translateY(-10px);
-    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15);
-  }
-`;
-
-const HeroSubtitle = styled.p`
-  font-size: clamp(1.2rem, 3vw, 1.8rem);
-  color: ${({ theme }) => theme.colors.text.dark};
-  text-align: center;
-  margin: 0;
-  line-height: 1.6;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-`;
-
-const StatSectionWrapper: React.FC<{
-  children: (props: {
-    targetRef: React.RefObject<HTMLDivElement>;
-    isVisible: boolean;
-    hasAnimated: boolean;
-  }) => React.ReactNode;
-}> = ({ children }) => {
-  const { targetRef, isVisible, hasAnimated } = useIntersectionObserver({
-    threshold: 0.3
-  });
-  return <>{children({ targetRef, isVisible, hasAnimated })}</>;
-};
-
-const StatSection = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: clamp(1.5rem, 4vw, 2.5rem);
-  padding: clamp(3rem, 6vw, 5rem);
-  width: 100%;
-  max-width: 1400px;
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
   margin: 0 auto;
-`;
 
-const StatCard = styled.div`
-  padding: ${({ theme }) => theme.spacing.xlarge};
-  background: rgba(255, 255, 255, 0.9);
-  text-align: center;
-  border-radius: ${({ theme }) => theme.borderRadii.large};
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 16px rgba(100, 150, 255, 0.12);
-  backdrop-filter: blur(8px);
-  
-  &:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 8px 24px rgba(100, 150, 255, 0.2);
-    background: rgba(255, 255, 255, 0.95);
-  }
-
-  .number {
-    font-size: clamp(3.5rem, 6vw, 4.5rem);
-    font-weight: 800;
-    color: #1e40af; /* Darker blue for better contrast */
-    margin-bottom: 1.25rem;
-    min-height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    line-height: 1;
+  h1 {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    color: #1a365d;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
     letter-spacing: -0.02em;
   }
-  
-  .label {
-    font-size: clamp(0.875rem, 2vw, 1rem);
-    color: #1e293b; /* Darker slate for better contrast */
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    line-height: 1.4;
-  }
-`;
-
-const MissionSectionContent = styled.div`
-  padding: clamp(4rem, 10vh, 6rem) 2rem;
-  background: #fff8e1;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  position: relative;
-  min-height: 100vh;
-  
-  h2 {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    color: #333;
-    font-weight: 700;
-    margin-bottom: 2rem;
-    position: relative;
-  }
-  
-  p {
-    font-size: clamp(1rem, 2vw, 1.2rem);
-    color: #333;
-    max-width: 900px;
-    line-height: 1.8;
-    margin: 0 auto;
-    opacity: 0.85;
-  }
-`;
-
-const InitiativesGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  margin: 0 auto 3rem;
-  padding: 0 1rem;
-`;
-
-const InitiativeCard = styled.div`
-  background: rgba(255, 255, 255, 0.9);
-  padding: 2rem;
-  border-radius: 16px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-  transition: all 0.3s ease;
-  text-align: left;
-
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-  }
-
-  h4 {
-    font-size: 1.5rem;
-    color: #2563eb;
-    margin-bottom: 1rem;
-    font-weight: 600;
-  }
 
   p {
-    font-size: 1.1rem;
-    color: #1e293b;
+    font-size: clamp(1.1rem, 2vw, 1.3rem);
+    color: #4a9894;
+    font-weight: 500;
     line-height: 1.6;
     margin: 0;
   }
 `;
 
-const RegisterSection = styled(Section)`
+// About Section
+const AboutSection = styled.section`
+  padding: clamp(4rem, 8vh, 6rem) 2rem;
+  background: white;
   text-align: center;
-  
+
   h2 {
-    font-size: clamp(2rem, 5vw, 3rem);
-    color: ${({ theme }) => theme.colors.text.dark};
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    color: #1a365d;
+    font-weight: 700;
     margin-bottom: 2rem;
-    
+    position: relative;
+    display: inline-block;
+
     &::after {
       content: '';
-      display: block;
-      width: 100px;
-      height: 3px;
-      margin: 1rem auto;
-      background: ${({ theme }) => `linear-gradient(90deg, 
-        ${theme.colors.primary}, 
-        ${theme.colors.secondary}
-      )`};
-      animation: ${gradientFlow} 3s linear infinite;
+      position: absolute;
+      bottom: -1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 4px;
+      background: linear-gradient(90deg, #5ba3a0, #4a9894);
+      border-radius: 2px;
+    }
+  }
+
+  p {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: #1e293b;
+    max-width: 900px;
+    margin: 3rem auto 0;
+    line-height: 1.8;
+  }
+`;
+
+// Get Involved Section
+const GetInvolvedSection = styled.section`
+  padding: clamp(4rem, 8vh, 6rem) 2rem;
+  background: #f9fafb;
+
+  h2 {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    color: #1a365d;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+`;
+
+const CardGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+`;
+
+const Card = styled(motion.div)`
+  background: white;
+  padding: 2.5rem 2rem;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 32px rgba(198, 221, 220, 0.2);
+    border-color: #c6dddc;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    color: #1a365d;
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+
+  p {
+    font-size: 1rem;
+    color: #4a9894;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  a {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    background: #c6dddc;
+    color: #1a365d;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: #5ba3a0;
+      color: white;
     }
   }
 `;
 
-const ButtonContainer = styled.div`
-  margin-top: 3rem;
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-`;
+// Stats Section
+const StatsSection = styled.section`
+  padding: clamp(4rem, 8vh, 6rem) 2rem;
+  background: white;
 
-const RegisterButton = styled.a`
-  display: inline-block;
-  padding: 1.2rem 3rem;
-  background: ${({ theme }) => theme.colors.primary};
-  color: ${({ theme }) => theme.colors.background.light};
-  text-decoration: none;
-  border-radius: ${({ theme }) => theme.borderRadii.full};
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  transition: all 0.3s ease;
-  
-  &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px ${({ theme }) => `${theme.colors.shadow}40`};
+  h2 {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    color: #1a365d;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 4rem;
   }
 `;
 
-const FormEmbed = styled.div`
-  margin-top: 4rem;
-  width: 100%;
-  max-width: 900px;
-  border-radius: ${({ theme }) => theme.borderRadii.large};
-  overflow: hidden;
-  background: ${({ theme }) => theme.colors.background.light};
-  box-shadow: 0 10px 30px ${({ theme }) => `${theme.colors.shadow}20`};
-  
-  iframe {
-    width: 100%;
-    height: 800px;
-    border: none;
+const StatGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+`;
+
+const StatCard = styled.div`
+  background: #c6dddc;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+
+  .number {
+    font-size: clamp(3rem, 5vw, 4rem);
+    font-weight: 800;
+    color: #1a365d;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .label {
+    font-size: 1rem;
+    color: #1a365d;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+`;
+
+// Start a Chapter Section
+const ChapterSection = styled.section`
+  padding: clamp(4rem, 8vh, 6rem) 2rem;
+  background: #c6dddc;
+
+  h2 {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    color: #1a365d;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .benefits {
+    max-width: 800px;
+    margin: 2rem auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    li {
+      font-size: 1.1rem;
+      color: #1a365d;
+      font-weight: 500;
+      text-align: left;
+    }
+  }
+
+  a {
+    display: inline-block;
+    margin-top: 2rem;
+    padding: 1rem 2.5rem;
+    background: white;
+    color: #1a365d;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: #1a365d;
+      color: white;
+    }
+  }
+`;
+
+// CTA Section
+const CTASection = styled.section`
+  padding: clamp(4rem, 8vh, 6rem) 2rem;
+  background: white;
+  text-align: center;
+
+  h2 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: #1a365d;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+  }
+
+  p {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: #4a9894;
+    max-width: 800px;
+    margin: 0 auto 2rem;
+    line-height: 1.8;
+  }
+
+  a {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: #c6dddc;
+    color: #1a365d;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: #5ba3a0;
+      color: white;
+    }
   }
 `;
 
 const Home: React.FC = () => {
-  const { currentSection, containerRef } = useScroll();
+  const { targetRef: statsRef, isVisible: statsVisible, hasAnimated: statsAnimated } = useIntersectionObserver({
+    threshold: 0.3
+  });
 
   return (
-    <HomeContainer ref={containerRef}>
-      <div className="sections-container">
-        <HeroSection $isActive={currentSection === 0}>
-          <BannerContainer>
-            <Banner role="img" aria-label="Art4Hearts Banner" />
-            <HeroContent>
-              <HeroSubtitle>
-                Art4Hearts is a 501(3)c non-profit based in the Bay Area aiming to spread love through art. 
-                Join our creative journey!
-              </HeroSubtitle>
-            </HeroContent>
-          </BannerContainer>
-        </HeroSection>
+    <>
+      {/* Hero Section */}
+      <HeroSection>
+        <HeroContent>
+          <h1>Spreading love through art</h1>
+          <p>Art4Hearts is a youth-led nonprofit creating beauty and comfort through personalized art, workshops, and handmade creations</p>
+        </HeroContent>
+      </HeroSection>
 
-        <Section $isActive={currentSection === 1} style={{backgroundColor: '#fff8e1'}}>
-          <h2 style={{
-            fontSize: '4.5rem',
-            marginBottom: '2.5rem',
-            color: '#333',
-            fontWeight: '700',
-            letterSpacing: '0.02em'
-          }}>
-            OUR MISSION
-          </h2>
-          <p style={{
-            fontSize: '1.2rem',
-            maxWidth: '900px',
-            lineHeight: '1.8',
-            color: '#333',
-            padding: '0 2rem'
-          }}>
-            Art4Hearts is a youth-led nonprofit spreading creativity and comfort through crafting personalized art therapy kits, 
-            leading art workshops, and handmaking bracelets with uplifting messages to brighten the lives of communities we serve.
-          </p>
-        </Section>
+      {/* What is Art4Hearts */}
+      <AboutSection>
+        <h2>What is Art4Hearts?</h2>
+        <p>
+          Art4Hearts is a 501(c)(3) nonprofit based in the Bay Area dedicated to spreading creativity and comfort through handcrafted art therapy kits, 
+          engaging art workshops, and personalized bracelets with uplifting messages. We believe everyone deserves to experience the healing power of art.
+        </p>
+      </AboutSection>
 
-        <Section $isActive={currentSection === 2} style={{ backgroundColor: '#f0f7ff' }}>
-          <StatSectionWrapper>
-            {({ targetRef, isVisible, hasAnimated }) => (
-              <StatSection ref={targetRef} style={{ backgroundColor: 'transparent' }}>
-                <StatCard>
-                  <div className="number">
-                    {useCountUp({ 
-                      end: 4500, 
-                      isVisible: isVisible || hasAnimated,
-                      duration: 2500
-                    }).toLocaleString()}+
-                  </div>
-                  <div className="label">VOLUNTEERS WORLDWIDE</div>
-                </StatCard>
-                <StatCard>
-                  <div className="number">
-                    {useCountUp({ 
-                      end: 150, 
-                      isVisible: isVisible || hasAnimated,
-                      duration: 2000,
-                      delay: 200
-                    }).toLocaleString()}+
-                  </div>
-                  <div className="label">ACTIVE CHAPTERS</div>
-                </StatCard>
-                <StatCard>
-                  <div className="number">
-                    {useCountUp({ 
-                      end: 50, 
-                      isVisible: isVisible || hasAnimated,
-                      duration: 1500,
-                      delay: 400
-                    }).toLocaleString()}+
-                  </div>
-                  <div className="label">COUNTRIES REACHED</div>
-                </StatCard>
-                <StatCard>
-                  <div className="number">
-                    {useCountUp({ 
-                      end: 1000, 
-                      isVisible: isVisible || hasAnimated,
-                      duration: 2000,
-                      delay: 600
-                    }).toLocaleString()}+
-                  </div>
-                  <div className="label">ART KITS & BRACELETS</div>
-                </StatCard>
-              </StatSection>
-            )}
-          </StatSectionWrapper>
-        </Section>
+      {/* Get Involved */}
+      <GetInvolvedSection>
+        <h2>Get Involved</h2>
+        <CardGrid>
+          <Card
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+          >
+            <h3>🎨 Volunteer</h3>
+            <p>Earn volunteer hours and make a meaningful impact in your community by creating art with us.</p>
+            <Link to="/get-involved">Learn More</Link>
+          </Card>
 
-        <RegisterSection $isActive={currentSection === 3}>
-          <h2>Join Our Mission!</h2>
-          <p>
-            Be part of a global movement that brings joy and creativity to those who need it most. 
-            Whether you're an artist, student, or someone who wants to make a difference, 
-            there's a place for you in the Art4Hearts family.
-          </p>
+          <Card
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            viewport={{ once: true }}
+          >
+            <h3>🏘️ Start a Chapter</h3>
+            <p>Lead a local Art4Hearts chapter and build a community of passionate artists and creators in your area.</p>
+            <Link to="/about/chapters">Learn More</Link>
+          </Card>
 
-          <div style={{ marginTop: '3rem', maxWidth: '800px' }}>
-            <h3 style={{ 
-              fontSize: '2rem', 
-              marginBottom: '2rem', 
-              color: '#1a365d',
-              fontWeight: '600' 
-            }}>
-              Current Initiatives
-            </h3>
-            <InitiativesGrid>
-              <InitiativeCard>
-                <h4>Art Therapy Kits</h4>
-                <p>Through art therapy, we hope to spread warmth and bring comfort to the recipients of the kit. Recipients can engage with a creative outlet.</p>
-              </InitiativeCard>
-              <InitiativeCard>
-                <h4>Bracelets</h4>
-                <p>Make handmade bracelets for someone in need of care. These bracelets can provide comfort and encouragement to those who are socially invisible.</p>
-              </InitiativeCard>
-            </InitiativesGrid>
-          </div>
+          <Card
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <h3>📚 Learn & Support</h3>
+            <p>Discover our projects, read stories from recipients, and stay updated on our latest initiatives.</p>
+            <Link to="/spotlights">Learn More</Link>
+          </Card>
+        </CardGrid>
+      </GetInvolvedSection>
 
-          <ButtonContainer>
-            <RegisterButton 
-              href="https://docs.google.com/forms/d/e/1FAIpQLSd98E0LsNhBywLdUhlIBmp6e88bjt81Fh1tV6Lz6FklT1LtEg/viewform" 
-              target="_blank" 
-              rel="noopener noreferrer"
-            >
-              Register as a Volunteer
-            </RegisterButton>
-          </ButtonContainer>
-          <FormEmbed>
-            <iframe
-              src="https://docs.google.com/forms/d/e/1FAIpQLSd98E0LsNhBywLdUhlIBmp6e88bjt81Fh1tV6Lz6FklT1LtEg/viewform?embedded=true"
-              title="Volunteer Registration Form"
-              loading="lazy"
-            />
-          </FormEmbed>
-        </RegisterSection>
-      </div>
-    </HomeContainer>
+      {/* Stats Section */}
+      <StatsSection>
+        <h2>Our Impact</h2>
+        <StatGrid ref={statsRef}>
+          <StatCard>
+            <div className="number">
+              {useCountUp({
+                end: 4500,
+                isVisible: statsVisible || statsAnimated,
+                duration: 2500
+              }).toLocaleString()}+
+            </div>
+            <div className="label">Volunteers Worldwide</div>
+          </StatCard>
+          <StatCard>
+            <div className="number">
+              {useCountUp({
+                end: 150,
+                isVisible: statsVisible || statsAnimated,
+                duration: 2000,
+                delay: 200
+              }).toLocaleString()}+
+            </div>
+            <div className="label">Active Chapters</div>
+          </StatCard>
+          <StatCard>
+            <div className="number">
+              {useCountUp({
+                end: 50,
+                isVisible: statsVisible || statsAnimated,
+                duration: 1500,
+                delay: 400
+              }).toLocaleString()}+
+            </div>
+            <div className="label">Countries Reached</div>
+          </StatCard>
+          <StatCard>
+            <div className="number">
+              {useCountUp({
+                end: 1000,
+                isVisible: statsVisible || statsAnimated,
+                duration: 2000,
+                delay: 600
+              }).toLocaleString()}+
+            </div>
+            <div className="label">Kits & Bracelets</div>
+          </StatCard>
+        </StatGrid>
+      </StatsSection>
+
+      {/* Start a Chapter */}
+      <ChapterSection>
+        <h2>Start a Chapter</h2>
+        <p style={{ fontSize: '1.1rem', color: '#1a365d', maxWidth: '800px', margin: '0 auto 1rem' }}>
+          Join our mission to bring art and creativity to communities worldwide. Here's what you get:
+        </p>
+        <ul className="benefits">
+          <li>💰 Leadership Opportunities</li>
+          <li>📜 Certified Volunteer Hours</li>
+          <li>🤝 Community Engagement</li>
+          <li>🎓 Strengthen Your Resume</li>
+          <li>🎉 Lots of Fun & Support</li>
+        </ul>
+        <div style={{ textAlign: 'center' }}>
+          <Link to="/about/chapters">Get Started</Link>
+        </div>
+      </ChapterSection>
+
+      {/* Final CTA */}
+      <CTASection>
+        <h2>Ready to Make a Difference?</h2>
+        <p>
+          Join Art4Hearts today and be part of a global movement spreading creativity, comfort, and joy to those who need it most.
+        </p>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSd98E0LsNhBywLdUhlIBmp6e88bjt81Fh1tV6Lz6FklT1LtEg/viewform" target="_blank" rel="noopener noreferrer">
+          Register as a Volunteer
+        </a>
+      </CTASection>
+    </>
   );
 };
 
