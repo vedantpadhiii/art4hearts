@@ -185,37 +185,15 @@ const MemberName = styled.h3`
 `;
 
 const NamesList = styled(motion.div)`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 2rem;
-  margin-bottom: 3rem;
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
+  display: none;
 `;
 
 const NameItem = styled(motion.div)`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 1.5rem;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(139, 92, 246, 0.08);
-  transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
-
-  &:hover {
-    box-shadow: 0 8px 24px rgba(139, 92, 246, 0.15);
-    transform: translateY(-4px);
-  }
+  display: none;
 `;
 
 const NameItemText = styled.div`
-  display: flex;
-  flex-direction: column;
+  display: none;
 `;
 
 const Name = styled.span`
@@ -284,69 +262,31 @@ const AltColorSection = styled(ContentSection)`
 `;
 
 const AltSectionTitle = styled.h1`
-  font-size: 2.8rem;
-  font-weight: 700;
-  color: #000000;
-  margin-bottom: 1rem;
-  letter-spacing: -0.01em;
-  text-align: center;
-
-  @media (max-width: 768px) {
-    font-size: 2.2rem;
-  }
+  display: none;
 `;
 
 const AltSectionDescription = styled.p`
-  font-size: 1.1rem;
-  color: #000000;
-  max-width: 600px;
-  margin: 0 auto 0;
-  line-height: 1.6;
-  text-align: center;
-
-  @media (max-width: 768px) {
-    font-size: 1rem;
-  }
+  display: none;
 `;
 
 const AltHeadingUnderline = styled.div`
-  width: 120px;
-  height: 4px;
-  background: linear-gradient(90deg, #c6dddc 0%, #b3d4d2 50%, #5ba3a0 100%);
-  border-radius: 2px;
-  margin: 1.5rem auto 0;
-  box-shadow: 0 4px 12px rgba(198, 221, 220, 0.2);
+  display: none;
 `;
 
 const AltTeamSectionTitle = styled.h2`
-  font-size: 1.6rem;
-  font-weight: 600;
-  color: #000000;
-  margin-bottom: 2rem;
-  text-align: center;
-  padding-bottom: 1rem;
-  border-bottom: 2px solid rgba(198, 221, 220, 0.2);
-
-  @media (max-width: 768px) {
-    font-size: 1.4rem;
-  }
+  display: none;
 `;
 
 const AltNameItem = styled(NameItem)`
-  background: linear-gradient(135deg, #ecfdf5 0%, #f0fdf4 100%);
-  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.08);
-
-  &:hover {
-    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.15);
-  }
+  display: none;
 `;
 
 const AltName = styled(Name)`
-  color: #000000;
+  display: none;
 `;
 
 const AltRole = styled(MemberRole)`
-  color: #000000;
+  display: none;
 `;
 
 const Team: React.FC = () => {
@@ -450,72 +390,6 @@ const Team: React.FC = () => {
           ))}
         </Grid>
       </ContentSection>
-
-      {/* Saratoga Chapter Section */}
-      <AltColorSection
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-      >
-        <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-          <AltSectionTitle>2025-2026 Saratoga High School Chapter Team</AltSectionTitle>
-          <AltHeadingUnderline style={{ margin: '1.5rem auto 0' }} />
-          <AltSectionDescription style={{ marginTop: '2rem' }}>
-            Meet the officers for the Art4Hearts Saratoga High School chapter, the first Art4Hearts chapter.
-          </AltSectionDescription>
-        </div>
-
-        {/* Officers */}
-        <TeamSection>
-          <AltTeamSectionTitle>Officers</AltTeamSectionTitle>
-          <NamesList
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-100px' }}
-          >
-            {officers.map((member, index) => (
-              <AltNameItem
-                key={index}
-                variants={itemVariants}
-                initial="hidden"
-                whileInView="visible"
-              >
-                <NameItemText>
-                  <AltName>{member.name}</AltName>
-                  <AltRole>{member.role}</AltRole>
-                </NameItemText>
-              </AltNameItem>
-            ))}
-          </NamesList>
-        </TeamSection>
-
-        {/* Outreach Team */}
-        <TeamSection>
-          <AltTeamSectionTitle>Outreach Team</AltTeamSectionTitle>
-          <NamesList
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-100px' }}
-          >
-            {outreachTeam.map((member, index) => (
-              <AltNameItem
-                key={index}
-                variants={itemVariants}
-                initial="hidden"
-                whileInView="visible"
-              >
-                <NameItemText>
-                  <AltName>{member.name}</AltName>
-                  <AltRole>{member.role}</AltRole>
-                </NameItemText>
-              </AltNameItem>
-            ))}
-          </NamesList>
-        </TeamSection>
-      </AltColorSection>
     </PageContainer>
   );
 };
