@@ -18,9 +18,10 @@ const LinktreeIcon = () => (
 
 
 const ContactContainer = styled.div`
-  min-height: calc(100vh - ${props => props.theme.spacing.header});
-  background: #fff8e1;
+  background: linear-gradient(135deg, #c6dddc 0%, #b3d4d2 100%);
   margin-top: ${props => props.theme.spacing.header};
+  padding-bottom: 8rem;
+  min-height: auto;
 `;
 
 const ContactInfo = styled.div`
@@ -30,27 +31,29 @@ const ContactInfo = styled.div`
   margin: 0 auto;
 
   h1 {
-    font-size: 3.5rem;
-    font-weight: 700;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 800;
     margin-bottom: 1.5rem;
-    color: #1a365d;
+    color: #000000;
+    letter-spacing: -0.02em;
   }
 
   p {
-    color: #1e293b;
-    font-size: 1.1rem;
-    line-height: 1.6;
+    color: #000000;
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    line-height: 1.8;
     margin-bottom: 3rem;
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
+    font-weight: 500;
   }
   
   .contact-details {
-    background: #fff;
+    background: white;
     padding: 2rem;
     border-radius: 16px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 8px 24px rgba(198, 221, 220, 0.25);
     max-width: 400px;
     margin: 0 auto 3rem;
     
@@ -62,22 +65,22 @@ const ContactInfo = styled.div`
       }
       
       strong {
-        color: #2563eb;
+        color: #000000;
         display: block;
         margin-bottom: 0.5rem;
         font-size: 1.1rem;
-        font-weight: 600;
+        font-weight: 700;
       }
 
       a, span {
-        color: #1a365d;
+        color: #000000;
         text-decoration: none;
         font-size: 1rem;
         line-height: 1.5;
         display: block;
 
         &:hover {
-          color: #2563eb;
+          color: #333333;
         }
       }
     }
@@ -88,6 +91,7 @@ const ContactInfo = styled.div`
     gap: 1rem;
     justify-content: center;
     margin-bottom: 2rem;
+    flex-wrap: wrap;
   }
 `;
 
@@ -97,60 +101,63 @@ const SocialLink = styled.a`
   justify-content: center;
   gap: 0.6rem;
   padding: 0.8rem 1.5rem;
-  background: #2563eb;
+  background: #000000;
   color: white;
   border-radius: 8px;
   text-decoration: none;
   font-weight: 600;
   font-size: 0.95rem;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 
   &:hover {
-    background: linear-gradient(135deg, #1e40af, #1e3a8a);
+    background: #333333;
     transform: translateY(-4px);
-    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
   }
 `;
 
 const ContactForm = styled.form`
   background: rgba(255, 255, 255, 0.95);
-  padding: ${props => props.theme.spacing.large};
+  padding: 2.5rem 2rem;
   border-radius: 20px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 12px 40px rgba(198, 221, 220, 0.3);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  max-width: 600px;
+  margin: 3rem auto;
   
   .form-group {
-    margin-bottom: ${props => props.theme.spacing.medium};
+    margin-bottom: 1.5rem;
     
     label {
       display: block;
       margin-bottom: 0.5rem;
-      color: #1a365d;
-      font-weight: 600;
+      color: #000000;
+      font-weight: 700;
       font-size: 0.95rem;
     }
     
     input, textarea {
       width: 100%;
       padding: 1rem;
-      background: rgba(255, 255, 255, 0.8);
-      border: 1px solid rgba(37, 99, 235, 0.2);
+      background: rgba(255, 255, 255, 0.9);
+      border: 2px solid rgba(198, 221, 220, 0.4);
       border-radius: 12px;
-      color: #1a365d;
+      color: #000000;
       font-size: 1rem;
       transition: all 0.3s ease;
+      font-family: inherit;
       
       &:focus {
         outline: none;
-        border-color: #2563eb;
+        border-color: #c6dddc;
         background: rgba(255, 255, 255, 0.95);
-        box-shadow: 0 2px 8px rgba(37, 99, 235, 0.1);
+        box-shadow: 0 4px 12px rgba(198, 221, 220, 0.25);
       }
       
       &::placeholder {
-        color: #64748b;
+        color: #999999;
       }
     }
     
@@ -162,20 +169,20 @@ const ContactForm = styled.form`
   
   button {
     width: 100%;
-    padding: 1rem;
-    background: #2563eb;
+    padding: 1.1rem;
+    background: #000000;
     color: white;
     border: none;
     border-radius: 12px;
-    font-size: 1.1rem;
-    font-weight: 600;
+    font-size: 1.05rem;
+    font-weight: 700;
     cursor: pointer;
     transition: all 0.3s ease;
     
     &:hover {
       transform: translateY(-2px);
-      background: #1e40af;
-      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+      background: #333333;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
     }
   }
 `;
@@ -189,10 +196,10 @@ const SuccessMessage = styled(motion.div)`
   padding: 1rem 2rem;
   border-radius: 12px;
   z-index: 1000;
-  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.2);
+  box-shadow: 0 6px 16px rgba(34, 197, 94, 0.3);
   backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  font-weight: 500;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  font-weight: 600;
 `;
 
 const Contact: React.FC = () => {
