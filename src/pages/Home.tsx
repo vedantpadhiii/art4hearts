@@ -155,30 +155,16 @@ const HeroButton = styled.a<{ primary?: boolean }>`
   cursor: pointer;
   transition: all 0.3s ease;
   border: 2px solid;
+  background: #000000;
+  color: white;
+  border-color: #000000;
 
-  ${props => props.primary ? `
-    background: #1a365d;
-    color: white;
-    border-color: #1a365d;
-
-    &:hover {
-      background: #0f1f38;
-      border-color: #0f1f38;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(26, 54, 93, 0.25);
-    }
-  ` : `
-    background: transparent;
-    color: #1a365d;
-    border-color: #1a365d;
-
-    &:hover {
-      background: #1a365d;
-      color: white;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(26, 54, 93, 0.15);
-    }
-  `}
+  &:hover {
+    background: #333333;
+    border-color: #333333;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  }
 `;
 
 // Section Container
@@ -281,15 +267,15 @@ const Card = styled(motion.div)`
   a {
     display: inline-block;
     padding: 0.8rem 2rem;
-    background: #c6dddc;
-    color: #1a365d;
+    background: #000000;
+    color: white;
     text-decoration: none;
     border-radius: 8px;
     font-weight: 600;
     transition: all 0.3s ease;
 
     &:hover {
-      background: #5ba3a0;
+      background: #333333;
       color: white;
       transform: scale(1.05);
     }
@@ -367,8 +353,8 @@ const BenefitsList = styled(motion.ul)`
 const CTAButton = styled(motion.a)`
   display: inline-block;
   padding: 1rem 2.5rem;
-  background: #c6dddc;
-  color: #1a365d;
+  background: #000000;
+  color: white;
   text-decoration: none;
   border-radius: 8px;
   font-weight: 700;
@@ -378,10 +364,10 @@ const CTAButton = styled(motion.a)`
   border: 2px solid transparent;
 
   &:hover {
-    background: #5ba3a0;
+    background: #333333;
     color: white;
     transform: translateY(-3px);
-    box-shadow: 0 8px 24px rgba(198, 221, 220, 0.3);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
   }
 `;
 
@@ -793,9 +779,9 @@ const Home: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <h3>� Looking for a Kit or Bracelet?</h3>
-            <p>If you're a hospital, senior center, or any charitable organization interested in our products.</p>
-            <Link to="/contact">Contact Us</Link>
+            <h3>📦 Looking for a Kit or Bracelet?</h3>
+            <p>If you're a hospital, senior center, or any charitable organization, we'd love to help!</p>
+            <a href="https://art4hearts.onrender.com/contact" target="_blank" rel="noopener noreferrer">Contact Us</a>
           </Card>
         </CardGrid>
       </LightSection>
@@ -886,83 +872,6 @@ const Home: React.FC = () => {
           </StatCard>
         </StatGrid>
       </WhiteSection>
-
-      {/* Start a Chapter */}
-      <TealSection
-        initial="hidden"
-        whileInView="visible"
-        variants={containerVariants}
-        viewport={{ once: true }}
-      >
-        <SectionTitle
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          Start a Chapter
-        </SectionTitle>
-        <SectionDescription
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          viewport={{ once: true }}
-        >
-          Join our mission to bring art and creativity to communities worldwide. Here's what you get:
-        </SectionDescription>
-        <BenefitsList initial="hidden" whileInView="visible" viewport={{ once: true }}>
-          <motion.li
-            initial={{ opacity: 0, x: -10 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            Leadership Opportunities
-          </motion.li>
-          <motion.li
-            initial={{ opacity: 0, x: -10 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            viewport={{ once: true }}
-          >
-            Certified Volunteer Hours
-          </motion.li>
-          <motion.li
-            initial={{ opacity: 0, x: -10 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            Community Engagement
-          </motion.li>
-          <motion.li
-            initial={{ opacity: 0, x: -10 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            viewport={{ once: true }}
-          >
-            Strengthen Your Resume
-          </motion.li>
-          <motion.li
-            initial={{ opacity: 0, x: -10 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            viewport={{ once: true }}
-          >
-            Lots of Fun & Support
-          </motion.li>
-        </BenefitsList>
-        <CTAButton
-          as={Link}
-          to="/about/chapters"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          viewport={{ once: true }}
-        >
-          Get Started
-        </CTAButton>
-      </TealSection>
 
       {/* Final CTA */}
       <WhiteSection
