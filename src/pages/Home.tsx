@@ -73,6 +73,16 @@ const HeroSection = styled.section`
   }
 `;
 
+const LogoContainer = styled(motion.div)`
+  margin-bottom: 2rem;
+  
+  img {
+    max-width: 180px;
+    height: auto;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1));
+  }
+`;
+
 const HeroContent = styled(motion.div)`
   position: relative;
   z-index: 1;
@@ -81,7 +91,7 @@ const HeroContent = styled(motion.div)`
 
   h1 {
     font-size: clamp(2.5rem, 7vw, 4.5rem);
-    color: #1a365d;
+    color: #000000;
     font-weight: 800;
     margin-bottom: 1.5rem;
     line-height: 1.1;
@@ -90,7 +100,7 @@ const HeroContent = styled(motion.div)`
 
   p {
     font-size: clamp(1rem, 2.5vw, 1.3rem);
-    color: #4a9894;
+    color: #000000;
     font-weight: 500;
     line-height: 1.7;
     margin: 0;
@@ -119,7 +129,7 @@ const TealSection = styled(SectionContainer)`
 
 const SectionTitle = styled(motion.h2)`
   font-size: clamp(2rem, 5vw, 3.5rem);
-  color: #1a365d;
+  color: #000000;
   font-weight: 800;
   margin-bottom: 1rem;
   line-height: 1.2;
@@ -138,7 +148,7 @@ const SectionTitle = styled(motion.h2)`
 
 const SectionDescription = styled(motion.p)`
   font-size: clamp(1rem, 2vw, 1.15rem);
-  color: #4a9894;
+  color: #000000;
   max-width: 900px;
   margin: 2rem auto 0;
   line-height: 1.8;
@@ -172,14 +182,14 @@ const Card = styled(motion.div)`
 
   h3 {
     font-size: clamp(1.3rem, 2.5vw, 1.5rem);
-    color: #1a365d;
+    color: #000000;
     margin-bottom: 1rem;
     font-weight: 700;
   }
 
   p {
     font-size: 1rem;
-    color: #4a9894;
+    color: #000000;
     line-height: 1.7;
     margin-bottom: 1.5rem;
   }
@@ -228,14 +238,14 @@ const StatCard = styled(motion.div)`
   .number {
     font-size: clamp(2.5rem, 5vw, 3.5rem);
     font-weight: 800;
-    color: #1a365d;
+    color: #000000;
     line-height: 1;
     margin-bottom: 0.8rem;
   }
 
   .label {
     font-size: clamp(0.9rem, 1.5vw, 1rem);
-    color: #4a9894;
+    color: #000000;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -252,7 +262,7 @@ const BenefitsList = styled(motion.ul)`
 
   li {
     font-size: 1.1rem;
-    color: #1a365d;
+    color: #000000;
     font-weight: 600;
     padding: 0.8rem 0;
     padding-left: 2rem;
@@ -305,6 +315,19 @@ const Home: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
+          <LogoContainer
+            initial={{ scale: 0.5, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ 
+              duration: 0.8, 
+              delay: 0.1,
+              type: "spring",
+              stiffness: 120,
+              damping: 8
+            }}
+          >
+            <img src="/Art4Hearts logo.png" alt="Art4Hearts Logo" />
+          </LogoContainer>
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
