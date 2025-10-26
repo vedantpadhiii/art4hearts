@@ -20,16 +20,14 @@ const NavContainer = styled.nav<{ isScrolled: boolean; isVisible: boolean }>`
   padding: ${props => props.isScrolled ? '0.5rem 2rem' : '1rem 2rem'};
   transition: all 0.3s ease;
   transform: translateY(${props => props.isVisible ? '0' : '-100%'});
-  background: ${props => props.isScrolled 
-    ? 'rgba(255, 255, 255, 0.95)'
-    : 'rgba(255, 255, 255, 0.98)'};
+  background: #c6dddc;
   backdrop-filter: blur(8px);
   box-shadow: ${props => props.isScrolled ? '0 4px 16px rgba(0, 0, 0, 0.08)' : 'none'};
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 
   @media (max-width: 768px) {
     padding: 0.5rem 1rem;
-    background: rgba(240, 247, 255, 0.95);
+    background: #c6dddc;
   }
 `;
 
@@ -51,6 +49,12 @@ const LogoWrapper = styled(Link)`
   font-size: 1.35rem;
   letter-spacing: 0.02em;
   text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1);
+  
+  img {
+    height: auto;
+    max-width: 200px;
+    width: auto;
+  }
   
   &:hover {
     color: #1e3a8a;
@@ -284,7 +288,7 @@ export const Navigation: React.FC = () => {
     <NavContainer isScrolled={scrollY > 50} isVisible={isVisible}>
       <NavContent>
         <LogoWrapper to="/">
-          <Logo />
+          <img src="/Art4Hearts Banner.png" alt="Art4Hearts Banner" />
         </LogoWrapper>
 
         <MenuButton 

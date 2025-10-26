@@ -582,7 +582,7 @@ const Home: React.FC = () => {
             damping: 8
           }}
         >
-          <img src="/Art4Hearts logo.png" alt="Art4Hearts Logo" />
+          <img src="/Art4Hearts-Logo-NoBackground.png" alt="Art4Hearts Logo" />
         </LogoContainer>
       </HeroSection>
 
