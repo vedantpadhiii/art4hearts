@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 const PageContainer = styled(motion.div)`
   min-height: 100vh;
-  background: #fdf2f8;
+  background: #ffffff;
   padding-top: 80px;
 
   @media (max-width: 768px) {
@@ -92,17 +92,7 @@ const TeamSection = styled.div`
 `;
 
 const TeamSectionTitle = styled.h2`
-  font-size: 1.6rem;
-  font-weight: 600;
-  color: #000000;
-  margin-bottom: 2rem;
-  text-align: center;
-  padding-bottom: 1rem;
-  border-bottom: 2px solid rgba(198, 221, 220, 0.2);
-
-  @media (max-width: 768px) {
-    font-size: 1.4rem;
-  }
+  display: none;
 `;
 
 const ContentSection = styled(motion.section)`
@@ -135,29 +125,34 @@ const MemberCard = styled(motion.div)`
   text-align: center;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+  background: #fafafa;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 
   &:hover {
     transform: translateY(-8px);
+    box-shadow: 0 8px 24px rgba(198, 221, 220, 0.2);
   }
 `;
 
 const ImagePlaceholder = styled.div`
   width: 220px;
   height: 280px;
-  background: linear-gradient(135deg, #fbcfe8 0%, #fce7f3 100%);
+  background: linear-gradient(135deg, #c6dddc 0%, #b3d4d2 100%);
   border-radius: 12px;
   margin-bottom: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8px 24px rgba(244, 114, 182, 0.12);
-  border: 2px solid rgba(244, 114, 182, 0.1);
+  box-shadow: 0 8px 24px rgba(198, 221, 220, 0.15);
+  border: 2px solid rgba(198, 221, 220, 0.2);
   overflow: hidden;
   transition: all 0.3s ease;
 
   ${MemberCard}:hover & {
-    box-shadow: 0 16px 40px rgba(244, 114, 182, 0.2);
-    border-color: rgba(244, 114, 182, 0.3);
+    box-shadow: 0 12px 32px rgba(198, 221, 220, 0.25);
+    border-color: rgba(198, 221, 220, 0.4);
   }
 
   @media (max-width: 768px) {
@@ -236,8 +231,20 @@ const Name = styled.span`
 
 const MemberRole = styled.p`
   font-size: 0.95rem;
-  color: #f472b6;
-  font-weight: 500;
+  color: #000000;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+
+  @media (max-width: 768px) {
+    font-size: 0.85rem;
+  }
+`;
+
+const MemberBio = styled.p`
+  font-size: 0.9rem;
+  color: #666666;
+  line-height: 1.5;
+  margin: 0;
 
   @media (max-width: 768px) {
     font-size: 0.85rem;
@@ -273,7 +280,7 @@ const SocialLink = styled.a`
 `;
 
 const AltColorSection = styled(ContentSection)`
-  background: linear-gradient(135deg, #f0fdfa 0%, #f0fdf4 100%);
+  display: none;
 `;
 
 const AltSectionTitle = styled.h1`
@@ -343,38 +350,18 @@ const AltRole = styled(MemberRole)`
 `;
 
 const Team: React.FC = () => {
-  const executiveDirectors = [
-    { name: 'Grace Lin', image: '0684.jpg' },
-    { name: 'Ruiyan Zhu', image: '0820.jpg' }
-  ];
-
-  const chapterDirectors = [
-    { name: 'Aidan Liu', image: '0382.jpg' },
-    { name: 'Vedant Sinha', image: '0239.jpg' }
-  ];
-
-  const socialMediaTeam = [
-    { name: 'Sophie Qi', image: '0151.jpg' },
-    { name: 'Sophie Qin', image: '0724.jpg' },
-    { name: 'Kathlyn Zhang', image: '0541.jpg' }
-  ];
-
-  const websiteManager = [
-    { name: 'Vedant Padhi', image: '0709.jpg', linkedin: 'https://www.linkedin.com/in/vedant-padhi-51621a320' }
-  ];
-
-  const officers = [
-    { name: 'Grace Lin', role: 'Co-President' },
-    { name: 'Ruiyan Zhu', role: 'Co-President' },
-    { name: 'Aidan Liu', role: 'Co-Vice President' },
-    { name: 'Vedant Sinha', role: 'Co-Vice President' },
-    { name: 'Sophie Qin', role: 'Secretary' },
-    { name: 'Soumya Katkere', role: 'Treasurer' }
-  ];
-
-  const outreachTeam = [
-    { name: 'Arian Loftizadeh', role: 'Outreach Team' },
-    { name: 'Carter Wilson', role: 'Outreach Team' }
+  const allTeamMembers = [
+    { name: 'Grace Lin', image: '0684.jpg', role: 'Co-President', bio: 'Grace leads Art4Hearts with vision and compassion, driving the organization\'s mission forward.' },
+    { name: 'Ruiyan Zhu', image: '0820.jpg', role: 'Co-President', bio: 'Ruiyan co-leads the organization with dedication to making art accessible to all.' },
+    { name: 'Aidan Liu', image: '0382.jpg', role: 'Co-Vice President', bio: 'Aidan oversees chapter development and expansion across the nation.' },
+    { name: 'Vedant Sinha', image: '0239.jpg', role: 'Co-Vice President', bio: 'Vedant supports the organization\'s strategic initiatives and chapter success.' },
+    { name: 'Sophie Qi', image: '0151.jpg', role: 'Social Media Team', bio: 'Sophie creates engaging content that connects us with our community.' },
+    { name: 'Sophie Qin', image: '0724.jpg', role: 'Secretary', bio: 'Sophie ensures our operations run smoothly and communications are clear.' },
+    { name: 'Kathlyn Zhang', image: '0541.jpg', role: 'Social Media Team', bio: 'Kathlyn shares our impact and stories across social platforms.' },
+    { name: 'Soumya Katkere', image: '', role: 'Treasurer', bio: 'Soumya manages our finances and ensures resources support our mission.' },
+    { name: 'Vedant Padhi', image: '0709.jpg', role: 'Website Manager', bio: 'Vedant builds our digital presence and keeps our community connected online.', linkedin: 'https://www.linkedin.com/in/vedant-padhi-51621a320' },
+    { name: 'Arian Loftizadeh', image: '', role: 'Outreach Team', bio: 'Arian connects with communities and brings Art4Hearts to new audiences.' },
+    { name: 'Carter Wilson', image: '', role: 'Outreach Team', bio: 'Carter spreads our message and builds lasting relationships with partners.' }
   ];
 
   const containerVariants = {
@@ -424,128 +411,44 @@ const Team: React.FC = () => {
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
       >
-
-        {/* Executive Directors */}
-        <TeamSection>
-          <TeamSectionTitle>Executive Directors</TeamSectionTitle>
-          <Grid
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-100px' }}
-          >
-            {executiveDirectors.map((member, index) => (
-              <MemberCard
-                key={index}
-                variants={itemVariants}
-              >
-                <ImagePlaceholder>
-                  {member.image ? (
-                    <img src={`/team/${member.image}`} alt={member.name} />
-                  ) : (
-                    <PlaceholderText>Image</PlaceholderText>
-                  )}
-                </ImagePlaceholder>
-                <MemberName>{member.name}</MemberName>
-              </MemberCard>
-            ))}
-          </Grid>
-        </TeamSection>
-
-        {/* Chapter Directors */}
-        <TeamSection>
-          <TeamSectionTitle>Chapter Directors</TeamSectionTitle>
-          <Grid
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-100px' }}
-          >
-            {chapterDirectors.map((member, index) => (
-              <MemberCard
-                key={index}
-                variants={itemVariants}
-              >
-                <ImagePlaceholder>
-                  {member.image ? (
-                    <img src={`/team/${member.image}`} alt={member.name} />
-                  ) : (
-                    <PlaceholderText>Image</PlaceholderText>
-                  )}
-                </ImagePlaceholder>
-                <MemberName>{member.name}</MemberName>
-              </MemberCard>
-            ))}
-          </Grid>
-        </TeamSection>
-
-        {/* Social Media Team */}
-        <TeamSection>
-          <TeamSectionTitle>Social Media Team</TeamSectionTitle>
-          <Grid
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-100px' }}
-          >
-            {socialMediaTeam.map((member, index) => (
-              <MemberCard
-                key={index}
-                variants={itemVariants}
-              >
-                <ImagePlaceholder>
-                  {member.image ? (
-                    <img src={`/team/${member.image}`} alt={member.name} />
-                  ) : (
-                    <PlaceholderText>Image</PlaceholderText>
-                  )}
-                </ImagePlaceholder>
-                <MemberName>{member.name}</MemberName>
-              </MemberCard>
-            ))}
-          </Grid>
-        </TeamSection>
-
-        {/* Website Manager */}
-        <TeamSection>
-          <TeamSectionTitle>Website Manager</TeamSectionTitle>
-          <Grid
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-100px' }}
-          >
-            {websiteManager.map((member, index) => (
-              <MemberCard
-                key={index}
-                variants={itemVariants}
-              >
-                <ImagePlaceholder>
-                  {member.image ? (
-                    <img src={`/team/${member.image}`} alt={member.name} />
-                  ) : (
-                    <PlaceholderText>Image</PlaceholderText>
-                  )}
-                </ImagePlaceholder>
-                <MemberName>{member.name}</MemberName>
-                {member.linkedin && (
-                  <SocialLinks>
-                    <SocialLink
-                      href={member.linkedin}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      title="LinkedIn"
-                    >
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.39v-1.2h-2.84v8.37h2.84v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.84M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
-                      </svg>
-                    </SocialLink>
-                  </SocialLinks>
+        <Grid
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-100px' }}
+        >
+          {allTeamMembers.map((member, index) => (
+            <MemberCard
+              key={index}
+              variants={itemVariants}
+            >
+              <ImagePlaceholder>
+                {member.image ? (
+                  <img src={`/team/${member.image}`} alt={member.name} />
+                ) : (
+                  <PlaceholderText>Image</PlaceholderText>
                 )}
-              </MemberCard>
-            ))}
-          </Grid>
-        </TeamSection>
+              </ImagePlaceholder>
+              <MemberName>{member.name}</MemberName>
+              <MemberRole>{member.role}</MemberRole>
+              <MemberBio>{member.bio}</MemberBio>
+              {member.linkedin && (
+                <SocialLinks>
+                  <SocialLink
+                    href={member.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="LinkedIn"
+                  >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.39v-1.2h-2.84v8.37h2.84v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.84M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+                    </svg>
+                  </SocialLink>
+                </SocialLinks>
+              )}
+            </MemberCard>
+          ))}
+        </Grid>
       </ContentSection>
 
       {/* Saratoga Chapter Section */}
