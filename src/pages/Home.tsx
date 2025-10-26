@@ -390,15 +390,15 @@ const PartnersSection = styled(motion.div)`
   display: flex;
   flex-wrap: wrap;
   gap: 3rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 3rem 1rem;
+  padding: 3rem 2rem;
   align-items: center;
   justify-content: center;
   background: white;
   width: 100%;
   margin-left: calc(-50vw + 50%);
   margin-right: calc(-50vw + 50%);
+  padding-left: calc(50vw - 50%);
+  padding-right: calc(50vw - 50%);
 
   img {
     max-width: 100%;
