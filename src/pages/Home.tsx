@@ -446,8 +446,8 @@ const GalleryButton = styled(motion.a)`
 const PartnersSection = styled(motion.div)`
   display: flex;
   flex-wrap: wrap;
-  gap: 3rem;
-  padding: 3rem 2rem;
+  gap: 1.5rem;
+  padding: 2rem 2rem;
   align-items: center;
   justify-content: center;
   background: white;
@@ -461,7 +461,7 @@ const PartnersSection = styled(motion.div)`
     max-width: 100%;
     width: auto;
     height: auto;
-    max-height: 140px;
+    max-height: 200px;
     object-fit: contain;
     filter: grayscale(0%);
     transition: all 0.3s ease;
@@ -472,11 +472,11 @@ const PartnersSection = styled(motion.div)`
   }
 
   @media (max-width: 768px) {
-    gap: 2rem;
-    padding: 2.5rem 1rem;
+    gap: 1.5rem;
+    padding: 1.5rem 1rem;
     
     img {
-      max-height: 110px;
+      max-height: 150px;
     }
   }
 `;
