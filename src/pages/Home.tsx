@@ -1072,14 +1072,18 @@ const Home: React.FC = () => {
           >
             <GalleryCarousel 
               images={[
-                '/gallery/DSCF5420.JPG',
-                '/gallery/DSCF5430.JPG',
-                '/gallery/DSCF5447.JPG',
-                '/gallery/DSCF5452.JPG',
-                '/gallery/IMG_3335.HEIC',
-                '/gallery/IMG_8906.heic',
-                '/gallery/processed-D10D25C8-6C7A-4597-B16B-1B28EC67801A.jpeg',
-                '/gallery/Screenshot 2025-07-05 at 2.47.41 PM.png',
+                '/gallery/572171669_17855370453555521_6099618948601915028_n.jpg',
+                '/gallery/DSCF5420.jpg',
+                '/gallery/DSCF5468.jpg',
+                '/gallery/IMG_8906.jpg',
+                '/gallery/club_rush_sept_5.jpg',
+                '/gallery/image2.jpg',
+                '/gallery/Screenshot 2025-10-14 at 2.24.14 PM.png',
+                '/gallery/Screenshot 2025-10-14 at 2.49.57 PM.png',
+                '/gallery/Screenshot 2025-10-14 at 2.53.15 PM.png',
+                '/gallery/Screenshot 2025-10-14 at 2.54.32 PM.png',
+                '/gallery/Screenshot 2025-10-14 at 3.00.46 PM.png',
+                '/gallery/Screenshot 2025-10-14 at 3.03.34 PM.png',
               ]}
             />
           </motion.div>
