@@ -8,18 +8,18 @@ interface GalleryCarouselProps {
 
 const CarouselContainer = styled.div`
   position: relative;
-  width: 75%;
+  width: 90%;
   margin: 0 auto;
   overflow: hidden;
   padding: 2rem 0;
   background: linear-gradient(to bottom, #f5f5f5, #ffffff);
 
   @media (max-width: 1024px) {
-    width: 85%;
+    width: 92%;
   }
 
   @media (max-width: 768px) {
-    width: 95%;
+    width: 96%;
   }
 `;
 

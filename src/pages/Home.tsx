@@ -440,19 +440,19 @@ const GallerySection = styled(SectionContainer)`
 `;
 
 const GalleryContentWrapper = styled.div`
-  max-width: 1400px;
+  max-width: 1600px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 75%;
+  width: 90%;
 
   @media (max-width: 1024px) {
-    width: 85%;
+    width: 92%;
   }
 
   @media (max-width: 768px) {
-    width: 95%;
+    width: 96%;
     max-width: 100%;
   }
 `;
