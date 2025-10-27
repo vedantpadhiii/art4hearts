@@ -915,27 +915,57 @@ const ChaptersMapEmbed: React.FC = () => {
             box-shadow: 0 2px 4px rgba(0,0,0,0.2);
           "></div>`,
           iconSize: [30, 30],
+          iconAnchor: [15, 30],
+          popupAnchor: [0, -30],
           className: 'custom-marker'
         });
       };
 
-      // Add markers for each chapter
+      // Group chapters by coordinates to handle overlaps
+      const markerGroups: { [key: string]: typeof chaptersData } = {};
       chaptersData.forEach(chapter => {
-        const isUSA = chapter.country === 'USA';
-        const marker = L.marker([chapter.lat, chapter.lng], {
+        const key = `${chapter.lat},${chapter.lng}`;
+        if (!markerGroups[key]) {
+          markerGroups[key] = [];
+        }
+        markerGroups[key].push(chapter);
+      });
+
+      // Add markers for each location group
+      Object.entries(markerGroups).forEach(([coords, chapters]) => {
+        const [lat, lng] = coords.split(',').map(Number);
+        const isUSA = chapters[0].country === 'USA';
+        
+        const marker = L.marker([lat, lng], {
           icon: createHeartIcon(isUSA)
         }).addTo(map);
 
-        // Create popup content
-        const popupContent = `
-          <div style="font-family: 'Kollektif', sans-serif; font-size: 14px;">
-            <strong>${chapter.name}</strong><br/>
-            <strong>Location:</strong> ${chapter.location}, ${chapter.region}<br/>
-            <strong>Country:</strong> ${chapter.country}<br/>
-            ${chapter.leader ? `<strong>Leader:</strong> ${chapter.leader}<br/>` : ''}
-            ${chapter.email ? `<strong>Email:</strong> ${chapter.email}` : ''}
-          </div>
-        `;
+        // Create popup content - show all chapters at this location
+        let popupContent = '';
+        if (chapters.length === 1) {
+          const chapter = chapters[0];
+          popupContent = `
+            <div style="font-family: 'Kollektif', sans-serif; font-size: 14px; max-width: 250px;">
+              <strong>${chapter.name}</strong><br/>
+              <strong>Location:</strong> ${chapter.location}, ${chapter.region}<br/>
+              <strong>Country:</strong> ${chapter.country}<br/>
+              ${chapter.leader ? `<strong>Leader:</strong> ${chapter.leader}<br/>` : ''}
+              ${chapter.email ? `<strong>Email:</strong> ${chapter.email}` : ''}
+            </div>
+          `;
+        } else {
+          popupContent = `
+            <div style="font-family: 'Kollektif', sans-serif; font-size: 14px; max-width: 250px;">
+              <strong>${chapters.length} Chapters at this location:</strong><br/><br/>
+              ${chapters.map(ch => `
+                <strong>${ch.name}</strong><br/>
+                ${ch.leader ? `Leader: ${ch.leader}<br/>` : ''}
+                ${ch.email ? `Email: ${ch.email}<br/>` : ''}
+                <br/>
+              `).join('')}
+            </div>
+          `;
+        }
 
         marker.bindPopup(popupContent);
       });
