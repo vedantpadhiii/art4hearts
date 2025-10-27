@@ -408,6 +408,28 @@ const CTAButton = styled(motion.a)`
   }
 `;
 
+const InstructionButton = styled.a`
+  display: inline-block;
+  padding: 0.7rem 1.8rem;
+  background: #000000;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  margin-top: 0.8rem;
+  margin-right: 0.8rem;
+  border: 2px solid transparent;
+
+  &:hover {
+    background: #333333;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+  }
+`;
+
 // Gallery Section
 const GallerySection = styled(SectionContainer)`
   background: white;
@@ -899,14 +921,32 @@ const Home: React.FC = () => {
               <h3>🎨 Initiatives</h3>
               <p>
                 <strong>Art Therapy Kits:</strong> Through art therapy, we hope to spread warmth and bring comfort to the recipients of the kit. Recipients can engage with a creative outlet.
-                <br /><br />
-                <a href="https://www.instagram.com/p/DMTzV_3PXf5/?img_index=5" target="_blank" rel="noopener noreferrer" style={{color: '#1e3a8a', textDecoration: 'underline'}}>View instructions</a>
               </p>
-              <p style={{marginTop: '1.5rem'}}>
+              <InstructionButton 
+                href="https://www.instagram.com/p/DMTzV_3PXf5/?img_index=5" 
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
+                View Instructions on Instagram →
+              </InstructionButton>
+              <p style={{marginTop: '1.5rem', fontSize: '0.9rem', color: '#666666'}}>
+                <em>Follow our Instagram for step-by-step guides on creating art therapy kits and spreading warmth.</em>
+              </p>
+
+              <p style={{marginTop: '2rem'}}>
                 <strong>Bracelets:</strong> Make handmade bracelets for someone in need of care. These bracelets provide comfort and encouragement to those who receive them.
-                <br /><br />
-                <a href="https://www.instagram.com/p/DMTzV_3PXf5/?img_index=1" target="_blank" rel="noopener noreferrer" style={{color: '#1e3a8a', textDecoration: 'underline'}}>View instructions</a>
               </p>
+              <InstructionButton 
+                href="https://www.instagram.com/p/DMTzV_3PXf5/?img_index=1" 
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
+                View Instructions on Instagram →
+              </InstructionButton>
+              <p style={{marginTop: '1.5rem', fontSize: '0.9rem', color: '#666666'}}>
+                <em>Check out our Instagram for tutorials on making beautiful handmade bracelets.</em>
+              </p>
+
               <StyledLink to="/gallery">
                 Explore More <span>→</span>
               </StyledLink>
