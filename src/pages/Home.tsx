@@ -933,9 +933,6 @@ const Home: React.FC = () => {
               >
                 View Instructions on Instagram →
               </InstructionButton>
-              <p style={{marginTop: '1.5rem', fontSize: '0.9rem', color: '#666666'}}>
-                <em>Follow our Instagram for step-by-step guides on creating art therapy kits and spreading warmth.</em>
-              </p>
 
               <p style={{marginTop: '2rem'}}>
                 <strong>Bracelets:</strong> Make handmade bracelets for someone in need of care. These bracelets provide comfort and encouragement to those who receive them.
@@ -947,13 +944,6 @@ const Home: React.FC = () => {
               >
                 View Instructions on Instagram →
               </InstructionButton>
-              <p style={{marginTop: '1.5rem', fontSize: '0.9rem', color: '#666666'}}>
-                <em>Check out our Instagram for tutorials on making beautiful handmade bracelets.</em>
-              </p>
-
-              <StyledLink to="/gallery">
-                Explore More <span>→</span>
-              </StyledLink>
             </div>
             <img className="content-image" src="/Art4Hearts-Logo-NoBackground.png" alt="Initiatives" />
           </ContentCard>
