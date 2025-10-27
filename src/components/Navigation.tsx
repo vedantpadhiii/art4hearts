@@ -20,13 +20,13 @@ const NavContainer = styled.nav<{ isScrolled: boolean; isVisible: boolean }>`
   padding: ${props => props.isScrolled ? '0.5rem 2rem' : '1rem 2rem'};
   transition: all 0.3s ease;
   transform: translateY(${props => props.isVisible ? '0' : '-100%'});
-  background: #c6dddc;
+  background: linear-gradient(135deg, #c6dddc 0%, #b3d4d2 100%);
   backdrop-filter: blur(8px);
   box-shadow: ${props => props.isScrolled ? '0 4px 16px rgba(0, 0, 0, 0.08)' : 'none'};
 
   @media (max-width: 768px) {
     padding: 0.5rem 1rem;
-    background: #c6dddc;
+    background: linear-gradient(135deg, #c6dddc 0%, #b3d4d2 100%);
   }
 `;
 
