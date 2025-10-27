@@ -226,6 +226,10 @@ const WhiteSection = styled(SectionContainer)`
   background: white;
 `;
 
+const CTASection = styled(SectionContainer)`
+  background: #ffcfcc;
+`;
+
 const LightSection = styled(SectionContainer)`
   background: #f9fafb;
 `;
@@ -1285,7 +1289,7 @@ const Home: React.FC = () => {
       </WhiteSection>
 
       {/* Final CTA */}
-      <WhiteSection
+      <CTASection
         initial="hidden"
         whileInView="visible"
         variants={containerVariants}
@@ -1321,7 +1325,7 @@ const Home: React.FC = () => {
         >
           Register as a Volunteer
         </CTAButton>
-      </WhiteSection>
+      </CTASection>
     </>
   );
 };

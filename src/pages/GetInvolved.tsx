@@ -127,6 +127,10 @@ const WhiteSection = styled(SectionContainer)`
   background: white;
 `;
 
+const CTASection = styled(SectionContainer)`
+  background: #ffcfcc;
+`;
+
 const SectionTitle = styled(motion.h2)`
   font-size: clamp(2rem, 5vw, 3.5rem);
   color: #000000;
@@ -379,7 +383,7 @@ const GetInvolved: React.FC = () => {
       </WhiteSection>
 
       {/* CTA Section */}
-      <WhiteSection
+      <CTASection
         initial="hidden"
         whileInView="visible"
         variants={containerVariants}
@@ -415,7 +419,7 @@ const GetInvolved: React.FC = () => {
         >
           Register as a Volunteer
         </CTAButton>
-      </WhiteSection>
+      </CTASection>
     </>
   );
 };
