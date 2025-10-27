@@ -293,7 +293,7 @@ const Team: React.FC = () => {
     { name: 'Sophie Qi', image: '0541.jpg', role: 'Social Media Team', bio: 'Saratoga High School' },
     { name: 'Sophie Qin', image: '0724.jpg', role: 'Social Media Team', bio: 'Saratoga High School' },
     { name: 'Kathlyn Zhang', image: '0541.jpg', role: 'Social Media Team', bio: 'Saratoga High School' },
-    { name: 'Vedant Padhi', image: '0709.jpg', role: 'Website Manager', bio: 'Saratoga High School', linkedin: 'https://www.linkedin.com/in/vedant-padhi-51621a320' }
+    { name: 'Vedant Padhi', role: 'Website Manager', bio: 'Saratoga High School', linkedin: 'https://www.linkedin.com/in/vedant-padhi-51621a320' }
   ];
 
   const containerVariants = {
