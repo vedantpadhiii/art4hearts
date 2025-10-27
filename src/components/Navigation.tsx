@@ -111,10 +111,11 @@ const ContactLink = styled(Link)<{ $isActive?: boolean }>`
   background: transparent;
   
   &:hover {
-    background: #1e3a8a;
+    background: #000000;
     color: white;
+    border-color: #000000;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(30, 58, 138, 0.25);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   }
 `;
 
@@ -163,7 +164,7 @@ const NavLink = styled(Link)<{ $isActive?: boolean }>`
   position: relative;
   
   ${props => props.$isActive && `
-    color: #1e3a8a;
+    color: white;
     background: transparent;
   `}
 
