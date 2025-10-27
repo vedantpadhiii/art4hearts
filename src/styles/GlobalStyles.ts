@@ -8,7 +8,7 @@ const GlobalStyles = createGlobalStyle`
     font-style: normal;
   }
 
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Kollektif:wght@400&display=swap');
 
   * {
     margin: 0;
@@ -20,7 +20,7 @@ const GlobalStyles = createGlobalStyle`
     background: ${props => props.theme.colors.background.dark};
     color: ${props => props.theme.colors.text.light};
     font-family: ${props => props.theme.fonts.body};
-    font-weight: bold;
+    font-weight: normal;
     font-style: normal;
     font-size: 16px;
     line-height: 1.5;
@@ -32,7 +32,7 @@ const GlobalStyles = createGlobalStyle`
 
   p, span, li, td, th, label, input, textarea, button, a, div, article, section, nav {
     font-family: ${props => props.theme.fonts.body};
-    font-weight: bold;
+    font-weight: normal;
     font-style: normal;
   }
 
