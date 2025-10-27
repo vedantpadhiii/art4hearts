@@ -562,6 +562,8 @@ const ContentCard = styled(motion.div)`
   margin-right: auto;
 
   div {
+    text-align: left;
+
     h3 {
       font-size: clamp(1.5rem, 5vw, 2rem);
       color: #000000;
