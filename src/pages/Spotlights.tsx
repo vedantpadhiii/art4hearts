@@ -375,67 +375,67 @@ const SpotlightsPage: React.FC = () => {
           <SectionTitle>Photos</SectionTitle>
           <PhotosGrid>
             <PhotoItem
-              src="/photos/jpegmini_optimized/FullSizeRender_5.jpg"
+              src="/Photos/jpegmini_optimized/FullSizeRender_5.jpg"
               alt="Art4Hearts Photo 1"
             />
             <PhotoItem
-              src="/photos/jpegmini_optimized/IMG_2650.jpg"
+              src="/Photos/jpegmini_optimized/IMG_2650.jpg"
               alt="Art4Hearts Photo 2"
             />
             <PhotoItem
-              src="/photos/jpegmini_optimized/IMG_3335.jpg"
+              src="/Photos/jpegmini_optimized/IMG_3335.jpg"
               alt="Art4Hearts Photo 3"
             />
             <PhotoItem
-              src="/photos/jpegmini_optimized/IMG_3336.jpg"
+              src="/Photos/jpegmini_optimized/IMG_3336.jpg"
               alt="Art4Hearts Photo 4"
             />
             <PhotoItem
-              src="/photos/jpegmini_optimized/IMG_7093_2.jpg"
+              src="/Photos/jpegmini_optimized/IMG_7093_2.jpg"
               alt="Art4Hearts Photo 5"
             />
             <PhotoItem
-              src="/photos/jpegmini_optimized/IMG_8900.jpg"
+              src="/Photos/jpegmini_optimized/IMG_8900.jpg"
               alt="Art4Hearts Photo 6"
             />
             <PhotoItem
-              src="/photos/jpegmini_optimized/IMG_8904.jpg"
+              src="/Photos/jpegmini_optimized/IMG_8904.jpg"
               alt="Art4Hearts Photo 7"
             />
             <PhotoItem
-              src="/photos/jpegmini_optimized/IMG_8906.jpg"
+              src="/Photos/jpegmini_optimized/IMG_8906.jpg"
               alt="Art4Hearts Photo 8"
             />
             <PhotoItem
-              src="/photos/jpegmini_optimized/IMG_9354.jpg"
+              src="/Photos/jpegmini_optimized/IMG_9354.jpg"
               alt="Art4Hearts Photo 9"
             />
             <PhotoItem
-              src="/photos/jpegmini_optimized/IMG_9363.jpg"
+              src="/Photos/jpegmini_optimized/IMG_9363.jpg"
               alt="Art4Hearts Photo 10"
             />
             <PhotoItem
-              src="/photos/jpegmini_optimized/Resized_20250321_165909.jpg"
+              src="/Photos/jpegmini_optimized/Resized_20250321_165909.jpg"
               alt="Art4Hearts Photo 11"
             />
             <PhotoItem
-              src="/photos/jpegmini_optimized/image0_(1).jpg"
+              src="/Photos/jpegmini_optimized/image0_(1).jpg"
               alt="Art4Hearts Photo 12"
             />
             <PhotoItem
-              src="/photos/jpegmini_optimized/image2.jpg"
+              src="/Photos/jpegmini_optimized/image2.jpg"
               alt="Art4Hearts Photo 13"
             />
             <PhotoItem
-              src="/photos/jpegmini_optimized/processed-C469C3CA-C7B6-441E-9CEC-E3B4080A92C3.jpg"
+              src="/Photos/jpegmini_optimized/processed-C469C3CA-C7B6-441E-9CEC-E3B4080A92C3.jpg"
               alt="Art4Hearts Photo 14"
             />
             <PhotoItem
-              src="/photos/jpegmini_optimized/processed-D10D25C8-6C7A-4597-B16B-1B28EC67801A.jpg"
+              src="/Photos/jpegmini_optimized/processed-D10D25C8-6C7A-4597-B16B-1B28EC67801A.jpg"
               alt="Art4Hearts Photo 15"
             />
             <PhotoItem
-              src="/photos/jpegmini_optimized/processed-E2F05DC8-3F5E-4ED4-848F-0AF469A57C65.jpg"
+              src="/Photos/jpegmini_optimized/processed-E2F05DC8-3F5E-4ED4-848F-0AF469A57C65.jpg"
               alt="Art4Hearts Photo 16"
             />
           </PhotosGrid>
