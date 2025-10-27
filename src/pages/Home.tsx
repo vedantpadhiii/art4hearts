@@ -227,7 +227,7 @@ const WhiteSection = styled(SectionContainer)`
 `;
 
 const CTASection = styled(SectionContainer)`
-  background: #ffcfcc;
+  background: #ffcfec;
 `;
 
 const LightSection = styled(SectionContainer)`
@@ -1078,12 +1078,6 @@ const Home: React.FC = () => {
                 '/gallery/IMG_8906.jpg',
                 '/gallery/club_rush_sept_5.jpg',
                 '/gallery/image2.jpg',
-                '/gallery/Screenshot 2025-10-14 at 2.24.14 PM.jpg',
-                '/gallery/Screenshot 2025-10-14 at 2.49.57 PM.jpg',
-                '/gallery/Screenshot 2025-10-14 at 2.53.15 PM.jpg',
-                '/gallery/Screenshot 2025-10-14 at 2.54.32 PM.jpg',
-                '/gallery/Screenshot 2025-10-14 at 3.00.46 PM.jpg',
-                '/gallery/Screenshot 2025-10-14 at 3.03.34 PM.jpg',
               ]}
             />
           </motion.div>

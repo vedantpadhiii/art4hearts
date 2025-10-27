@@ -128,7 +128,7 @@ const WhiteSection = styled(SectionContainer)`
 `;
 
 const CTASection = styled(SectionContainer)`
-  background: #ffcfcc;
+  background: #ffcfec;
 `;
 
 const SectionTitle = styled(motion.h2)`
