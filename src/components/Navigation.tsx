@@ -23,7 +23,6 @@ const NavContainer = styled.nav<{ isScrolled: boolean; isVisible: boolean }>`
   background: #c6dddc;
   backdrop-filter: blur(8px);
   box-shadow: ${props => props.isScrolled ? '0 4px 16px rgba(0, 0, 0, 0.08)' : 'none'};
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 
   @media (max-width: 768px) {
     padding: 0.5rem 1rem;
