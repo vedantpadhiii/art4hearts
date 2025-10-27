@@ -290,7 +290,7 @@ const Team: React.FC = () => {
     { name: 'Ruiyan Zhu', image: '0820.jpg', role: 'Executive Director', bio: 'Saratoga High School' },
     { name: 'Aidan Liu', image: '0382.jpg', role: 'Chapter Director', bio: 'Saratoga High School' },
     { name: 'Vedant Sinha', image: '0239.jpg', role: 'Chapter Director', bio: 'Saratoga High School' },
-    { name: 'Sophie Qi', image: '0541.jpg', role: 'Social Media Team', bio: 'Saratoga High School' },
+    { name: 'Sophie Qi', image: '0151.jpg', role: 'Social Media Team', bio: 'Saratoga High School' },
     { name: 'Sophie Qin', image: '0724.jpg', role: 'Social Media Team', bio: 'Saratoga High School' },
     { name: 'Kathlyn Zhang', image: '0541.jpg', role: 'Social Media Team', bio: 'Saratoga High School' },
     { name: 'Vedant Padhi', role: 'Website Manager', bio: 'Saratoga High School', linkedin: 'https://www.linkedin.com/in/vedant-padhi-51621a320' }

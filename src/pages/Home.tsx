@@ -813,7 +813,7 @@ const Home: React.FC = () => {
               Learn More
             </HeroButton>
             <HeroButton as={Link} to="/contact">
-              Connect
+              Contact Usx
             </HeroButton>
           </HeroButtonGroup>
           <motion.p
@@ -932,7 +932,7 @@ const Home: React.FC = () => {
             transition={{ duration: 0.6 }}
           >
             <div>
-              <h3>🎨 Initiatives</h3>
+              <h3>Initiatives</h3>
               <p>
                 <strong>Art Therapy Kits:</strong> Through art therapy, we hope to spread warmth and bring comfort to the recipients of the kit. Recipients can engage with a creative outlet.
               </p>
@@ -966,7 +966,7 @@ const Home: React.FC = () => {
             transition={{ duration: 0.6 }}
           >
             <div>
-              <h3>🏘️ Our Chapters</h3>
+              <h3>Our Chapters</h3>
               <p>
                 Discover our growing network of over 150 Art4Hearts chapters worldwide, where leaders of all ages are using art to uplift their communities across the globe!
               </p>
@@ -985,7 +985,7 @@ const Home: React.FC = () => {
             transition={{ duration: 0.6 }}
           >
             <div>
-              <h3>🤝 Volunteering</h3>
+              <h3>Volunteering</h3>
               <p>
                 Apply to be an Art4Hearts volunteer today to share art with those in need—no experience required! Enjoy the flexibility of remote volunteering while earning certified volunteer hours.
               </p>
