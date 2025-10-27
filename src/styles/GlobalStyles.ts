@@ -8,7 +8,7 @@ const GlobalStyles = createGlobalStyle`
     font-style: normal;
   }
 
-  @import url('https://fonts.googleapis.com/css2?family=Kollektif:ital,wght@0,400;1,400&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Kollektif:wght@400;700&display=swap');
 
   * {
     margin: 0;
