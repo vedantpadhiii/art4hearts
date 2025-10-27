@@ -440,11 +440,21 @@ const GallerySection = styled(SectionContainer)`
 `;
 
 const GalleryContentWrapper = styled.div`
-  max-width: 1000px;
+  max-width: 1400px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 75%;
+
+  @media (max-width: 1024px) {
+    width: 85%;
+  }
+
+  @media (max-width: 768px) {
+    width: 95%;
+    max-width: 100%;
+  }
 `;
 
 const GalleryButton = styled(motion.a)`
