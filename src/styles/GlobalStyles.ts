@@ -21,7 +21,7 @@ const GlobalStyles = createGlobalStyle`
     color: ${props => props.theme.colors.text.light};
     font-family: ${props => props.theme.fonts.body};
     font-weight: bold;
-    font-style: italic;
+    font-style: normal;
     font-size: 16px;
     line-height: 1.5;
     overflow-x: hidden;
@@ -33,7 +33,7 @@ const GlobalStyles = createGlobalStyle`
   p, span, li, td, th, label, input, textarea, button, a, div, article, section, nav {
     font-family: ${props => props.theme.fonts.body};
     font-weight: bold;
-    font-style: italic;
+    font-style: normal;
   }
 
   h1, h2, h3, h4, h5, h6 {
