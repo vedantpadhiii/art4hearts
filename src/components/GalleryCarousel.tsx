@@ -8,10 +8,19 @@ interface GalleryCarouselProps {
 
 const CarouselContainer = styled.div`
   position: relative;
-  width: 100%;
+  width: 75%;
+  margin: 0 auto;
   overflow: hidden;
   padding: 2rem 0;
   background: linear-gradient(to bottom, #f5f5f5, #ffffff);
+
+  @media (max-width: 1024px) {
+    width: 85%;
+  }
+
+  @media (max-width: 768px) {
+    width: 95%;
+  }
 `;
 
 const ScrollTrack = styled(motion.div)`
@@ -23,7 +32,7 @@ const ScrollTrack = styled(motion.div)`
 
 const ImageItem = styled.div`
   flex: 0 0 auto;
-  width: clamp(200px, 30vw, 350px);
+  width: clamp(220px, 35vw, 400px);
   aspect-ratio: 1;
   border-radius: 12px;
   overflow: hidden;
@@ -43,7 +52,7 @@ const ImageItem = styled.div`
   }
 
   @media (max-width: 768px) {
-    width: clamp(140px, 45vw, 220px);
+    width: clamp(160px, 50vw, 280px);
   }
 `;
 
