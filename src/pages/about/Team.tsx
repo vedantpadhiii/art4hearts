@@ -286,14 +286,14 @@ const AltRole = styled(MemberRole)`
 
 const Team: React.FC = () => {
   const allTeamMembers = [
-    { name: 'Grace Lin', image: '0684.jpg', role: 'Co-President', bio: 'Grace leads Art4Hearts with vision and compassion, driving the organization\'s mission forward.' },
-    { name: 'Ruiyan Zhu', image: '0820.jpg', role: 'Co-President', bio: 'Ruiyan co-leads the organization with dedication to making art accessible to all.' },
-    { name: 'Aidan Liu', image: '0382.jpg', role: 'Co-Vice President', bio: 'Aidan oversees chapter development and expansion across the nation.' },
-    { name: 'Vedant Sinha', image: '0239.jpg', role: 'Co-Vice President', bio: 'Vedant supports the organization\'s strategic initiatives and chapter success.' },
-    { name: 'Sophie Qi', image: '0151.jpg', role: 'Social Media Team', bio: 'Sophie creates engaging content that connects us with our community.' },
-    { name: 'Sophie Qin', image: '0724.jpg', role: 'Secretary', bio: 'Sophie ensures our operations run smoothly and communications are clear.' },
-    { name: 'Kathlyn Zhang', image: '0541.jpg', role: 'Social Media Team', bio: 'Kathlyn shares our impact and stories across social platforms.' },
-    { name: 'Vedant Padhi', role: 'Website Manager', bio: 'Vedant builds our digital presence and keeps our community connected online.', linkedin: 'https://www.linkedin.com/in/vedant-padhi-51621a320' }
+    { name: 'Grace Lin', image: '0684.jpg', role: 'Executive Director', bio: 'Saratoga High School' },
+    { name: 'Ruiyan Zhu', image: '0820.jpg', role: 'Executive Director', bio: 'Saratoga High School' },
+    { name: 'Aidan Liu', image: '0382.jpg', role: 'Chapter Director', bio: 'Saratoga High School' },
+    { name: 'Vedant Sinha', image: '0239.jpg', role: 'Chapter Director', bio: 'Saratoga High School' },
+    { name: 'Sophie Qi', image: '0541.jpg', role: 'Social Media Team', bio: 'Saratoga High School' },
+    { name: 'Sophie Qin', image: '0724.jpg', role: 'Social Media Team', bio: 'Saratoga High School' },
+    { name: 'Kathlyn Zhang', image: '0541.jpg', role: 'Social Media Team', bio: 'Saratoga High School' },
+    { name: 'Vedant Padhi', image: '0709.jpg', role: 'Website Manager', bio: 'Saratoga High School', linkedin: 'https://www.linkedin.com/in/vedant-padhi-51621a320' }
   ];
 
   const containerVariants = {
