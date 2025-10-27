@@ -786,7 +786,7 @@ const Home: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.9 }}
             style={{ marginTop: '1.5rem', fontSize: 'clamp(1rem, 1.8vw, 1.15rem)', fontWeight: 400 }}
           >
-            Join our community dedicated to curiosity and creativity through hands-on STEM projects today!
+            Join our community dedicated to crafting meaningful items to translate warmth
           </motion.p>
         </HeroContent>
         <LogoContainer
@@ -898,10 +898,16 @@ const Home: React.FC = () => {
             <div>
               <h3>🎨 Initiatives</h3>
               <p>
-                Discover our creative programs bringing art and comfort to communities, hospitals, and care facilities worldwide. 
-                Our art therapy kits, workshops, and personalized bracelets are designed to spread joy and healing to those who need it most.
+                <strong>Art Therapy Kits:</strong> Through art therapy, we hope to spread warmth and bring comfort to the recipients of the kit. Recipients can engage with a creative outlet.
+                <br /><br />
+                <a href="https://www.instagram.com/p/DMTzV_3PXf5/?img_index=5" target="_blank" rel="noopener noreferrer" style={{color: '#1e3a8a', textDecoration: 'underline'}}>View instructions</a>
               </p>
-              <StyledLink to="/spotlights">
+              <p style={{marginTop: '1.5rem'}}>
+                <strong>Bracelets:</strong> Make handmade bracelets for someone in need of care. These bracelets provide comfort and encouragement to those who receive them.
+                <br /><br />
+                <a href="https://www.instagram.com/p/DMTzV_3PXf5/?img_index=1" target="_blank" rel="noopener noreferrer" style={{color: '#1e3a8a', textDecoration: 'underline'}}>View instructions</a>
+              </p>
+              <StyledLink to="/gallery">
                 Explore More <span>→</span>
               </StyledLink>
             </div>
@@ -918,8 +924,7 @@ const Home: React.FC = () => {
             <div>
               <h3>🏘️ Our Chapters</h3>
               <p>
-                Join a local Art4Hearts chapter and connect with passionate volunteers dedicated to spreading creativity in your community. 
-                Our chapters provide leadership opportunities, volunteer hours, and the chance to make a real difference.
+                Discover our growing network of over 150 Art4Hearts chapters worldwide, where leaders of all ages are using art to uplift their communities across the globe!
               </p>
               <StyledLink to="/about/chapters">
                 Explore More <span>→</span>
@@ -938,8 +943,7 @@ const Home: React.FC = () => {
             <div>
               <h3>🤝 Volunteering</h3>
               <p>
-                Make a difference by volunteering with Art4Hearts. Help create art that brings joy and healing to those who need it most. 
-                Earn certified volunteer hours, gain leadership experience, and be part of a global movement for good.
+                Apply to be an Art4Hearts volunteer today to share art with those in need—no experience required! Enjoy the flexibility of remote volunteering while earning certified volunteer hours.
               </p>
               <StyledLink to="/get-involved">
                 Explore More <span>→</span>
