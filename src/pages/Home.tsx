@@ -813,7 +813,7 @@ const Home: React.FC = () => {
               Learn More
             </HeroButton>
             <HeroButton as={Link} to="/contact">
-              Contact Usx
+              Contact Us
             </HeroButton>
           </HeroButtonGroup>
           <motion.p

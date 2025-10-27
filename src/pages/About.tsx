@@ -29,37 +29,71 @@ const AboutContainer = styled.div`
 `;
 
 const HeroSection = styled.section`
+  background: linear-gradient(135deg, #c6dddc 0%, #b3d4d2 100%);
+  padding: clamp(6rem, 10vh, 8rem) 2rem;
   position: relative;
+  overflow: visible;
   min-height: 60vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 4rem 2rem;
-  background: linear-gradient(135deg, #c6dddc 0%, #b3d4d2 100%);
+  gap: 1.5rem;
+  width: 100%;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  padding-left: 2rem;
+  padding-right: 2rem;
+
+  @media (max-width: 768px) {
+    min-height: auto;
+    gap: 2rem;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -40%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: 0;
+    animation: float 6s ease-in-out infinite;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -20%;
+    left: -15%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: 0;
+    animation: float 8s ease-in-out infinite reverse;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(20px); }
+  }
   
   h1 {
     font-size: clamp(3rem, 6vw, 4.5rem);
     font-weight: 700;
     color: #000000;
-    margin-bottom: 2rem;
+    margin-bottom: 1.2rem;
     position: relative;
-    
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: -1rem;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100px;
-      height: 3px;
-      background: linear-gradient(90deg, #5ba3a0, #4a9894);
-    }
+    line-height: 1.15;
+    letter-spacing: -0.02em;
   }
   
   p {
-    font-size: clamp(1.2rem, 2vw, 1.4rem);
+    font-size: clamp(1.05rem, 2vw, 1.4rem);
     max-width: 800px;
     line-height: 1.8;
     color: #000000;
