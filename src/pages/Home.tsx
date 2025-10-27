@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import useCountUp from '../hooks/useCountUp';
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 import GalleryCarousel from '../components/GalleryCarousel';
+import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
 
 // FAQ Data
 const homepageFAQs = [
@@ -360,6 +362,46 @@ const StatCard = styled(motion.div)`
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+  }
+`;
+
+const MapEmbedSection = styled.div`
+  width: 100%;
+  max-width: 1200px;
+  margin: 4rem auto 0;
+  padding: 0 1rem;
+`;
+
+const MapContainer = styled.div`
+  width: 100%;
+  height: 500px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  margin-top: 2rem;
+
+  .leaflet-container {
+    height: 100%;
+    width: 100%;
+    background: white;
+    border-radius: 12px;
+  }
+
+  .leaflet-marker-icon {
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  }
+
+  .leaflet-popup-content-wrapper {
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(198, 221, 220, 0.25);
+  }
+
+  .leaflet-popup-tip {
+    background: white;
+  }
+
+  @media (max-width: 768px) {
+    height: 400px;
   }
 `;
 
@@ -776,6 +818,150 @@ const FAQLink = styled(motion.a)`
   }
 `;
 
+// Chapters data for map
+const chaptersData = [
+  { name: 'Art4Hearts: Minnesota Connections Academy', leader: 'Makayla Anderson', location: 'Saint Paul', region: 'Minnesota', country: 'USA', email: 'amakayla900@gmail.com', lat: 44.9537, lng: -93.0900 },
+  { name: 'Art4Hearts Chandler AZ', leader: 'Siena Verdugo', location: 'Chandler', region: 'Arizona', country: 'USA', email: 'art4heartschandler@gmail.com', lat: 33.3062, lng: -111.8413 },
+  { name: 'Art4Hearts Crest High School', leader: 'Mallory Bowen', location: 'Shelby', region: 'North Carolina', country: 'USA', email: 'mallorybowen2022@gmail.com', lat: 35.2790, lng: -81.6381 },
+  { name: 'Art4Hearts Lebanon High School', leader: 'Addy Wright', location: 'Lebanon', region: 'Indiana', country: 'USA', email: 'theaddisonwright@gmail.com', lat: 40.0423, lng: -86.4656 },
+  { name: 'Art4Hearts Palm Beach Gardens', leader: 'Keira Compiani', location: 'Palm Beach Gardens', region: 'Florida', country: 'USA', email: 'Kmae.compiani@gmail.com', lat: 26.8158, lng: -80.1065 },
+  { name: 'Art4Hearts Suffolk County Long Island', leader: 'Aishwarya Kammili', location: 'Suffolk', region: 'New York', country: 'USA', email: 'aishwaryakammili@gmail.com', lat: 40.9176, lng: -72.7554 },
+  { name: 'Art4Hearts Bridgewater', leader: 'Neila Roach', location: 'Bridgewater', region: 'Massachusetts', country: 'USA', email: 'roachneila21@gmail.com', lat: 41.9813, lng: -71.0084 },
+  { name: 'Art4Hearts Frontier International Academy', leader: 'Noor Ahmed', location: 'Hamtramck', region: 'Michigan', country: 'USA', email: 'zaralovescats143@gmail.com', lat: 42.2324, lng: -83.0673 },
+  { name: 'Art4Hearts West Campus High School', leader: 'Janey Saechao', location: 'Sacramento', region: 'California', country: 'USA', email: 'art4heartswchs@gmail.com', lat: 38.5816, lng: -121.4944 },
+  { name: 'Art4Hearts Atherton High School', leader: 'Delaney Payton', location: 'Louisville', region: 'Kentucky', country: 'USA', email: 'art4heartsahs@gmail.com', lat: 38.2527, lng: -85.7585 },
+  { name: 'Art4Hearts Apple Valley High School', leader: 'Marley Fic', location: 'Apple Valley', region: 'California', country: 'USA', email: '2026.marleyfic@gmail.com', lat: 34.5001, lng: -117.1812 },
+  { name: 'Art4Hearts Surprise, AZ', leader: 'Christina Barsch-Kuzmyn', location: 'Surprise', region: 'Arizona', country: 'USA', email: 'art4heartssurprise@gmail.com', lat: 33.6390, lng: -112.3692 },
+  { name: 'Art4Hearts Denver', leader: 'Ellie Carroll', location: 'Denver', region: 'Colorado', country: 'USA', email: 'Elliecarrolladvocacy@gmail.com', lat: 39.7392, lng: -104.9903 },
+  { name: 'Art4Hearts Gilbert Classical Academy', leader: 'Sophie Kephart', location: 'Gilbert', region: 'Arizona', country: 'USA', email: 'sophiegkephart@gmail.com', lat: 33.3528, lng: -111.7890 },
+  { name: 'Art4Hearts Milpitas Middle College High School', leader: 'Nishka Gohel', location: 'Milpitas', region: 'California', country: 'USA', email: 'nishkangohel@gmail.com', lat: 37.4281, lng: -121.8863 },
+  { name: 'Art4Hearts Clear Creek High School', leader: 'Hafsa Syed', location: 'League City', region: 'Texas', country: 'USA', email: 'Hafsasyed009@gmail.com', lat: 29.4849, lng: -95.1181 },
+  { name: 'Art4Hearts SEA', leader: 'Selene Maldonado', location: 'Ormond Beach', region: 'Florida', country: 'USA', email: 'selene0925@icloud.com', lat: 29.2876, lng: -81.0573 },
+  { name: 'Art4Hearts ABQ', leader: 'Nicole Ibarra', location: 'Albuquerque', region: 'New Mexico', country: 'USA', email: 'munecamisticas@outlook.com', lat: 35.0844, lng: -106.6504 },
+  { name: 'Art4Hearts Emerson High School', leader: 'Andrea Capati', location: 'McKinney', region: 'Texas', country: 'USA', email: 'andrealorin.capati.169@k12.friscoisd.org', lat: 33.1972, lng: -96.6397 },
+  { name: 'Art4Hearts San Jose', leader: 'Emily Mai', location: 'San Jose', region: 'California', country: 'USA', email: 'emilykimmai@gmail.com', lat: 37.3382, lng: -121.8863 },
+  { name: 'Art4Hearts DH Conley HS', leader: 'Maddie Adrias', location: 'Greenville', region: 'North Carolina', country: 'USA', email: 'art4hearts.dhc@gmail.com', lat: 35.6129, lng: -82.3982 },
+  { name: 'Art4Hearts Medina, TN', leader: 'Payton Wilson', location: 'Medina', region: 'Tennessee', country: 'USA', email: 'Paytonw680@outlook.com', lat: 35.4434, lng: -88.7162 },
+  { name: 'Art4Hearts Miami, FL', leader: 'Melody Monge', location: 'Miami', region: 'Florida', country: 'USA', email: 'melodymonge902@gmail.com', lat: 25.7617, lng: -80.1918 },
+  { name: 'Art4Hearts Frisco, TX', leader: 'Khyathi Motukuri', location: 'Frisco', region: 'Texas', country: 'USA', email: 'art4hearts.frisco@gmail.com', lat: 33.1506, lng: -96.8236 },
+  { name: 'Art4Hearts Saddle River Day School', leader: 'Emma Ehrenkranz', location: 'Saddle River', region: 'New Jersey', country: 'USA', email: 'emma.ehrenkranz@icloud.com', lat: 40.9616, lng: -74.0352 },
+  { name: 'Art4Hearts Webber Academy', leader: 'Kylah Meghani', location: 'Calgary', region: 'Alberta', country: 'Canada', email: 'art4heartswebber@gmail.com', lat: 51.0447, lng: -114.0719 },
+  { name: 'Art4Hearts Saint Paul High School', leader: 'Ariana Soto', location: 'Santa Fe Springs', region: 'California', country: 'USA', email: 'ariana335024@gmail.com', lat: 33.9453, lng: -118.0951 },
+  { name: 'Art4Hearts Irvine High School', leader: 'Iman Rizvi', location: 'Irvine', region: 'California', country: 'USA', email: 'arts4heartsihschapter@gmail.com', lat: 33.6846, lng: -117.8265 },
+  { name: 'Art4Hearts Waxhaw, NC', leader: 'Shyna Jalota', location: 'Waxhaw', region: 'North Carolina', country: 'USA', email: 'shyna.jalota13@gmail.com', lat: 34.8797, lng: -80.7483 },
+  { name: 'Art4Hearts Hinesville, Georgia', leader: 'Kamilah Perez-Concepcion', location: 'Hinesville', region: 'Georgia', country: 'USA', email: 'milahpc.09@gmail.com', lat: 31.8418, lng: -81.6200 },
+  { name: 'Art4Hearts Strawberry Crest High School', leader: 'Nishita Moravineni', location: 'Shelby', region: 'North Carolina', country: 'USA', email: 'art4heartsschs@gmail.com', lat: 35.2790, lng: -81.6381 },
+  { name: 'Art4Hearts Cary, NC', leader: 'Mackenzie Sanders', location: 'Cary', region: 'North Carolina', country: 'USA', email: 'Mackenzies0308@gmail.com', lat: 35.7915, lng: -78.7811 },
+  { name: 'Art4Hearts Newfane High School', leader: 'Adalyn Shepard', location: 'Newfane', region: 'New York', country: 'USA', email: 'Adalyneshepard56@gmail.com', lat: 43.0530, lng: -78.8020 },
+  { name: 'Art4Hearts Brooke Point High School', leader: 'Kanwal Naveed', location: 'Stafford', region: 'Virginia', country: 'USA', email: 'kanwalnaveed2010@icloud.com', lat: 38.4161, lng: -77.6706 },
+  { name: 'Art4Hearts Bay City Western High School', leader: 'Autumn Lyons', location: 'Bay City', region: 'Michigan', country: 'USA', email: 'lyonsaut2028@bcschools.net', lat: 43.5891, lng: -83.8846 },
+  { name: 'Art4Hearts Walnut', leader: 'Lyonn', location: 'Walnut', region: 'California', country: 'USA', email: 'art4heartswalnut@gmail.com', lat: 34.0105, lng: -117.8660 },
+  { name: 'Art4Hearts Newark', leader: '', location: 'Newark', region: 'California', country: 'USA', email: 'art4heartnewark@gmail.com', lat: 37.5485, lng: -122.0363 },
+  { name: 'Westlake High School', leader: 'Emma Kashyap', location: 'Westlake Village', region: 'California', country: 'USA', email: 'art4heartswhs@gmail.com', lat: 34.1438, lng: -118.8113 },
+  { name: 'Art4Hearts North Garland High School', leader: '', location: 'Garland', region: 'Texas', country: 'USA', email: 'nghsarthearts@gmail.com', lat: 32.9126, lng: -96.6345 },
+  { name: 'Art4Hearts Isaac Bear Early College High School', leader: 'Mackenzie Ryan', location: 'Wilmington', region: 'North Carolina', country: 'USA', email: 'art4heartsibechs@gmail.com', lat: 34.2257, lng: -77.9447 },
+  { name: 'Art4Hearts Mission Oak High School', leader: 'Sparrow Silva', location: 'Tulare', region: 'California', country: 'USA', email: 'art4heartsMOHS@gmail.com', lat: 36.2417, lng: -119.3535 },
+  { name: 'Art4Hearts Louis D Brandeis High School', leader: 'Angela Grace Aquino', location: 'San Antonio', region: 'Texas', country: 'USA', email: 'art4hearts.louisdbrandeishs@gmail.com', lat: 29.4241, lng: -98.4936 },
+  { name: 'Art4Hearts Lakewood High School', leader: 'Ella Morgan', location: 'Lakewood', region: 'Colorado', country: 'USA', email: 'art4hearts.lakewoodhs@gmail.com', lat: 39.7139, lng: -105.0844 },
+  { name: 'Art4Hearts Columbia', leader: 'Mackenna Maddox', location: 'Columbia', region: 'South Carolina', country: 'USA', email: 'art4heartscolumbia@gmail.com', lat: 34.0007, lng: -81.0348 },
+  { name: 'Art4Hearts Salt Lake City', leader: '', location: 'Salt Lake City', region: 'Utah', country: 'USA', email: 'art4hearts.slc@gmail.com', lat: 40.7608, lng: -111.8910 },
+  { name: 'Art4Hearts El Modena High School', leader: 'Sarah Dinh', location: 'Orange', region: 'California', country: 'USA', email: 'elmo.art4hearts@gmail.com', lat: 33.7879, lng: -117.8527 },
+  { name: 'Art4Hearts Orlando', leader: '', location: 'Orlando', region: 'Florida', country: 'USA', email: 'art4hearts.orlando@gmail.com', lat: 28.5421, lng: -81.3723 },
+  { name: 'Art4Hearts St. Mary\'s Preparatory High School', leader: 'Adelina', location: 'West Bloomfield', region: 'Michigan', country: 'USA', email: '', lat: 42.5419, lng: -83.4788 },
+  { name: 'Art4Hearts Pasco High School', leader: 'Jenna Bragg', location: 'Pasco', region: 'Washington', country: 'USA', email: 'art4heartspasco@gmail.com', lat: 46.2396, lng: -119.1007 },
+  { name: 'Art4Hearts 10th of Ramadan City', leader: 'Menna Esam', location: '10th of Ramadan City', region: 'Sharkya', country: 'Egypt', email: 'mennaabozahra2008@gmail.com', lat: 30.4850, lng: 31.4455 },
+  { name: 'Art4Hearts King\'s College Alicante', leader: 'Alejandra Lín', location: 'Elche', region: 'Alicante', country: 'Spain', email: 'Alejandra.lin189@gmail.com', lat: 38.2688, lng: -0.6954 },
+  { name: 'Art4Hearts Yangon, Myanmar', leader: 'Clara Zaw', location: 'Yangon', region: 'Yangon', country: 'Myanmar', email: 'clara.nguushweyizaw@gmail.com', lat: 16.8661, lng: 96.1951 },
+  { name: 'Art4Hearts The Millennium School', leader: 'Aleena Ahmed', location: 'Dubai', region: 'Dubai', country: 'United Arab Emirates', email: 'Aleenaahmed063@gmail.com', lat: 25.2048, lng: 55.2708 },
+  { name: 'Art4Hearts Athens', leader: 'Danae Lianantonaki', location: 'Athens', region: 'Attica', country: 'Greece', email: 'art4heartsathens@gmail.com', lat: 37.9838, lng: 23.7275 },
+  { name: 'Art4Hearts Segamat', leader: 'Lee Jing', location: 'Segamat', region: 'Johor', country: 'Malaysia', email: 'art4hearts.segamat@gmail.com', lat: 2.7250, lng: 102.8125 }
+];
+
+// ChaptersMapEmbed Component
+const ChaptersMapEmbed: React.FC = () => {
+  const mapRef = useRef<HTMLDivElement>(null);
+  const mapInstanceRef = useRef<L.Map | null>(null);
+
+  useEffect(() => {
+    if (!mapRef.current) return;
+
+    // Only initialize if not already initialized
+    if (mapInstanceRef.current) return;
+
+    try {
+      // Create map with default center (USA)
+      const map = L.map(mapRef.current).setView([39.8283, -98.5795], 4);
+
+      // Add OpenStreetMap tile layer
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors',
+        maxZoom: 19
+      }).addTo(map);
+
+      // Create custom heart icon
+      const createHeartIcon = (isUSA: boolean) => {
+        const color = isUSA ? '#8b5cf6' : '#ec4899'; // purple for USA, pink for international
+        return L.divIcon({
+          html: `<div style="
+            width: 30px;
+            height: 30px;
+            background: ${color};
+            border-radius: 50% 50% 0 0;
+            transform: rotate(-45deg);
+            border: 2px solid white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+          "></div>`,
+          iconSize: [30, 30],
+          className: 'custom-marker'
+        });
+      };
+
+      // Add markers for each chapter
+      chaptersData.forEach(chapter => {
+        const isUSA = chapter.country === 'USA';
+        const marker = L.marker([chapter.lat, chapter.lng], {
+          icon: createHeartIcon(isUSA)
+        }).addTo(map);
+
+        // Create popup content
+        const popupContent = `
+          <div style="font-family: 'Kollektif', sans-serif; font-size: 14px;">
+            <strong>${chapter.name}</strong><br/>
+            <strong>Location:</strong> ${chapter.location}, ${chapter.region}<br/>
+            <strong>Country:</strong> ${chapter.country}<br/>
+            ${chapter.leader ? `<strong>Leader:</strong> ${chapter.leader}<br/>` : ''}
+            ${chapter.email ? `<strong>Email:</strong> ${chapter.email}` : ''}
+          </div>
+        `;
+
+        marker.bindPopup(popupContent);
+      });
+
+      mapInstanceRef.current = map;
+
+      // Handle window resize for responsive map
+      const handleResize = () => {
+        if (mapInstanceRef.current) {
+          setTimeout(() => mapInstanceRef.current?.invalidateSize(), 250);
+        }
+      };
+
+      window.addEventListener('resize', handleResize);
+
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
+    } catch (error) {
+      console.error('Error initializing map:', error);
+    }
+  }, []);
+
+  return <MapContainer ref={mapRef} />;
+};
+
 const Home: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'initiatives' | 'chapters' | 'volunteering'>('initiatives');
   const [expandedFAQ, setExpandedFAQ] = useState<number | null>(null);
@@ -1183,6 +1369,10 @@ const Home: React.FC = () => {
             <div className="label">Kits & Bracelets</div>
           </StatCard>
         </StatGrid>
+
+        <MapEmbedSection>
+          <ChaptersMapEmbed />
+        </MapEmbedSection>
       </WhiteSection>
 
       {/* FAQ Section */}
