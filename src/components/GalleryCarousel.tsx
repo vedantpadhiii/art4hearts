@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 interface GalleryCarouselProps {
   images: string[];
@@ -8,154 +8,102 @@ interface GalleryCarouselProps {
 
 const CarouselContainer = styled.div`
   position: relative;
-  width: 100vw;
-  margin-left: calc(-50vw + 50%);
-  margin-right: calc(-50vw + 50%);
-  aspect-ratio: 16 / 10;
+  width: 100%;
   overflow: hidden;
-  border-radius: 0;
-  box-shadow: 0 12px 40px rgba(198, 221, 220, 0.3);
-  background: #f5f5f5;
+  padding: 2rem 0;
+  background: linear-gradient(to bottom, #f5f5f5, #ffffff);
 `;
 
-const ImageWrapper = styled(motion.div)`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
+const ScrollTrack = styled(motion.div)`
+  display: flex;
+  gap: 1.5rem;
+  padding: 0 2rem;
+  width: fit-content;
+`;
+
+const ImageItem = styled.div`
+  flex: 0 0 auto;
+  width: clamp(200px, 30vw, 350px);
+  aspect-ratio: 1;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 32px rgba(198, 221, 220, 0.3);
+  }
 
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
-`;
-
-const NavButton = styled.button`
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.4);
-  color: white;
-  border: none;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  transition: all 0.3s ease;
-  z-index: 10;
-
-  &:hover {
-    background: rgba(0, 0, 0, 0.7);
-    transform: translateY(-50%) scale(1.1);
-  }
-
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
 
   @media (max-width: 768px) {
-    width: 40px;
-    height: 40px;
-    font-size: 1.2rem;
+    width: clamp(140px, 45vw, 220px);
   }
 `;
 
-const PrevButton = styled(NavButton)`
-  left: 20px;
-`;
-
-const NextButton = styled(NavButton)`
-  right: 20px;
-`;
-
-const DotContainer = styled.div`
+const ScrollGradient = styled.div`
   position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 0.8rem;
-  z-index: 10;
-`;
+  top: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 1;
 
-const Dot = styled.button<{ isActive: boolean }>`
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  border: none;
-  background: ${props => props.isActive ? '#ffffff' : 'rgba(255, 255, 255, 0.5)'};
-  cursor: pointer;
-  transition: all 0.3s ease;
+  &.left {
+    left: 0;
+    width: 60px;
+    background: linear-gradient(to right, rgba(245, 245, 245, 0.8), transparent);
 
-  &:hover {
-    background: rgba(255, 255, 255, 0.8);
+    @media (max-width: 768px) {
+      width: 40px;
+    }
+  }
+
+  &.right {
+    right: 0;
+    width: 60px;
+    background: linear-gradient(to left, rgba(255, 255, 255, 0.8), transparent);
+
+    @media (max-width: 768px) {
+      width: 40px;
+    }
   }
 `;
 
 const GalleryCarousel: React.FC<GalleryCarouselProps> = ({ images }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  // Create a seamless loop by duplicating images
+  const duplicatedImages = [...images, ...images, ...images];
 
-  // Infinite carousel effect using modulo
-  const getImageIndex = (index: number) => {
-    return ((index % images.length) + images.length) % images.length;
-  };
-
-  const currentImage = images[getImageIndex(currentIndex)];
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex(prev => prev + 1);
-    }, 6000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  const handlePrev = () => {
-    setCurrentIndex(prev => prev - 1);
-  };
-
-  const handleNext = () => {
-    setCurrentIndex(prev => prev + 1);
-  };
+  // Calculate animation duration based on number of images
+  // Each image gets about 3 seconds of screen time
+  const animationDuration = images.length * 4;
 
   return (
     <CarouselContainer>
-      <AnimatePresence mode="wait">
-        <ImageWrapper
-          key={currentImage}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <img src={currentImage} alt="Gallery" />
-        </ImageWrapper>
-      </AnimatePresence>
-
-      <PrevButton onClick={handlePrev} aria-label="Previous image">
-        ‹
-      </PrevButton>
-      <NextButton onClick={handleNext} aria-label="Next image">
-        ›
-      </NextButton>
-
-      <DotContainer>
-        {images.map((_, index) => (
-          <Dot
-            key={index}
-            isActive={getImageIndex(currentIndex) === index}
-            onClick={() => setCurrentIndex(index)}
-            aria-label={`Go to slide ${index + 1}`}
-          />
+      <ScrollTrack
+        animate={{
+          x: [0, -images.length * (300 + 24)], // 300px item width + 24px gap
+        }}
+        transition={{
+          duration: animationDuration,
+          ease: 'linear',
+          repeat: Infinity,
+        }}
+      >
+        {duplicatedImages.map((image, index) => (
+          <ImageItem key={index}>
+            <img src={image} alt={`Gallery item ${index + 1}`} />
+          </ImageItem>
         ))}
-      </DotContainer>
+      </ScrollTrack>
+
+      <ScrollGradient className="left" />
+      <ScrollGradient className="right" />
     </CarouselContainer>
   );
 };
