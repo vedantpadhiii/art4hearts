@@ -177,6 +177,9 @@ const Card = styled(motion.div)`
   transition: all 0.3s ease;
   border: 2px solid transparent;
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 
   &:hover {
     transform: translateY(-12px);
@@ -196,6 +199,7 @@ const Card = styled(motion.div)`
     color: #000000;
     line-height: 1.7;
     margin-bottom: 1.5rem;
+    flex-grow: 1;
   }
 
   a, button {
@@ -209,6 +213,7 @@ const Card = styled(motion.div)`
     font-weight: 600;
     transition: all 0.3s ease;
     cursor: pointer;
+    margin-top: auto;
 
     &:hover {
       background: #333333;
