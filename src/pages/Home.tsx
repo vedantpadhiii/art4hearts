@@ -57,7 +57,7 @@ const itemVariants = {
 // Hero Section
 const HeroSection = styled.section`
   background: linear-gradient(135deg, #c6dddc 0%, #b3d4d2 100%);
-  padding: clamp(4rem, 8vh, 5rem) 2rem;
+  padding: clamp(5rem, 10vh, 8rem) 2rem;
   position: relative;
   overflow: visible;
   min-height: 85vh;
@@ -1211,7 +1211,7 @@ const Home: React.FC = () => {
                 Explore More <span>→</span>
               </StyledLink>
             </div>
-            <img className="content-image" src="/Art4Hearts-Logo-NoBackground.png" alt="Volunteering" />
+            <img className="content-image" src="/volunteering-packing.png" alt="Volunteering" />
           </ContentCard>
         )}
       </WhiteSection>

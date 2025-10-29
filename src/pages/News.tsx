@@ -18,7 +18,7 @@ const NewsContainer = styled.div`
 const HeroSection = styled.section`
   position: relative;
   text-align: center;
-  padding: 6rem 2rem;
+  padding: clamp(5rem, 10vh, 8rem) 2rem;
   background: linear-gradient(135deg, #2563eb11 0%, #2563eb05 100%);
   margin-bottom: 4rem;
   

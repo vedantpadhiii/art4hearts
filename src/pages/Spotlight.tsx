@@ -41,6 +41,12 @@ const HeroSection = styled.section`
   margin-bottom: 4rem;
   background: #ede9fe;
   overflow: hidden;
+  margin-top: ${({ theme }) => theme.spacing.header};
+  width: 100%;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  padding: clamp(5rem, 10vh, 8rem) 2rem;
+  box-sizing: border-box;
 
   &::before {
     content: '';

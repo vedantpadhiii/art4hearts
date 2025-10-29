@@ -98,7 +98,7 @@ const RightSection = styled.div`
 `;
 
 const ContactLink = styled(Link)<{ $isActive?: boolean }>`
-  color: #1e3a8a;
+  color: #51aba7;
   text-decoration: none;
   font-weight: 700;
   padding: 0.6rem 1.5rem;
@@ -106,9 +106,10 @@ const ContactLink = styled(Link)<{ $isActive?: boolean }>`
   letter-spacing: 0.03em;
   transition: all 0.3s ease;
   border-radius: 8px;
-  border: 2px solid #1e3a8a;
+  border: 2px solid #51aba7;
   white-space: nowrap;
   background: transparent;
+  font-family: 'Kollektif', sans-serif;
   
   &:hover {
     background: #000000;
@@ -120,7 +121,7 @@ const ContactLink = styled(Link)<{ $isActive?: boolean }>`
 `;
 
 const InstagramLink = styled.a`
-  color: #1e3a8a;
+  color: #51aba7;
   text-decoration: none;
   font-weight: 600;
   padding: 0.5rem;
@@ -133,7 +134,7 @@ const InstagramLink = styled.a`
   justify-content: center;
   width: 40px;
   height: 40px;
-  border: 2px solid #1e3a8a;
+  border: 2px solid #51aba7;
   background: transparent;
   white-space: nowrap;
   
@@ -162,6 +163,7 @@ const NavLink = styled(Link)<{ $isActive?: boolean }>`
   white-space: nowrap;
   border-radius: 6px;
   position: relative;
+  font-family: 'Kollektif', sans-serif;
   
   ${props => props.$isActive && `
     color: white;
@@ -180,7 +182,7 @@ const Dropdown = styled.div<{ isOpen: boolean }>`
   top: 100%;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(255, 255, 255, 0.98);
+  background: linear-gradient(135deg, #c6dddc 0%, #b3d4d2 100%);
   border: 1px solid rgba(37, 99, 235, 0.15);
   border-radius: 12px;
   padding: 0.75rem;
