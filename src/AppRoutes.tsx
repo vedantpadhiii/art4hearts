@@ -14,6 +14,8 @@ import FAQs from './pages/FAQs';
 import Spotlights from './pages/Spotlights';
 import Contact from './pages/Contact';
 
+
+
 const AppRoutes: React.FC = () => {
   const location = useLocation();
 
@@ -22,6 +24,7 @@ const AppRoutes: React.FC = () => {
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<Home />} />
+
           <Route path="/about" element={<About />} />
           <Route path="/about/team" element={<Team />} />
           <Route path="/about/chapters" element={<Chapters />} />
@@ -30,6 +33,8 @@ const AppRoutes: React.FC = () => {
           <Route path="/gallery" element={<Spotlights />} />
           <Route path="/spotlights" element={<Spotlights />} />
           <Route path="/contact" element={<Contact />} />
+
+x
         </Routes>
       </AnimatePresence>
     </Layout>

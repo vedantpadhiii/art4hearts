@@ -3,6 +3,8 @@ import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { useScroll } from '../context/ScrollContext';
 import Logo from '../assets/Logo';
+import '../index.css';
+
 
 // Instagram Icon
 const InstagramIcon = () => (

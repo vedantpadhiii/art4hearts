@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
+
 interface Chapter {
   name: string;
   leader: string;

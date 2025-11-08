@@ -7,6 +7,8 @@ import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 import GalleryCarousel from '../components/GalleryCarousel';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
+import '../index.css';
+
 
 // FAQ Data
 const homepageFAQs = [
