@@ -286,31 +286,46 @@ const MapContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 700px;
-  gap: 0;
+  min-height: 0;
+  gap: 1rem;
   margin-bottom: 2rem;
+  padding: 0;
+`;
+
+const MapSectionWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 700px;
+  gap: 1rem;
 
   @media (max-width: 1024px) {
-    flex-direction: column;
-    height: 600px;
+    min-height: 600px;
   }
 
   @media (max-width: 768px) {
-    height: 500px;
+    min-height: 500px;
   }
 `;
 
 const MapWrapper = styled.div`
   width: 100%;
-  height: 100%;
-  border-radius: 0;
+  flex: 1;
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: none;
-  margin-bottom: 0;
+  box-shadow: 0 12px 32px rgba(198, 221, 220, 0.2);
   position: relative;
   z-index: 1;
   background: white;
-  flex: 1;
+  min-height: 600px;
+
+  @media (max-width: 1024px) {
+    min-height: 500px;
+  }
+
+  @media (max-width: 768px) {
+    min-height: 400px;
+  }
 
   .leaflet-container {
     height: 100%;
@@ -320,16 +335,22 @@ const MapWrapper = styled.div`
   }
 
   .leaflet-marker-icon {
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
   }
 
   .leaflet-popup-content-wrapper {
     border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(198, 221, 220, 0.25);
+    box-shadow: 0 8px 24px rgba(198, 221, 220, 0.3);
+    border: none;
   }
 
   .leaflet-popup-tip {
     background: white;
+  }
+
+  .leaflet-control-zoom {
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
 `;
 
@@ -362,6 +383,12 @@ const MapSection = styled(motion.div)`
   flex-direction: column;
   flex: 1;
   width: 100%;
+  gap: 1rem;
+  padding: 2rem;
+
+  @media (max-width: 768px) {
+    padding: 1.5rem;
+  }
 
   &:nth-child(2),
   &:nth-child(3) {
@@ -372,17 +399,19 @@ const MapSection = styled(motion.div)`
 const MapTitle = styled.h2`
   font-size: 2.5rem;
   color: #000000;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.75rem;
+  margin-top: 0;
   font-weight: 600;
-  padding: 1.5rem 2rem 0;
+  padding: 0;
   border-bottom: none;
   background: transparent;
   letter-spacing: normal;
   flex-shrink: 0;
+  line-height: 1.2;
 
   @media (max-width: 768px) {
     font-size: 1.8rem;
-    padding: 1rem 1.5rem 0;
+    padding: 0;
   }
 `;
 
