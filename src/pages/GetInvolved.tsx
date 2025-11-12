@@ -220,6 +220,19 @@ const Card = styled(motion.div)`
       color: white;
       transform: scale(1.05);
     }
+
+    &:disabled {
+      background: #cccccc;
+      color: #666666;
+      cursor: not-allowed;
+      opacity: 0.6;
+      transform: none;
+
+      &:hover {
+        background: #cccccc;
+        transform: none;
+      }
+    }
   }
 `;
 
@@ -326,7 +339,7 @@ const GetInvolved: React.FC = () => {
             <p>
               Support our cause financially. Your donations help us provide art supplies, expand our programs, and reach more communities in need of healing and creativity.
             </p>
-            <button onClick={() => alert('Donation portal coming soon!')}>Make a Donation</button>
+            <button disabled>Coming Soon</button>
           </Card>
 
           <Card
