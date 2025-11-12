@@ -376,34 +376,57 @@ const MapEmbedSection = styled.div`
 
 const MapContainer = styled.div`
   width: 100%;
-  height: 500px;
-  border-radius: 12px;
+  min-height: 600px;
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 12px 32px rgba(198, 221, 220, 0.2);
   margin-top: 2rem;
+  background: white;
+  display: flex;
+  flex-direction: column;
 
   .leaflet-container {
     height: 100%;
     width: 100%;
     background: white;
-    border-radius: 12px;
+    border-radius: 16px;
+    flex: 1;
+    min-height: 600px;
   }
 
   .leaflet-marker-icon {
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
   }
 
   .leaflet-popup-content-wrapper {
     border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(198, 221, 220, 0.25);
+    box-shadow: 0 8px 24px rgba(198, 221, 220, 0.3);
+    border: none;
   }
 
   .leaflet-popup-tip {
     background: white;
   }
 
+  .leaflet-control-zoom {
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  @media (max-width: 1024px) {
+    min-height: 500px;
+
+    .leaflet-container {
+      min-height: 500px;
+    }
+  }
+
   @media (max-width: 768px) {
-    height: 400px;
+    min-height: 400px;
+
+    .leaflet-container {
+      min-height: 400px;
+    }
   }
 `;
 
@@ -1267,7 +1290,7 @@ const Home: React.FC = () => {
           >
             <h3>Looking for a Kit or Bracelet?</h3>
             <p>If you're a hospital, senior center, or any charitable organization, we'd love to help!</p>
-            <a href="https://art4hearts.onrender.com/contact" target="_blank" rel="noopener noreferrer">Contact Us</a>
+            <Link to="/contact">Contact Us</Link>
           </Card>
         </CardGrid>
       </LightSection>
