@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.8f96650c.css",
+    "main.js": "/static/js/main.d30eadbb.js",
+    "static/media/Kollektif-Bold.ttf": "/static/media/Kollektif-Bold.d97641da7b1897b8ee19.ttf",
+    "static/media/Kollektif-BoldItalic.ttf": "/static/media/Kollektif-BoldItalic.577d896c027c07a14345.ttf",
+    "static/media/Kollektif.ttf": "/static/media/Kollektif.33fdfd1d0f21c0c8283b.ttf",
+    "static/media/Kollektif-Italic.ttf": "/static/media/Kollektif-Italic.0e7ef841e38b13bbac89.ttf",
+    "index.html": "/index.html",
+    "main.8f96650c.css.map": "/static/css/main.8f96650c.css.map",
+    "main.d30eadbb.js.map": "/static/js/main.d30eadbb.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8f96650c.css",
+    "static/js/main.d30eadbb.js"
+  ]
+}
