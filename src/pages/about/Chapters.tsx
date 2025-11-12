@@ -286,64 +286,31 @@ const MapContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: 2rem;
-  margin-bottom: 0;
-  padding: 2rem;
+  height: 700px;
+  gap: 0;
+  margin-bottom: 2rem;
 
   @media (max-width: 1024px) {
-    padding: 1.5rem;
+    flex-direction: column;
+    height: 600px;
   }
 
   @media (max-width: 768px) {
-    padding: 1rem;
+    height: 500px;
   }
-`;
-
-const StatsContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1.5rem;
-  margin-bottom: 1rem;
-
-  @media (max-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-`;
-
-const StatCard = styled(motion.div)`
-  background: linear-gradient(135deg, #c6dddc 0%, #b3d4d2 100%);
-  border-radius: 12px;
-  padding: 1.5rem;
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(198, 221, 220, 0.2);
-`;
-
-const StatNumber = styled.h3`
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #000000;
-  margin-bottom: 0.5rem;
-
-  @media (max-width: 768px) {
-    font-size: 2rem;
-  }
-`;
-
-const StatLabel = styled.p`
-  font-size: 0.95rem;
-  color: #333333;
-  font-weight: 600;
 `;
 
 const MapWrapper = styled.div`
   width: 100%;
-  height: 600px;
-  border-radius: 16px;
+  height: 100%;
+  border-radius: 0;
   overflow: hidden;
-  box-shadow: 0 12px 32px rgba(198, 221, 220, 0.25);
+  box-shadow: none;
+  margin-bottom: 0;
   position: relative;
   z-index: 1;
   background: white;
+  flex: 1;
 
   .leaflet-container {
     height: 100%;
@@ -353,32 +320,40 @@ const MapWrapper = styled.div`
   }
 
   .leaflet-marker-icon {
-    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.15));
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
   }
 
   .leaflet-popup-content-wrapper {
     border-radius: 12px;
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
-    background: white;
-    padding: 0;
+    box-shadow: 0 8px 24px rgba(198, 221, 220, 0.25);
   }
 
   .leaflet-popup-tip {
     background: white;
   }
+`;
 
-  .leaflet-popup-content {
-    margin: 0;
-    padding: 0;
-  }
+const MapHeaderContainer = styled.div`
+  display: none;
+  grid-column: 1 / -1;
+  margin-bottom: 2rem;
+`;
+
+const MapSectionTitle = styled.h2`
+  font-size: 1.6rem;
+  color: #5b21b6;
+  margin-bottom: 1rem;
+  font-weight: 700;
+`;
+
+const StateCardContainer = styled.div`
+  display: none;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+  margin-bottom: 4rem;
 
   @media (max-width: 1024px) {
-    height: 500px;
-  }
-
-  @media (max-width: 768px) {
-    height: 400px;
-    border-radius: 12px;
+    grid-template-columns: 1fr;
   }
 `;
 
@@ -387,7 +362,6 @@ const MapSection = styled(motion.div)`
   flex-direction: column;
   flex: 1;
   width: 100%;
-  gap: 1.5rem;
 
   &:nth-child(2),
   &:nth-child(3) {
@@ -395,36 +369,88 @@ const MapSection = styled(motion.div)`
   }
 `;
 
-const MapHeaderContainer = styled.div`
-  display: none;
-`;
-
-const MapSectionTitle = styled.h2`
-  display: none;
-`;
-
-const StateCardContainer = styled.div`
-  display: none;
-`;
-
 const MapTitle = styled.h2`
-  display: none;
+  font-size: 2.5rem;
+  color: #000000;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  padding: 1.5rem 2rem 0;
+  border-bottom: none;
+  background: transparent;
+  letter-spacing: normal;
+  flex-shrink: 0;
+
+  @media (max-width: 768px) {
+    font-size: 1.8rem;
+    padding: 1rem 1.5rem 0;
+  }
 `;
 
 const StateGrid = styled.div`
-  display: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
 `;
 
 const StateCard = styled(motion.button)`
-  display: none;
+  background: linear-gradient(135deg, #ede9fe 0%, #f3e8ff 100%);
+  border: 2px solid #c4b5fd;
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+  font-weight: 600;
+  color: #5b21b6;
+  font-size: 1rem;
+
+  &:hover {
+    border-color: #8b5cf6;
+    background: linear-gradient(135deg, #ddd6fe 0%, #ede9fe 100%);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(139, 92, 246, 0.2);
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+    padding: 1rem;
+  }
 `;
 
 const CountryCard = styled(motion.button)`
-  display: none;
+  background: linear-gradient(135deg, #ede9fe 0%, #f3e8ff 100%);
+  border: 2px solid #c4b5fd;
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+  font-weight: 600;
+  color: #5b21b6;
+  font-size: 1rem;
+
+  &:hover {
+    border-color: #8b5cf6;
+    background: linear-gradient(135deg, #ddd6fe 0%, #ede9fe 100%);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(139, 92, 246, 0.2);
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+    padding: 1rem;
+  }
 `;
 
 const ChapterCount = styled.div`
-  display: none;
+  font-size: 0.8rem;
+  color: #7c3aed;
+  margin-top: 0.5rem;
+  font-weight: 500;
 `;
 
 const Modal = styled(motion.div)`
@@ -694,37 +720,6 @@ const Chapters: React.FC = () => {
         viewport={{ once: true }}
       >
         <MapContainer>
-          {/* Quick Stats */}
-          <StatsContainer>
-            <StatCard
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              viewport={{ once: true }}
-            >
-              <StatNumber>{chapters.length}</StatNumber>
-              <StatLabel>Total Chapters</StatLabel>
-            </StatCard>
-            <StatCard
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
-              <StatNumber>{usStates.filter(state => getChaptersForRegion(state, 'USA').length > 0).length}</StatNumber>
-              <StatLabel>States Covered</StatLabel>
-            </StatCard>
-            <StatCard
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              viewport={{ once: true }}
-            >
-              <StatNumber>{countries.filter(country => getChaptersForRegion(country, country).length > 0).length}</StatNumber>
-              <StatLabel>Countries</StatLabel>
-            </StatCard>
-          </StatsContainer>
-
           {/* Interactive Map Section */}
           <MapSection
             variants={containerVariants}
@@ -732,7 +727,60 @@ const Chapters: React.FC = () => {
             whileInView="visible"
             viewport={{ once: true }}
           >
+            <MapTitle>Interactive Map</MapTitle>
             <MapWrapper ref={mapContainerRef} />
+          </MapSection>
+
+          {/* USA Section */}
+          <MapSection
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            <MapTitle>United States</MapTitle>
+            <StateGrid>
+              {usStates.map((state) => (
+                <StateCard
+                  key={state}
+                  onClick={() => setSelectedRegion(`${state}-USA`)}
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  {state}
+                  <ChapterCount>
+                    {getChaptersForRegion(state, 'USA').length} {getChaptersForRegion(state, 'USA').length === 1 ? 'chapter' : 'chapters'}
+                  </ChapterCount>
+                </StateCard>
+              ))}
+            </StateGrid>
+          </MapSection>
+
+          {/* International Section */}
+          <MapSection
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            <MapTitle>International</MapTitle>
+            <StateGrid>
+              {countries.map((country) => (
+                <CountryCard
+                  key={country}
+                  onClick={() => setSelectedRegion(`${country}-INTL`)}
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  {country}
+                  <ChapterCount>
+                    {getChaptersForRegion(country, country).length} {getChaptersForRegion(country, country).length === 1 ? 'chapter' : 'chapters'}
+                  </ChapterCount>
+                </CountryCard>
+              ))}
+            </StateGrid>
           </MapSection>
         </MapContainer>
       </ContentSection>
