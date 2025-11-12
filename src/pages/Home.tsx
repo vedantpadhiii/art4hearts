@@ -1293,7 +1293,7 @@ const Home: React.FC = () => {
                 <strong>Bracelets:</strong> Make handmade bracelets for someone in need of care. These bracelets provide comfort and encouragement to those who receive them.
               </p>
               <InstructionButton 
-                href="https://www.instagram.com/p/DMTzV_3PXf5/?img_index=1" 
+                href="https://www.instagram.com/p/DMJ0X4BujJx/?img_index=1" 
                 target="_blank" 
                 rel="noopener noreferrer"
               >
