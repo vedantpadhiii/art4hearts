@@ -191,6 +191,23 @@ const Contact: React.FC = () => {
                 Instagram
               </a>
               <a
+                href="https://www.linkedin.com/company/art4hearts/"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: 'inline-block',
+                  padding: '0.75rem 1.25rem',
+                  background: '#000000',
+                  color: 'white',
+                  borderRadius: '8px',
+                  textDecoration: 'none',
+                  fontWeight: 600,
+                  transition: 'all 0.3s ease',
+                }}
+              >
+                LinkedIn
+              </a>
+              <a
                 href="https://linktr.ee/art4hearts"
                 target="_blank"
                 rel="noopener noreferrer"

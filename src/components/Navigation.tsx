@@ -13,6 +13,14 @@ const InstagramIcon = () => (
   </svg>
 );
 
+// LinkedIn Icon
+const LinkedInIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.475-2.236-1.986-2.236-1.081 0-1.722.722-2.004 1.418-.103.249-.129.597-.129.946v5.441h-3.554s.05-8.736 0-9.644h3.554v1.361c.425-.654 1.185-1.586 2.882-1.586 2.105 0 3.681 1.376 3.681 4.336v5.533zM5.337 8.855c-1.144 0-1.915-.759-1.915-1.71 0-.956.77-1.71 1.956-1.71 1.187 0 1.915.75 1.935 1.71 0 .951-.748 1.71-1.976 1.71zm1.946 11.597H3.392V9.808h3.891v10.644zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+  </svg>
+);
+
+
 const NavContainer = styled.nav<{ isScrolled: boolean; isVisible: boolean }>`
   position: fixed;
   top: 0;
@@ -149,6 +157,35 @@ const InstagramLink = styled.a`
     box-shadow: 0 4px 12px rgba(204, 35, 102, 0.3);
   }
 `;
+
+const LinkedInLink = styled.a`
+  color: #51aba7;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  letter-spacing: 0.03em;
+  transition: all 0.3s ease;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 2px solid #51aba7;
+  background: transparent;
+  white-space: nowrap;
+  font-family: 'Kollektif', sans-serif;
+  
+  &:hover {
+    background: #0A66C2;
+    border-color: #0A66C2;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(10, 102, 194, 0.3);
+  }
+`;
+
 
 const NavItem = styled.div`
   position: relative;
@@ -366,6 +403,14 @@ export const Navigation: React.FC = () => {
             >
               <InstagramIcon />
             </InstagramLink>
+            <LinkedInLink 
+              href="https://www.linkedin.com/company/art4hearts/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              title="Follow us on LinkedIn"
+            >
+              <LinkedInIcon />
+            </LinkedInLink>
           </RightSection>
         </NavLinks>
       </NavContent>
