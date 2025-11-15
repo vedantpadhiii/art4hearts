@@ -1,0 +1,7 @@
+services:
+  - type: static
+    name: art4hearts
+    staticPublishPath: ./build
+    routes:
+      - path: /*
+        dest: /index.html
