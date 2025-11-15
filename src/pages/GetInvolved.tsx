@@ -395,7 +395,7 @@ const GetInvolved: React.FC = () => {
             <p>
               If you represent a hospital, senior center, or charitable organization, we'd love to help! Request art therapy kits or a workshop for your community.
             </p>
-            <a href="/contact">Contact Us</a>
+            <Link to="/contact" style={{ display: 'inline-block', padding: '0.8rem 2rem', background: '#000000', color: 'white', textDecoration: 'none', borderRadius: '8px', fontWeight: 600, marginTop: 'auto', transition: 'all 0.3s ease', cursor: 'pointer' }}>Contact Us</Link>
           </Card>
         </CardGrid>
       </WhiteSection>
