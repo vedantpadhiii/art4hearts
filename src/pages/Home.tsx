@@ -1432,11 +1432,11 @@ const Home: React.FC = () => {
           >
             <GalleryCarousel 
               images={[
+                '/gallery/DSCF5420.jpg',
                 '/gallery/DSCF5468.jpg',
                 '/gallery/IMG_8906.jpg',
-                '/gallery/Screenshot 2025-10-14 at 2.49.57 PM.jpg',
-                '/gallery/Screenshot 2025-10-14 at 2.53.15 PM.jpg',
-                '/gallery/Screenshot 2025-10-14 at 3.03.34 PM.jpg',
+                '/gallery/club_rush_sept_5.jpg',
+                '/gallery/image2.jpg',
               ]}
             />
           </motion.div>
