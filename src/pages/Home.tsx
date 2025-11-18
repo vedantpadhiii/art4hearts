@@ -548,9 +548,9 @@ const GalleryButton = styled(motion.a)`
 // Partners Section
 const PartnersSection = styled(motion.div)`
   display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  padding: 2rem 2rem;
+  flex-wrap: nowrap;
+  gap: 2rem;
+  padding: 3rem 2rem;
   align-items: center;
   justify-content: center;
   background: white;
@@ -559,27 +559,42 @@ const PartnersSection = styled(motion.div)`
   margin-right: calc(-50vw + 50%);
   padding-left: calc(50vw - 50%);
   padding-right: calc(50vw - 50%);
+  overflow-x: auto;
 
   img {
-    max-width: 100%;
-    width: auto;
+    flex-shrink: 0;
+    width: clamp(120px, 15vw, 200px);
     height: auto;
-    max-height: 200px;
+    max-height: clamp(80px, 10vw, 150px);
     object-fit: contain;
     filter: grayscale(0%);
     transition: all 0.3s ease;
 
     &:hover {
-      transform: scale(1.05);
+      transform: scale(1.1);
+    }
+  }
+
+  @media (max-width: 1024px) {
+    gap: 1.5rem;
+    padding: 2rem 1rem;
+
+    img {
+      width: clamp(100px, 12vw, 160px);
+      max-height: clamp(70px, 8vw, 120px);
     }
   }
 
   @media (max-width: 768px) {
     gap: 1.5rem;
     padding: 1.5rem 1rem;
-    
+    flex-wrap: wrap;
+    overflow-x: visible;
+
     img {
-      max-height: 150px;
+      width: clamp(80px, 20vw, 120px);
+      max-height: clamp(60px, 12vw, 100px);
+      flex-shrink: 1;
     }
   }
 `;
