@@ -1432,7 +1432,6 @@ const Home: React.FC = () => {
           >
             <GalleryCarousel 
               images={[
-                '/gallery/DSCF5420.jpg',
                 '/gallery/DSCF5468.jpg',
                 '/gallery/IMG_8906.jpg',
                 '/gallery/club_rush_sept_5.jpg',
