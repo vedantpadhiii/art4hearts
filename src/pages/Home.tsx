@@ -552,7 +552,7 @@ const PartnersSection = styled(motion.div)`
       transform: translateX(0);
     }
     100% {
-      transform: translateX(-50%);
+      transform: translateX(calc(-100% / 2));
     }
   }
 
@@ -569,7 +569,7 @@ const PartnersSection = styled(motion.div)`
   padding-left: calc(50vw - 50%);
   padding-right: calc(50vw - 50%);
   overflow: hidden;
-  animation: slideLogos 40s linear infinite;
+  animation: slideLogos 50s linear infinite;
 
   img {
     flex-shrink: 0;
@@ -588,7 +588,7 @@ const PartnersSection = styled(motion.div)`
   @media (max-width: 1024px) {
     gap: 1.5rem;
     padding: 2rem 1rem;
-    animation: slideLogos 35s linear infinite;
+    animation: slideLogos 45s linear infinite;
 
     img {
       width: clamp(100px, 12vw, 160px);
@@ -610,6 +610,16 @@ const PartnersSection = styled(motion.div)`
       flex-shrink: 1;
     }
   }
+`;
+
+const PartnersTitle = styled(motion.h2)`
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 2rem 0 1rem 0;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 `;
 
 // Subsection Grid
@@ -1214,6 +1224,14 @@ const Home: React.FC = () => {
       </HeroSection>
 
       {/* Partners Section */}
+      <PartnersTitle
+        initial={{ opacity: 0, y: -20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+      >
+        In Collaboration With
+      </PartnersTitle>
       <PartnersSection
         initial="hidden"
         whileInView="visible"
