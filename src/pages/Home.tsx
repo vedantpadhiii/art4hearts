@@ -546,75 +546,46 @@ const GalleryButton = styled(motion.a)`
 `;
 
 // Partners Section
-const PartnersSection = styled(motion.div)`
-  @keyframes slideLogos {
-    0% {
-      transform: translateX(0);
-    }
-    50% {
-      transform: translateX(-1300px);
-    }
-    50.01% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(0);
-    }
-  }
-
-  display: flex;
-  flex-wrap: nowrap;
-  gap: 2rem;
-  padding: 3rem 2rem;
-  align-items: center;
-  justify-content: flex-start;
-  background: white;
+const PartnersContainer = styled.div`
   width: 100%;
   margin-left: calc(-50vw + 50%);
   margin-right: calc(-50vw + 50%);
   padding-left: calc(50vw - 50%);
   padding-right: calc(50vw - 50%);
   overflow: hidden;
-  animation: slideLogos 120s linear infinite;
+  background: white;
+  padding: 3rem 2rem;
+`;
 
-  img {
-    flex-shrink: 0;
-    width: clamp(120px, 15vw, 200px);
-    height: auto;
-    max-height: clamp(80px, 10vw, 150px);
-    object-fit: contain;
-    filter: grayscale(0%);
-    transition: all 0.3s ease;
+const PartnersTrack = styled(motion.div)`
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  justify-content: flex-start;
+`;
 
-    &:hover {
-      transform: scale(1.1);
-    }
+const PartnerLogo = styled(motion.img)`
+  flex-shrink: 0;
+  width: clamp(120px, 15vw, 200px);
+  height: auto;
+  max-height: clamp(80px, 10vw, 150px);
+  object-fit: contain;
+  filter: grayscale(0%);
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.1);
   }
 
   @media (max-width: 1024px) {
-    gap: 1.5rem;
-    padding: 2rem 1rem;
-    animation: slideLogos 100s linear infinite;
-
-    img {
-      width: clamp(100px, 12vw, 160px);
-      max-height: clamp(70px, 8vw, 120px);
-    }
+    width: clamp(100px, 12vw, 160px);
+    max-height: clamp(70px, 8vw, 120px);
   }
 
   @media (max-width: 768px) {
-    gap: 1.5rem;
-    padding: 1.5rem 1rem;
-    flex-wrap: wrap;
-    overflow: visible;
-    animation: none;
-    justify-content: center;
-
-    img {
-      width: clamp(80px, 20vw, 120px);
-      max-height: clamp(60px, 12vw, 100px);
-      flex-shrink: 1;
-    }
+    width: clamp(80px, 20vw, 120px);
+    max-height: clamp(60px, 12vw, 100px);
   }
 `;
 
@@ -1163,6 +1134,45 @@ const ChaptersMapEmbed: React.FC = () => {
   return <MapContainer ref={mapRef} />;
 };
 
+// Infinite Partner Carousel Component
+const InfinitePartnerCarousel: React.FC = () => {
+  const partners = ['/partners/0.png', '/partners/1.png', '/partners/2.png', '/partners/3.png', '/partners/4.png', '/partners/5.png', '/partners/6.png', '/partners/7.png'];
+  const [x, setX] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setX(prev => {
+        const newX = prev - 1;
+        // Reset to 0 when we've scrolled all 8 logos
+        if (newX <= -1300) {
+          return 0;
+        }
+        return newX;
+      });
+    }, 30);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <PartnersContainer>
+      <PartnersTrack style={{ x }}>
+        {partners.map((src, idx) => (
+          <PartnerLogo 
+            key={idx} 
+            src={src} 
+            alt={`Partner ${idx + 1}`}
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: idx * 0.05 }}
+            viewport={{ once: true }}
+          />
+        ))}
+      </PartnersTrack>
+    </PartnersContainer>
+  );
+};
+
 const Home: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'initiatives' | 'chapters' | 'volunteering'>('initiatives');
   const [expandedFAQ, setExpandedFAQ] = useState<number | null>(null);
@@ -1238,30 +1248,7 @@ const Home: React.FC = () => {
       >
         In Collaboration With
       </PartnersTitle>
-      <PartnersSection
-        initial="hidden"
-        whileInView="visible"
-        variants={containerVariants}
-        viewport={{ once: true }}
-      >
-        <motion.img src="/partners/0.png" alt="Partner 1" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} viewport={{ once: true }} />
-        <motion.img src="/partners/1.png" alt="Partner 2" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.05 }} viewport={{ once: true }} />
-        <motion.img src="/partners/2.png" alt="Partner 3" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }} viewport={{ once: true }} />
-        <motion.img src="/partners/3.png" alt="Partner 4" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.15 }} viewport={{ once: true }} />
-        <motion.img src="/partners/4.png" alt="Partner 5" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }} viewport={{ once: true }} />
-        <motion.img src="/partners/5.png" alt="Partner 6" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.25 }} viewport={{ once: true }} />
-        <motion.img src="/partners/6.png" alt="Partner 7" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.3 }} viewport={{ once: true }} />
-        <motion.img src="/partners/7.png" alt="Partner 8" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.35 }} viewport={{ once: true }} />
-        {/* Duplicated for seamless loop */}
-        <motion.img src="/partners/0.png" alt="Partner 1" />
-        <motion.img src="/partners/1.png" alt="Partner 2" />
-        <motion.img src="/partners/2.png" alt="Partner 3" />
-        <motion.img src="/partners/3.png" alt="Partner 4" />
-        <motion.img src="/partners/4.png" alt="Partner 5" />
-        <motion.img src="/partners/5.png" alt="Partner 6" />
-        <motion.img src="/partners/6.png" alt="Partner 7" />
-        <motion.img src="/partners/7.png" alt="Partner 8" />
-      </PartnersSection>
+      <InfinitePartnerCarousel />
 
       {/* What is Art4Hearts */}
       <WhiteSection
