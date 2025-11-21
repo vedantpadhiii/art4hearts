@@ -551,8 +551,14 @@ const PartnersSection = styled(motion.div)`
     0% {
       transform: translateX(0);
     }
-    100% {
+    50% {
       transform: translateX(-1300px);
+    }
+    50.01% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(0);
     }
   }
 
@@ -569,7 +575,7 @@ const PartnersSection = styled(motion.div)`
   padding-left: calc(50vw - 50%);
   padding-right: calc(50vw - 50%);
   overflow: hidden;
-  animation: slideLogos 60s linear infinite;
+  animation: slideLogos 120s linear infinite;
 
   img {
     flex-shrink: 0;
@@ -588,7 +594,7 @@ const PartnersSection = styled(motion.div)`
   @media (max-width: 1024px) {
     gap: 1.5rem;
     padding: 2rem 1rem;
-    animation: slideLogos 50s linear infinite;
+    animation: slideLogos 100s linear infinite;
 
     img {
       width: clamp(100px, 12vw, 160px);
