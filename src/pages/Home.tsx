@@ -547,19 +547,29 @@ const GalleryButton = styled(motion.a)`
 
 // Partners Section
 const PartnersSection = styled(motion.div)`
+  @keyframes slideLogos {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
   display: flex;
   flex-wrap: nowrap;
   gap: 2rem;
   padding: 3rem 2rem;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   background: white;
   width: 100%;
   margin-left: calc(-50vw + 50%);
   margin-right: calc(-50vw + 50%);
   padding-left: calc(50vw - 50%);
   padding-right: calc(50vw - 50%);
-  overflow-x: auto;
+  overflow: hidden;
+  animation: slideLogos 40s linear infinite;
 
   img {
     flex-shrink: 0;
@@ -578,6 +588,7 @@ const PartnersSection = styled(motion.div)`
   @media (max-width: 1024px) {
     gap: 1.5rem;
     padding: 2rem 1rem;
+    animation: slideLogos 35s linear infinite;
 
     img {
       width: clamp(100px, 12vw, 160px);
@@ -589,7 +600,9 @@ const PartnersSection = styled(motion.div)`
     gap: 1.5rem;
     padding: 1.5rem 1rem;
     flex-wrap: wrap;
-    overflow-x: visible;
+    overflow: visible;
+    animation: none;
+    justify-content: center;
 
     img {
       width: clamp(80px, 20vw, 120px);
@@ -1215,6 +1228,15 @@ const Home: React.FC = () => {
         <motion.img src="/partners/5.png" alt="Partner 6" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.25 }} viewport={{ once: true }} />
         <motion.img src="/partners/6.png" alt="Partner 7" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.3 }} viewport={{ once: true }} />
         <motion.img src="/partners/7.png" alt="Partner 8" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.35 }} viewport={{ once: true }} />
+        {/* Duplicated for seamless loop */}
+        <motion.img src="/partners/0.png" alt="Partner 1" />
+        <motion.img src="/partners/1.png" alt="Partner 2" />
+        <motion.img src="/partners/2.png" alt="Partner 3" />
+        <motion.img src="/partners/3.png" alt="Partner 4" />
+        <motion.img src="/partners/4.png" alt="Partner 5" />
+        <motion.img src="/partners/5.png" alt="Partner 6" />
+        <motion.img src="/partners/6.png" alt="Partner 7" />
+        <motion.img src="/partners/7.png" alt="Partner 8" />
       </PartnersSection>
 
       {/* What is Art4Hearts */}
