@@ -548,9 +548,9 @@ const GalleryButton = styled(motion.a)`
 // Partners Section
 const PartnersSection = styled(motion.div)`
   display: flex;
-  flex-direction: column;
+  flex-wrap: nowrap;
   gap: 2rem;
-  padding: 4rem 2rem;
+  padding: 3rem 2rem;
   align-items: center;
   justify-content: center;
   background: white;
@@ -559,25 +559,7 @@ const PartnersSection = styled(motion.div)`
   margin-right: calc(-50vw + 50%);
   padding-left: calc(50vw - 50%);
   padding-right: calc(50vw - 50%);
-`;
-
-const PartnersTitle = styled.h3`
-  font-size: 1.1rem;
-  font-weight: 600;
-  letter-spacing: 0.15em;
-  color: #333333;
-  margin: 0;
-  text-transform: uppercase;
-`;
-
-const PartnersContainer = styled.div`
-  display: flex;
-  flex-wrap: nowrap;
-  gap: 2.5rem;
-  align-items: center;
-  justify-content: center;
   overflow-x: auto;
-  padding: 0 1rem;
 
   img {
     flex-shrink: 0;
@@ -594,7 +576,8 @@ const PartnersContainer = styled.div`
   }
 
   @media (max-width: 1024px) {
-    gap: 2rem;
+    gap: 1.5rem;
+    padding: 2rem 1rem;
 
     img {
       width: clamp(100px, 12vw, 160px);
@@ -604,6 +587,7 @@ const PartnersContainer = styled.div`
 
   @media (max-width: 768px) {
     gap: 1.5rem;
+    padding: 1.5rem 1rem;
     flex-wrap: wrap;
     overflow-x: visible;
 
@@ -1223,17 +1207,14 @@ const Home: React.FC = () => {
         variants={containerVariants}
         viewport={{ once: true }}
       >
-        <PartnersTitle>In Collaboration With</PartnersTitle>
-        <PartnersContainer>
-          <motion.img src="/partners/0.png" alt="Partner 1" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} viewport={{ once: true }} />
-          <motion.img src="/partners/1.png" alt="Partner 2" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.05 }} viewport={{ once: true }} />
-          <motion.img src="/partners/2.png" alt="Partner 3" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }} viewport={{ once: true }} />
-          <motion.img src="/partners/3.png" alt="Partner 4" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.15 }} viewport={{ once: true }} />
-          <motion.img src="/partners/4.png" alt="Partner 5" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }} viewport={{ once: true }} />
-          <motion.img src="/partners/5.png" alt="Partner 6" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.25 }} viewport={{ once: true }} />
-          <motion.img src="/partners/6.png" alt="Partner 7" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.3 }} viewport={{ once: true }} />
-          <motion.img src="/partners/7.png" alt="Partner 8" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.35 }} viewport={{ once: true }} />
-        </PartnersContainer>
+        <motion.img src="/partners/0.png" alt="Partner 1" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} viewport={{ once: true }} />
+        <motion.img src="/partners/1.png" alt="Partner 2" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.05 }} viewport={{ once: true }} />
+        <motion.img src="/partners/2.png" alt="Partner 3" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }} viewport={{ once: true }} />
+        <motion.img src="/partners/3.png" alt="Partner 4" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.15 }} viewport={{ once: true }} />
+        <motion.img src="/partners/4.png" alt="Partner 5" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }} viewport={{ once: true }} />
+        <motion.img src="/partners/5.png" alt="Partner 6" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.25 }} viewport={{ once: true }} />
+        <motion.img src="/partners/6.png" alt="Partner 7" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.3 }} viewport={{ once: true }} />
+        <motion.img src="/partners/7.png" alt="Partner 8" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.35 }} viewport={{ once: true }} />
       </PartnersSection>
 
       {/* What is Art4Hearts */}
