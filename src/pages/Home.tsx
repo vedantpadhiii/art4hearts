@@ -1137,34 +1137,29 @@ const ChaptersMapEmbed: React.FC = () => {
 // Infinite Partner Carousel Component
 const InfinitePartnerCarousel: React.FC = () => {
   const partners = ['/partners/0.png', '/partners/1.png', '/partners/2.png', '/partners/3.png', '/partners/4.png', '/partners/5.png', '/partners/6.png', '/partners/7.png'];
-  const [x, setX] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setX(prev => {
-        const newX = prev - 1;
-        // Reset to 0 when we've scrolled all 8 logos
-        if (newX <= -1300) {
-          return 0;
-        }
-        return newX;
-      });
-    }, 30);
-
-    return () => clearInterval(interval);
-  }, []);
-
+  // Duplicate partners for seamless looping
+  const duplicatedPartners = [...partners, ...partners];
+  
   return (
     <PartnersContainer>
-      <PartnersTrack style={{ x }}>
-        {partners.map((src, idx) => (
+      <PartnersTrack
+        animate={{ x: -1300 }}
+        transition={{
+          duration: 40,
+          repeat: Infinity,
+          repeatType: "loop",
+          ease: "linear"
+        }}
+        initial={{ x: 0 }}
+      >
+        {duplicatedPartners.map((src, idx) => (
           <PartnerLogo 
             key={idx} 
             src={src} 
-            alt={`Partner ${idx + 1}`}
+            alt={`Partner ${(idx % 8) + 1}`}
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: idx * 0.05 }}
+            transition={{ duration: 0.5, delay: (idx % 8) * 0.05 }}
             viewport={{ once: true }}
           />
         ))}
