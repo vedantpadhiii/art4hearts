@@ -566,9 +566,9 @@ const PartnersTrack = styled(motion.div)`
 
 const PartnerLogo = styled(motion.img)`
   flex-shrink: 0;
-  width: clamp(120px, 15vw, 200px);
+  width: clamp(180px, 20vw, 280px);
   height: auto;
-  max-height: clamp(80px, 10vw, 150px);
+  max-height: clamp(120px, 15vw, 200px);
   object-fit: contain;
   filter: grayscale(0%);
   transition: all 0.3s ease;
@@ -579,13 +579,13 @@ const PartnerLogo = styled(motion.img)`
   }
 
   @media (max-width: 1024px) {
-    width: clamp(100px, 12vw, 160px);
-    max-height: clamp(70px, 8vw, 120px);
+    width: clamp(140px, 18vw, 220px);
+    max-height: clamp(100px, 12vw, 160px);
   }
 
   @media (max-width: 768px) {
-    width: clamp(80px, 20vw, 120px);
-    max-height: clamp(60px, 12vw, 100px);
+    width: clamp(100px, 25vw, 150px);
+    max-height: clamp(80px, 15vw, 120px);
   }
 `;
 
@@ -593,10 +593,13 @@ const PartnersTitle = styled(motion.h2)`
   text-align: center;
   font-size: 1.5rem;
   font-weight: bold;
-  margin: 2rem 0 1rem 0;
+  margin: 0;
+  padding: 2rem 0;
   color: #333;
   text-transform: uppercase;
   letter-spacing: 1px;
+  background: #ffcfec;
+  width: 100%;
 `;
 
 // Subsection Grid
