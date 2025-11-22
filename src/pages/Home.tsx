@@ -210,7 +210,7 @@ const HeroButton = styled.a<{ primary?: boolean }>`
 
 // Section Container
 const SectionContainer = styled(motion.section)`
-  padding: clamp(5rem, 10vh, 8rem) 2rem;
+  padding: clamp(2rem, 6vh, 4rem) 2rem;
   text-align: center;
   position: relative;
   z-index: 1;
@@ -554,7 +554,7 @@ const PartnersContainer = styled.div`
   padding-right: calc(50vw - 50%);
   overflow: hidden;
   background: white;
-  padding: 1.5rem 2rem;
+  padding: 0.25rem 2rem;
 `;
 
 const PartnersTrack = styled(motion.div)`
@@ -566,9 +566,9 @@ const PartnersTrack = styled(motion.div)`
 
 const PartnerLogo = styled(motion.img)`
   flex-shrink: 0;
-  width: clamp(220px, 25vw, 340px);
+  width: clamp(280px, 30vw, 420px);
   height: auto;
-  max-height: clamp(150px, 18vw, 240px);
+  max-height: clamp(180px, 22vw, 300px);
   object-fit: contain;
   filter: grayscale(0%);
   transition: all 0.3s ease;
@@ -579,13 +579,13 @@ const PartnerLogo = styled(motion.img)`
   }
 
   @media (max-width: 1024px) {
-    width: clamp(160px, 20vw, 260px);
-    max-height: clamp(120px, 15vw, 180px);
+    width: clamp(200px, 25vw, 320px);
+    max-height: clamp(140px, 18vw, 220px);
   }
 
   @media (max-width: 768px) {
-    width: clamp(120px, 28vw, 180px);
-    max-height: clamp(100px, 18vw, 140px);
+    width: clamp(140px, 32vw, 220px);
+    max-height: clamp(110px, 20vw, 160px);
   }
 `;
 
@@ -594,7 +594,7 @@ const PartnersTitle = styled(motion.h2)`
   font-size: 1.1rem;
   font-weight: bold;
   margin: 0;
-  padding: 1.5rem 0;
+  padding: 0.75rem 0;
   color: #333;
   text-transform: uppercase;
   letter-spacing: 1px;
