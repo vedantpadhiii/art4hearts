@@ -559,16 +559,16 @@ const PartnersContainer = styled.div`
 
 const PartnersTrack = styled(motion.div)`
   display: flex;
-  gap: 2rem;
+  gap: 1rem;
   align-items: center;
   justify-content: flex-start;
 `;
 
 const PartnerLogo = styled(motion.img)`
   flex-shrink: 0;
-  width: clamp(180px, 20vw, 280px);
+  width: clamp(220px, 25vw, 340px);
   height: auto;
-  max-height: clamp(120px, 15vw, 200px);
+  max-height: clamp(150px, 18vw, 240px);
   object-fit: contain;
   filter: grayscale(0%);
   transition: all 0.3s ease;
@@ -579,19 +579,19 @@ const PartnerLogo = styled(motion.img)`
   }
 
   @media (max-width: 1024px) {
-    width: clamp(140px, 18vw, 220px);
-    max-height: clamp(100px, 12vw, 160px);
+    width: clamp(160px, 20vw, 260px);
+    max-height: clamp(120px, 15vw, 180px);
   }
 
   @media (max-width: 768px) {
-    width: clamp(100px, 25vw, 150px);
-    max-height: clamp(80px, 15vw, 120px);
+    width: clamp(120px, 28vw, 180px);
+    max-height: clamp(100px, 18vw, 140px);
   }
 `;
 
 const PartnersTitle = styled(motion.h2)`
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 1.1rem;
   font-weight: bold;
   margin: 0;
   padding: 2rem 0;
