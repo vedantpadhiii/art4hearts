@@ -554,12 +554,12 @@ const PartnersContainer = styled.div`
   padding-right: calc(50vw - 50%);
   overflow: hidden;
   background: white;
-  padding: 3rem 2rem;
+  padding: 1.5rem 2rem;
 `;
 
 const PartnersTrack = styled(motion.div)`
   display: flex;
-  gap: 1rem;
+  gap: 0.5rem;
   align-items: center;
   justify-content: flex-start;
 `;
@@ -594,7 +594,7 @@ const PartnersTitle = styled(motion.h2)`
   font-size: 1.1rem;
   font-weight: bold;
   margin: 0;
-  padding: 2rem 0;
+  padding: 1.5rem 0;
   color: #333;
   text-transform: uppercase;
   letter-spacing: 1px;
