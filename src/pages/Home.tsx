@@ -567,9 +567,9 @@ const PartnersTrack = styled(motion.div)`
 const PartnerLogo = styled(motion.img)`
   flex-shrink: 0;
   margin-right: -360px;
-  width: clamp(559px, 60vw, 838px);
+  width: clamp(280px, 30vw, 420px);
   height: auto;
-  max-height: clamp(359px, 44vw, 598px);
+  max-height: clamp(180px, 22vw, 300px);
   object-fit: contain;
   filter: grayscale(0%);
   transition: all 0.3s ease;
@@ -581,14 +581,14 @@ const PartnerLogo = styled(motion.img)`
 
   @media (max-width: 1024px) {
     margin-right: -20px;
-    width: clamp(399px, 50vw, 639px);
-    max-height: clamp(279px, 36vw, 439px);
+    width: clamp(200px, 25vw, 320px);
+    max-height: clamp(140px, 18vw, 220px);
   }
 
   @media (max-width: 768px) {
     margin-right: -15px;
-    width: clamp(279px, 64vw, 439px);
-    max-height: clamp(219px, 40vw, 319px);
+    width: clamp(140px, 32vw, 220px);
+    max-height: clamp(110px, 20vw, 160px);
   }
 `;
 
