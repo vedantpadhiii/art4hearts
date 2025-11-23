@@ -210,7 +210,7 @@ const HeroButton = styled.a<{ primary?: boolean }>`
 
 // Section Container
 const SectionContainer = styled(motion.section)`
-  padding: clamp(0rem, 2vh, 1rem) 0rem;
+  padding: clamp(0rem, 1vh, 0rem) 0rem;
   text-align: center;
   position: relative;
   z-index: 1;
