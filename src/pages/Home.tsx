@@ -566,7 +566,7 @@ const PartnersTrack = styled(motion.div)`
 
 const PartnerLogo = styled(motion.img)`
   flex-shrink: 0;
-  margin-right: -280px;
+  margin-right: -260px;
   width: clamp(360px, 38vw, 540px);
   height: auto;
   max-height: clamp(240px, 28vw, 400px);
