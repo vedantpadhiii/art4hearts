@@ -554,7 +554,7 @@ const PartnersContainer = styled.div`
   padding-right: calc(50vw - 50%);
   overflow: hidden;
   background: white;
-  padding: 0.1rem 2rem;
+  padding: 0.067rem 2rem;
 `;
 
 const PartnersTrack = styled(motion.div)`
@@ -597,7 +597,7 @@ const PartnersTitle = styled(motion.h2)`
   font-size: 1.1rem;
   font-weight: bold;
   margin: 0;
-  padding: 0.5rem 0;
+  padding: 0.4rem 0;
   color: #333;
   text-transform: uppercase;
   letter-spacing: 1px;
