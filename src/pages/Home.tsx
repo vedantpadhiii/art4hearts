@@ -559,7 +559,7 @@ const PartnersContainer = styled.div`
 
 const PartnersTrack = styled(motion.div)`
   display: flex;
-  gap: 0.1rem;
+  gap: 0.3rem;
   align-items: center;
   justify-content: flex-start;
 `;
