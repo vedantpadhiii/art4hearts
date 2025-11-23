@@ -210,7 +210,7 @@ const HeroButton = styled.a<{ primary?: boolean }>`
 
 // Section Container
 const SectionContainer = styled(motion.section)`
-  padding: clamp(2rem, 6vh, 4rem) 2rem;
+  padding: clamp(0rem, 2vh, 1rem) 0rem;
   text-align: center;
   position: relative;
   z-index: 1;
@@ -554,7 +554,7 @@ const PartnersContainer = styled.div`
   padding-right: calc(50vw - 50%);
   overflow: hidden;
   background: white;
-  padding: 0.067rem 2rem;
+  padding: 0.05rem 0rem 0rem 0rem;
 `;
 
 const PartnersTrack = styled(motion.div)`
