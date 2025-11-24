@@ -1147,7 +1147,7 @@ const ChaptersMapEmbed: React.FC = () => {
 
 // Infinite Partner Carousel Component
 const InfinitePartnerCarousel: React.FC = () => {
-  const partners = ['/partners/0.png', '/partners/1.png', '/partners/2.png', '/partners/3.png', '/partners/4.png', '/partners/5.png', '/partners/6.png', '/partners/7.png'];
+  const partners = ['/partners/1.png', '/partners/2.png', '/partners/3.png', '/partners/4.png', '/partners/5.png', '/partners/6.png', '/partners/7.png'];
   // Duplicate partners for seamless looping
   const duplicatedPartners = [...partners, ...partners];
   
@@ -1519,7 +1519,7 @@ const Home: React.FC = () => {
           >
             <div className="number">
               {useCountUp({
-                end: 4500,
+                end: 5500,
                 isVisible: statsVisible || statsAnimated,
                 duration: 2500
               }).toLocaleString()}+
@@ -1569,7 +1569,7 @@ const Home: React.FC = () => {
           >
             <div className="number">
               {useCountUp({
-                end: 1000,
+                end: 10000,
                 isVisible: statsVisible || statsAnimated,
                 duration: 2000,
                 delay: 600
