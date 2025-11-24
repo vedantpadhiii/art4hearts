@@ -245,8 +245,8 @@ const About: React.FC = () => {
           <h2>Our Mission</h2>
           <p>
             We started Art4Hearts to follow through our mission of spreading love to community 
-            members who are in need of care. Our dedicated team of over 4,500 volunteers has 
-            collectively donated more than 5,000 bracelets and art therapy kits, making a 
+            members who are in need of care. Our dedicated team of over 5,500 volunteers has 
+            collectively donated more than 10,000 bracelets and art therapy kits, making a 
             meaningful impact in communities worldwide.
           </p>
           <div style={{ 
@@ -321,7 +321,7 @@ const About: React.FC = () => {
         <h2>Our Impact</h2>
         <ImpactGrid>
           <ImpactCard>
-            <div className="number">4,500+</div>
+            <div className="number">5,500+</div>
             <div className="label">Volunteers Worldwide</div>
           </ImpactCard>
           <ImpactCard>
@@ -329,7 +329,7 @@ const About: React.FC = () => {
             <div className="label">Active Chapters</div>
           </ImpactCard>
           <ImpactCard>
-            <div className="number">5,000+</div>
+            <div className="number">10,000+</div>
             <div className="label">Art Kits & Bracelets Delivered</div>
           </ImpactCard>
           <ImpactCard>
