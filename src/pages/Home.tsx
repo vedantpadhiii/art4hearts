@@ -210,7 +210,7 @@ const HeroButton = styled.a<{ primary?: boolean }>`
 
 // Section Container
 const SectionContainer = styled(motion.section)`
-  padding: clamp(0rem, 1vh, 0rem) 0rem;
+  padding: clamp(3rem, 8vh, 6rem) 0rem;
   text-align: center;
   position: relative;
   z-index: 1;
@@ -232,10 +232,10 @@ const WhiteSection = styled(SectionContainer)`
 
 const CTASection = styled(SectionContainer)`
   background: #ffcfec;
-  padding: 5rem 0rem !important;
+  padding: 7rem 0rem !important;
 
   @media (max-width: 768px) {
-    padding: 3rem 0rem !important;
+    padding: 5rem 0rem !important;
   }
 `;
 
@@ -1147,7 +1147,7 @@ const ChaptersMapEmbed: React.FC = () => {
 
 // Infinite Partner Carousel Component
 const InfinitePartnerCarousel: React.FC = () => {
-  const partners = ['/partners/1.png', '/partners/2.png', '/partners/3.png', '/partners/4.png', '/partners/5.png', '/partners/6.png', '/partners/7.png'];
+  const partners = ['/partners/1.png', '/partners/3.png', '/partners/4.png', '/partners/5.png', '/partners/6.png', '/partners/7.png'];
   // Duplicate partners for seamless looping
   const duplicatedPartners = [...partners, ...partners];
   
