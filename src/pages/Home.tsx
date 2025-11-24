@@ -232,6 +232,11 @@ const WhiteSection = styled(SectionContainer)`
 
 const CTASection = styled(SectionContainer)`
   background: #ffcfec;
+  padding: 5rem 0rem !important;
+
+  @media (max-width: 768px) {
+    padding: 3rem 0rem !important;
+  }
 `;
 
 const LightSection = styled(SectionContainer)`
