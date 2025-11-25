@@ -1056,20 +1056,24 @@ const ChaptersMapEmbed: React.FC = () => {
         const color = isUSA ? '#8b5cf6' : '#ec4899'; // purple for USA, pink for international
         return L.divIcon({
           html: `<div style="
+            background-color: ${color};
+            border-radius: 50%;
             width: 30px;
             height: 30px;
-            background: ${color};
-            border-radius: 50% 50% 0 0;
-            transform: rotate(-45deg);
-            border: 2px solid white;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-          "></div>`,
+            border: 3px solid white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            font-weight: bold;
+            color: white;
+            font-size: 16px;
+          ">
+            ❤
+          </div>`,
           iconSize: [30, 30],
-          iconAnchor: [15, 30],
-          popupAnchor: [0, -30],
+          iconAnchor: [15, 15],
+          popupAnchor: [0, -15],
           className: 'custom-marker'
         });
       };

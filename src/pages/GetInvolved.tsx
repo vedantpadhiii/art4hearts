@@ -321,7 +321,7 @@ const GetInvolved: React.FC = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h3>🎨 Become a Volunteer</h3>
+            <h3>Become a Volunteer</h3>
             <p>
               Share your time and talents with us. Help create art therapy kits, make bracelets, organize workshops, or assist with administrative tasks. All skills are valued!
             </p>
@@ -335,7 +335,7 @@ const GetInvolved: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
             viewport={{ once: true }}
           >
-            <h3>💝 Make a Donation</h3>
+            <h3>Make a Donation</h3>
             <p>
               Support our cause financially. Your donations help us provide art supplies, expand our programs, and reach more communities in need of healing and creativity.
             </p>
@@ -349,7 +349,7 @@ const GetInvolved: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <h3>🏘️ Start a Chapter</h3>
+            <h3>Start a Chapter</h3>
             <p>
               Anyone, anywhere can start a local Art4Hearts chapter. Lead your community, recruit volunteers, and create lasting impact in your school or neighborhood.
             </p>
@@ -363,7 +363,7 @@ const GetInvolved: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
             viewport={{ once: true }}
           >
-            <h3>🤝 Partner With Us</h3>
+            <h3>Partner With Us</h3>
             <p>
               Are you an organization that shares our vision? Let's collaborate to create impact and reach more people in need of art therapy and creative expression.
             </p>
@@ -377,7 +377,7 @@ const GetInvolved: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.4 }}
             viewport={{ once: true }}
           >
-            <h3>📢 Spread the Word</h3>
+            <h3>Spread the Word</h3>
             <p>
               Help us grow by sharing our mission on social media, telling your friends and family, or featuring us in your newsletter. Every share makes a difference!
             </p>
@@ -391,7 +391,7 @@ const GetInvolved: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.5 }}
             viewport={{ once: true }}
           >
-            <h3>🌍 Request Our Services</h3>
+            <h3>Request Our Services</h3>
             <p>
               If you represent a hospital, senior center, or charitable organization, we'd love to help! Request art therapy kits or a workshop for your community.
             </p>
