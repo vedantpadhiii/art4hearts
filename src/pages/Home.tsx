@@ -1275,7 +1275,7 @@ const Home: React.FC = () => {
           transition={{ duration: 0.6, delay: 0.1 }}
           viewport={{ once: true }}
         >
-          Learn more about our initiatives to bring kindness and love to hospitals, senior centers, and other charitable organizations.
+          Learn about our initiatives bringing art to hospitals, senior centers, and other charitable organizations.
         </SectionDescription>
         
         <SubsectionGrid
