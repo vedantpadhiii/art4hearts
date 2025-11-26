@@ -228,7 +228,7 @@ const SectionContainer = styled(motion.section)`
 
 const WhiteSection = styled(SectionContainer)`
   background: white;
-  padding-top: clamp(1rem, 3vh, 2rem) !important;
+  padding-top: clamp(0.25rem, 1vh, 0.5rem) !important;
 `;
 
 const CTASection = styled(SectionContainer)`
