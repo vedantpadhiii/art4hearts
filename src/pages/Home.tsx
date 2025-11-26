@@ -228,7 +228,7 @@ const SectionContainer = styled(motion.section)`
 
 const WhiteSection = styled(SectionContainer)`
   background: white;
-  padding-top: clamp(0.25rem, 1vh, 0.5rem) !important;
+  padding-top: clamp(0.1rem, 1vh, 0.1rem) !important;
 `;
 
 const CTASection = styled(SectionContainer)`
@@ -256,14 +256,7 @@ const SectionTitle = styled(motion.h2)`
   line-height: 1.2;
   letter-spacing: -0.01em;
 
-  &::after {
-    content: '';
-    display: block;
-    width: 100px;
-    height: 3px;
-    background: linear-gradient(90deg, #5ba3a0, #4a9894);
-    margin: 1.5rem auto 0;
-    border-radius: 2px;
+  
   }
 `;
 
