@@ -1342,7 +1342,7 @@ const Home: React.FC = () => {
               </InstructionButton>
 
               <p style={{marginTop: '2rem'}}>
-                <strong>Handmade Bracelets:</strong> Craft bracelets to provide comfort and encouragement to someone in need
+                <strong>Handmade Bracelets:</strong> Craft bracelets to provide comfort and encouragement to someone in need.
               </p>
               <InstructionButton 
                 href="https://www.instagram.com/p/DMJ0X4BujJx/?img_index=1" 
