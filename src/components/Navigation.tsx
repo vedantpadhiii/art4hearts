@@ -330,7 +330,7 @@ export const Navigation: React.FC = () => {
     <NavContainer isScrolled={scrollY > 50} isVisible={isVisible}>
       <NavContent>
         <LogoWrapper to="/">
-          <img src="/Art4Hearts Banner.png" alt="Art4Hearts Banner" />
+          <img src="/Art4Hearts-Banner-Transparent.png" alt="Art4Hearts Banner" />
         </LogoWrapper>
 
         <MenuButton 
