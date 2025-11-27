@@ -1390,7 +1390,7 @@ const Home: React.FC = () => {
                 Explore More <span>→</span>
               </StyledLink>
             </div>
-            <img className="content-image" src="/volunteering-packing.png" alt="Volunteering" />
+            <img className="content-image" src="/Art4Hearts-Logo-NoBackground.png" alt="Volunteering" />
           </ContentCard>
         )}
       </WhiteSection>
