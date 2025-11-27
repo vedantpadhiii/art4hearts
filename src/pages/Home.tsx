@@ -1331,7 +1331,7 @@ const Home: React.FC = () => {
             <div>
               <h3>Initiatives</h3>
               <p>
-                <strong>Art Therapy Kits:</strong> Through art therapy, we hope to spread warmth and bring comfort to the recipients of the kit. Recipients can engage with a creative outlet.
+                <strong>Art Therapy Kits:</strong> Assemble kits to give recipients a creative outlet to process emotions & de-stress.
               </p>
               <InstructionButton 
                 href="https://www.instagram.com/p/DMTzV_3PXf5/?img_index=5" 
@@ -1342,7 +1342,7 @@ const Home: React.FC = () => {
               </InstructionButton>
 
               <p style={{marginTop: '2rem'}}>
-                <strong>Bracelets:</strong> Make handmade bracelets for someone in need of care. These bracelets provide comfort and encouragement to those who receive them.
+                <strong>Handmade Bracelets:</strong> Craft bracelets to provide comfort and encouragement to someone in need
               </p>
               <InstructionButton 
                 href="https://www.instagram.com/p/DMJ0X4BujJx/?img_index=1" 
