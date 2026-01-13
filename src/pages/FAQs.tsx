@@ -38,6 +38,10 @@ const braceletsAndKitsFAQs = [
   {
     question: "How are hours measured?",
     answer: "Please keep track of the time you spend making your creations. Your volunteer hours will be based on the amount of time you self-report in the Bracelets Service Hours Request Form."
+  },
+  {
+    question: "How do volunteers contact hospitals or organizations to donate bracelets and art therapy kits?",
+    answer: "Art4Hearts provides volunteers with outreach email templates after they register as a volunteer. These templates are designed to help volunteers and chapters independently reach out to hospitals, senior centers, shelters, or other charitable organizations in their own local community."
   }
 ];
 
