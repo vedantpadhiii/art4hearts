@@ -884,7 +884,6 @@ const chaptersData = [
   { name: 'Art4Hearts SEA', leader: 'Selene Maldonado', location: 'Ormond Beach', region: 'Florida', country: 'USA', email: 'selene0925@icloud.com', lat: 29.2876, lng: -81.0573 },
   { name: 'Art4Hearts ABQ', leader: 'Nicole Ibarra', location: 'Albuquerque', region: 'New Mexico', country: 'USA', email: 'munecamisticas@outlook.com', lat: 35.0844, lng: -106.6504 },
   { name: 'Art4Hearts Emerson High School', leader: 'Andrea Capati', location: 'McKinney', region: 'Texas', country: 'USA', email: 'andrealorin.capati.169@k12.friscoisd.org', lat: 33.1972, lng: -96.6397 },
-  { name: 'Art4Hearts San Jose', leader: 'Emily Mai', location: 'San Jose', region: 'California', country: 'USA', email: 'emilykimmai@gmail.com', lat: 37.3382, lng: -121.8863 },
   { name: 'Art4Hearts DH Conley HS', leader: 'Maddie Adrias', location: 'Greenville', region: 'North Carolina', country: 'USA', email: 'art4hearts.dhc@gmail.com', lat: 35.6129, lng: -82.3982 },
   { name: 'Art4Hearts Medina, TN', leader: 'Payton Wilson', location: 'Medina', region: 'Tennessee', country: 'USA', email: 'Paytonw680@outlook.com', lat: 35.4434, lng: -88.7162 },
   { name: 'Art4Hearts Miami, FL', leader: 'Melody Monge', location: 'Miami', region: 'Florida', country: 'USA', email: 'melodymonge902@gmail.com', lat: 25.7617, lng: -80.1918 },
