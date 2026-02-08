@@ -130,6 +130,9 @@ const Footer: React.FC = () => {
           <HeartIcon>♥</HeartIcon>
           <span>Made with love</span>
         </Copyright>
+        <div style={{ marginTop: '1rem', fontSize: '0.85rem', color: '#000000' }}>
+          <p>EIN: 33-2190440</p>
+        </div>
       </FooterContent>
     </FooterContainer>
   );
