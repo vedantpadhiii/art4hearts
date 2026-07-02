@@ -230,7 +230,7 @@ const About: React.FC = () => {
         <h1>About Us</h1>
         <p>
           Art4Hearts is a nonprofit organization dedicated to providing volunteer opportunities 
-          through creating heartfelt cards and art kits. We invite individuals passionate about 
+          through creating handmade bracelents and art kits. We invite individuals passionate about 
           contributing to the community to explore our platform and engage with our creative features.
         </p>
       </HeroSection>
