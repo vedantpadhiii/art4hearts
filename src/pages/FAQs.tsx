@@ -25,8 +25,8 @@ const braceletsAndKitsFAQs = [
   },
   {
     question: "How can I donate the bracelets and art therapy kits?",
-    answer: "You can:\n1. Ship it to our P.O. Box Address found in the service request forms\n2. Donate it to your local charitable organization."
-  },
+    answer: "You can:\n. 1. Ship ART THERAPY KITS to our P.O. Box address found in the service request forms (we do not accept bracelets in our P.O.)\n2. Donate it to your local charitable organization (this includes both bracelets and art therapy kits)."
+  },1
   {
     question: "Do we always have to pay for the supplies and shipping?",
     answer: "You will have to pay for your supplies and postage. In the future, once we have more donation funds, we hope to provide financial aid."
