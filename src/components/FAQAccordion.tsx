@@ -10,6 +10,7 @@ interface FAQ {
 interface FAQAccordionProps {
   faqs: FAQ[];
   title: string;
+  sectionId?: string;
 }
 
 const Section = styled.section`
@@ -18,6 +19,7 @@ const Section = styled.section`
   max-width: 1000px;
   margin: 0 auto;
   position: relative;
+  scroll-margin-top: 9rem;
 
   &::before {
     content: '';
@@ -156,6 +158,7 @@ const AnswerContent = styled(motion.div)`
   
   p {
     padding: 1.5rem 0;
+    white-space: pre-line;
     position: relative;
     color: #000000;
     
@@ -191,7 +194,7 @@ const ChevronIcon = () => (
   </svg>
 );
 
-const FAQAccordion: React.FC<FAQAccordionProps> = ({ faqs, title }) => {
+const FAQAccordion: React.FC<FAQAccordionProps> = ({ faqs, title, sectionId }) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggleAccordion = (index: number) => {
@@ -199,7 +202,7 @@ const FAQAccordion: React.FC<FAQAccordionProps> = ({ faqs, title }) => {
   };
 
   return (
-    <Section>
+    <Section id={sectionId}>
       <SectionTitle>{title}</SectionTitle>
       <AccordionContainer>
         {faqs.map((faq, index) => (

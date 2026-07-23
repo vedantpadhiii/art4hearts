@@ -21,9 +21,9 @@ const LinkedInIcon = () => (
 );
 
 
-const NavContainer = styled.nav<{ isScrolled: boolean; isVisible: boolean }>`
+const NavContainer = styled.nav<{ isScrolled: boolean; isVisible: boolean; hasAnnouncement: boolean }>`
   position: fixed;
-  top: 0;
+  top: ${props => props.hasAnnouncement ? '3.25rem' : '0'};
   left: 0;
   right: 0;
   z-index: 1000;
@@ -35,6 +35,7 @@ const NavContainer = styled.nav<{ isScrolled: boolean; isVisible: boolean }>`
   box-shadow: ${props => props.isScrolled ? '0 4px 16px rgba(0, 0, 0, 0.08)' : 'none'};
 
   @media (max-width: 768px) {
+    top: ${props => props.hasAnnouncement ? '4rem' : '0'};
     padding: 0.5rem 1rem;
     background: linear-gradient(135deg, #c6dddc 0%, #b3d4d2 100%);
   }
@@ -285,7 +286,11 @@ const MenuButton = styled.button<{ isOpen: boolean }>`
   }
 `;
 
-export const Navigation: React.FC = () => {
+interface NavigationProps {
+  hasAnnouncement: boolean;
+}
+
+export const Navigation: React.FC<NavigationProps> = ({ hasAnnouncement }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const { scrollY } = useScroll();
@@ -327,7 +332,7 @@ export const Navigation: React.FC = () => {
   }, [location.pathname]);
 
   return (
-    <NavContainer isScrolled={scrollY > 50} isVisible={isVisible}>
+    <NavContainer isScrolled={scrollY > 50} isVisible={isVisible} hasAnnouncement={hasAnnouncement}>
       <NavContent>
         <LogoWrapper to="/">
           <img src="/Art4Hearts-Banner-Transparent.png" alt="Art4Hearts Banner" />

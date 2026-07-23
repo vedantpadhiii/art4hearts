@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import FAQAccordion from '../components/FAQAccordion';
@@ -53,6 +54,33 @@ const chaptersFAQs = [
   {
     question: "What officers are needed in order to create a chapter?",
     answer: "Having a leadership team is helpful as it can facilitate club proceedings, but it is not required. We recommend appointing a president, vice president, secretary, & treasurer.\n\nAdditional officers can include a social media/outreach head."
+  }
+];
+
+const poBoxFAQs = [
+  {
+    question: 'Can I donate bracelets to the Art4Hearts P.O. Box?',
+    answer: 'No.'
+  },
+  {
+    question: 'Can I donate art therapy kits to the Art4Hearts P.O. Box?',
+    answer: 'Yes, you may.'
+  },
+  {
+    question: 'Why do you no longer accept bracelets in your P.O. Box?',
+    answer: '1. Reduces our environmental footprint.\n2. Encourages volunteers to support charitable organizations in their own communities, creating a more widespread impact.\n\nGoing forward, our P.O. Box will be reserved exclusively for art therapy kit donations.'
+  },
+  {
+    question: 'Can I still get service hours for making bracelets?',
+    answer: 'Yes. If you’d like service hours for making bracelets, simply donate your bracelets to a charitable organization near you instead of mailing them to us. This applies to chapters and individual volunteers.'
+  },
+  {
+    question: 'How can I find a charitable organization to donate to?',
+    answer: 'When you sign up as a volunteer with us, we will provide you with resources on how to reach out to places to donate.'
+  },
+  {
+    question: 'Where can I find information about art therapy kits?',
+    answer: "Art therapy kits can include a variety of supplies—including bracelet-making kits! We already have posts on our Instagram page about kits, and we'll be sharing more soon."
   }
 ];
 
@@ -189,6 +217,14 @@ const ContactLink = styled.a`
 `;
 
 const FAQs: React.FC = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash === '#po-box-faqs') {
+      document.getElementById('po-box-faqs')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [location.hash]);
+
   return (
     <PageContainer
       initial={{ opacity: 0 }}
@@ -218,6 +254,12 @@ const FAQs: React.FC = () => {
         <FAQAccordion
           title="Chapters FAQs"
           faqs={chaptersFAQs}
+        />
+
+        <FAQAccordion
+          sectionId="po-box-faqs"
+          title="P.O. Box FAQs"
+          faqs={poBoxFAQs}
         />
 
         <ContactSection>
