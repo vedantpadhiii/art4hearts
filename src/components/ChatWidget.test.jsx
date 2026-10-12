@@ -29,6 +29,22 @@ async function ask(question) {
   await act(async () => Simulate.submit(container.querySelector('form')));
 }
 
+test('hides chat on the main website while keeping it available on the test service', () => {
+  const location = jest.spyOn(window, 'location', 'get');
+  try {
+    for (const hostname of ['art4heartsinternational.org', 'www.art4heartsinternational.org']) {
+      location.mockReturnValue({ hostname });
+      act(() => root.render(<ChatWidget />));
+      expect(container.querySelector('button')).toBeNull();
+    }
+    location.mockReturnValue({ hostname: 'art4hearts-7t3r.onrender.com' });
+    act(() => root.render(<ChatWidget />));
+    expect(button('Open Art4Hearts chat')).not.toBeNull();
+    openChat();
+    expect(container.querySelector('[role="dialog"]')).not.toBeNull();
+  } finally { location.mockRestore(); }
+});
+
 test('starts as a circle, focuses the composer, closes on Escape and restores focus', () => {
   act(() => root.render(<ChatWidget />));
   expect(container.querySelector('[role="dialog"]')).toBeNull();

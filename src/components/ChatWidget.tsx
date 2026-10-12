@@ -50,7 +50,7 @@ export function ChatReply({ text }: { text: string }) {
   return <>{blocks}</>;
 }
 
-const ChatWidget: React.FC = () => {
+const ChatPanel: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Turn[]>([]);
   const [draft, setDraft] = useState('');
@@ -161,6 +161,14 @@ const ChatWidget: React.FC = () => {
       </button>
     </div>
   );
+};
+
+// Temporarily keep chat off the main website while its hosting is evaluated.
+// The dedicated preview and local development keep the complete assistant.
+const CHAT_PREVIEW_HOSTS = new Set(['localhost', '127.0.0.1', '[::1]', 'art4hearts-7t3r.onrender.com']);
+
+const ChatWidget: React.FC = () => {
+  return CHAT_PREVIEW_HOSTS.has(window.location.hostname.toLowerCase()) ? <ChatPanel /> : null;
 };
 
 export default ChatWidget;

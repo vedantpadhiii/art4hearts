@@ -1,6 +1,11 @@
 # Art4Hearts website assistant
 
-The bottom-right circle opens a compact chat panel on every page. Conversation
+Chat is temporarily disabled on the main website. It remains available at
+https://art4hearts-7t3r.onrender.com/ and on localhost / 127.0.0.1 for testing.
+The allowed preview hosts are listed in `src/components/ChatWidget.tsx`; remove
+that hostname gate when the main site's backend hosting is ready.
+
+On the preview, the bottom-right circle opens a compact chat panel on every page. Conversation
 history stays in memory while the visitor navigates or closes the panel; a reload
 clears it. Questions are sent to the server and then to Anthropic. No conversations
 are saved to disk or logged by this application.
@@ -69,7 +74,7 @@ Provider contract: [Anthropic Messages API](https://platform.claude.com/docs/en/
 
 ## Integration validation (October 12, 2026)
 
-All six backend tests and four widget tests passed. A real question returned HTTP
+All six backend tests and five widget tests passed, including the preview-only visibility check. A real question returned HTTP
 200 using the original agent configuration without copying its credentials. The
 widget also passed a strict, isolated TypeScript check. The production bundle
 compiled, but the existing full-project TypeScript checking process exhausted its
