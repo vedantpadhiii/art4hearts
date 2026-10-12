@@ -29,20 +29,20 @@ async function ask(question) {
   await act(async () => Simulate.submit(container.querySelector('form')));
 }
 
-test('hides chat on the main website while keeping it available on the test service', () => {
+test('enables the hosted website chat through Cloudflare and preserves same-origin previews', async () => {
   const location = jest.spyOn(window, 'location', 'get');
+  mockFetch.mockResolvedValue({ ok: true, json: async () => ({ reply: 'You can volunteer.' }) });
   try {
-    for (const hostname of ['art4heartsinternational.org', 'www.art4heartsinternational.org']) {
-      location.mockReturnValue({ hostname });
-      act(() => root.render(<ChatWidget />));
-      expect(container.querySelector('button')).toBeNull();
-    }
-    for (const hostname of ['art4hearts-7t3r.onrender.com', 'art4hearts-chat.example.workers.dev']) {
+    for (const hostname of ['art4heartsinternational.org', 'www.art4heartsinternational.org', 'art4hearts-7t3r.onrender.com', 'art4hearts-chat.vedant13688.workers.dev', 'localhost']) {
       location.mockReturnValue({ hostname });
       act(() => root.render(<ChatWidget />));
       expect(button('Open Art4Hearts chat')).not.toBeNull();
       openChat();
-      expect(container.querySelector('[role="dialog"]')).not.toBeNull();
+      await ask('Can I volunteer?');
+      const expected = hostname.endsWith('.workers.dev') || hostname === 'localhost'
+        ? '/api/chat' : 'https://art4hearts-chat.vedant13688.workers.dev/api/chat';
+      expect(mockFetch.mock.calls[mockFetch.mock.calls.length - 1][0]).toBe(expected);
+      expect(container.textContent).toContain('You can volunteer.');
       act(() => button('Close chat').click());
     }
   } finally { location.mockRestore(); }

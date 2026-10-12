@@ -1,14 +1,16 @@
 # Art4Hearts website assistant
 
-Chat is temporarily disabled on the main website. It remains available at
-https://art4hearts-chat.vedant13688.workers.dev/ (Cloudflare),
-https://art4hearts-7t3r.onrender.com/ (older Render preview), and localhost / 127.0.0.1 for testing.
-The allowed preview hosts are listed in `src/components/ChatWidget.tsx`; remove
-that hostname gate when the main site's backend hosting is ready.
+The chatbot is enabled on the main website. Both
+`art4heartsinternational.org` and `www.art4heartsinternational.org` use
+`https://art4hearts-chat.vedant13688.workers.dev/api/chat` by default. The main
+website stays on its existing Render static service. The older Render preview
+also uses this Cloudflare API; localhost and the Cloudflare standalone preview
+use their same-origin `/api/chat` endpoints. An optional public
+`REACT_APP_CHAT_API_URL` build variable can override the endpoint.
 
-On the preview, the bottom-right circle opens a compact chat panel on every page. Conversation
+The bottom-right circle opens a compact chat panel on every page. Conversation
 history stays in memory while the visitor navigates or closes the panel; a reload
-clears it. Questions are sent to the server and then to Anthropic. No conversations
+clears it. Questions are sent to the backend and then to Anthropic. No conversations
 are saved to disk or logged by this application.
 
 The existing Art4Hearts agent was adapted into a Node server so the website and
@@ -35,7 +37,7 @@ https://art4hearts-chat.vedant13688.workers.dev/. See `worker/README.md` for
 deployment, testing, key handling, and reconnecting the existing static website.
 The Cloudflare setup uses free static assets and Worker compute with an encrypted
 Anthropic key, shared validation/redaction, and native rate limits. The main
-website stays on Render static hosting with chat hidden.
+website stays on Render static hosting with chat enabled through the Cloudflare API.
 
 ## Older Render web-service deployment
 
@@ -84,7 +86,7 @@ Provider contract: [Anthropic Messages API](https://platform.claude.com/docs/en/
 
 ## Integration validation (October 12, 2026)
 
-All six backend tests and five widget tests passed, including the preview-only visibility check. A real question returned HTTP
+All six backend tests and five widget tests passed, including main-site routing to Cloudflare and same-origin preview routing. A real question returned HTTP
 200 using the original agent configuration without copying its credentials. The
 widget also passed a strict, isolated TypeScript check. The production bundle
 compiled, but the existing full-project TypeScript checking process exhausted its

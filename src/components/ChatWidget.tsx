@@ -10,6 +10,16 @@ function ChatIcon({ kind }: { kind: 'chat' | 'close' | 'send' }) {
 }
 
 type Turn = { role: 'user' | 'assistant'; content: string };
+const CLOUDFLARE_CHAT_URL = 'https://art4hearts-chat.vedant13688.workers.dev/api/chat';
+const HOSTED_WEBSITE_HOSTS = new Set([
+  'art4heartsinternational.org', 'www.art4heartsinternational.org', 'art4hearts-7t3r.onrender.com',
+]);
+
+function chatEndpoint() {
+  return process.env.REACT_APP_CHAT_API_URL?.trim()
+    || (HOSTED_WEBSITE_HOSTS.has(window.location.hostname.toLowerCase()) ? CLOUDFLARE_CHAT_URL : '/api/chat');
+}
+
 const suggestions = [
   'Can I mail my bracelets to you?',
   'How do I get service hours?',
@@ -101,7 +111,7 @@ const ChatPanel: React.FC = () => {
     controller.current = abort;
     const timeout = window.setTimeout(() => abort.abort(), 45000);
     try {
-      const response = await fetch(process.env.REACT_APP_CHAT_API_URL || '/api/chat', {
+      const response = await fetch(chatEndpoint(), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message, history: history.current.slice(-12) }),
@@ -163,13 +173,8 @@ const ChatPanel: React.FC = () => {
   );
 };
 
-// Temporarily keep chat off the main website while its hosting is evaluated.
-// The dedicated preview and local development keep the complete assistant.
-const CHAT_PREVIEW_HOSTS = new Set(['localhost', '127.0.0.1', '[::1]', 'art4hearts-7t3r.onrender.com']);
-
 const ChatWidget: React.FC = () => {
-  const hostname = window.location.hostname.toLowerCase();
-  return CHAT_PREVIEW_HOSTS.has(hostname) || hostname.endsWith('.workers.dev') ? <ChatPanel /> : null;
+  return <ChatPanel />;
 };
 
 export default ChatWidget;

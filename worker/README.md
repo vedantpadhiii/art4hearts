@@ -1,7 +1,7 @@
 # Art4Hearts on Cloudflare Workers Free
 
 This Worker runs the Claude chat endpoint and serves a small standalone preview.
-The main website stays on its existing Render static service with chat disabled.
+The main website stays on its existing Render static service and uses this Worker for chat.
 Cloudflare's Workers dashboard was verified to show the Free allowance of
 100,000 requests/day and no existing applications during setup.
 
@@ -9,8 +9,8 @@ Cloudflare's Workers dashboard was verified to show the Free allowance of
 
 https://art4hearts-chat.vedant13688.workers.dev/
 
-The Worker and encrypted Anthropic secret have been deployed. The main website
-remains temporarily disabled for chat, as requested.
+The Worker and encrypted Anthropic secret have been deployed. Chat has been
+re-enabled on the main website and points to the Cloudflare API.
 
 ## What is included
 
@@ -57,13 +57,16 @@ JSON, and the bottom-right chat circle should return an AI answer. The preview's
 own origin is allowed automatically; `A4H_ORIGINS` lists the main website and the
 existing Render preview for future integration.
 
-## Reconnect the main website later
+## Main website connection
 
-After the Worker has been verified and chat is approved for the main site, set
-`REACT_APP_CHAT_API_URL` in the Render **static** service to the deployed Worker's
-full `/api/chat` URL, remove the temporary preview-only hostname gate in
-`src/components/ChatWidget.tsx`, rebuild, and deploy the static website. No domain
-move is required. The main-site widget remains hidden until that step.
+The website widget selects the deployed Cloudflare `/api/chat` URL automatically
+on `art4heartsinternational.org`, `www.art4heartsinternational.org`, and the older
+Render preview. No main-site environment change or domain move is needed.
+Local development and this standalone preview retain same-origin endpoints.
+
+If the backend URL changes later, set the public `REACT_APP_CHAT_API_URL` build
+variable on the Render static service and rebuild. The Anthropic key always stays
+in the Worker secret, never in the frontend or that public variable.
 
 ## Local verification
 
@@ -75,7 +78,7 @@ npm --prefix worker run dev
 
 The Worker tests and Node backend tests cover the shared validation/redaction
 policy. The website's existing widget tests cover rendering, conversation
-history, retry, focus, and preview-only visibility. The standalone preview and
+history, retry, focus, and main-site endpoint routing. The standalone preview and
 Worker bundle passed their deployment dry run during preparation.
 
 Cloudflare documentation:
