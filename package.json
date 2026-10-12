@@ -2,8 +2,12 @@
   "name": "art4hearts-lebron-style",
   "version": "0.1.0",
   "private": true,
+  "engines": { "node": ">=22" },
+  "proxy": "http://127.0.0.1:8000",
   "scripts": {
     "start": "react-scripts start",
+    "start:server": "node server/index.cjs",
+    "test:server": "node --test server/*.test.cjs",
     "build": "GENERATE_SOURCEMAP=false DISABLE_ESLINT_PLUGIN=true react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"

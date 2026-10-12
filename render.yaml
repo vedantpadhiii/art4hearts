@@ -1,7 +1,18 @@
 services:
-  - type: static
+  - type: web
     name: art4hearts
-    staticPublishPath: ./build
-    routes:
-      - path: /*
-        dest: /index.html
+    runtime: node
+    buildCommand: npm ci && npm run build
+    startCommand: npm run start:server
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: 22
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: A4H_MODEL
+        value: claude-sonnet-5
+      - key: A4H_ORIGINS
+        value: https://art4heartsinternational.org,https://www.art4heartsinternational.org
+      - key: A4H_TRUST_PROXY
+        value: 1

@@ -6,6 +6,7 @@ import GlobalStyles from './styles/GlobalStyles';
 import AppRoutes from './AppRoutes';
 import { ScrollProvider } from './context/ScrollContext';
 import ScrollToTop from './components/ScrollToTop';
+import ChatWidget from './components/ChatWidget';
 
 const App: React.FC = () => {
   return (
@@ -16,6 +17,7 @@ const App: React.FC = () => {
           <ScrollToTop />
           <AppRoutes />
         </ScrollProvider>
+        <ChatWidget />
       </ThemeProvider>
     </BrowserRouter>
   );
