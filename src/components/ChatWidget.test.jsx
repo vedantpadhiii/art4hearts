@@ -37,11 +37,14 @@ test('hides chat on the main website while keeping it available on the test serv
       act(() => root.render(<ChatWidget />));
       expect(container.querySelector('button')).toBeNull();
     }
-    location.mockReturnValue({ hostname: 'art4hearts-7t3r.onrender.com' });
-    act(() => root.render(<ChatWidget />));
-    expect(button('Open Art4Hearts chat')).not.toBeNull();
-    openChat();
-    expect(container.querySelector('[role="dialog"]')).not.toBeNull();
+    for (const hostname of ['art4hearts-7t3r.onrender.com', 'art4hearts-chat.example.workers.dev']) {
+      location.mockReturnValue({ hostname });
+      act(() => root.render(<ChatWidget />));
+      expect(button('Open Art4Hearts chat')).not.toBeNull();
+      openChat();
+      expect(container.querySelector('[role="dialog"]')).not.toBeNull();
+      act(() => button('Close chat').click());
+    }
   } finally { location.mockRestore(); }
 });
 

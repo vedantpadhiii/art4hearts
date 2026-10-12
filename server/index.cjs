@@ -55,6 +55,7 @@ function createServer({ chat = createChat(), origins = (process.env.A4H_ORIGINS 
     }
     if (pathname.startsWith('/api/')) return json(404, { error: 'Unknown endpoint.' });
     if (!['GET', 'HEAD'].includes(req.method)) return json(405, { error: 'GET only.' });
+    if (pathname.split('/').some(segment => segment.startsWith('.'))) return json(404, { error: 'Not found.' });
     let file = path.resolve(build, `.${pathname}`);
     if (file !== build && !file.startsWith(build + path.sep)) return json(403, { error: 'Forbidden.' });
     // Serve browser routes from index.html, but never substitute HTML for missing assets.

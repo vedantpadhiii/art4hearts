@@ -1,7 +1,8 @@
 # Art4Hearts website assistant
 
 Chat is temporarily disabled on the main website. It remains available at
-https://art4hearts-7t3r.onrender.com/ and on localhost / 127.0.0.1 for testing.
+https://art4hearts-chat.vedant13688.workers.dev/ (Cloudflare),
+https://art4hearts-7t3r.onrender.com/ (older Render preview), and localhost / 127.0.0.1 for testing.
 The allowed preview hosts are listed in `src/components/ChatWidget.tsx`; remove
 that hostname gate when the main site's backend hosting is ready.
 
@@ -27,7 +28,16 @@ Use Node 22 or later. Install with `npm ci` if needed.
 For a production preview, run `npm run build`, then `npm run start:server` and open
 `http://localhost:8000`. The server serves the built website and its browser routes.
 
-## Deploy on Render
+## Cloudflare Workers Free
+
+The chatbot API and standalone preview are deployed at
+https://art4hearts-chat.vedant13688.workers.dev/. See `worker/README.md` for
+deployment, testing, key handling, and reconnecting the existing static website.
+The Cloudflare setup uses free static assets and Worker compute with an encrypted
+Anthropic key, shared validation/redaction, and native rate limits. The main
+website stays on Render static hosting with chat hidden.
+
+## Older Render web-service deployment
 
 The previous Render configuration described a static site. A static site cannot
 run the chat backend. The updated `render.yaml` describes a Node web service with

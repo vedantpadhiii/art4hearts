@@ -101,7 +101,7 @@ const ChatPanel: React.FC = () => {
     controller.current = abort;
     const timeout = window.setTimeout(() => abort.abort(), 45000);
     try {
-      const response = await fetch('/api/chat', {
+      const response = await fetch(process.env.REACT_APP_CHAT_API_URL || '/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message, history: history.current.slice(-12) }),
@@ -168,7 +168,8 @@ const ChatPanel: React.FC = () => {
 const CHAT_PREVIEW_HOSTS = new Set(['localhost', '127.0.0.1', '[::1]', 'art4hearts-7t3r.onrender.com']);
 
 const ChatWidget: React.FC = () => {
-  return CHAT_PREVIEW_HOSTS.has(window.location.hostname.toLowerCase()) ? <ChatPanel /> : null;
+  const hostname = window.location.hostname.toLowerCase();
+  return CHAT_PREVIEW_HOSTS.has(hostname) || hostname.endsWith('.workers.dev') ? <ChatPanel /> : null;
 };
 
 export default ChatWidget;

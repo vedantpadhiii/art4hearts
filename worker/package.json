@@ -1,0 +1,16 @@
+{
+  "devDependencies": {
+    "esbuild": "0.28.2",
+    "wrangler": "4.149.0"
+  },
+  "name": "art4hearts-cloudflare-worker",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build-preview.mjs",
+    "test": "node --test handler.test.mjs",
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "check": "wrangler deploy --dry-run --outdir .wrangler/check"
+  }
+}
